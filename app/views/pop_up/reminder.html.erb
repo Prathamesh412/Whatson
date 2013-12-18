@@ -1,0 +1,22 @@
+<div class='choose-language'>
+  
+  <div class='header'>
+   <h4>Select the Duration.</h4>
+  </div>
+
+  <ul class='language-list'>
+      <li ng-repeat="t in timeDuraions">
+      <span>
+        <label for="checkbox{{t.label.replace(' ','')}}">
+          {{ t.label }}
+        </label>
+        <div class="custom-checkbox radio">
+          <input  ng-click="selectedReminderTime(t,$event)" id="checkbox{{t.label.replace(' ','')}}" name="timeDuration" type="radio" ng-checked="userAccountDetails.priortimeforreminder==t.value"/>
+          <label for="checkbox{{t.label.replace(' ','')}}" ></label>
+        </div>
+      </span>
+      </li>
+  </ul>
+  
+</div>
+

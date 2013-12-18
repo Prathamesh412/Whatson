@@ -1,0 +1,33 @@
+<section class='clearfix main-section lpApps' ng-controller="SitemapController">
+  <div class='content sitemap'>
+    <h6 class="subtitle">Sitemap</h6>
+    <div class="pageLoadingIndicator" ng-hide="sitemapLoaded"></div>
+<!--This is the HTML structure required for proper output of the sitemap-->
+<!--
+    <div class="sectionWrap" ng-repeat="n in [1, 2]">
+      <h5 class="sectionHeading">SECTION TITLE</h5>
+      <div class="sectionTree" ng-repeat="n in [1, 2, 3]">
+        <h6 class="treeTitle">Header</h6>
+        <ul>
+          <li><a href="#">Subheader 1</a></li>
+          <li><a href="#">Subheader 2</a></li>
+          <li><a href="#">Subheader 3</a></li>
+          <li><a href="#">Subheader 4</a></li>
+          <li class="disabled">Subheader 5</li>
+          <li class="sublevel2"><a href="#">Subheader 5.1</a></li>
+          <li><a href="#">Subheader 6</a></li>
+        </ul>
+      </div>
+    </div> 
+-->
+    <div class="sectionWrap" ng-repeat="section in sitemap">
+      <h5 class="sectionHeading"><a href="{{section.linkUrl}}">{{section.sitemaptitle}}</a><span ng-show="section.loading" ng-class="{live: section.loading}" class="loadingIndicator"></span></h5>
+      <div class="sectionTree"><!--  ng-repeat="subsection in section.subsections"  -->
+        <!-- <h6 class="treeTitle" ng-show="subsection.heading">{{subsection.heading}}</h6> -->
+        <ul>
+          <li ng-repeat="thisPage in section.subsections"><a href="{{thisPage.sectionUrl}}" ng-click="thisPage.sectionAction()">{{thisPage.sectionName}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

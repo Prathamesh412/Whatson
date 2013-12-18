@@ -1,0 +1,27 @@
+<div class='choose-language'>
+  <div class = 'popover-loader signin-loader' ng-hide='paginateGenres.length>0'> </div>
+  <div ng-show = 'paginateGenres.length>0'>
+    <div class='header'>
+     <h4>Select a Category</h4>
+    </div>
+      <ul class='language-list'>
+          <li ng-repeat="g in paginateGenres">
+          <span>
+            <label for="checkbox{{g.genre}}">
+              {{ g.genre }}
+            </label>
+            <div class="custom-checkbox radio">
+              <input  ng-click="selectedGenre(g)" id="checkbox{{g.genre}}" name="genreFilter" type="radio"  />
+              <label for="checkbox{{g.genre}}"></label>
+            </div>
+          </span>
+          </li>
+      </ul>
+     <div class='footer'>
+    <a ng-click="viewAllGenre()" ng-show="paginateGenres.length != allGenres.length" > 
+      View all Categories
+    </a>
+    </div>
+  </div>
+</div>
+

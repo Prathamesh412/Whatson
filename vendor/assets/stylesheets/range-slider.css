@@ -1,0 +1,155 @@
+.range-slider {
+	position: relative;
+	width: 346px;
+	height: 90px;
+	overflow: hidden;
+	font: 14px/18px 'HelveticaNeueRoman';
+	color: #bea4bd;
+	padding-top: 20px;
+}
+
+.range-slider-inner {
+	position: relative;
+	width: 346px;
+	height: 23px;
+	padding-top: 20px;
+	/* Add the correct path for the slider background image */
+	background-image: url('/assets/img/slider-base-new.png');
+	background-repeat: no-repeat;
+	background-origin: content-box;
+	
+}
+
+.thumb-container {
+	position: absolute;
+	width: 285px;
+	/*height: 23px;*/
+	height: 40px;
+	left: 26px;
+	overflow: hidden;
+}
+
+.range-slider .thumb {
+	height: 20px;
+	width: 20px;
+	background-repeat: no-repeat;
+	position: absolute;
+	top: 2px;
+	left: 22px;
+	z-index: 1;
+	border-radius: 20px;
+	/*background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ff2d0a), to(#fe6d01));*/
+	background: url('/assets/img/thumb.png') no-repeat;
+}
+
+html.no-touch .range-slider .thumb:hover {
+	background: url('/assets/img/slider-highligher.png') no-repeat -3px 0px;
+	height: 40px;
+	background-position-x: -3px;
+}
+.tooltip {
+	
+}
+
+.golden-bar {
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ff2d0a), to(#fe6d01));
+    background: -webkit-linear-gradient(top, #ff2d0a, #fe6d01);
+    background: -moz-linear-gradient(top, #ff2d0a, #fe6d01);
+    background: -ms-linear-gradient(top, #ff2d0a, #fe6d01);
+    background: -o-linear-gradient(top, #ff2d0a, #fe6d01);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff2d0a', endColorstr='#fe6d01',GradientType=0 );
+	height: 6px;
+	left: 120px;
+	position: absolute;
+	z-index: 0;
+	top: 8px;
+}
+
+.left-arrow {
+	width: 20px;
+	height: 20px;
+	float: left;	
+}
+.left-arrow.enabled {
+	/* Add the correct path for the left arrow image */
+	background-image: url('/assets/img/left-arrow.png');
+	background-repeat: no-repeat;
+	background-position: 8px 8px;
+}
+
+.right-arrow {
+	width: 20px;
+	height: 20px;
+	float: right;	
+}
+
+.right-arrow.enabled {
+	/* Add the correct path for the right arrow image */
+	background-image: url('/assets/img/right-arrow.png');
+	background-repeat: no-repeat;
+	background-position: 8px 8px;
+}
+
+.years-container {
+	position: absolute;
+	top: 52px;
+	left: 20px;
+	width: 300px;
+	overflow: hidden;
+	height: 20px;
+}
+
+.years-inner {
+	width: 1200px;
+	height: 20px;
+	position: absolute;
+	left: -9px;
+}
+
+.year {
+	display: inline-block;
+	font: 12px/19px 'HelveticaNeueRoman';
+	color: #a85b9c;
+	width: 50px;
+	text-align: center;
+}
+
+
+.tooltip {
+    position: absolute;
+	opacity: 1;
+	font: 10pt Arial;
+	padding: 2px 6px;
+	display: none;
+}
+
+.tooltip-inner{
+    color:#000; 
+    text-shadow:0px 1px  #fff; 
+    font-size: 16px; 
+    padding: 12px 15px 8px 15px;
+    text-align:center; 
+    box-shadow: 0 0 8px rgba(0,0,0,.7); 
+    white-space:nowrap;
+    border-radius: 4px;
+}
+
+.tooltip-inner{  
+    border-top:1px solid #e2dee3;
+    background-color: #b4adc3; background-repeat: repeat-x;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b4adc3), to(#fff));
+    background: -webkit-linear-gradient(top, #b4adc3, #fff);
+    background: -moz-linear-gradient(top, #b4adc3, #fff);
+    background: -ms-linear-gradient(top, #b4adc3, #fff);
+    background: -o-linear-gradient(top, #b4adc3, #fff);
+}
+
+.tooltip .tooltip-arrow {
+    position: absolute;
+    width: 0; 
+	height: 0; 
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	left: 28px;
+	border-top: 12px solid #fff;
+}

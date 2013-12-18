@@ -1,0 +1,26 @@
+<div class = 'thumb'>
+  <img src = "{{item.imagefilepath}}" alt="{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)"/>
+  <div class="favorite-ribbon" style="" ng-show="item.isrecommended == 1"></div>
+        <a class='play' ng-click="playVideo(item)" ng-show="showVideoButton(item)"></a>
+        <span class='duration' ng-hide="item.duration == '0'">{{item.duration | videoLength}}</span>
+        <!-- <span class='close' ng-show="editMode" ng-click="removeElement({{item.programmeid}},'<%= type %>')"></span> -->
+        <div class='close remove-icon' ng-show="editMode" delete-program="{programmeid:'{{item.programmeid}}', container: '<%= type %>',video:'{{item.videoid}}'}"></div>
+</div>
+<div class = 'text-wrapper clearfix'>
+  <div class = 'row-one'> 
+    <a multiline-overflow class = 'name' href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)"> {{item.programmename }}</a>
+    <!-- <div multiline-overflow class = 'name'> {{item.programmeid }}</div> -->
+  </div>
+  <div class = 'time'> {{item.starttime | watchlisttimeformat}}</div>
+</div>
+
+<div class="user-actions" ng-controller="UserController">
+          
+  <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(item, $event)'  class='btn btn-small btn-purple-blue favorite' ng-class="{active:item.isfavorite == '1'}">
+    <i class="icon-favorite"></i>
+  </a>
+  <a live-tooltip="Reminder Alerts" id="reminder_watchlistpage" ng-click='toggleReminder(item, $event, "landingWL")'  class='btn btn-small btn-purple-blue reminder' ng-class="{active:item.isreminder == '1'}"  >
+    <i class="icon-reminder"></i>
+  </a>  
+
+</div>

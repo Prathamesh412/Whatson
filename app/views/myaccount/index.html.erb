@@ -1,0 +1,456 @@
+<section class='clearfix main-section myaccount-details lpMain'>
+ 
+
+  <div class='content'>
+    <div class = 'account clearfix' ng-controller='MyAccountNavController'> 
+      <div class = 'account-header clearfix'>
+        <div class = 'welcome-note clearfix'>
+          Welcome, <span class = 'header-name'> {{showUserDetails.name}} </span>
+        </div>
+        <div profile-completion class = 'profile-completion' ng-controller = 'ProgressBarController'>
+          <div class = 'header'>
+            <div class ='title'>Profile Completeness</div>
+            <div class = 'percent'> {{profileCompletion}}% </div>
+          </div>
+        </div>
+      </div>
+      <div class = 'account-breadcrumb clearfix' >
+        <div class="btn-group">
+          <a class='btn' ng-class='{active:activeTab != "settings"}'   ng-click="changeTab('myaccount')">MY ACCOUNT</a>
+          <a class='btn' ng-class='{active:activeTab == "settings"}'   ng-click="changeTab('settings')">SETTINGS   </a>
+        </div>
+        <div class = 'edit-acct' ng-click="changeTab('editaccount')" ng-hide="activeTab == 'settings'">
+          Edit Account
+        </div>
+      </div>
+      
+      <!-- My Account Tab -->
+      <div class = 'account-info' ng-show='activeTab=="myaccount"' >
+        <div class = 'thumb'>
+          <img ng-src = '{{showProfileImage("show")}}'/>
+        </div>
+
+        <div class = 'sub-acct-wrapper fb-wrapper clearfix'>
+          <p> Username is visible to the public when you post comments. </p>
+          <div class = 'input-box'>
+            <div class = 'label-name'> Username </div>
+            <div class = 'input-content'> {{showUserDetails.name}} </div>
+             <span ng-show="showUserDetails.isfbuser == 1" class = 'fb-icon'></span>
+          </div>
+          <!-- <span ng-show="showUserDetails.isfbuser == 1" class = 'fb-icon'></span> -->
+        </div>
+
+        <div class = 'sub-acct-wrapper clearfix' ng-class ="{fbshowuser:showUserDetails.isfbuser == '1'}">
+          <p> All your private information is private and only visible to you.</p>
+          <div class = 'input-box'>
+            <div class = 'label-name'> Email </div>
+            <div class = 'input-content'> {{showUserDetails.email}} </div>
+          </div>
+          <div class = 'input-box show-mobile-no'>
+            <div class = 'label-name'> Mobile Number</div>
+            <div class = 'input-content'> {{showUserDetails.mobile}} </div>
+          </div>
+          <div class = 'input-box'>
+            <div class = 'label-name'> Password </div>
+            <input class = 'input-content pwd-content' type='password' ng-model='showUserDetails.password' disabled/>
+          </div>
+        </div>
+
+        <div class = 'sub-acct-wrapper clearfix'>
+          <div class = 'input-box show-language'>
+            <div class = 'label-name'> Language </div>
+            <div class = 'clearfix' account-language-popover mode-value="show">
+              <div class = 'input-content'>
+                <ul class = 'multiple-items'>
+                  <li ng-repeat='l in showUserDetails.languagename.split(",")'>{{l}}</li>
+                  <!-- <li>Hindi</li>
+                  <li>Kannada</li> -->
+                </ul>
+              </div>
+              <span class = 'arrow' ng-show="showUserDetails.languagename"></span>
+            </div>
+            <div class = 'clearfix language-overlay' ng-hide="showUserDetails.languagename">
+            </div>
+          </div>
+        </div>
+
+        <div class = 'sub-acct-wrapper clearfix' ng-show="userOperatorsList.length > 0" ng-repeat="c in userOperatorsList">
+          <div class = 'input-box'>
+            <div class = 'label-name'> Connection #{{$index + 1}} </div>
+            <div class = 'input-content'> {{c.roomname}} </div>
+          </div>
+          <div class = 'input-box hidden-phone hide-potrait-tablet'>
+            <div class = 'column1'>
+              <div class = 'label-name'> City </div>
+              <div class = 'input-content'> {{c.cityname}} </div>
+            </div>
+            <div class = 'column2'>
+              <div class = 'label-name'> Pincode </div>
+              <div class = 'input-content'> {{c.pincode}} </div>
+            </div>
+          </div>
+
+          <div class = 'input-box hidden-desktop hidden-tablet visible-phone show-potrait-tablet'>
+            <div class = 'label-name'> City </div>
+            <div class = 'input-content'> {{c.cityname}} </div>
+          </div>
+          <div class = 'input-box hidden-desktop hidden-tablet visible-phone show-potrait-tablet'>
+            <div class = 'label-name'> Pincode </div>
+            <div class = 'input-content'> {{c.pincode}} </div>
+          </div>
+          <div class = 'input-box' >
+            <div class = 'label-name'> TV Operator </div>
+            <div class = 'input-content'> {{c.headendname}} </div>
+          </div>
+        </div>
+
+        <div class = 'sub-acct-wrapper clearfix'>
+          <p> Add your favorite genre's to improve your TV and Mobile recommendations</p>
+          <div class = 'input-box'>
+            <div class = 'label-name'> Favorite Genre </div>
+            <div class = 'clearfix genrePopoverShow' genre-popover mode-value="show">
+              <div class = 'input-content hybrid-genre-content'>
+                <ul class = 'multiple-items'>
+                  <li ng-repeat='l in showUserDetails.hybridgenre.split(",")'>{{l}}</li>
+                  <!-- <li>Hindi</li>
+                  <li>Kannada</li> -->
+                </ul>
+              </div>
+              <span class = 'arrow' ng-show="showUserDetails.hybridgenre"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Account Tab -->
+      <div class = 'account-edit clearfix'     ng-show='activeTab=="editaccount"'>
+        <form class = 'image-uploader clearfix' method="post" action="/myaccount/create" id="imageUploadForm" enctype="multipart/form-data">
+          <div class = 'thumb'>
+            <!-- <img ng-src = '/images/upload/{{userAccountDetails.userimage}}' id="user-profile-image" /> -->
+            <!-- <img ng-src = "{{true && 'assets/img/woi-logo.png' || '/images/upload/calvin.jpg'}}" id="user-profile-image" /> -->
+            <img ng-src = '{{showProfileImage("edit")}}' id="user-profile-image" />
+          </div>
+          <div class = 'right-content clearfix'>
+            <p> Upload a Photo </p>
+            <div class = 'uploader'>
+              <div class = 'input-box hidden-phone' > {{userImagePath}}</div>
+              <label for="imageFile">
+                <input type ='file' name="upload[file]"  id="imageFile" onchange="angular.element(this).scope().changedImage(event)" class = 'profile-image' size="48" />
+              </label>
+              <div class = 'touchUploadOverlay' ng-show="!canUpload" ng-click="showMessage()"></div>
+              <div class = 'btn btn-light-blue'> Browse
+                <input type ='hidden' name="userid" class = 'profile-image' value="{{userAccountDetails.userid}}"/>
+              </div>
+            </div>
+            <div class = 'btn-wrapper clearfix'>
+              <div ng-click='uploadPic()' class = 'btn grey-btn upload-btn'> <span class='upload-text'>Upload </span><span class = 'spinner'> </span></div>
+              <span> or </span>
+              <a href="javascript:;" ng-click="cancelImage()"> Cancel </a>
+              <input type='hidden' ng-model='userAccountDetails.imagepath' />
+            </div>
+            <div id='uploadImageMessage' class='message error-msg'></div>
+          </div>
+        </form>
+
+
+        <div class = 'sub-acct-wrapper fb-wrapper clearfix'>
+          <p> Username is visible to the public when you post comments. </p>
+          <input class = 'input-box username' type='text' ng-model = 'userAccountDetails.name' placeholder="Username*" />
+          <div id='usernameMessage' class='message'></div>
+        </div>
+
+        <div class = 'sub-acct-wrapper pwd-wrapper clearfix' ng-class = "{fbuser:showUserDetails.isfbuser == '1'}">
+          <p> All your private information is private and only visible to you.</p>
+          <ul class="discussionConfirmation" id="passwordConfirmation">
+            <li>
+              <div class="dc_check"><div class="checkWrapper"></div></div>
+              <div class="dc_body">Your password has been updated successfully.</div>
+            </li>
+          </ul>
+          <input class = 'input-box email' type='email' ng-model='userAccountDetails.email' placeholder = "Email" ng-show="showUserDetails.isfbuser == 0"/>
+          <input class = 'input-box mobileno' type='tel' ng-model='userAccountDetails.mobile' placeholder = "Mobile Number"/>
+          <input class = 'input-box pwd-img-placeholder' type='password' ng-model="newpassword" placeholder = 'Enter New Password'/>
+          <input class = 'input-box cpwd-img-placeholder' type='password' ng-model="passConfirm" placeholder = 'Confirm Password'/>
+          <div class = 'btn grey-btn' ng-click = 'changePassword()' ng-show="showUserDetails.isfbuser == 0"> Change Password </div>
+          <div class = 'message' id='changePasswordMsg'></div>
+        </div>
+
+        <div class = 'sub-acct-wrapper clearfix'>
+          <div class = 'input-box' account-language-popover>
+            <div class = 'label-name'> Language </div>
+            <div class = 'input-content language'>
+              <ul class = 'multiple-items'>
+                <li ng-repeat="l in userAccountDetails.languagename.split(',')">{{l}}</li>
+                <!-- <li>{{userAccountDetails.languagename}}</li> -->
+                <!-- <li>Kannada</li÷> -->
+              </ul>
+            </div>
+            <span class = 'arrow'></span>
+          </div>
+        </div>
+
+        <div class = 'sub-acct-wrapper clearfix'>
+          <div class = 'outer-connection-wrapper' id="connectionsList">
+            <div class = 'connection-wrapper clearfix' ng-show="userOperatorsList.length > 0" ng-repeat="c in userOperatorsList">
+              <div class = 'close-connection' ng-click = 'deleteConnection(c,$index)'>  </div>
+              <div class = 'slide-connection-wrapper'>
+                <input class = 'input-box' type = 'text' ng-model='c.roomname' readonly/>
+                <div class = 'input-box place hidden-phone  hide-potrait-tablet'>
+                  <div class = 'column1'>
+                    <input class = 'input-content' type='text' ng-model='c.cityname' readonly/>
+                  </div>
+                  <div class = 'column2'>
+                    <input class = 'input-content' type='text' ng-model='c.pincode' readonly/>
+                  </div>
+                </div>
+                <input class = 'input-box hidden-desktop hidden-tablet visible-phone  show-potrait-tablet' type = 'text' ng-model='c.cityname' readonly/>
+                <input class = 'input-box hidden-desktop hidden-tablet visible-phone  show-potrait-tablet' type = 'text' ng-model='c.pincode' readonly/>
+                <div class = 'input-box '>
+                  <div class = 'input-content operator'> {{c.headendname}} </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class = 'sub-acct-wrapper clearfix' id='editConnectionDetails'>
+          <ul class="discussionConfirmation" id="addConnectionConfirmation">
+            <li>
+              <div class="dc_check"><div class="checkWrapper"></div></div>
+              <div class="dc_body"> Connection details have been updated successfully</div>
+            </li>
+          </ul>
+          <div class = 'outer-connection-wrapper'>
+            <div class = 'connection-wrapper clearfix'>
+              <input class = 'input-box roomname' type = 'text' placeholder='Connection Name'/>
+              <div class = 'input-box place hidden-phone  hide-potrait-tablet'>
+                <div class = 'column1' account-location-autocomplete>
+                  <input type="text" class="location-input input-content cityname" placeholder='City'/>
+                </div>
+                <div class = 'column2'>
+                  <input class = 'input-content pincode' type='tel' placeholder='Pincode'/>
+                </div>
+              </div>
+              <div account-location-autocomplete>
+                <input class = 'location-input input-box cityname hidden-desktop hidden-tablet visible-phone  show-potrait-tablet' type = 'text' placeholder='City'/>
+              </div>
+              <input class = 'input-box pincode hidden-desktop hidden-tablet visible-phone  show-potrait-tablet' type = 'tel' placeholder='Pincode'/>
+              <div class = 'input-box account-popover' account-tv-operator-popover>
+                <div class = 'input-content operator'> TV Operator </div>
+                <span class = 'arrow'></span>
+              </div>
+            </div>
+          </div>
+          <span class = 'btn grey-btn' ng-click = 'addConnection()'> Add Connection </span>
+          <div class = 'message' id='addConnectionMsg'></div>
+        </div>
+
+
+        <div class = 'sub-acct-wrapper clearfix'>
+          <p> Add your favorite genre's to improve your TV and Mobile recommendations</p>
+          <div class = 'input-box genrePopoverEdit' genre-popover>
+            <div class = 'label-name'> Favorite Genre </div>
+            <div class = 'input-content language'>
+              <ul class = 'multiple-items'>
+                <li ng-repeat='l in userAccountDetails.hybridgenre.split(",")'>{{l}}</li>
+                <!-- <li>Hindi</li>
+                <li>Kannada</li> -->
+              </ul>
+            </div>
+            <span class = 'arrow'></span>
+          </div>
+        </div>
+
+        <div class = 'btn btn-light-blue save-btn' ng-click = 'saveChanges()'> Save Changes </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div class = 'account-settings' ng-show='activeTab=="settings"'    ng-controller="SettingsController">
+        <ul class = 'clearfix'>
+          <li class = 'settings on-off-setting clearfix' ng-controller = 'AccountSocialSharingController'>
+            <div class = 'left-content'>
+              <p class = 'heading'> Social Sharing </p>
+              <p class = 'sub-heading'> Control whether your posts will publish to Facebook.</p>
+            </div>
+            <div on-off class='on-off'/>
+            
+          </li>
+          <li class = 'settings btn-group-setting clearfix' ng-controller="ProfileSettingsController">
+            <div class = 'left-content'>
+              <p class = 'heading'> Profile Settings </p>
+              <p class = 'sub-heading'> Control who can view your profile information.</p>
+            </div>
+            <div class  = 'btn-group'>
+              <a class = 'btn' ng-class='{active:activeChoice == "public"}'   ng-click="changeChoice('public')">Public </a>
+              <a class = 'btn' ng-class='{active:activeChoice == "friends"}'  ng-click="changeChoice('friends')">Friends</a>
+              <a class = 'btn' ng-class='{active:activeChoice == "private"}'  ng-click="changeChoice('private')">Private</a>
+            </div>
+          </li>
+          <li class = 'settings on-off-setting clearfix' ng-controller = 'LanguageFilterController'>
+            <div class = 'left-content'>
+              <p class = 'heading'> Language Filter </p>
+              <p class = 'sub-heading'> View personalized recommendations based on your language preferences.</p>
+            </div>
+            <div on-off class='on-off' />
+          </li>
+          <li class = 'settings clearfix'>
+            <div class = 'left-content clearfix'>
+              <p class = 'heading'> How would you like to receive Reminders? </p>
+              <p class = 'sub-heading'> You can set reminders for any movie or programme.</p>
+            </div>
+            <div class = 'clearfix'></div>
+            <div class = 'options-list clearfix'>
+              <div class = 'option' ng-controller = 'SmsController'>
+                <span class = 'option-name'> SMS </span>
+                <div on-off  class='on-off'/>
+              </div>
+              <div class = 'option' ng-controller = 'EmailController'>
+                <span class = 'option-name'> Email </span>
+                <div on-off  class='on-off'/>
+              </div>
+            </div>
+          </li>
+          <li class = 'settings reminder clearfix'>
+            <span class = 'remind-text'>Remind me 
+            <div class = 'reminder-box'>
+             <!-- <div class="select-operator" > -->
+              <a class="btn"  dropdown-reminder-popover ng-controller="ReminderPopoverController">
+                <span class="remind-time" id="selectReminder">{{userAccountDetails.priortimeforreminder | minToHrs}}</span><span class="arrow"></span>
+              </a>
+           </div>
+            before my favorite show starts.</span>
+          </li>
+          <li class = 'settings on-off-setting clearfix' ng-controller = 'RemindersController'>
+            <div class = 'left-content'>
+              <p class = 'heading'> Repeat Reminders </p>
+              <p class = 'sub-heading'> Make sure you get reminders every time your favorite show is on. </p>
+            </div>
+            <div on-off  class='on-off'/>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- / content -->
+
+
+
+  <!-- Side Bar -->
+  <aside class='sidebar clearfix' ng-controller = 'AccountSideBarController'>    <!--Pratham Changes for account-->
+    <div class = 'friends-popular clearfix'>
+      
+      <!-- Friends/Popular Tab -->
+      <ul class="tabs clearfix">
+        <li ng-show="paginateFriendList.length > 0">
+          <a ng-class='{active:activeTab == "friends"}'  ng-click="changeTab('friends')">
+            FRIENDS
+          </a>
+        </li>
+        <li ng-show="paginatePopularList.length > 0">
+          <a ng-class='{active:activeTab == "popular"}'  ng-click="changeTab('popular')">
+              POPULAR
+          </a>
+        </li>
+      </ul>
+      
+      <!-- Friends List -->
+      <ul class = 'fp-content clearfix' ng-show = 'activeTab == "friends" && paginateFriendList.length > 0' >
+        <li class = 'fp-item clearfix' save-start-time="item" ng-repeat = "item in paginateFriendList">
+          <div class = 'thumb'>
+            <a ng-href="#!/program/{{item.contentname}}" ng-click="EncodeUrlWithDash(item.contentname,$event,'programme',item.channelid,item.contentid)">
+              <img ng-src = '{{item.imageurl}}'/>
+            </a>
+            <!-- <div class="user-actions" ng-controller="UserController">
+              <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(item, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:item.isfavorite == '1'}">
+              <i class="icon-favorite"></i>
+              </a>
+
+              <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(item, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:item.isreminder == '1'}"  >
+              <i class="icon-reminder"></i>
+              </a>
+
+              <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(item, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:item.iswatchlist == '1'}">
+              <i class="icon-watchlist"></i>
+              </a>
+            </div> -->
+          </div>
+          <div class = 'details'>
+            <div class = 'title'> 
+              <a ng-href="#!/program/{{item.contentname}}" ng-click="EncodeUrlWithDash(item.contentname,$event,'programme',item.channelid,item.contentid)" live-tooltip="{{item.contentname}}">
+                {{item.contentname}}
+              </a> 
+            </div>
+            <div class = 'like-person'>
+              <span class = 'person-name'> {{item.username}} </span>
+            </div>
+            <div class = 'like-count'> {{item.totalLikes | likeCount}} </div>
+            <button class="btn btn-small fblike ng-binding" ng-click="facebookShare(item,$event)">{{item.isliked | isLikedText}}</button>
+          </div>
+        </li>
+        
+        <li class = 'loadmore' ng-show = 'showMoreFriendList == true'>
+          <a ng-click = 'loadMoreFriends()'> More </a>
+        </li>
+      </ul>
+
+      <!-- Popular List -->
+      <ul class = 'fp-content clearfix' ng-show = 'activeTab == "popular" && paginatePopularList.length > 0' >
+        <li class = 'fp-item clearfix' save-start-time="item" ng-repeat = "item in paginatePopularList">
+          <div class = 'thumb'>
+            <a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)">
+              <img ng-src = '{{item.imagefilepath}}'/>
+            </a>
+          </div>
+          <div class = 'details'>
+            <div class = 'title'> 
+              <a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)">
+                {{item.programmename}}
+              </a> 
+            </div>
+            <div class = 'like-person'>
+              <span class = 'person-name'> {{item.peopleWhoLiked}} </span>
+            </div>
+            <div class = 'like-count'> {{item.totalLikes | likeCount}} </div>
+            <button class="btn btn-small fblike ng-binding" ng-click="facebookShare(item, $event,true)">{{item.isliked | isLikedText}}</button>
+          </div>
+        </li>
+        
+        <li class = 'loadmore' ng-show = 'showMorePopularList == true'>
+          <a ng-click = 'loadMorePopular()'> More </a>
+        </li>
+      </ul>
+
+    </div>
+  </aside>
+  <!-- / SIDEBAR -->
+</section>
+
+<div id='trending' ng-controller="AccountSliderController" class='clearfix recommended-carousel' ng-hide="trendings.length == 0">
+
+  <h6 class='subtitle'>RECOMMENDED</h6>
+
+  <div id="recommendedCarousel" class='recommended-container'>
+    <div class = 'recommended-wrapper'>
+      <div class='recommended-slider'>
+        <div class='item' save-start-time="r" ng-repeat='r in trendings'>
+          <div class = 'thumb'>
+            <a  href="#!/program/{{r.programmename}} " ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid)"><img ng-src = '{{r.imagefilepath}}'/></a>
+          </div>
+          <div class = 'info'>
+            <div live-tooltip-single-line = "{{r.programmename}}" class = 'title'> 
+              <a  href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid)">{{r.programmename}} </a>
+            </div>
+            <div class = 'time'> {{r.starttime | featuredVideoTime}} </div>
+            <div class = 'channel'> 
+              <a ng-href="#!/channel/{{r.channelname}}" ng-click="EncodeUrlWithDash(r.channelname,$event,'channel',r.channelid,r.programmeid)">{{r.channelname}}</a>
+            </div>
+          </div>
+        </div>   
+      </div>
+    </div>
+    <!-- /slider -->
+    <a class='arrows prev' ng-click='slide(false)' ng-class="{disabled:currentSlide == 0}">&lt;</a>
+    <a class='arrows next' ng-click='slide(true)' ng-class="{disabled:currentSlide == (trendings.length-noOfItems)}">&gt;</a>
+  </div>
+</div>

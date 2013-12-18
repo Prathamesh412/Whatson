@@ -1,0 +1,197 @@
+<section id="searchResultsDiv" class="search-list main-section clearfix search_results" ng-controller='SearchResultsController'>
+
+<div class="phone-filters visible-phone clearfix">
+  <div class = 'filter-wrapper clearfix'>
+    <span class="title">Filter &amp; Sort</span>
+    <button class="btn btn-filter" search-results-filter>=</button>
+    <div class="dropdown"></div>
+  </div>
+  <h6 class="results_header phone-view clearfix visible-phone">
+    <span class="search-query" live-tooltip="{{searchTitle}}: {{searchQuery.resultText}}">{{searchQuery.resultText}}</span>
+    <span class="count-search-query">{{searchResults.count.all}} Results</span>
+  </h6>
+</div>
+<div class = 'outer-wrapper search-results-outer-wrapper'>
+  <div class = 'inner-wrapper'>
+<div class='content' scroll-callback>
+  <header class="results_header clearfix">
+  <h6>
+    <span class="search-query hidden-phone" live-tooltip="{{searchTitle}}: {{searchQuery.resultText}}">{{searchQuery.resultText}}</span>
+    <span class="count-search-query hidden-phone">{{searchResults.count.all}} Results</span></h6>    
+  <ul class="filters hidden-phone" ng-hide="isEmptyText">
+    <li><a href="#" ng-class="{active: current=='all'}" ng-click="filter('all', $event)">all</a></li>
+    <li><a href="#" ng-class="{active: current=='movies'}" ng-click="filter('movies', $event)">movies ({{searchResults.count.movies}})</a></li>
+    <li><a href="#" ng-class="{active: current=='tvshows'}" ng-click="filter('tvshows', $event)">tv shows ({{searchResults.count.tvshows}})</a></li>
+    <li><a href="#" ng-class="{active: current=='videos'}" ng-click="filter('videos', $event)">videos ({{searchResults.count.videos}})</a></li>
+    <li><a href="#" ng-class="{active: current=='channels'}" ng-click="filter('channels', $event)">channels({{searchResults.count.channels}})</a></li>
+  </ul>
+  <div class="fix hidden-phone" ng-show="showSuggestionBox == true">
+    <a href="#close" class="close-btn" live-tooltip="close">x</a>
+    <span class="title">Showing results for <span class="highlight">{{searchQuery.resultText}}.</span> {{searchResults.count.all}} Results</span>
+    <p>Search for <a href="#!/search/{{suggestedWord}}" class="highlight">{{suggestedWord}}</a> instead.</p>
+  </div>
+  <div class="fix hidden-phone" ng-show="isEmptyText">
+    <a href="#close" class="close-btn" live-tooltip="close">x</a>
+    <span class="title">Please enter a keyword to search.</span>
+  </div>
+  </header>
+  <!-- END Search Results Header-->
+  <ul class="results">
+    <!-- <li class="no-results" ng-show="isLoaded=='1' && searchResults[current] < 1"> -->
+    <li class="no-results" ng-show="displayEmptyBlock()">
+    <span class="title"> Your search <span class="highlight">{{searchQuery.resultText}}</span> did not match any {{searchType}}.</span>
+    </li>
+    <li class="item {{s.type}}" ng-repeat="s in paginated">
+
+    <div ng-show="s.type == 'programme'" watchable="s">
+      <div ng-show="s.isrecommended=='1'" class="favorite-ribbon"></div>
+      <div class="thumb">
+        <!-- Looks like using a directive won't be appropriate here, so trying a different method of injecting the videos -->
+        <div class="player" style-"display: none;"></div>
+        <div class="wrapper">
+          <a ng-click='playVideo(s.videourls.videourl[0],s)' id="trigger-{{s.videourls.videourl[0].videoid}}" ng-show='s.videourls.videourl[0]' class='play'></a>
+          <img ng-show="s.videourls.videourl[0]" ng-src="{{s.imagefilepath}}" alt="" />
+          <a ng-hide="s.videourls.videourl[0]" href="#!/program/{{s.ProgrammeName}}"ng-click="EncodeUrlWithDash(s.programmename,$event,'programme',s.ChannelID,s.ProgrammeID)"><img ng-src="{{s.imagefilepath}}" alt="" /></a>
+      </div>
+        <span class="duration" ng-show="s.videourls.videourl[0]">{{s.duration}}</span>
+       
+          <div class="user-actions" ng-controller="UserController">
+          
+            <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(s, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:s.isfavorite == '1'}">
+              <i class="icon-favorite"></i>
+            </a>
+            
+            <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(s, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:s.isreminder == '1'}"  >
+              <i class="icon-reminder"></i>
+            </a>
+
+            <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(s, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:s.iswatchlist == '1'}">
+              <i class="icon-watchlist"></i>
+            </a>
+          </div>
+
+      </div>
+      <div class="info">
+        <h2><a href="#!/program/{{s.ProgrammeName}}" ng-click="EncodeUrlWithDash(s.ProgrammeName,$event,'programme',s.ChannelID,s.ProgrammeID)" >{{s.ProgrammeName}}</a></h2>
+        <span class="details">
+          <span class="time">{{s.StartTime|featuredVideoTime}}</span>
+          <span class="channel-name"><a href="#!/channel/{{s.ChannelName}}" ng-click="EncodeUrlWithDash(s.ChannelName,$event,'channel',s.ChannelID,s.ProgrammeID)">{{s.ChannelName}}</a></span>
+        </span>
+        <p class="description hidden-phone">{{s.Synopsis}}</p>
+        <ul class="tags">
+          <li><a ng-href="#!/search/{{s.M2eCategoryName}}">{{s.M2eCategoryName}}</a></li>
+          <li ng-click = "updateSearchText(s.LanguageName)"><a ng-href="#!/search/{{s.LanguageName}}">{{s.LanguageName}}</a></li>
+          <li ng-click = "updateSearchText(s.M2eSubCategoryName)"><a ng-href="#!/search/{{s.M2eSubCategoryName}}">{{s.M2eSubCategoryName}}</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    
+    
+    <div class="channel" ng-show="s.type == 'channel'">
+    <div class="thumb">
+      <a href="#!/channel/{{s.channelname}}" ng-click="EncodeUrlWithDash(s.channelname,$event,'channel',s.channelid,s.programmeid)"><img ng-src="{{s.channellogo}}" alt="{{s.channelname}}" /></a>
+    </div>
+      <div class="info">
+        <h2><a href="#!/channel/{{s.channelname}}" ng-click="EncodeUrlWithDash(s.channelname,$event,'channel',s.channelid,s.programmeid)">{{s.channelname}}</a></h2>
+        <p class="description">{{s.channeldescription}}</p>
+        <ul class="tags">
+          <li><a href="#!/search/Channel">Channel</a></li>
+          <li ng-click = "updateSearchText(s.languagename)"><a href="#!/search/{{s.languagename}}">{{s.languagename}}</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="cast" ng-show="s.type == 'cast'">
+      <div class="thumb">
+        <img ng-src="{{s.castimage | filterDefaultImage}}" alt="{{s.castname}}" /> 
+      </div>
+      <div class="info">
+        <h2><a ng-href="#!/search/{{s.castname}}">{{s.castname}}</a></h2>
+        <p class="description">{{s.castdescription}}</p>
+        <ul class="tags">
+          <li><a ng-href="#!/search/{{s.rolenames}}">{{s.rolenames}}</a></li>
+          <li><a ng-href="#!/search/{{s.castindustry}}">{{s.castindustry}}</a></li>
+        </ul>
+      </div>
+    </div>
+    </li>
+
+    <!-- <li>
+     <a  class="more" ng-click="loadMore()">MORE…</a>
+    </li> -->
+  </ul> 
+
+</div> 
+
+<div class="search sidebar">
+
+  <ul class="filters visible-phone">
+    <li><a href="#" ng-class="{active: current=='all'}" ng-click="filter('all', $event)">all</a></li>
+    <li><a href="#" ng-class="{active: current=='movies'}" ng-click="filter('movies', $event)">movies ({{searchResults.count.movies}})</a></li>
+    <li><a href="#" ng-class="{active: current=='tvshows'}" ng-click="filter('tvshows', $event)">tv shows ({{searchResults.count.tvshows}})</a></li>
+    <li><a href="#" ng-class="{active: current=='videos'}" ng-click="filter('videos', $event)">videos ({{searchResults.count.videos}})</a></li>
+    <li><a href="#" ng-class="{active: current=='channels'}" ng-click="filter('channels', $event)">channels({{searchResults.count.channels}})</a></li>
+  </ul>
+  <div class="search-options" ng-controller="SearchCategoryController">
+    <h6 class="subtitle">Category</h6>
+    <!-- <div class="styled-select body-select">
+      <select ng-change="categoryFilter()" ng-model="valueCategoryFilter"   ng-options="sc.label for sc in searchCategories">
+      </select>
+    </div> -->
+    <div class="category">
+        <div class="styled-select" dropdown-popover>
+          <p>{{currentFilter}}</p>
+        </div>
+    </div> 
+    <h6 class="subtitle">Sort By</h6>
+     <div class="category">
+        <div class="styled-select" dropdown-popover-rating>
+          <p>{{currentFilterRating}}</p>
+        </div>
+    </div> 
+  </div>
+  <div>  
+    <button class = 'btn back-btn-filter visible-phone hidden-desktop hidden-tablet' search-results-filter> Back </button>
+  </div>
+  <div class="recommendations hidden-phone " ng-controller="UserController" contextual-info ng-show="showTips">
+    <div class="recClose" ng-click="closePrompt()">×</div>
+    <h6>Get better recommendations</h6>
+    <div class="recPrompt">
+      <div class="favTrigger">
+        <a href="javascript:void(0)" class="btn btn-small btn-purple-blue">
+          <i class="icon-favorite"></i>
+        </a>
+
+        <a href="javascript:void(0)" class="btn btn-small btn-purple-blue">
+          <i class="icon-reminder"></i>
+        </a>
+
+        <a href="javascript:void(0)" class="btn btn-small btn-purple-blue">
+          <i class="icon-watchlist"></i>
+        </a>
+      </div>
+      <div class="favPrompt">
+        Click Heart To Favorite
+      </div>
+      <div class="favPrompt">
+      
+        Click to set SMS/Email Reminders for your favorite programs
+      </div>
+      <div class="favPrompt">
+        Click to add programs to your watchlist
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommended Partial -->
+  <div class = 'hidden-phone visible-desktop visible-tablet'>
+    <%= render :partial => "addons/recommendations", :locals => {:controller => "YourRecsController", :header => "Recommended"} %>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+    </section>

@@ -1,0 +1,402 @@
+.lp_header{
+	margin-left: 0px;
+	width: 280px;
+	span.browse{
+		display: block;
+		line-height: 30px;
+		margin-bottom: 15px;
+		margin-top: 0px;
+	}
+	.phone-filters{
+		min-height: 40px;
+	  .right-wrapper{
+	  	// float: right;
+	  	margin-top: 7px;
+	  	position: absolute;
+	  	left: 208px;
+	  }
+      .title{
+        float:left;
+        color:#a85b9c; 
+        font-size: 14px; 
+        margin:5px 10px 0 0; 
+        font-family: 'HelveticaNeueCn', sans-serif;
+      }
+      .btn-filter{
+        float:left;
+        text-indent:-9999px;
+        padding:0px; 
+        width:25px; 
+        height:25px; 
+        padding-top:4px; 
+        .rounded(2px);
+        
+        &:before{
+          content:''; 
+          width:15px; 
+          height:15px; 
+          position:relative;
+          display:block; 
+          margin: 15px auto;
+          background:url('../assets/img/icon-list.png') no-repeat 50% 50% transparent;
+        }
+      }
+      .operator-box{
+			width: 146px;
+			height: 38px;
+			float: left;
+			margin-left: 5px;
+			.rounded(5px);
+			a{
+				width: 92px;
+				text-align: left;
+				padding: 8px 20px 4px 13px;
+				height: 23px;
+				position: relative;
+				.arrow{
+					background: url("../assets/img/icons-sprite.png") no-repeat -4px -692px;
+					width: 20px;
+					height: 20px;
+					display: block;
+					position: absolute;
+					right: 8px;
+					top: 7px;
+				}
+			}
+			.operator-name{
+				width: 88px;
+				font: 14px/20px 'HelveticaNeueRoman';
+				color: #a85b9c;
+				margin-top: 5px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+    }
+}
+
+.channel-content{
+	width: 290px;
+	position: relative;
+	// min-height: 800px;
+	margin: 0;
+}
+
+.detailsWrapper{
+	width: 290px;
+	// position: absolute;
+	margin-left: 0px;
+	overflow: hidden;
+}
+
+.channel-detail-content{
+	// min-height: 1100px;
+	width: 290px;
+	overflow: hidden;
+	margin: 0 auto;
+	.channel-inner-wrapper{
+		width: 580px;
+		&.mobileView{
+			margin-left: -290px;
+			.detailsWrapper{
+				display: none;
+			}
+		}
+	}
+}
+
+.channelList{
+	margin-top: 0px;
+	margin: 0 auto;
+	.channelItem{
+		.rightContent{
+			width: 173px;
+			ul{
+				li{
+					max-width: 100%;
+					width: 100%;
+					margin-left: 0px;
+				}
+			}
+			.channelDetails{
+				.channelName{
+					max-width: 79%;
+					overflow: hidden;
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+}
+
+.sideList{
+	width: 280px;
+	margin-left: 0px;
+	// display: none;
+	// margin-left: 310px;
+	float: right;
+	// position: absolute;
+	margin-right: 10px;
+	margin-bottom: 50px;
+	margin: 0 auto;
+	ul{
+		width: 100%;
+		li{
+			font-size: 14px;
+			width: 42%;
+			float: left;
+			padding-right: 0px;
+			margin: 0 5px;
+			line-height: 29px;
+			height: 30px;
+		}
+		li.active{
+            .gradient(#ff4b06, #ff2e0a, #fe6c01);
+            .rounded(3px);
+            // padding: 5px;
+		}
+	}
+	.back-btn-filter{
+		margin-top: 20px;
+	}
+	input[type='text']{
+		float: left;
+		width: 83%;
+		height: 37px;
+		border: 1px solid #3F2336;
+		.rounded(5px);
+		padding: 0px 15px;
+		line-height: 20px;
+		background-color: #270921;
+        -webkit-transition: .4s all ease; 
+        -moz-transition: .4s all ease;
+        -o-transition: .4s all ease;
+        transition: .4s all ease; 
+        padding-left: 30px;
+    	background: url('/assets/img/icon-search.png') #270921 no-repeat 8px 12px;
+
+        &:focus, &.active {
+          position:relative ; 
+          width:83.2%;
+          background-color: #FFF !important;
+          border:0;
+          border-top:1px solid #fff; 
+          border-bottom:1px solid #e0e0e0 ; 
+          box-shadow: 0px 1px 8px rgba(0,0,0,.9); 
+        }
+	}
+	.operator-box{
+		width: 87%;
+		height: 38px;
+		float: left;
+		margin-left: 0px;
+		margin-bottom: 10px;
+		.rounded(5px);
+		a{
+			width: 100%;
+			text-align: left;
+			padding: 4px 20px 8px 13px;
+			height: 23px;
+			position: relative;
+			.arrow{
+				background: url("../assets/img/icons-sprite.png") no-repeat -4px -692px;
+				width: 20px;
+				height: 20px;
+				display: block;
+				position: absolute;
+				right: 8px;
+				top: 7px;
+			}
+			&.active {
+	            .gradient(#ff4b06, #ff2e0a, #fe6c01);
+
+	            border-color: #fea201 #fe7607 #fe7c07;
+	            border-color: rgba(256, 162, 1, 0.50) rgba(254, 118, 7, 0.40) rgba(0, 0, 0, 0.25);
+	            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4b06', endColorstr='#ff2f0a', GradientType=0);
+	            filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	            color: #fff;
+	            text-shadow: 0 5px 9px #FFB971;
+
+	            .arrow {
+	              background-position: -4px -731px; 
+	            }
+	            .operator-name{
+	            	color: #fff;
+	            }
+	        }
+		}
+		.operator-name{
+			width: 95%;
+			font: 14px/13px 'HelveticaNeueRoman';
+			color: #a85b9c;
+			margin-top: 5px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			display: inline-block;
+		}
+	}
+}
+
+.lpFeatured{
+	.item{
+		width: 100%;
+	}
+}
+
+.channel-sidebar{
+	width: 290px;
+	margin: 0 auto;
+	float: none;
+	margin-top: 20px;
+	display: block;
+}
+
+.channel-details{
+	padding-top: 10px;
+	.fb-activity{
+		width: 300px !important;
+	}
+	.trending-discussions{
+		.content-wrapper{
+			ul{
+				&.discussionBody{
+					li{
+						.discussionHeader{
+							.dH_thumb{
+								display: none;
+							}
+							.dH_details{
+								margin: 3px 5px;
+								.user-actions{
+									margin-top: 1px;
+									.btn-comment{
+										padding: 0 5px;
+									}
+									.btn{
+										height: 26px;
+										line-height: 30px;
+										margin-right: 4px;
+										font-size: 13px;
+									}
+									a:last-child{
+										margin-right: -16px;
+									}
+									a .icon-like{
+										height: 23px;
+									}
+									a .icon-dislike{
+										height: 28px;
+									}
+									a .icon-flag{
+										height: 26px;
+									}
+								}
+								.discussion-header{
+									max-width: 56px;
+								}
+								.author{
+									float: right;
+									max-width: 92px;
+								}
+							}
+							.dH_count{
+								display: none;
+							}
+							.dH_likeCount{
+								bottom: -5px;
+							}
+						}
+						.discussionContents{
+							.comments-list{
+								li{
+									padding: 15px 10px;
+									.thumb{
+										display:none;
+									}
+									.info{
+										margin-left: 0px;
+										width: 100%;
+										h2{
+											width: 95%;
+										}
+										.description{
+											width: 100%;
+										}
+										.user-actions{
+											.btn{
+												margin-right: 4px;
+											}
+											.btn-comment{
+												padding: 0 7px;
+												font-size: 13px;
+												height: 26px;
+												line-height: 29px;
+											}
+											a .icon-like{
+												height: 26px;
+											}
+											a .icon-dislike{
+												height:31px;
+											}
+											a .icon-flag{
+												height: 28px;
+											}
+											a:last-child{
+												margin-right: -6px;
+											}
+
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.sidebar{
+		.whatson{
+			.list-calendar{
+				.schedule-item{
+					.item{
+						width: 140px;
+						margin: 15px 15px;
+						h3{
+							width: 100%;
+						}
+						h4{
+							width: 100%;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							white-space: nowrap;
+						}
+					}
+				}
+			}
+		}
+	}
+	.channel-description{
+		.channel-status{
+			float:left;
+		}
+		.right-grid{
+			margin: 20px 0px 0px 0px;
+		}
+		.left-grid{
+			// width: 170px;
+			.name{
+				font-size: 21px;
+			}
+		}
+	}
+}
+html.android{
+  #selectOperator{
+    .android-line-height-channel{
+      line-height: 23px !important;
+    }
+  }  
+}

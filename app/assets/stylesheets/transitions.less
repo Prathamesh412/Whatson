@@ -1,0 +1,23 @@
+/*
+Add a transition class and triggers it with .trigger class
+ex:
+
+<a id="element" class="fadeInRight"></a>
+
+$('#element').addClass('trigger');
+
+*/
+.fadeInRight{opacity:0; margin-right:-5px;
+z-index:-10;
+-webkit-transition: .2s all linear;
+-moz-transition: .2s all linear;
+-o-transition: .2s all linear;
+transition: .2s all linear;	
+}
+.fadeInRight.trigger{
+opacity:1;
+margin-right:0;
+z-index:0;
+
+}
+

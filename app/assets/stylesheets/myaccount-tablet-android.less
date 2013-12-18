@@ -1,0 +1,124 @@
+html.android{
+	.friends-popular{
+	.fp-content{
+		.fp-item{
+			padding: 15px 10px;
+			.details{
+				width:95px;
+				.title{
+					max-width: 100px;
+				}
+			}
+		}
+	}
+} 
+
+.recommended-container{
+	.recommended-wrapper{
+		width: 93.5%;
+	}
+}
+
+.account-settings{
+	.settings{
+		&.on-off-setting{
+			.left-content{
+				.column(5);
+			}
+		}
+	}
+}
+
+.account{
+	.account-info, .account-edit{
+		.input-box{
+			.column(6.7);
+			margin-left: 0px;
+			.label-name{
+				.column(2);
+			}
+			.input-content{
+				.column(4);
+			}
+			&.show-potrait-tablet{
+				display: block !important;
+			}
+			&.hide-potrait-tablet{
+				display: none !important;
+			}
+		}
+		.image-uploader{
+			.thumb{
+				margin-right: 10px;
+			}	
+			.btn{
+				&.grey-btn{
+					.column(3.7);
+					margin: 0px;
+					margin-right: 5px;
+				}
+			}
+			.right-content{
+				.uploader{
+					.input-box{
+						.column(3);
+						margin-left: 0px;
+					}
+					.btn{
+						padding: 12px 15px 8px 15px;
+					}
+				}
+			}
+		}
+	}
+	.account-header{
+		.welcome-note{
+			span.header-name{
+				width: 100px;
+			}
+		}
+	}
+	.account-edit{
+		.sub-acct-wrapper{
+			.connection-wrapper{
+				input.input-box:last-of-type{
+					.rounded(0px);
+				}
+				div.input-box:last-of-type{
+					border-top: none;
+				}
+				.close-connection{
+					right: 10px;
+				}
+				.location-input{
+					border-bottom: none;
+				}
+			}
+		}
+		.input-box{
+			.input-content{
+				&.language{
+					.column(4);
+				}
+				&.operator{
+					.column(6);
+					margin-left: 2px;
+				}
+			}
+			&.genre{
+				.label-name{
+					.column(1.9);
+					margin-left: 0px;
+				}
+			}
+		}
+		.btn-light-blue{
+			&.save-btn{
+				.column(6.7);
+				margin-left: 0px;
+				margin-top: 23px;
+			}
+		}
+	}
+}
+}

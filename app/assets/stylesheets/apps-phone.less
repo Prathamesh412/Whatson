@@ -1,0 +1,100 @@
+.lpApps{
+	.appSliderWrap{
+		position: relative;
+		height: 666px;
+
+		.as_container{
+			width: 290px;
+			height: auto;
+			position: absolute;
+			left:0;
+			top:0;
+
+			.swiper-container {
+				height: 361px;
+			}
+
+			.swiper-slide{
+				height: 361px;
+
+				> div {
+					background-size: contain;
+				}
+			}
+
+			.pagination{
+				margin-top: 40px;
+
+				.swiper-pagination-switch{
+
+				}
+				.swiper-active-switch{
+						
+				}
+			}
+			.swiper-container,.swiper-slide{
+				width: 290px;
+			}
+			.sliderActions{
+				&#videoTrigger{
+					// left: 0px;
+					position: relative;
+					left: auto;
+					bottom: auto;
+					margin: auto;
+				}
+				&#storeTrigger{
+					position: relative;
+					margin: 20px auto auto;
+					right:auto;
+					bottom: auto;
+				}
+			}
+		}
+		.as_control{
+			width: 260px;
+			position: absolute;
+		}
+	}
+	.phone-filters{
+		h6.subtitle{
+	    	font-size:17px;
+	    	float: left;
+	    	width:auto;
+	    	text-transform: uppercase;
+	    	margin-top: 30px;
+	    }
+	  .right-wrapper{
+	  	float: right;
+	  	margin-top: 29px;
+	  	margin-right: 5px;
+	  }
+      .title{
+        float:left;
+        color:#a85b9c; 
+        font-size: 14px; 
+        margin:5px 10px 0 0; 
+        font-family: 'HelveticaNeueCn', sans-serif;
+      }
+      .btn-filter{
+        float:left;
+        text-indent:-9999px;
+        padding:0px; 
+        width:25px; 
+        height:25px; 
+        padding-top:4px; 
+        .rounded(2px);
+        
+	        &:before{
+	          content:''; 
+	          width:15px; 
+	          height:15px; 
+	          position:relative;
+	          display:block; 
+	          margin: 15px auto;
+	          background:url('../assets/img/icon-list.png') no-repeat 50% 50% transparent;
+	        }
+	    }
+    }
+    
+}

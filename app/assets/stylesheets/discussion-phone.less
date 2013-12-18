@@ -1,0 +1,138 @@
+.lpDiscussions{
+	.content.discussions{
+		>h6.subtitle{
+			font-size:17px;
+			width: 135px;
+		}
+		.select-filter{
+			margin-top: -4px;
+		}
+		.categoryAccordion{
+			> li{
+				h1{
+					font-size: 20px;
+				}
+				&.active{
+					ul{
+						&.discussionBody{
+							min-height: 0;
+							li{
+								.discussionHeader{
+									.dH_thumb{
+										display: none;
+									}
+									.dH_details{
+										margin: 3px 5px;
+										.user-actions{
+											margin-top: 1px;
+											.btn-comment{
+												padding: 0 5px;
+											}
+											.btn{
+												height: 26px;
+												line-height: 30px;
+												margin-right: 4px;
+												font-size: 13px;
+											}
+											a:last-child{
+												margin-right: -16px;
+											}
+											a .icon-like{
+												height: 23px;
+											}
+											a .icon-dislike{
+												height: 28px;
+											}
+											a .icon-flag{
+												height: 26px;
+											}
+										}
+										.discussion-header{
+											max-width: 56px;
+										}
+										.author{
+											float: right;
+											max-width: 92px;
+										}
+									}
+									.dH_count{
+										display: none;
+									}
+									.dH_likeCount{
+										bottom: -5px;
+									}
+								}
+								.discussionContents{
+									.comments-list{
+										li{
+											padding: 15px 10px;
+											&.post-comment {
+												padding: 0;
+												padding-top: 15px;
+												form {
+													margin: 0;
+												}
+											}
+											.thumb{
+												display:none;
+											}
+											.info{
+												margin-left: 0px;
+												width: 100%;
+												h2{
+													width: 95%;
+												}
+												.description{
+													width: 100%;
+												}
+												.user-actions{
+													.btn{
+														margin-right: 4px;
+													}
+													.btn-comment{
+														padding: 0 7px;
+														font-size: 13px;
+														height: 26px;
+														line-height: 29px;
+													}
+													a .icon-like{
+														height: 26px;
+													}
+													a .icon-dislike{
+														height:31px;
+													}
+													a .icon-flag{
+														height: 28px;
+													}
+													a:last-child{
+														margin-right: -6px;
+													}
+
+												}
+											}
+										}
+										.post-comment {
+											textarea {
+												height: 40px;
+												margin: 0;
+												margin-bottom: 5px;
+												box-sizing: border-box;
+												width: 100%;
+											}
+										}
+									}
+									.newCommentBox {
+										padding-top: 0;
+									}
+								}
+							}
+						}
+						&.discussionTabs{
+							min-height: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}

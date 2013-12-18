@@ -1,0 +1,15 @@
+<div class='popover-content signin-container' ng-controller='App_UserActionController'>
+  <div>
+    <form ng-submit='submitRegister()' name='signUpForm' class='signInForm' novalidate>
+      <h4 class='icon key gray'>Sign up. It's quick and easy.</h4>
+      <a class='btn fb' ng-click='submitFacebookLogin()'>Facebook Connect</a>
+      <input type='email' ng-model='data.register.email' name='email'  sign-in-input class="email">
+      <div class="errorMessage signup_email_error"></div>
+        <input type='password' ng-model='data.register.password' name='password'  sign-in-input class="password android-desktop-password">
+        <input type='text' ng-model='data.register.password' name='password'  sign-in-input class="ios-password password ios-signup-pwd">
+      <div class="errorMessage signup_pw_error"></div>
+      <div class="successMessage" id="signup_success"></div>
+      <button class='btn btn-light-blue'>Sign Up</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,355 @@
+// ------------------------------------
+// SIDEBAR
+// ------------------------------------
+.sidebar {
+  .column(6);
+  /*margin-top: 10px; */
+  position: relative;
+  transition: width 1.5s ease;
+  -moz-transition:width 1s ease ;
+  -webkit-transition:width 1s ease ;
+  -o-transition:width 1s ease;
+  .tv_guide .shows .container{margin-top:0;}
+  &.expand {
+    .column(16);
+    margin-top:10px;
+    transition: width 1.5s ease;
+    -moz-transition:width 1s ease ;
+    -webkit-transition:width 1s ease ;
+    -o-transition:width 1s ease;
+    nav {
+      .btn-group{
+        .expand-btn {
+          left: -75px;
+        }
+      }
+    }
+    .half-timeline {
+      display: none;
+    }
+  }
+  .btn.arrow-right {
+    padding:0 0 0 10px; 
+    background-image:url('../assets/img/btn-fulltvguide.png');
+    background-repeat:no-repeat;
+    background-position:0 0;
+    background-color:transparent !important;
+    -webkit-transition: .1s none ease;
+    -moz-transition: .1s none ease;
+    -o-transition: .1s none ease;
+    transition: .1s none ease;
+    width:159px;
+    height:38px;
+    line-height:40px; 
+    border:0;
+    text-align:left;
+    &:active {
+      color:#fff;
+      background-position:0 -38px;
+      text-shadow:0 0 5px #ff0;
+    }
+  }
+  nav {
+    position: relative;
+    margin-bottom: 10px;
+    .btn {
+      z-index: 200 !important;
+    }
+    .btn-group {
+      float: left;
+      position: relative;
+      a{
+        height:36px;
+        line-height:40px;
+        padding: 0 15px;
+      }
+      .btn:active {
+        color:#fff;
+        background-color: #de5e02;
+        background-repeat: repeat-x;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#de5e02), to(#ef4000));
+        background: -webkit-linear-gradient(top, #de5e02, #ef4000);
+        background: -moz-linear-gradient(top, #de5e02, #ef4000);
+        background: -ms-linear-gradient(top, #de5e02, #ef4000);
+        background: -o-linear-gradient(top, #de5e02, #ef4000);
+        border:1px solid #de5e00;
+        box-shadow:none;
+      }
+      .expand-btn {
+        transition: left .5s ease-out ;
+        -moz-transition:left .5s ease-out ;
+        -webkit-transition:left .5s ease-out ;
+        -o-transition:left .5s ease-out ;
+        .rounded(3px);
+        outline:0;
+        position: absolute;
+        top: 6px;
+        left:0;
+        color: #cdcccc;
+        //padding: 5px 12px 5px 25px;
+        padding-left: 28px;
+        font-size: 14px;
+        width:70px;
+        height:25px;
+        line-height:29px;
+        line-height:  27px\9;
+        z-index: 100;
+        text-transform: none;
+        font-family: 'HelveticaNeueCn';
+        background: url('/assets/img/nownext-open.png') rgba(0, 0, 0, 0.8) no-repeat left center;
+        &.expanded {
+          background: url('/assets/img/nownext-close.png') rgba(0, 0, 0, 0.8) no-repeat left center;
+          left: -75px !important;
+        }
+      }
+    }
+    a {
+      background: #2c0a2a;
+      font-size: 1.250em;
+      color: #a85b9c;
+      text-transform: uppercase;
+      padding: 5px 10px;
+    }
+    .btn.active{
+      .gradient(#ff4b06, #ff2e0a, #fe6c01);
+      border-color: #fea201 #fe7607 #fe7c07;
+      border-color: rgba(256, 162, 1, 0.50) rgba(254, 118, 7, 0.40) rgba(0, 0, 0, 0.25);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4b06', endColorstr='#ff2f0a', GradientType=0);
+      filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+      color: #fff;
+      text-shadow: 0 5px 9px #FFB971;
+    }
+    .btn.arrow-right {
+      float: right;
+      display:block; 
+      font-size: 1.125em;
+      text-transform:none;
+    }
+  }
+  .list {
+    .border-radius( 5px, 0, 0, 5px);
+    background: #180c26;
+    border: 1px solid #292238;
+    .time {
+      position: relative;
+      padding: 0px 27px;
+      border-bottom: 1px solid #41173d;
+      .arrows {
+        position: absolute;
+        padding: 3px 6px 10px;
+        font-weight: bold;
+        font-size: 30px;
+        color: #952d5f;
+        &.prev {
+          left:0px;
+        }
+        &.next {
+          right:0px;
+        }
+      }
+      .container {
+        overflow: hidden;
+        ul {
+          padding: 0;
+          margin: 0;
+          list-style:none;
+          width: 9999999px;
+          li {
+            display: inline-block;
+            font-size: 1.171em;
+            line-height: 35px;
+            padding-left: 60px;
+            width: 105px;
+            color: #a85b9c;
+          }
+          li.active {
+            color: #FEEF02;
+            text-shadow: 0 2px 17px #FF616B;
+          }
+        }
+      }
+    }
+    .row {
+      overflow: hidden;
+      border-top: 1px solid #231a32;
+      &:nth-child(odd) {
+        background-color: #191224;
+      }
+      &:nth-child(even) {
+        background-color: #1f172d;
+      }
+      .container {
+        width: 99999px;
+
+      }
+      .show {
+        @show_width: 338px;
+        float: left;
+        height: 70px;
+        /*width: @show_width;*/
+        display: table-cell;
+        position:relative ;
+        &.twice {
+          .show-item{width:101px;}
+        }
+        .channel-logo {
+          box-shadow: 4px 0 3px 0px #0e0a16;
+          background: #3d344b;
+          background: rgba(216, 226, 244, .1);
+          border-right: 1px solid #4d465a;
+          height:46px;
+          padding: 15px 12px 12px 12px;
+          float: left;
+          display:none;
+        }
+        &:first-child {
+          .channel-logo {
+            display:block;
+          }
+          .show-item{&:before{display:none; }}
+        }
+        .show-item {
+          float:left;
+          padding: 0 20px 0 10px;
+          width:233px;
+          position:relative ;
+          margin:10px 0;
+          &:before {
+            content:'';
+            width:1px;
+            height:50px;
+            position:absolute;
+            top:0px;
+            left:0;
+            border-left:1px solid #000;
+            background: #3c2b54;
+          }
+        }
+        h2,h3 {
+          font-size:14px;
+          margin: 0;
+          line-height: inherit;
+        }
+        h2 {
+          color: #f7e6f5;
+          margin-top: 3px;
+        }
+        h3 {
+          color: #a85b9c;
+        }
+        img {
+          float:left;
+          display: none;
+        }
+        &.active {
+          img {
+            display: block;
+          }
+        }
+        &.q1 {
+          width: @show_width/4;
+        }
+        &.q2 {
+          width: @show_width/2;
+        }
+        &.q3 {
+          width: @show_width - @show_width / 4;
+          border-right: 1px solid #3c2b54;
+        }
+      }
+    }
+  }
+}
+
+html.no-touch{
+  &.win{
+    .sidebar{
+      &.expand{
+        nav{
+          .btn-group{
+            .expand-btn{
+              left: -90px;
+            }
+            &:hover .expand-btn{
+              left: -90px;
+            }
+          }
+        }
+      }
+      nav{
+        .btn-group{
+          &:hover{
+            .expand-btn{
+              left: -90px !important;
+            }
+          }
+        }
+        .expand-btn{
+          &.expanded{
+            left: -90px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+html.no-touch {
+  .sidebar {
+    &.expand {
+      nav {
+        .btn-group{
+          &:hover .expand-btn {
+            left: -75px;
+          }
+        }
+      }
+    }
+    .btn.arrow-right {
+
+      transition: .1s none ease;
+      -moz-transition:.1s none ease;
+      -webkit-transition:.1s none ease;
+      -o-transition:.1s none ease;
+      &:hover{
+        background-image: url('../assets/img/btn-fulltvguide.png');
+        background-repeat: no-repeat;
+        background-position: 0 -76px;
+        background-color:transparent;
+      }
+      &:active{
+        background-image: url('../assets/img/btn-fulltvguide.png');
+        background-repeat: no-repeat;
+        background-position: 0 -38px;
+        background-color:transparent;
+      }
+    }
+    nav {
+      .btn-group {
+        &:hover{
+          .expand-btn{
+            display:none;
+            transition: left .5s ease-out ;
+            -moz-transition:left .5s ease-out ;
+            -webkit-transition:left .5s ease-out ;
+            -o-transition:left .5s ease-out ;
+            left: -75px !important;
+          }
+        }
+      }
+    }
+    .list {
+      .row {
+        .show {
+          &:hover{
+            background-color: #2d243b;
+            text-shadow: 0 2px 17px #FF616B;
+          }
+          &:hover h2, &:hover h3 { 
+            color: #FEEF02; 
+          }
+        }
+      }
+    }
+  }
+}

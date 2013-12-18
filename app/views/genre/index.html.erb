@@ -1,0 +1,38 @@
+<div class='choose-language' header-location >
+  <div class = 'popover-loader signin-loader' ng-hide='paginateGenres.length>0'> </div>
+  <div ng-show = 'paginateGenres.length>0'>
+    <div class='header' ng-show="genreEdit">
+      <h4>Choose Your TV Genre</h4>
+
+    </div>
+    <div class='header' ng-hide="genreEdit">
+      <h4> Your Favorite TV Genre </h4>
+    </div>
+    <ul id="genreLanguageList" class='language-list' >
+        <li ng-repeat="l in paginateGenres">
+        <span ng-show="genreEdit">
+          <label for="checkbox{{l.value.replace(' ','')}}"  ng-class="{selectedLanguage:l.favGenre=='1'}">
+            {{ l.value }}
+          </label>
+            <div class="custom-checkbox">
+              <input ng-click="toggleLanguageGenre($event,l.value,'genre',l)" id="checkbox{{l.value.replace(' ','')}}" name="language" value="{{l.value}}" type="checkbox" ng-checked="l.favGenre =='1'"/>
+              <label for="checkbox{{l.value.replace(' ','')}}"></label>
+            </div>
+        </span>
+        <span ng-hide="genreEdit">
+          <label ng-class="{selectedLanguage:l.favGenre=='1'}">
+            {{ l.value }}
+          </label>
+          <div class="custom-checkbox">
+            <input type="checkbox" ng-checked="l.favGenre == 1"/>
+            <!-- Empty Label tag for UI -->
+            <label></label>
+          </div>
+        </span>
+        </li>
+    </ul>
+    <div ng-show="paginateGenres.length < allGenres.length" class='footer'>
+      <a ng-click="loadMoreGenres()">More Genres</a>
+    </div>  
+  </div>
+</div>

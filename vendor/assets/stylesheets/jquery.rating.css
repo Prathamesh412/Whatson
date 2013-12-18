@@ -1,0 +1,23 @@
+/* jQuery.Rating Plugin CSS - http://www.fyneworks.com/jquery/star-rating/ */
+/*
+ * Modified on Feb 28, 2013 to allow for halfstar ratings
+ * starHead and starTail represent the first and second halves of a 
+ * star respectively
+ */
+input.star{visibility: hidden;}
+div.rating-cancel,div.star-rating{float:left;width:25px;height:25px;text-indent:-999em;cursor:pointer;display:block;background:transparent;overflow:hidden;margin-top:4px;}
+div.rating-cancel,div.rating-cancel a{position:absolute; left:-25px; display:none !important; background:url(delete.gif) no-repeat 0 -16px}
+div.star-rating,div.star-rating a{background:url(../assets/img/icon-rating-stars.png) no-repeat 0 0px}
+div.starTail{width: 13px; background-position: -11px 0}
+div.starHead{width: 12px; background-position: 0 0}
+div.rating-cancel a,div.star-rating a{display:block;width:25px;height:100%;background-position:0 -25px;border:0}
+div.star-rating.starTail,div.star-rating.starTail a{display:block;width:13px;height:100%;background-position:-11px -25px;border:0}
+div.star-rating-on a{background-position:0 0 !important}
+div.star-rating-on.starTail a{background-position:-11px 0 !important}
+div.star-rating-hover a{background-position:0 -50px}
+div.star-rating-hover.starTail a{background-position:-11px -50px}
+/* Read Only CSS */
+div.star-rating-readonly a{cursor:default !important}
+/* Partial Star CSS */
+div.star-rating{background:transparent!important;overflow:hidden!important}
+/* END jQuery.Rating Plugin CSS */

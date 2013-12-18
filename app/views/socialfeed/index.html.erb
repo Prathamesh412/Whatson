@@ -1,0 +1,141 @@
+<section class="clearfix main-section lpFeeds myprofile_detailed" ng-controller="WatchlistPageController">
+	<div class='content' >
+
+		<div class="feedSelect">
+			<ul>
+				<li ng-click="changeFeedTab('watchlistsocial') " ng-class="{active: feedTab=='watchlist'}">Watchlist</li>
+				<li ng-click="changeFeedTab('reminders') "  ng-class="{active: feedTab=='reminder'}">Reminders</li>
+				<li ng-click="changeFeedTab('favourites') " ng-class="{active: feedTab=='favourite'}">Favorites</li>
+
+				<li ng-click="changeFeedTab('socialfeed') " ng-class="{active: feedTab=='feed'}">Social Feed</li>
+			</ul>
+		</div>
+
+		<div ng-hide="feedTab=='feed'">
+			<%= render :partial => "watchlist/maindiv", :locals => {:page => "feed"} %>
+		</div>
+
+
+		<div class="feeds" ng-controller="ProfileMainController" ng-show="feedTab=='feed'">
+			<ul class="clearfix selection-tabs" >
+			<li><a href='#' class='tab-btn' ng-click="switchFeeds($event, 'latest')" ng-class="{active: activeFeed == 'latest'}">Latest Updates</a></li>
+			<li><a href='#' class='tab-btn' ng-click="switchFeeds($event, 'friends')" ng-class="{active: activeFeed == 'friends'}">Friends</a></li>
+			</ul>
+			<h6 class="subtitle">Feed</h6>
+			<a class="more" ng-click='loadMoreFeeds()' ng-show="profile.feeds.allData.length > 6" ng-hide="profile.feeds.nullReached">View More</a>
+			<div class="loadingIndicator" ng-show="profile.feeds.loading"></div>
+			<div class="fix clearfix" ng-show="!profile.feeds.data.length && profile.feeds.sectionLoaded && !profile.feeds.loading">No feeds to display</div>
+			<div class="content-wrapper" ng-show="profile.feeds.data.length">
+				<ul>
+
+					<li ng-repeat="td in profile.feeds.data">
+						<ul>
+							<li class="row" ng-show = "td.contenttype.toLowerCase() == 'program'" >
+								<div class="thumb">
+									<div class="wrapper" ng-show="!td.imageurl"css-bg-image="{{td.imagepath}}"></div>
+									<div class="wrapper" ng-show="!td.imagepath" css-bg-image="{{td.imageurl}}"></div>
+								</div>
+								<div class="testimonialContent" ng-class-odd="'odd'" ng-class="{active: td.active}">
+									<h5>{{td.contentname}}<button class='btn btn-small fblike' ng-click='facebookShare(td, $event)'>{{td.userlike | fbActivityLike}}</button></h5>
+									<div class="multilineWrap">
+										<p ng-show="!td.feeddescription">{{td.description}}</p>
+										<p ng-show="!td.description">{{td.feeddescription}}</p> <!-- Description for Friends Activity -->
+									</div>
+									<ul class="list-friends" ng-show="td.feedLikes.showSection">
+									<!-- <ul class="list-friends"> -->
+										<p class="title_blue">{{td.feedLikes.displayUsers}}<span class="text_pink"> and {{td.feedLikes.likeCount}} others like this</span></p>
+										<li class="item animate bounceInDown clearfix friend_inline_list additional_style" ng-repeat="thisItem in td.feedLikes.userImages" >
+										<!-- <li class="item animate bounceInDown clearfix friend_inline_list additional_style" ng-repeat="thisItem in [1, 2, 3]" > -->
+											<div class="thumb" css-bg-image="{{thisItem.userimage | filterDefaultImage}}" title="{{thisItem.username}}"></div>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="row{{td.rownum}}" ng-click="loadDiscussion(td, $event)" ng-class="{active: td.active}" ng-show = "td.contenttype == 'channel'"  >
+								<div class="thumb">
+									<div class="wrapper" css-bg-image="{{td.imagepath}}"></div>
+								</div>
+								<div class="testimonialContent" ng-class-odd="'odd'" ng-class="{active: td.active}">
+									<h5>{{td.contentname}}</h5>
+									<div class="multilineWrap">
+										<p>{{td.description}}</p>
+									</div>
+									<ul class="list-friends" ng-show="td.feedLikes.showSection">
+										<p class="title_blue">{{td.feedLikes.displayUsers}}<span class="text_pink"> and {{td.feedLikes.likeCount}} others like this</span></p>
+									</ul>
+									<button class='btn btn-small fblike' ng-click='facebookShare(td, $event)'>{{td.userlike | fbActivityLike}}</button>
+								</div>
+							</li>
+
+
+							<li class="row{{td.rownum}} form-list" ng-class="{active: td.active}" ng-show = "td.contenttype == 'forum'">
+								<div class="thumb">
+									<div class="wrapper" css-bg-image="{{td.forumimage}}"></div>
+								</div>
+								<div class="testimonialContent discussion" ng-class-odd="'odd'" ng-class="{active: td.active}">
+									<div class="thumb">
+										<div class="wrapper"></div>
+									</div>
+									<div class="info">
+										<h2 class="discussion-header"><span class="title" live-tooltip="{{td.contentname}}">{{td.contentname}}</span></h2>
+										<span live-tooltip="{{td.username}}" class="author">by {{td.username}}</span>
+										<span class="details">{{td.createddate | momentDiference}}</span>
+										<div class="user-actions" ng-controller="UserController">
+											<a href="" class="btn btn-comment" ng-click="toggleComment($event)">Comment</a>
+											<a href="#" ng-click="toggleLikeDiscussion(true, td, $event)" ng-class="{active: td.userlike =='1'}" class="like btn btn-small btn-purple-blue">
+												<i class="icon-like"></i>
+											</a>
+											<a href="#" ng-click="toggleLikeDiscussion(false, td,  $event)" ng-class="{active: td.userdislike =='1'}" class="btn btn-small btn-purple-blue dislike">
+												<i class="icon-dislike"></i>
+											</a>
+											<a href="#" ng-click="flagDiscussion(td, $event)" ng-class="{active: td.userreportabuse =='1'}" class="btn btn-small btn-purple-blue flag">
+												<i class="icon-flag"></i>
+											</a>
+										</div>
+									</div>
+									<div class="trending-meter">{{td.threadcount}}</div>
+									<div class="ownComment clearfix ng-scope" ng-show="td.ownComment">
+										<div class="thumb"></div>
+										<div class="info clearfix">
+											<h2 live-tooltip="{{td.ownComment.username}}" class="ng-binding">{{td.ownComment.username}}
+												<span class="status ico star" ng-show="td.ownComment.moderator">moderator</span>
+											</h2>
+											<div class="description ng-binding">{{td.ownComment.commenttext}}</div>
+											<div class="user-actions ng-scope" ng-controller="UserController">
+												<a href="" class="btn-comment btn" ng-click="openReplyForm($event)">Reply</a>
+												<a href="#" ng-class="{active: td.ownComment.userlike=='1'}" ng-click="toggleLikeComment(true, td.ownComment, $event)" class="btn flag btn-small btn-purple-blue like">
+													<i class="icon-like"></i>
+												</a>
+												<a href="#" ng-class="{active: td.ownComment.userdislike=='1'}" ng-click="toggleLikeComment(false, td.ownComment, $event)" class="btn flag btn-small btn-purple-blue dislike">
+													<i class="icon-dislike"></i>
+												</a>
+												<a href="#" ng-class="{active: td.ownComment.userreportabuse=='1'}" ng-click="toggleFlagComment(td.ownComment, $event)" class="btn flag btn-small btn-purple-blue">
+													<i class="icon-flag"></i>
+												</a>
+											</div>
+											<form class="post-reply ng-scope ng-pristine ng-valid" ng-controller="UserController" action="">
+												<textarea ng-model="discussion.reply.message" placeholder="Reply to this comment..." class="ng-pristine ng-valid"></textarea>
+												<button type="submit" ng-click="commentDiscussion(td.contentid, $event, displayFeedComment, td)" class="btn-reply btn btn-light-blue">Post</button>
+											</form>
+										</div>
+									</div>
+									<div class="post-comment ng-scope" ng-controller="UserController">
+										<form action="" class="ng-pristine ng-valid">
+											<textarea ng-model="discussion.reply.message" placeholder="Write a comment..." class="ng-pristine ng-valid"></textarea>
+											<button type="submit" ng-click="commentDiscussion(td.contentid, $event, displayFeedComment, td)" class="btn-post btn btn-light-blue">Post</button>
+										</form>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--  End of feeds  -->
+
+	</div>
+
+	<%= render :partial => "addons/profile-sidebar" %>
+	
+</section>

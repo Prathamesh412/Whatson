@@ -1,0 +1,81 @@
+<div class="bg" id="popup_login_form" name='signInForm' style="display: none" ng-controller="App_UserActionController">
+  <div class="admin_panel_forgot signin-container">
+    <input  type="button" class="close" ng-click="redirctToHomePage()"/>
+
+    <img class="key" src="/assets/img/overlay_key.png" />
+    <div class="admin_text">Login to your TV Guide</div>
+    <div class="login_bg">
+      <input  type="button" class="facebook" ng-click="submitFacebookLogin()"/>
+    </div>
+    <form ng-submit='submitSignIn()' name='signInForm' class="login_box" novalidate>
+      <div class="login_img"><img src="/assets/img/overlay_id_img.png" /></div>
+      <input class="admin_text_input" type="text" ng-model='data.signin.email' name='email' value="Email ID" placeholder="Email ID" onfocus="if(this.value === 'Email ID') this.value = '';" onblur="if(this.value === '') this.value = 'Email ID';" />
+      <div class="login_border"></div>
+      <div class="login_img"><img src="/assets/img/overlay_pas_img.png" /></div>
+      <input class="admin_text_input" type="password" ng-model='data.signin.password' name='password' value="Password" placeholder="Password" onfocus="if(this.value === 'Password') this.value = '';" onblur="if(this.value === '') this.value = 'Password';" />
+      <div class="errorMessage signin_email_error"></div>
+      <div class="errorMessage signin_pw_error"></div>
+      <div class="login_bg">
+        <button   class="login signin-img" ></button>
+      </div>
+
+
+      <div class="forgot">
+        <span ng-click="showForgotForm()">Forgot Password?</span>
+      </div>
+
+
+    </form>
+  </div>
+</div>
+
+<div class="bg" id="forgot_form" style="display: none" ng-controller="App_UserActionController">
+  <div class="admin_panel_forgot_inside signin-container">
+    <input  type="button" class="close" ng-click="redirctToHomePage()"/>
+
+    <div class="forgot_tital">Forgot Password</div>
+    <div class="sub_text">Submit your email id to recover your password.</div>
+
+    <form ng-submit='submitForgotPassword()' novalidate name='forgotPasswordForm' class="login_box_forgot" novalidate>
+      <div class="login_img"><img src="/assets/img/overlay_id_img.png" /></div>
+      <input class="admin_text_input"  type="email" name="email" ng-model="data.forgot.emailid"  sign-in-input value="Email" placeholder="Email" onfocus="if(this.value === 'Email') this.value = '';" onblur="if(this.value === '') this.value = 'Email';" />
+      <div class="errorMessage recover_email_error"></div>
+      <div class="successMessage recover_email_success">Login credentials sent successfully to your Email ID</div>
+      <div class="login_bg">
+        <button  class="submit" ></button>
+      </div>
+      <div class="forgot">
+        <span ng-click="showLoginForm()">Cancel</span>
+      </div>
+
+
+    </form>
+  </div>
+</div>
+
+
+<div class="bg" id="submit_form" style="display: none" ng-controller="App_UserActionController">
+  <div class="admin_panel signin-container">
+    <input type="button" class="close" ng-click="redirctToHomePage()"/>
+
+    <img class="key" src="/assets/img/overlay_key.png" />
+    <div class="admin_text">Sign up. It's quick and easy.</div>
+    <div class="login_bg">
+      <input  type="button" class="facebook" ng-click="submitFacebookLogin()"/>
+    </div>
+    <form ng-submit='submitRegister()' name='signUpForm' class="login_box" novalidate>
+      <div class="login_img"><img src="/assets/img/overlay_id_img.png" /></div>
+      <input class="admin_text_input" type='email' ng-model='data.register.email' name='email'  sign-in-input  value="Email ID" placeholder="Email ID" onfocus="if(this.value === 'Email ID') this.value = '';" onblur="if(this.value === '') this.value = 'Email ID';" />
+      <div class="login_border"></div>
+      <div class="login_img"><img src="/assets/img/overlay_pas_img.png" /></div>
+      <input class="admin_text_input" type='password' ng-model='data.register.password' name='password'  sign-in-input value="Password" placeholder="Password" onfocus="if(this.value === 'Password') this.value = '';" onblur="if(this.value === '') this.value = 'Password';" />
+      <input type='text' ng-model='data.register.password' name='password'  sign-in-input class="ios-password password ios-signup-pwd">
+      <div class="errorMessage signup_pw_error"></div>
+      <div class="errorMessage signup_email_error"></div>
+      <div class="successMessage" id="signup_success"></div>
+      <div class="login_bg">
+        <button  class="login signup-img" ></button>
+      </div>
+    </form>
+  </div>
+</div>

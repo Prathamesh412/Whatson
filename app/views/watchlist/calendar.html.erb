@@ -1,0 +1,25 @@
+<div class="calendar-popover watchlist-calendar-popover clearfix">
+  <div class="title">Change date</div>
+  <div class="thismonth clearfix">
+	  <div class='month'><%= Date::MONTHNAMES[Date.today.month] %>
+	  	 <a class="calender-arrow-right" ng-click = "nextmonth()">&gt;</a>
+	  </div>
+	    <ul class="days">
+	      <li ng-click="changeViewForDate(c.api_date,c.clickable)" ng-repeat="c in calendar.thisMonth" ng-class="{inactive: !c.clickable}">
+	      <span class="day-name">{{c.day_name}}</span>
+	      <span class="day-value">{{c.day_value}}</span>
+	      </li>
+	    </ul>
+  </div>
+  <div class="nextmonth clearfix">
+	  <div class='month'><%= Date::MONTHNAMES[Date.today.at_beginning_of_month.next_month.strftime("%m").to_i] %>
+	  	 <a class="calender-arrow-left" ng-click = "prevmonth()">&lt;</a>
+	  </div>
+	    <ul class="days">
+	      <li ng-click="changeViewForDate(c.api_date,c.clickable)" ng-repeat="c in calendar.nextMonth" ng-class="{inactive: !c.clickable}">
+	      <span class="day-name">{{c.day_name}}</span>
+	      <span class="day-value">{{c.day_value}}</span>
+	      </li>
+	    </ul>
+  </div>
+</div>

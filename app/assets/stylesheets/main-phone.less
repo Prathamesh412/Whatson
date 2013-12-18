@@ -1,0 +1,498 @@
+body {
+  font-size: 12px;
+}
+
+#container {
+  max-width: auto;
+  margin: 0 auto;
+}
+.tvoperator-popover, .language-popover, .reminder-popover {
+  .language-list li {
+    span {
+      /*&:hover {
+        background: none !important;
+      }*/
+    }
+  }
+}
+
+html.android{
+  .android-tip-fix.qtip .qtip-tip:before{
+    right:auto;
+    left:-40px;
+  }
+}
+
+// ------------------------------------
+// MAIN HEADER
+// ------------------------------------
+.header {
+
+  .logo {
+    /*.column(6);*/
+    width:50px;
+    padding-top:8px; 
+    margin-right:0px; 
+
+    .woi-logo{
+      width:47px; 
+      height:47px; 
+    }
+    h1,h2 {
+      display: none;
+    }
+  }
+  .social-actions-col {
+    .column(13);
+    margin-right:0;
+    float:right; 
+
+    .social {
+      display: none;
+    }
+    .actions {
+      padding-top: 12px;
+      .select-language , select {
+        width: 97px;
+        margin: 0;
+        padding-left:0px; 
+        padding-right:0px; 
+        margin-right:0;
+        .btn{
+          width:80px;
+          padding-left:5px;
+          padding-right:5px;
+          .arrow{
+            right:3px;
+          }
+        }
+      }
+      .members-area{
+        float:right; 
+        .username{
+          span{
+            width: 100px;
+          }
+          .btn-group{
+            button{
+              margin-left: 4px;
+              height: 28px;
+            }
+          }
+        }
+        .btn{
+          padding-left: 9px;
+          padding-right: 9px;
+        }
+        .btn.sign-in{
+          /*margin-left:4px; 
+          float:right;
+          span{
+            display:none; 
+          }
+          &:before{
+            content:'Login'; 
+          }*/
+        }
+        .btn.register{
+          /*margin-left:0px;
+          span{
+            display:none; 
+          }
+          &:before{
+            content:'Sign Up'; 
+          }*/
+        }
+      }
+    }
+  }
+}
+
+// ------------------------------------
+// MAIN NAV
+// ------------------------------------
+.main-nav {
+  margin-top:0px; 
+  padding-top:7px; 
+  background: none !important;
+  ul:not(.dropdown-menu) {
+    .column(9);
+    margin-top:3px; 
+    li{
+      padding:0 5px;
+      &.more{
+        background-image:none; 
+      }
+
+      a{
+        font-size: 15px; 
+      }
+      &:first-child{ 
+        margin-left:2px; 
+      } 
+
+    }
+  }
+  ul.dropdown-menu {
+    left: 0;
+    display: none;
+    z-index:999999999;
+
+    li {
+      float: none;
+      display: block;
+      margin: 0 !important;
+      padding: 0 !important;
+
+      &:first-child a {
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+      }
+
+      &:last-child a {
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      a {
+        display: block;
+        color: inherit;
+        border: none;
+        text-shadow: none;
+        padding: 5px 10px;
+
+        &.active {
+          color: #fff !important;
+          text-decoration: none;
+          background-color: #fb8a32;
+          background-repeat: repeat-x;
+          background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fb8a32), to(#f96745)) ;
+          background: -webkit-linear-gradient(top, #fb8a32, #f96745) ;
+          background: -moz-linear-gradient(top, #fb8a32, #f96745) ;
+          background: -ms-linear-gradient(top, #fb8a32, #f96745) ;
+          background: -o-linear-gradient(top, #fb8a32, #f96745) ;
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4b06', endColorstr='#ff2f0a', GradientType=0);
+          filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+          background-repeat: repeat-x; 
+        }
+        /*&:hover {
+          border: none;
+        }*/
+      }
+    }
+  }
+  .nav-right{
+    .column(7);
+
+    .watchlist{
+      float:left; 
+
+      .btn{
+        padding:0 4px;
+      }
+    }
+    .search{
+      margin-left:0;
+		input[type=search]{
+			padding-left: 22px !important;
+      // background-color: transparent !important;
+			/*width: 260px !important;*/
+			
+			&:focus{
+				padding-left: 30px !important;
+				width: 260px !important;
+			}
+		}
+      input{
+        width:1px; 
+        height:25px; 
+        padding:0px !important; 
+        margin-left:4px;
+        margin-bottom:0;
+        background-color:transparent !important; 
+        box-shadow:none;
+        border-color:transparent;
+        text-indent:-9999px;
+
+        background-image: url('../assets/img/search-icon-phone.png'); 
+        background-position:3px 3px;
+
+
+        &:focus{
+          width:30px; height:30px; 
+          padding:0px !important; 
+          background-color:inherit; 
+          box-shadow:none; 
+          border:inherit;
+          text-indent:0px;
+        }
+      }
+    }
+  }
+}
+
+// ------------------------------------
+// MAIN CONTENT
+// ------------------------------------
+.content {
+  .column(16);
+  margin-top:10px;
+
+
+  .featured {
+    margin-bottom:0 !important; 
+
+    .play {
+      width: 50px;
+      height: 50px;
+    }
+
+  }
+
+  .channel-tabs {
+    display: none;
+  }
+}
+
+// ------------------------------------
+// SIDEBAR
+// ------------------------------------
+.sidebar {
+  .column(16);
+  margin-top:0;
+
+  nav{
+    .btn.arrow-right{
+      width:135px; 
+      height:34px; 
+      background-size: cover;
+      /*&:hover{
+        background-position:0 -68px;
+      }*/
+      &:active, &.active{
+        background-position:0 -34px;
+      }                          
+    }
+    .btn-group a {
+      height: 32px !important; 
+      line-height: 35px !important;
+      padding: 0 7px !important;
+    }
+  }
+
+  .half-timeline {
+    display: none;
+  }
+
+  .list {
+    .time {
+      .container {
+        width:215px;
+      }
+    }
+    .row {
+      width: 100%;
+      .show {
+        @show_width: 300px;
+        width: @show_width;
+        &.q1 {
+          width: @show_width/4;
+        }
+        &.q2 {
+          width: @show_width/2;
+        }
+        &.q3 {
+          width: @show_width - @show_width / 4;
+        }
+      }
+    }
+
+  }
+
+  .now-and-next.sidebar{
+    width:100%; 
+
+  }
+}
+
+// ------------------------------------
+// BOTTOM ATTENTION GRABBER
+// ------------------------------------
+.fb-activity {
+  .column(16);
+  margin-top:30px;
+
+  .container {
+    .row(16);
+
+    .slider {
+
+      .item {
+        &.active:after{
+          display:none; 
+        }
+        /*width: 100%;*/
+      }
+    }
+  }
+}
+.trending {
+  /*.column(16);*/
+  margin-top:30px;
+
+  .arrows.right{
+  /*  left:275px; */
+    left: auto !important;
+    right: 0px;
+  }
+  .container {
+    .slider {
+      .item {
+        width: 250px;
+        border-right: 0;
+      }
+    }
+  }
+  .containerBox{
+    .item{
+      width:258px !important;
+      h2{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width:150px;
+        line-height: 20px !important;
+      }
+    }
+  }
+}
+
+
+// ------------------------------------
+// FOOTER
+// ------------------------------------
+footer {
+  .search{
+    height:32px !important;
+    width:100% !important;
+    .column(16);
+    margin:0 auto;
+    display: block;
+    overflow: visible; /* This was hidden, removed because it was hiding the autocomplete dropdown in the footer :o */
+    width: 100%;
+    position: relative;
+
+    input#searchBoxBottom{
+      display: block !important;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: #130913;
+      background-position: 8px 8px;
+      .rounded(5px);
+      padding-left: 25px;
+      padding-right: 0px;
+      height:32px !important; 
+      width:100% !important;
+
+      &:focus{
+        height:32px !important;
+        padding:10px 10px 10px 25px !important;
+        width:100% !important;
+        background-color: #FFF;
+      }
+    }
+  }
+
+  .newsletter{
+    .column(16);
+    clear:both; 
+    width:100%;
+    margin:10px auto 0 auto !important; 
+    
+    input{
+      display: block !important;
+      width:100%;
+      background: #130913; 
+      height:32px !important; 
+      line-height:30px; 
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    } 
+
+    .btn{
+      height:30px;
+      line-height:34px; 
+    }
+  }  
+
+  .nav {
+    .column(16);
+
+    ul {
+      li {
+        margin-right: 4px;
+        font-size: 14px;         
+        
+        &.more {
+          display: inline-block !important;
+        }
+      }
+    }
+  }
+
+}
+.main-nav {
+
+  .search {
+    width: auto;
+
+    .typeahead.dropdown-menu {
+      right: 52px !important;
+      left: auto !important;
+    }
+  }
+}
+
+.main-section{
+  background: none !important;
+  
+  .content{
+    margin-top:0px !important;
+  }
+}
+
+/*  Android Specific */
+html.android{
+  .main-nav{
+    .nav-right{
+      .search{
+        input[type="search"]{
+          &:focus{
+            right: 20px !important;
+          }
+        }
+      }
+    }
+  }
+  .fb-activity{
+    .container{
+      .slider{
+        .item{
+          width:290px;
+        }
+      }
+    }
+  }
+  footer .newsletter input{
+    line-height: 18px;
+  }
+  #searchBoxBottom{
+    line-height: 18px;
+  }
+  #searchBoxBottom ~ .dropdown-menu {
+    // padding-top: 50px;
+  }
+}
+

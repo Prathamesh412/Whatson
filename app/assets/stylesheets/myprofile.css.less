@@ -1,0 +1,63 @@
+
+// ------------------------------------
+// IMPORTING STYLSHEETS
+// ------------------------------------
+
+@import 'grid.less';
+@import 'elements.less';
+@import 'fonts.less';
+
+
+
+// ------------------------------------
+// RESPONSIVE STYLES INCLUDE
+// ------------------------------------
+
+/* default desktop version */
+@import 'myprofile-desktop.less';
+
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-width: 640px){
+  @import 'myprofile-phone.less';
+}
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-width: 480px) and (orientation: portrait){
+	.main-section{
+		.content{
+			.opened_profile_item_container{
+				.profile_item_content{
+					.profile_item_content_list{
+						.list-item{
+							&:nth-child(3n){
+								.thumb{
+									margin-right: 29px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-width: 640px) and (orientation: landscape){
+}
+/* #### iPhone 4+ Portrait or Landscape #### */
+@media screen and (max-width: 480px) and (-webkit-min-pixel-ratio: 2){
+  /* some CSS here */
+}
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  /*@import 'movies-tablet.less';*/
+  // @import 'myprofile-tablet.less';
+}
+/* #### Tablets Portrait #### */
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation:portrait) {
+  @import 'myprofile-tablet.less';
+}
+/* #### Tablets Landscape #### */
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation:landscape) {
+}
+

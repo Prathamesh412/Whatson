@@ -1,0 +1,134 @@
+.lpMovies{
+	padding-left: 5px;
+}
+
+.movie-pics{
+	padding-left: 0px;
+	.movie-item{
+		margin-left: 8px;
+		margin-right: 9px;
+		&:nth-child(4){
+			margin-top: 0px;
+			.thumb{
+				height: 192px;		
+			}
+		}
+		&:nth-child(3){
+			margin-top: 44px;
+			.thumb{
+				height: 148px;		
+			}
+		}
+		&:nth-child(14n+1), &:nth-child(14n){
+			.thumb{
+				width: 165px;
+				height: 192px;
+				.user-actions{
+					.btn-purple-blue{
+						&.favorite, &.reminder, &.watchlist{
+          					margin: 4px 0 4px 25px;
+              				float: left;
+						}
+						&.favorite{
+			              margin-left: 10px;
+            			}
+					}
+				}
+			}
+			.text-wrapper{
+				width: 165px;
+				.name{
+					width: 85px;
+				}
+			}
+		}
+		&:nth-child(10n+1), &:nth-child(10n){
+        .thumb{
+	        width: 360px;
+	        height: 465px;
+	        .user-actions{
+	          .btn-purple-blue{
+	            &.favorite{
+	              float: left;
+	              margin: 4px 0px 4px 45px;
+	            }
+	            &.reminder{              
+	              margin: 4px 0px 4px 88px;
+	            }
+	            &.watchlist{
+	              float: right;
+	              margin: 4px 45px 4px 0;
+	            }
+	          }
+	        }
+        }
+        .text-wrapper{
+	        width: 360px;
+	        .name{
+	          width: 280px;
+	        }
+	      }
+		}
+    	&:nth-child(14n-3){
+    		clear: none;
+    	}
+	    &:nth-child(10n-2){
+	      clear:left;
+	    }
+	    &:nth-child(14n){
+	    	float: left;
+	    	margin-top: 0px;
+	    }
+	    &:nth-child(10n){
+			float: right;
+			margin-top: -272px;
+	    }
+	}
+}
+
+.moviesWrapper{
+	input{
+		margin-right: 12px;
+	}
+	.typeahead.dropdown-menu{
+		max-height:423px;
+		overflow-y: scroll;
+	}
+}
+
+html.android{
+	.moviesWrapper{
+		input{
+			margin-right: 45px;
+		}
+	}
+}
+
+.movie-info-tabs{
+	ul{
+		li{
+			a{
+				font-size: 22px;
+				margin-right: 0px;
+			}
+		}
+	}
+	.select-boxes{
+		margin-top: 20px;
+	}
+}
+
+.filters{
+	.main-nav{
+		ul{
+			width: 100% !important;
+			li{
+				padding-left: 0px;
+				border-right: 9px solid transparent;
+			}
+		}
+		.range-slider{
+			float: right;
+		}
+	}
+}

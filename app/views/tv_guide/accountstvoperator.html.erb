@@ -1,0 +1,28 @@
+<div class='choose-language'>
+  <div class = 'popover-loader signin-loader' ng-hide='paginateOps.length>0'> </div>
+  <div ng-show = 'paginateOps.length>0'>
+    <div class='header'>
+     <h4>Select TV Operator</h4>
+    </div>
+
+    <ul class='language-list tv-operator-list'>
+      <li ng-repeat="op in paginateOps">
+        <span tvoperator-checkbox="op" ng-click="selectOperator(op)" >
+          <!-- <label for="checkbox{{op.operator_id}}">
+            {{ op.operator_name }}{{ op.operator_name }}
+          </label>
+          <div class="custom-checkbox radio">
+            <input  ng-click="selectOperator(op)" id="checkbox{{op.operator_id}}" name="tvoperator" type="radio"  />
+            <label for="checkbox{{op.operator_id}}"></label>
+          </div> -->
+        </span>
+      </li>
+    </ul>
+    <div class='footer'>
+      <a ng-click="viewAllOperators()" ng-show="paginateOps.length != allOperators.length" > 
+        View all TV Operators
+      </a>
+    </div>
+  </div>
+</div>
+

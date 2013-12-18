@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'dosisregular';
+    src: url('/assets/fonts/dosis-regular-webfont.eot');
+    src: url('/assets/fonts/dosis-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/dosis-regular-webfont.woff') format('woff'),
+         url('/assets/fonts/dosis-regular-webfont.ttf') format('truetype'),
+         url('/assets/fonts/dosis-regular-webfont.svg#dosisregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face{
+	font-family:"helveticaneuelight";
+	src:url("/assets/fonts/helveticaneuelt-webfont.svg#helveticaneuelight") format("svg");
+	src:url("/assets/fonts/helveticaneuelt-webfontd41d.eot?#iefix") format("embedded-opentype"),
+		url("/assets/fonts/helveticaneuelt-webfont.woff") format("woff"),
+		url("/assets/fonts/helveticaneuelt-webfont.ttf") format("truetype"),
+		url("/assets/fonts/helveticaneuelt-webfont.eot");
+	font-weight:normal;
+	font-style:normal;
+}

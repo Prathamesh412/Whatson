@@ -1,0 +1,33 @@
+<div class='set-reminder' ng-controller="UserController">
+  <div class='header'>
+    <h4>{{currentItemForReminder.statusMsg}}</h4>
+    <p class="time-set" ng-show="currentItemForReminder.statusMsg == 'Set Reminder'" >{{currentItemForReminder.starttime | featuredVideoTime}} for {{currentItemForReminder.programmename}} on {{currentItemForReminder.channelname}}</p>
+  </div>
+  <div class="remind-content" ng-class="{allfilled : reminderVerified}">
+    <span class="email">
+      <span class="filled" >
+        {{userData.emailaddress}}
+      </span>
+    </span>
+    <span class="mobile">
+      <span  class="filled" ng-show="userData.mobile.length > 1">
+        {{userData.mobile}}
+      </span>
+    <span class="notfilled">
+      <input type="tel" class="mobile-number" ng-model="mobile_number_verification" placeholder="Your Mobile No."/>
+      <button type="button" ng-click="verifyMobileNumber($event)" class="corner-right btn btn-light-green">Add</button>
+    </span>
+    <span class="notfilled">
+      <input type="text" class="mobile-code" ng-model="mobile_number_verification_code" placeholder="Your Verification Code."/>
+      <button type="button" ng-click="authorizeMobileNumber($event)" class="corner-right btn btn-light-green">Verify</button>
+    </span>
+    </span>
+    <p class="info" ng-hide="currentItemForReminder.isRepeated">Set repeat reminder for future airings of this program</p>
+    <p class="info" ng-show="currentItemForReminder.isRepeated">Repeat reminders for all future airings are set for this program</p>
+  </div> 
+  <div class='footer'>
+    <button class="btn btn-light-blue" ng-click="setRepeatReminder($event)">Set Repeat Reminder</button>
+  </div>
+</div>
+
+

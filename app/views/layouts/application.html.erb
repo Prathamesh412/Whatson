@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html ng-app='woi'>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <head>
+    <title>What's On India</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta charset="utf-8">
+    <meta name="description" content="Online tv channel guide for Indian tv channels, India tv schedules, tv schedules, tv programs, tv programmes, tv listings, tv shows, tv show timings, movies on tv, tv movie timings, find tv shows, tv movies, epg - Indian tv electronic program guide for DTH, cable, IPTV, media center EPG, Indian television channel schedules, fpc, india channels, india channel, shows reminder, tv time, tv timings, tv timetable, hbo, star, sun tv, sports programs, cricket tv channel guide, mtv, ipl match schedules, espn, telugu tv channel guide, tamil tv channel guide, bangla tv channel guide, hindi tv channel guide, punjabi tv channel guide, india tv channel guide, india tv listings, discovery travel and living, etv2 tv channel guide, PIX television schedule, ZEE schedules, media center india, zipzap">
+
+    <%  user_agent = request.env['HTTP_USER_AGENT'] %>
+    <%  if /Windows/.match(user_agent).nil? %>
+      <%= stylesheet_link_tag    "application", :media => "all" %>
+      <%= stylesheet_link_tag    "application2", :media => "all" %>
+    <%  else %>
+       <% if user_agent.include? "Safari" and !user_agent.include? "Chrome" %>
+        <%= stylesheet_link_tag    "safariwindows", :media => "all" %>
+        <%= stylesheet_link_tag    "safariwindows2", :media => "all" %>
+       <% else %>
+        <%= stylesheet_link_tag    "windowsapplication", :media => "all" %>
+        <%= stylesheet_link_tag    "windowsapplication2", :media => "all" %>
+       <% end %>
+    <% end %>
+
+    <%= javascript_include_tag "application" %>
+
+    <!--[if gte IE 7]>
+      <%= stylesheet_link_tag    "ie", :media => "all" %>
+    <![endif]-->
+    <%= stylesheet_link_tag '/video-js/video-js.min' %>
+    <%= javascript_include_tag '/video-js/video.min' %>
+    <%= javascript_include_tag 'http://j.maxmind.com/app/geoip.js' %>
+    <%= csrf_meta_tags %>
+    <script>
+      //console.log = function(){};
+    </script>
+    <script>
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
+                Date();a=s.createElement(o),
+
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a
+                ,m)
+
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-46480673-1', 'whatsonindia.tv');
+        ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body ng-controller='AppController'>
+  <%= render :template => "user/popup_login" %>
+    <div ng-controller="UserController"></div>
+    <%= yield %>
+    <!--[if lt IE 7]>
+    <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
+    <div id='container'>
+    <div class='draggable-image-cont hide-elem' id='dragDiv'><span class='plus_icon'></span></div>
+
+      <header class='header clearfix'>
+      <div class='logo'>
+        <div class="woi-logo">
+          <a href="#!/home">
+            <img class = 'hidden-phone' src='/assets/img/woi-logo.png'/>
+            <img class = 'visible-phone' src='/assets/img/whatsOnLogo_mobile.png'/>
+          </a>
+        </div>
+        <!-- <h1 class="hidden-tablet hidden-phone">India's TV Guide</h1>
+        <h2 class="hidden-tablet hidden-phone">500+ Channels</h2> -->
+      </div>
+      <!-- / logo -->
+
+
+      <div class='social-actions-col'>
+
+        <div class="socialWrapperRight hidden-phone">
+          <!-- Facebook Like -->
+          <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.WhatsOnIndia.com%2F&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=true&amp;font=verdana&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=121998297991674" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+
+
+          <!-- Twitter -->
+          <!-- <a href="https://twitter.com/WhatsOnIndia" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @WhatsOnIndia</a> -->
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whatsonindia.com" data-text="Whats On India -" data-via="whatsonindia" data-hashtags="tvguide">Tweet</a>
+          <script>
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+          </script>
+
+          <!-- Google Plus -->
+          <div class="g-plusone" data-size="medium"  data-href="http://www.WhatsOnIndia.com/" data-callback="gPlusCallback"></div>
+          <!-- Place this tag after the last +1 button tag. -->
+          <script type="text/javascript">
+            (function() {
+              var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+              po.src = 'https://apis.google.com/js/plusone.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+
+            function gPlusCallback(){
+              //alert('gPlusCallback');
+            }
+          </script>
+        </div>
+        <div class='actions'>
+
+          <div class='select-language' ng-controller="App_UserLanguageController">
+            <a class='btn' id='selectLanguage' language-popover>Language<span class='arrow'></span></a>
+          </div>
+
+          <div class='members-area' ng-switch on="userLogged">
+            <div ng-switch-when="off">
+              <button class='btn register' data-action='signup' ng-click="showSignupForm()" ><span>Sign Up</span></button>
+              <button class='btn sign-in' data-action='signin' ng-click="showLoginForm()"><span>Login</span></button>
+            </div>
+            <div ng-switch-when="on" class='username'>
+              <span>{{userInfo.name | filterUserName}}</span>
+              <div class="btn-group">
+                <div class="btn dropdown-toggle moreDropdownTrigger" id="usernameDropdown"></div>
+                <ul class="dropdown-menu pull-right">
+                  <li><a href="#!/myaccount">My Account</a></li>
+                  <li class="spaced"><a href="#!/myprofile">My Profile</a></li>
+                  <li><a href='#!/watchlistsocial'>Watchlist</a></li>
+                  <li><a href='#!/reminders'>Reminders</a></li>
+                  <li><a href='#!/favourites'>Favorites</a></li>
+                  <li><a ng-click="goToFeed('feed')">Social Feed</a></li>
+                  <li class="spaced"><a ng-click="signOutUser()">Log out</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- / actions -->
+      </div>
+      </header>
+      <!-- / header -->
+
+      <nav class='main-nav clearfix' ng-controller="MainMenuController" >
+      <ul>
+        <li><a href='#!/home' ng-class='{active: currentMenuActive == "home" || currentMenuActive == ""}' ng-click="goTo('home')">HOME</a></li>
+        <li><a href='#!/tv-guide' ng-class='{active: currentMenuActive == "tv-guide"}' ng-click="goTo('tv-guide')">TV GUIDE</a></li>
+        <li class='visible-phone' style="background: none !important; position: relative;">
+          <a href="" id="menuDropdown" class="moreDropdownTrigger">MORE</a>
+          <ul class="dropdown-menu">
+            <li><a href="#!/movies" ng-class="{active: currentMenuActive == 'movies'}" ng-click="goTo('movies')" >MOVIES</a></li>
+            <li><a href="#!/videos" ng-class="{active: currentMenuActive == 'videos'}" ng-click="goTo('videos')" >VIDEOS</a></li>
+            <li><a href="#!/channels" ng-class='{active: currentMenuActive =="channels"}' ng-click="goTo('channels')" >CHANNELS</a></li>
+            <li><a href="#!/apps" ng-class="{active: currentMenuActive == 'apps'}" ng-click="goTo('apps')">APPS</a></li>
+          </ul>
+        </li>
+        <li><a href='#!/movies' ng-class="{active: currentMenuActive == 'movies'}" ng-click="goTo('movies')" class='hidden-phone'>MOVIES</a></li>
+        <li><a href='#!/videos' ng-class="{active: currentMenuActive == 'videos'}" ng-click="goTo('videos')" class='hidden-phone'>VIDEOS</a></li>
+        <li><a href='#!/channels' ng-class='{active: currentMenuActive =="channels"}' ng-click="goTo('channels')"  class='hidden-phone'>CHANNELS</a></li>
+        <!-- <li class="more"><a href='#' class='visible-phone'>MORE</a></li> -->
+        <li><a href='#!/apps' ng-class="{active: currentMenuActive == 'apps'}" ng-click="goTo('apps')"class='hidden-phone'>APPS</a></li>
+      </ul>
+
+      <div class="nav-right" watchlist-dropbox>
+
+        <div class='search' ng-controller="SearchAutoCompleteController">
+          <!-- <form name="autocomplete" method="GET" ng-submit= "submitFormData()"> -->
+          <div class = 'search-icon'>
+            <div class = 'iconoverlay hidden-phone' ng-click="clickSearch()"></div>
+            <input type='search' id="mainSearch" placeholder='Search TV' ng-model="searchQuery.text" search-auto-complete>
+            <div ng-show="showInvalid == true" style="display: block ; margin-top: -8px;color: red;">Invalid search text</div>
+          </div>
+          <div class="icon"></div>
+        </div>
+
+        <!-- / search -->
+        <div class='watchlist' >
+          <button class='btn' id="watchList" watchlist-popover ng-controller="WatchlistController">
+            <i class="hidden-tablet hidden-phone"></i>
+            <span class = 'mywatchlist'>My Watchlist</span>
+            <div class = 'watchlist-spinner ' ></div>
+          </button>
+        </div>
+        <!-- / watchlist -->
+      </div>
+
+      <div class="clearfix"></div>
+
+
+      <!-- add a class named 'watchlist-mini' for the landing page'-->
+      <div class='watchlist-excoll hide-elem ' watchlist-dropbox ng-controller="WatchlistController" id="watchlist-excoll">
+      <!-- <div class='watchlist-excoll' watchlist-dropbox ng-controller="WatchlistController"> -->
+        <div class="arrow-tip"></div>
+
+        <div class='info-bar'>
+            <span class='text-info'>{{watchlistCount}} Movies, videos and more</span>
+            <span class='dropstatus-msg'>Item saved in your watchlist.</span>
+            <ul class='ctrl-list'>
+              <li class='edit-watchlist-slider' ng-click="openEditMode()" ng-class="{active:editMode}" ng-hide="hideEditButton()"></li>
+              <li class='share-watchlist-slider' ng-click="shareWatchlist()" ng-hide="watchlistCount == 0"></li>
+              <li class='close-watchlist-slider' ng-show="showHideButton"></li>
+            </ul>
+        </div>
+
+        <div class="mainp-wrapper" id="watchlistSlider"> <!-- add hide-elem class to this -->
+
+        <a class='leftarrow struc slide' ng-click="slide(false)">
+          <i class='real-arrow-l'></i>
+        </a>
+
+        <div class="watchlist_slider_list">
+          <ul class="mywatchlist_list">
+            <li class="list-item" ng-repeat="item in watchlist">
+                <div class="thumb" style='background-image:url("{{item.imagefilepath}}")' >
+                  <i class="isvideo" ng-click="playVideo(item)" ng-show="showVideoButton(item)"></i>
+                  <div class="favorite-ribbon" ng-show="item.isrecommended == 1">
+                  </div>
+                </div>
+
+                <div class="text-wrapper clearfix">
+                  <div class="row-one">
+                    <a class="name" href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)" watchlist-tooltip="{{item.programmename}}"> {{item.programmename}} </a>
+                  </div>
+                  <div class="time"> {{item.starttime | watchlisttimeformat}}</div>
+                </div>
+
+                <div class="user-actions" ng-controller="UserController">
+                  <a live-tooltip='Add to Favorite' ng-click='toggleFavorite(item, $event)'  class='btn btn-small btn-purple-blue favorite' ng-class="{active:item.isfavorite == '1'}">
+                    <i class="icon-favorite"></i>
+                  </a>
+                  <a live-tooltip="Reminder Alerts" ng-click='toggleReminder(item, $event, "sliderWL")'  class='btn btn-small btn-purple-blue reminder' ng-class="{active:item.isreminder == '1'}"  >
+                    <i class="icon-reminder"></i>
+                  </a>
+                </div>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+
+        <a class='rightarrow struc slide' ng-click="slide(true)">
+          <i class='real-arrow-r'></i>
+        </a>
+        <div class="clearfix"></div>
+        <a class="view-more-watchlist" href="{{getWatchlistUrl()}}">View More</a>
+        </div>
+      </div>
+
+
+      </nav>
+
+      <div ng-view class="clearfix mainView"></div>
+
+        <%= render :partial => "addons/trending-discussions" %>
+        <!-- /trending -->
+        <%= render :partial => "addons/fbactivity" %>
+
+      <footer>
+      <div class='search' ng-controller="SearchAutoCompleteController">
+      <form action="#!/search/{{searchQuery.text}}" method="GET">
+          <div class = 'search-icon'>
+            <div class = 'iconoverlay'></div>
+            <input id="searchBoxBottom" type='search' ng-model="searchQuery.text" placeholder='TV Shows, Movies, Channels, Actors…' search-auto-complete>
+            <input type="submit">
+          </div>
+      </form>
+      </div>
+      <!-- /search -->
+
+      <div class='newsletter' ng-controller='NewsletterController'>
+        <form  ng-submit='getSubscribe()' name = "subscriptionForm" novalidate>
+
+          <div class='nw_wrapper'>
+            <a class="btn" ng-click ="getSubscribe()">Subscribe</a>
+            <div class='in_wrapper'>
+              <input type='email' placeholder='Your Email...' ng-model="data.subscribe.mailid" name ="subscribeEmail" >
+            </div>
+          </div>
+          <div class="errorMessage" id="subscribe_email_error"></div>
+          <div class="successMessage" id="subscribe_email_success">Thanks! You have subscribed successfully.</div>
+          <input type ="submit">
+        </form>
+        <div class='clear'></div>
+        <p>Weekly email digest on the latest exclusives on TV.</p>
+      </div>
+      <!-- /newsletter -->
+
+      <div class='nav' ng-controller="MainMenuController">
+       <p>® 2012</p>
+        <ul>
+          <li><a href='#!/about' ng-click="clearMainNav()">About</a></li>
+          <li><a href='http://www.whatsonindia.net/contact.html' target="_blank">Contact</a></li>
+          <li class="visible-phone more"><a href='#' ng-click="toggleMoreFooter($event)">More</a></li>
+          <li class="hidden-phone special"><a href='http://www.whatsonindia.net' target="_blank">Corporate</a></li>
+          <li class="hidden-phone special"><a href='#!/tnc' ng-class='{active: currentMenuActive =="tnc"}'  ng-click="goTo('tnc')">T&amp;C</a></li>
+          <li class="hidden-phone special"><a href='#!/privacy' ng-class='{active: currentMenuActive =="privacy"}'  ng-click="goTo('privacy')">Privacy</a></li>
+          <li class="hidden-phone"><a href='#!/sitemap' ng-class='{active: currentMenuActive =="sitemap"}'  ng-click="goTo('sitemap')">Sitemap</a></li>
+        </ul>
+      </div>
+      <!-- /nav -->
+
+      <div class='clear'></div>
+      </footer>
+    </div>
+    <!-- /container -->
+
+    <!--container for the draggable image clone-->
+    <div class="draggable-image-cont hide-elem"><span class="plus_icon"></span></div>
+
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        FB.init({
+          appId      : '286624648037398',
+          channelUrl : '//WhatsOnIndia.com/channel.html', // Channel File for x-domain communication
+          status     : true, // check the login status upon init?
+          cookie     : true, // set sessions cookies to allow your server to access the session?
+          xfbml      : true  // parse XFBML tags on this page?
+        });
+
+        // Additional initialization code such as adding Event Listeners goes here
+
+      };
+
+      // Load the SDK's source Asynchronously
+      // Note that the debug version is being actively developed and might
+      // contain some type checks that are overly strict.
+      // Please report such bugs using the bugs tool.
+      (function(d, debug){
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+        ref.parentNode.insertBefore(js, ref);
+      }(document, /*debug*/ false));
+      /*
+          appId      : '320575391401347', //Prod
+          appId      : '286624648037398', //Prod - Jiten
+          appId      : '536822596369929', //QA
+          appId      : '352501411518498', //Dev
+          appId      : '121998297991674', // localhost:8080
+	  appId      : '331810416962723', //192.168.1.238:8080 - woitest
+      */
+      var pki = "<%= @pki %>";
+    </script>
+  </body>
+</html>
+

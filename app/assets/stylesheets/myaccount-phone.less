@@ -1,0 +1,157 @@
+.account{
+	.account-header{
+		.welcome-note{
+			span.header-name{
+				width: 175px;
+			}
+		}
+		.profile-completion{
+			width: 200px;
+		}
+	}
+	.account-info, .account-edit{
+		.input-box{
+			.column(4);
+			margin-left: 0px;
+			.label-name{
+				text-align: left;
+				.column(1.5);
+				margin-left: 2px;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+			.input-content{
+				.column(1.7);
+				margin-left: 5px;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+		}
+		.image-uploader{
+			.thumb{
+				margin-right: 5px;
+			}	
+			.btn{
+				&.grey-btn{
+					width: 62px;
+					margin: 0px;
+					margin-right: 5px;
+				}
+			}		
+		}
+	}
+	.account-breadcrumb{
+		.btn{
+			width: 115px;
+		}
+	}
+	.account-edit{
+		.sub-acct-wrapper{
+			.connection-wrapper{
+				max-width: 240px;
+				input.input-box:last-of-type{
+					.rounded(0px);
+				}
+				div.input-box:last-of-type{
+					border-top: none;
+				}
+				.location-input{
+					border-bottom: none;
+				}
+			}
+		}
+		.input-box{
+			.input-content{
+				&.language{
+					.column(1.9);
+				}
+				&.operator{
+					.column(1.9);
+				}
+			}
+			&.genre{
+				.label-name{
+					.column(1.9);
+				}
+			}
+		}
+		.btn-light-blue{
+			&.save-btn{
+				.column(4);
+				margin-left: 0px;
+				margin-top: 23px;
+			}
+		}
+	}
+	.account-settings{
+		.settings{
+			.left-content{
+				.column(4);
+			}
+			&.on-off-setting{
+				.left-content{
+					.column(4);
+				}
+			}
+			&.btn-group-setting{
+				.left-content{
+					.column(4);
+				}
+				.btn-group{
+					margin-left: 17px;
+				}
+			}
+			.options-list{
+				.option{
+					&:last-child{
+						margin-left: 20px;
+						margin-top: 20px;
+					}
+					&:first-child{
+						.on-off{
+							margin-left: 6px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.recommended-container{
+	.recommended-wrapper{
+		width: 230px;
+	}
+	.item{
+		padding: 10px 36px 10px 4px;
+	}
+}
+
+.friends-popular{
+	.tabs{
+		li{
+			border-left-width: 0px;
+		}
+	}
+	.fp-content{
+		.fp-item{
+			height: auto;
+			display: block;
+			.details{
+				.title{
+					max-width: 125px;
+					a{
+						color: #BEB0BF;
+					}
+				}
+			}
+		}
+	}
+}
+html.android{
+	.account-settings .settings .options-list .option{
+		float: none;
+	}
+}

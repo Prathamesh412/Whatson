@@ -1,0 +1,183 @@
+woi.controller('MainMenuController', ['$scope', '$rootScope','$filter', '$location', '$timeout', '$compile', 'recoAPI', 'userAPI', 'userList', function($scope, $rootScope,$filter, $location, $timeout, $compile, recoAPI, userAPI, userList){
+
+  $scope.$on('highlightChannel', function(event, args) {   
+    $scope.currentMenuActive = 'channels';
+   });        
+
+  $scope.$on('highlightMovies', function(event, args) {   
+    $scope.currentMenuActive = 'movies';
+  });        
+  
+  $scope.$on('highlightTvGuide', function(event, args) { 
+    $scope.currentMenuActive = 'tv-guide';
+  });
+
+  $scope.$on('highlightHome', function(event, args) { 
+    $scope.currentMenuActive = 'home';
+  });
+
+  $scope.$on('highlightApps', function(event, args) { 
+    $scope.currentMenuActive = 'apps';
+  });
+
+  $scope.$on('highlightVideos', function(event, args) {  
+    $scope.currentMenuActive = 'videos';
+  });  
+  
+  $scope.$on('resetHighlight', function(event, args) {  
+    $scope.currentMenuActive = 'nil';
+  });
+
+  $scope.currentMenuActive = $location.path().replace(/\//g, '') ;
+
+  $scope.goTo = function(e,location) {
+
+  	//if(($('#searchResultsDiv').is(':visible'))){ 
+      
+    	$('#mainSearch').css('background-color','transparent');
+      if( !$('html').hasClass('ie9') ) {
+        $('#mainSearch').val('');
+        $('#searchBoxBottom').val('');
+      }
+      if($.browser.msie && ($.browser.version == '9.0')){
+        $('#mainSearch').val($('#mainSearch').attr('placeholder'));
+        $('#searchBoxBottom').val($('#searchBoxBottom').attr('placeholder'));
+      }
+  	// }
+
+
+    var element = $(e.currentTarget);
+
+if(location != 'home')
+{
+e.preventDefault();
+
+if(!$rootScope.isUserLogged()){
+
+
+    e.stopPropagation();
+
+      $rootScope.beforeaction.title = "Login to View";
+      $rootScope.beforeaction.subtitle = "Please login to View";
+      // adjustments for popover for tvguide channels
+      var yoffset = (element.attr("data-popover"))? (-15) : 5;
+      var popover_position = ($('.sidebar').hasClass('expand') || $('.tv_guide').hasClass('tv'))? {my:'top left', at:'bottom center'} : {my: 'top center', at: 'bottom center'};
+      var resetQtip = function() {
+        return {
+          show: 'click',
+          hide: {
+            fixed: true,
+            delay: 750,
+            event: 'unfocus',
+          },
+          position:{
+            my: popover_position.my, 
+            at: popover_position.at,
+            adjust:{
+              y: 2, 
+              x: -2
+            }
+          },
+          style:{
+            classes:'popover reminder-popover cside-popover'
+          } , 
+          events:{
+            show:function(){
+              element.parent().parent('.thumb').addClass('active');
+              element.addClass('active');
+            } ,
+            hide:function(){
+              element.parent().parent('.thumb').removeClass('active');
+              element.removeClass('active');
+            } 
+          }, 
+          content: {
+            text: '<div class="popover-loader signin-loader"></div>',
+            ajax: {
+              url: "/user/beforeaction",
+              type: 'GET',
+              data: {},
+              success:function(data, status ) {
+                var _this = this;
+                // Set the content manually (required!)
+                $timeout(function(){
+                  _this.set('content.text', $compile(data)($scope));
+                  $timeout(function(){
+                    _this.reposition();
+                  });
+                });
+                $scope.actionObj = {
+                  element: element, 
+                  popconfig: qtipConfig, 
+                  // after log in display the reminde popover
+                  success: function(){
+                    element.qtip('hide').qtip('destroy');
+			if(location == 'home')
+			{
+				element.addClass('active');
+				window.location.href = '#!/home';
+			}			
+			else if(location == 'tv-guide')
+			{
+				element.addClass('active');
+				window.location.href = '#!/tv-guide';			
+			}
+			else if(location == 'movies')
+			{
+				element.addClass('active');
+				window.location.href = '#!/movies';
+			}
+			else if(location == 'videos')
+			{
+				element.addClass('active');			
+				window.location.href = '#!/videos';
+			}
+			else if(location == 'channels')
+			{
+				element.addClass('active');
+				window.location.href = '#!/channels';
+			}
+			else if(location == 'apps')
+			{
+				element.addClass('active');			
+				window.location.href = '#!/apps';
+			}
+		  },
+                  failure: function() {
+                    alert('oopss');
+                  }
+                };
+              }
+            }
+          }, 
+        };
+      };
+
+      var qtipConfig = resetQtip();
+      element.qtip(qtipConfig).qtip('show');
+      return false;
+
+    }
+}
+    element.qtip('destroy');
+
+
+    $rootScope.showinfo = $rootScope.showinfo || {};
+    $rootScope.showinfo.visible = false;
+    var descriptionPopover = $('#description-popover');
+    if(descriptionPopover) {
+      descriptionPopover.hide();
+    }
+
+    $scope.currentMenuActive = location;
+    
+    // Hide the MORE dropdown
+    var moreDropdown = $('.main-nav ul.dropdown-menu');
+    moreDropdown.hide();
+  };
+
+  $rootScope.stopProp = function(e) {
+    e.stopPropagation();
+  }
+
+}]);

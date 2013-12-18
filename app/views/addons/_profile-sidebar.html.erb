@@ -1,0 +1,69 @@
+<aside class='sidebar' ng-controller="ProfileSidebarController"> 
+	<div class="user-profile-container clearfix">
+		<div  class="user_prof_image" css-bg-image="{{sidebar.userData.data.userimage | filterDefaultProfileImage}}"></div>
+		<div class="user_prof_det_wrapper">
+			<div class="user_name show_ellipsis " ng-show="sidebar.userData.data.name">{{sidebar.userData.data.name}}</div>
+			<div class="usr_email show_ellipsis" ng-show="sidebar.userData.data.email">{{sidebar.userData.data.email}}</div>
+			<div class="usr_location show_ellipsis" ng-show="sidebar.userData.data.city">{{sidebar.userData.data.city}}</div>
+		</div>
+	</div>
+	<div class="recently-searches" ng-hide="sidebar.recentSearches.dataLoaded && sidebar.recentSearches.allData.length == 0">
+		<h6 class="subtitle">RECENTLY SEARCHED</h6>
+		<ul class="recommended">
+			<li class="item animate bounceInDown clearfix" ng-repeat="thisItem in sidebar.recentSearches.visibleData">
+				<a href="#!/channel/{{thisItem.channelname}}" ng-click="EncodeUrlWithDash(thisItem.channelname,$event,'channel',thisItem.channelid,thisItem.programmeid)" class="clearfix linkchannel">
+					<div class="thumb">
+						<div ng-show="thisItem.isrecommended =='1'" class="favorite-ribbon"></div>
+						<div class="wrapper">
+							<img ng-src="{{thisItem.logofileurl}}" alt="{{thisItem.channelname}}" ng-click="EncodeUrlWithDash(thisItem.channelname,$event,'channel',thisItem.channelid,thisItem.programmeid)" />
+						</div>
+					</div>
+					<h2>{{thisItem.channelname}}</h2>
+					<ul class="info">
+						<li class="channel-label">Channel</li>
+						<li>{{thisItem.languagename}}</li>
+						<li class = "adjust-width">{{thisItem.hybridgenre}}</li>
+					</ul>
+				</a>
+			</li>
+			<li class="loadmore" ng-show="sidebar.recentSearches.allData.length >4  &&  sidebar.recentSearches.visibleData.length < sidebar.recentSearches.allData.length"><a href="javascript:void(0);" title="Load more Recent Searches" ng-click="loadMoreSearches()">More..</a></li>
+			<li class="loadmore" ng-show="sidebar.recentSearches.dataLoaded && sidebar.recentSearches.allData.length == 0"><a href="javascript:void(0);">No Results To Display</a></li>
+		</ul>
+	</div>
+	<div class="yourrecs" ng-hide="sidebar.recentBrowsed.dataLoaded && sidebar.recentBrowsed.visibleData.length == 0">
+		<h6 class="subtitle">RECENTLY BROWSED</h6>
+		<ul class="recommended">
+			<li class="item animate bounceInDown" save-start-time="thisItem" ng-repeat="thisItem in sidebar.recentBrowsed.visibleData">
+				<div class="thumb">
+					<a class='play' ng-click="playVideo(thisItem)" ng-show="showVideoButton(thisItem)"></a>
+					<div ng-show="thisItem.isrecommended =='1'" class="favorite-ribbon"></div>
+					<div class="wrapper">
+						<a href="#!/program/{{thisItem.programmename}}" ng-click="EncodeUrlWithDash(thisItem.programmename,$event,'programme',thisItem.channelid,thisItem.programmeid)"><img ng-src="{{thisItem.imagefilepath}}" alt="{{thisItem.ProgrammeName}}" ng-click="changeurl(thisItem.programmename,$event)"/></a>
+					</div>
+					<span class="duration" ng-show="thisItem.duration">{{thisItem.duration | videoLength}}</span>
+					<div class="user-actions" ng-controller="UserController">
+						<a ng-class="{active:thisItem.isfavorite == '1'}"  ng-click='toggleFavorite(thisItem, $event)'  live-tooltip='Add to Favorite' class='btn btn-small btn-purple-blue'><i class="icon-favorite active"></i></a>
+						<a ng-class="{active:thisItem.isreminder == '1'}" ng-click='toggleReminder(thisItem, $event)' live-tooltip="Reminder Alerts" class='btn btn-small btn-purple-blue'><i class="icon-reminder"></i></a>
+						<a ng-class="{active:thisItem.iswatchlist == '1'}" ng-click='addToWatchlist(thisItem, $event)' live-tooltip='Add to Watchlist' class='btn btn-small btn-purple-blue'><i class="icon-watchlist"></i></a>     
+					</div>
+				</div>
+				<div class="thumbDetails">
+					<h2>
+						<a href="#!/program/{{thisItem.programmename}}" ng-click="EncodeUrlWithDash(thisItem.programmename,$event,'programme',thisItem.channelid,thisItem.programmeid)">{{thisItem.programmename}}</a>
+					</h2>
+					<p class="info">
+						{{thisItem.starttime | featuredVideoTime}}
+						<br />
+						<a href="#!/channel/{{thisItem.channelname}}" ng-click="EncodeUrlWithDash(thisItem.channelname,$event,'channel',thisItem.channelid,thisItem.programmeid)">{{thisItem.channelname}}</a>
+					</p>
+				</div>
+			</li>
+			<li class="loadmore" ng-show="sidebar.recentBrowsed.allData.length >2 &&  sidebar.recentBrowsed.visibleData.length < sidebar.recentBrowsed.allData.length"><a href="javascript:void(0);" title="Load more Recently Browsed" ng-click="loadMoreBrowsed()">More..</a></li>
+			<li class="loadmore" ng-show="sidebar.recentBrowsed.dataLoaded && sidebar.recentBrowsed.visibleData.length == 0"><a href="javascript:void(0);">No Results To Display</a></li>
+		</ul>
+	</div>
+
+	<%= render :partial => "addons/questionnaire" %>
+
+	</div>
+</aside>

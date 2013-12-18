@@ -1,0 +1,70 @@
+<div class='tv_guide' tv-guide-events ng-init="thisPage = '<%= inPage %>'" ng-show="!isEmpty && tvGuideVisibleRows > 0">
+  <div class='header'>
+    <a class='arrow prev' ng-click='moveSlider(false)'>&lt;</a>
+    <a class='arrow next' ng-click='moveSlider(true)'>&gt;</a>
+  </div>
+
+  <div class='channels' ng-controller="UserController">
+    <ul>
+      <li ng-repeat="thisChannel in _MODEL" ng-hide="_currentGenre == 'favorite' && thisChannel.channel_info.ischannelfavorite=='false'">
+        <div class = 'channel-no' ng-hide="thisChannel.channel_info.LCN=='0'">{{thisChannel.channel_info.LCN}}</div>
+        <a class='favorite hidden-phone hidden-tablet' ng-click='toggleFavoriteChannel($event, thisChannel.channel_info)' data-popover="nowandnext" ng-show='userLogged!="on"'></a>
+        <a class='favourite-logged' ng-class='{active:thisChannel.channel_info.ischannelfavorite=="true"}' ng-click='toggleFavoriteChannel($event, thisChannel.channel_info)' ng-show='userLogged=="on"'></a>
+        <a href='#!/channel/{{thisChannel.channel_info.ChannelName}}' ng-click="EncodeUrlWithDash(thisChannel.channel_info.ChannelName,$event,'channel',thisChannel.channel_info.ChannelID,thisChannel.channel_info.ProgrammeID)"><img ng-src="{{thisChannel.channel_info.logofileurl}}" width='65'/></a>
+      </li>
+    </ul>
+  </div>
+
+  <div class='shows'>
+    <div class='container' id='tv_guide_container'>
+      <div class='slider'>
+        
+        <div id="description-popover" ng-click="stopProp($event)">
+          <div class="loading-spinner" ng-show="!showinfo.visible"></div>
+          <div class="thumb" ng-show="showinfo.visible">
+            <div class="wrapper"><img ng-src="{{showinfo.imagefilepath}}" alt="" /></div>
+          </div>
+          <div class="programme-info" ng-show="showinfo.visible">
+            <h3>{{showinfo.programmename}}</h3>
+            <h4>{{showinfo.genre}}, {{showinfo.subgenre}}</h4>
+            <p class="description">
+              {{showinfo.synopsis}}
+            </p>
+            <p class="casts" ng-show="showinfo.actor">
+              <span>Cast:</span> {{showinfo.actor}}, {{showinfo.director}}
+            </p>
+
+            <div class="actions" ng-controller="UserController">
+
+              <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(showinfo, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:showinfo.isfavorite == '1'}">
+                <i class="icon-favorite"></i>
+              </a>
+
+              <a live-tooltip="Reminder Alerts"   ng-click='toggleReminder(showinfo, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:showinfo.isreminder == '1'}"  >
+                <i class="icon-reminder"></i>
+              </a>
+
+              <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(showinfo, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:showinfo.iswatchlist == '1'}">
+                <i class="icon-watchlist"></i>
+              </a>
+              <a save-start-time="showinfo" ng-click="EncodeUrlWithDash(showinfo.programmename,$event,'programme',showinfo.channelid,showinfo.programmeid)" live-tooltip="See full Info" class="btn arrow">&gt;</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class='timeline'>
+          <ul>
+            <li ng-repeat='t in timeline' data-time='{{t.time}}' ng-class="{active: t.active && currentDate}">{{t.hour}}</li>
+          </ul>
+        </div>
+        <div class="channelProgrammeRow" ng-class-odd="'odd'" ng-class="{highlighted: thisChannel.channel_info.ChannelID == highlightedChannel}" ng-repeat="thisChannel in _MODEL" ng-hide="_currentGenre == 'favorite' && thisChannel.channel_info.ischannelfavorite=='false'">
+          <div ng-repeat='thisProgram in thisChannel.programs' save-start-time="thisProgram" tv-guide-item tv-guide-item-actions  class='item' rel="tooltip" channel-id="{{thisChannel.channel_info.ChannelID}}" program-id="{{thisProgram.programmeid}}" program-name="{{thisProgram.programmename}}" start-time="{{thisProgram.starttime}}" is-recommended="{{thisProgram.isrecommended}}" image-path="{{thisProgram.imagefilepath}}">
+            <h3>{{thisProgram.programmename}}</h3>            
+            <h4><span ng-show="p.m2ecategoryname=='Film'">{{thisProgram.m2ecategoryname}},</span> {{thisProgram.m2esubcategoryname}}</h4>
+          </div>
+        </div>
+        <div class="time-elapsed" tv-guide-time-elapsed></div>
+      </div>
+    </div>
+  </div>
+</div> 

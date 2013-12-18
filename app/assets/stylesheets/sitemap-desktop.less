@@ -1,0 +1,134 @@
+.lpApps{
+	.content.sitemap {
+		width: 100%;
+		margin-top: 0px;
+
+		div.pageLoadingIndicator {
+			height: 100px;
+			width: 100%;
+			position: relative;
+		}
+
+		span.loadingIndicator {
+			height: 30px;
+			width: 30px;
+			position: relative;
+			display: inline-block;
+			margin-bottom: -7px;
+			margin-left: 5px;
+		}
+
+		h6 {
+			text-transform: uppercase;
+			margin-top: 30px;
+		}
+
+		.sectionWrap {
+			margin-bottom: 23px;
+
+			h5.sectionHeading {
+				color: 	#A85B9C;
+				text-transform: uppercase;
+				font-size: 22px;
+				font-family: 'DosisLight', sans-serif;
+				margin-top: 12px;
+			}
+
+			.sectionTree {
+				/*margin: 0 17px; Enable this once API is fixed*/
+				float: left;
+
+				&:first-child {
+					/*margin-left: 20px; Enable this once API is fixed*/
+				}
+
+				h6.treeTitle {
+					color: #bea4bd;
+					text-transform: none;
+					font-size: 17px;
+					font-family: 'DosisLight', sans-serif;
+					margin-bottom: 18px;
+				}
+
+				li {
+					/* Temporary styles until API response is fixed */
+					float: left;
+					margin: 10px 17px;
+					/* End of temporary styles until API response is fixed */
+					height: 40px;
+					line-height: 44px;
+					width: 212px;
+					padding: 0 10px;
+					border: dashed thin #2c213f;
+					background: rgba(0, 0, 0, 0.02);
+					.rounded(3px);
+					/*margin: 10px 0; Enable this one API fixed */
+					color: #bca4bc;
+					font-size: 15px;
+					-webkit-transition: all 0.1s linear;
+					-moz-transition: all 0.1s linear;
+					-o-transition: all 0.1s linear;
+					transition: all 0.1s linear;
+
+					a {
+						color: #9587AF;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow: hidden;
+						width: 100%;
+						display: block;
+						font-size: 16px;
+						font-family: 'HelveticaNeueCn';
+					}
+
+					
+
+					&.sublevel2 {
+						width: 182px;
+						margin-left: 30px;
+					}
+				}
+			}
+
+			&:after {
+				content: '.';
+				width: 100%;
+				clear: both;
+				display: block;
+				height: 0;
+				overflow: hidden;
+			}
+		}
+	}
+}
+
+
+html.no-touch {
+  .lpApps{
+
+    .content.sitemap {
+
+      .sectionWrap {
+
+        .sectionTree {
+
+          li {
+
+            &:not(.disabled):hover {
+              .gradient(#fe4d07, #fe2e08, #fd6c01);
+              border: solid thin #fea201;
+              color: #FFF;
+
+              a {
+                display: block;
+                height: 100%;
+                width: 100%;
+                color: #FFF;
+              }
+            }  
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<section class="clearfix fb-trending-wrp">
+    <div class='fb-activity' ng-controller='Home_FBActivityController'>
+      <h6 class='subtitle'>FACEBOOK ACTIVITY</h6>
+
+      <a class='more' ng-click="toggleSlider()" ng-show="activities.length > 2">{{viewStatus}}</a>
+      <div class='FBwrapper' id='FBwrapperLinkWidth'>
+        <a class='arrows prev' ng-click='slide(false)' ng-class="{disabled:currentSlide == 0}">&lt;</a>
+        <a class='arrows next' ng-click='slide(true)' ng-class="{disabled:currentSlide == (activities.length-1)}">&gt;</a>
+
+        <div class='container FBcontainerWrapper'>
+          <div class='slider'>
+            <div class='item' save-start-time="a" ng-repeat='a in activities' fb-activity-width-setter>
+              <a ng-href="#!/program/{{a.contentname}}" ng-click="EncodeUrlWithDash(a.contentname,$event,'programme',a.channelid,a.contentid)">
+
+
+                <div class='thumb' css-bg-image='{{a.imageurl}}'></div>
+              </a>
+              <h2 live-tooltip-single-line = "{{a.contentname}}">
+                <a ng-href="#!/program/{{a.contentname}}" ng-click="EncodeUrlWithDash(a.contentname,$event,'programme',a.channelid,a.contentid)">                       <!-- changes made for facebook..a.contentname | makeURL:a.contentname-->
+                  {{a.contentname}}
+                </a>
+              </h2>
+              <p>{{a.totallikes}} Likes</p>
+              <button class='btn btn-small fblike' ng-click='like($event, a)'>{{a.isliked|fbActivityLike}}</button>
+            </div>
+          </div>
+          <!-- /slider -->
+        </div>
+        <!-- /container -->
+      </div>
+    </div>
+    <!-- /fb activity -->
+  </section>

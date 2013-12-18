@@ -1,0 +1,153 @@
+
+
+.tv_guide.tv .shows .container .time-elapsed{display:block;}
+.sidebar.expand .tv_guide .container .time-elapsed{display:block;}
+
+.tv_guide.tv{
+    width:100% !important;
+    margin:0;
+    .phone-filters{
+    width: 280px;  
+    margin: 0 auto;
+    .filter-wrapper{
+      width: 135px;
+      float: right;
+    }
+      .title{
+          float:left;
+          color:#a85b9c; 
+          font-size: 14px; 
+          margin:5px 10px 0 0; 
+          font-family: 'HelveticaNeueCn', sans-serif;
+      }
+      .btn-filter{
+          float:right;
+          text-indent:-9999px;
+          padding:0px; 
+          width:25px; 
+          height:25px; 
+          padding-top:4px; 
+          .rounded(2px);
+          
+          &:before{
+              content:''; 
+              width:15px; 
+              height:15px; 
+              position:relative;
+              display:block; 
+              margin: 15px auto;
+              background:url('../assets/img/icon-list.png') no-repeat 50% 50% transparent;
+          }
+      }
+    }
+  .top-nav{
+    //  display:none; /*Waiting for VD/Wireframe of UI team*/
+    width: 280px;
+    margin: 20px auto;
+    float: right;
+    .location{
+      .location-label{
+        .location-input:focus{
+          width: 60%;
+        }
+      }
+      .select-operator{
+        width: 99%;
+        margin-right: 0px;
+        .btn{
+          width: 85%;
+        }
+      }
+    }
+    .filters{
+      .main-nav{
+        ul{
+          width: 100%;
+          li{
+            padding-left: 0px;
+            border-right: 9px solid transparent;
+            margin-top: 5px;
+            a,.number{
+              font-size: 15px;
+            }
+          }
+        }
+      }
+      .duedate{
+        float: left;
+        margin-top: 20px;
+        margin-left: 10px;
+        a{
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .channelProgrammeRow {
+    .item {
+      &:active {
+        border: none;
+        border-top: 1px solid #241832;
+        background-color: none;
+        box-shadow: none;
+        color: #FFF;
+        z-index: auto;
+
+        & > h3 {
+          color: #BEB0BF;
+          text-shadow: none;
+        }
+
+        & > h4 {
+          color: #AF5AA1;
+          text-shadow: none;
+        }
+
+        &.odd {
+          background-color: #231630;  
+        }
+      }
+    }
+  }
+  .tv_guide{
+	.channels{
+		ul{
+			margin-left:-2px;
+      .favorite {
+        display: none;
+      }
+		}
+	}
+ }
+}
+
+.tv_guide.tv{
+  .outer-wrapper{
+    width: 290px;
+    margin: 0 auto;
+    .inner-wrapper{
+      width: 570px;
+      min-height: 0;
+      .tv_guide{
+        width: 280px;
+      }
+      .emptyGuideLoader{
+        width:50%;
+      }
+      .back-btn-filter{
+        margin-top: 20px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+html.android{
+  #selectOperator{
+    .android-line-height-tv{
+      line-height: 32px !important;
+    }
+  }
+}
+
+
+

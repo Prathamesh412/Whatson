@@ -1,0 +1,20 @@
+<div class='trending' ng-controller="Home_TrendingController">
+    <h6 class='subtitle'>TRENDING DISCUSSIONS</h6>
+
+    <a class='more' ng-click="toggleSlider()" ng-hide="lessThanOne()">{{viewStatus}}</a>
+
+    <div id="trendingCarousel" class='container containerWrapper'>
+      <div class='slider'>
+        <div class='item' save-start-time="t" ng-repeat='t in trendings'>
+          <h2>{{t.forumtitle}}</h2>
+          <p>{{t.time}}</p>
+          <button class='btn btn-small fblike' ng-click='like($event, t)'>{{t.isliked|fbActivityLike}}</button>
+          <span>{{t.likecount}}</span>
+        </div>
+        <div class='clearfix'></div>
+      </div>
+      <!-- /slider -->
+      <a class='arrows left' ng-click='slide(false)' ng-class="{disabled:currentSlide == 0}">&lt;</a>
+      <a class='arrows right' ng-click='slide(true)' ng-class="{disabled:currentSlide == (trendings.length-1)}">&gt;</a>
+    </div>
+  </div>

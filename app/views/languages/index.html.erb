@@ -1,0 +1,32 @@
+<div class='choose-language' header-location ng-controller="App_UserLanguageController">
+  <div class = 'popover-loader signin-loader' ng-hide='paginate.length>0'> </div>
+  <div ng-show = 'paginate.length>0'>
+    <div class='header'>
+      <h4>Choose Your TV Language</h4>
+      <p>
+        <span class="location-label" live-tooltip-location="{{locationString}}">
+          <input type="text" class="location-input" style="display: none;" value="{{locationString}}"/>
+          <span class="location-string" ><span class="autolocation-label">Auto Location: </span>{{locationString}}</span>
+        </span>
+        <span class='close location-change'>&times;</span>
+        <i class="clearfix"></i>
+      </p>
+    </div>
+    <ul id="languageList" class='language-list header-language-list' ng-init="getLanguages();">
+        <li ng-repeat="l in paginate">
+        <span>
+          <label for="checkbox{{l.languagename.replace(' ','')}}"  ng-class="{selectedLanguage:l.favlanguage == '1'}">
+            {{ l.languagename }}
+          </label>
+            <div class="custom-checkbox">
+              <input ng-click="addLanguage($event,l.languagename)" id="checkbox{{l.languagename.replace(' ','')}}" name="language" value="{{l.languagename}}" type="checkbox" ng-checked="l.favlanguage == 1"/>
+              <label for="checkbox{{l.languagename.replace(' ','')}}"></label>
+            </div>
+        </span>
+        </li>
+    </ul>
+    <div ng-show="paginate.length < languages.length" class='footer'>
+      <a ng-click="loadMore()">More languages</a>
+    </div>  
+  </div>
+</div>

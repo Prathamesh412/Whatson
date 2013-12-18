@@ -1,0 +1,56 @@
+html.android{
+	.video-pics{
+	.video-item{
+		margin-right: 10px;
+		&:nth-child(10n), &:nth-child(10n+1){
+			.thumb{
+				width: 375px;
+			}
+			.text-wrapper{
+				width: 375px;
+				.name{
+					width: 295px;
+				}
+			}
+			.video-details{
+				.info{
+					width: 55%;
+				}
+			}
+		}
+	}
+}
+
+.video-info-tabs{
+	.video-tabs{
+		.tab{
+			a{
+				font-size: 20px;
+				margin-right: 0px;
+			}
+		}
+	}
+	.select-boxes{
+		// margin-right: 0px;
+		input[type='text']{
+			width: 109px;
+			padding-top: 5px;
+			line-height: 15px;
+		}
+		.select-operator{
+			width: 136px;
+			.btn{
+				width: 110px;
+				font-size: 16px;
+			}
+		}
+	}
+}
+@media screen and (max-width: 768px) and (orientation: portrait) {
+	.fb-activity {
+		float: left !important;
+		width: 368px !important;
+	}
+}
+
+}

@@ -1,0 +1,104 @@
+<section class="clearfix main-section">
+	<div class='content'>
+		<div class ="new-dis-head-wrapper clearfix">
+			<div class ="dis-header">
+				<h6 class ="subtitle">NEW DISCUSSION</h6>
+			</div>
+		      <div class='social-actions-col'>
+		        <div class='social ' ng-controller="SocialSharingController">
+		          <button id="fbButton" class='btn fb btn-mini fadeInRight trigger'>
+		            <i class="icon-fb"></i>
+		            <span class="total sFix">{{fbLikeCount}}</span> 
+		          </button>
+		          <button id="twitterButton" class='btn tw btn-mini fadeInRight trigger'>
+		            <i class="icon-tw"></i>
+		            <span class="total sFix">{{tweetsCount}}</span> 
+		          </button>
+		          <button id="gplusButton" class='btn gp btn-mini fadeInRight trigger'>
+		            <i class="icon-gp"></i>
+		            <span class="total sFix">0</span> 
+		          </button> 
+		          <button class='btn rss btn-mini fadeInRight trigger' style="display:none;">
+		            <i class="icon-rss"></i>
+		            <span class="total sFix">62k</span> 
+		          </button>
+		          <button class='btn sh btn-mini active'><i class="icon-sh"></i></button>
+		        </div>
+		        <!-- / social -->
+		      </div>
+	    </div>
+	    <div class ="new-dis-container">
+	    	<div class ="new-dis-content-wrapper cleafix">
+				<form action="">
+		    		<div class ="image-upload-wrapper">
+		    			<img src="assets/img/uploadPlaceholder.png" alt="upload your image">
+		    			<div class= "upload_button">Upload
+		    			</div>
+		    		</div>
+		    		<div class= "dis-form-elements">
+			    		<div class ="dis-title-wrapper">
+		       					<input type="text"class="discussion-heading adjusted-size" placeholder="Discussion Heading" />
+			    		</div>
+			    		<p class = "error_msg">* Please enter the title for your discussion
+			    		</p>
+			    		<div class ="dis-dropdown-wrapper">
+		       					 <input type="text"class="discussion-heading adjusted-size" placeholder="TV Shows" />
+		       					 <span class ="dropdown_arrow"></span>
+			    		</div>
+
+			    		<div class ="dis-user-entered-shows">
+		       					 <input type="text"class="discussion-heading adjusted-size" placeholder="Enter shows seprated by commas" />
+			    		</div>
+			    	</div>
+		    		<div class ="dis-post-wrapper">
+			                <textarea ng placeholder="Write a comment..." class ="text_area_size"></textarea>
+			                <button type="submit" ng-click="replyDiscussion(currentforumid, $event, initTrending)" class="btn-post btn btn-light-blue post_btn_size">Post Discussion</button>
+		    		</div>
+		    	</form>
+	    	</div> 
+	    </div>
+	</div>
+	<aside class='sidebar'>
+    <!--  Might need to change the controller here, depending on the API they give us  -->
+    <div class="yourrecs" ng-controller="YourRecsController">
+      <h6 class="subtitle">Recommended</h6>
+      <ul class="recommended">
+        <li class="item animate bounceInDown" ng-repeat="r in paginate">
+        <div class="thumb">
+          <div ng-show="r.isrecommended=='1'" class="favorite-ribbon"></div>
+          <div class="wrapper">
+            <a href="#!/program/{{r.programid}}/channel/{{r.channelid}}"><img ng-src="{{r.imagefilepath}}" alt="{{r.programmename}}" /></a>
+          </div>
+          <span class="duration">{{r.duration}}</span>
+          
+			<div class="user-actions" ng-controller="UserController">
+
+			  <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(r, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:r.isfavorite == '1'}">
+			    <i class="icon-favorite"></i>
+			  </a>
+			  
+			  <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(r, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:r.isreminder == '1'}"  >
+			    <i class="icon-reminder"></i>
+			  </a>
+
+			  <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(r, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:r.iswatchlist == '1'}">
+			    <i class="icon-watchlist"></i>
+			  </a>
+			</div>
+        </div>
+        <div class="thumbDetails">
+          <h2>
+           <a href="#!/program/{{r.programid}}/channel/{{r.channelid}}">{{r.programmename}}</a>
+          </h2>
+          <p class="info">
+          {{r.timestring}}
+          <br />
+          <a href="#!/channel/{{r.channelid}}">{{r.channelname}}</a> 
+          </p>
+        </div>
+        </li>
+        <li class="loadmore" ng-show="showMore==true"><a href="javascript:void(0);" title="Load more Recommended" ng-click="loadMore()">More..</a></li>
+      </ul>
+    </div>
+  </aside>
+</section>

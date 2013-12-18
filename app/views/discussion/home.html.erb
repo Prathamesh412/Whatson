@@ -1,0 +1,156 @@
+<section class='clearfix main-section lpDiscussions' ng-controller="DiscussionsController">
+	<div class='content discussions'>
+		<h6 class="subtitle">Discussions <a href="#!/newdiscussion" class="addDiscussion" style="display: none;"><img src='/assets/img/expandPlus.png' /></a></h6>
+
+		<div class='select-filter' ng-show="allFilters.length">
+<!-- 			<div class="styled-select"  discussion-filter-popover>
+        <p>{{currentFilter}}</p>
+      </div> -->
+			<a class='btn' id='selectFilter'>Filter<span class='arrow'></span></a>
+			<ul class="dropdown-menu selectFilter">
+				<li ng-repeat="thisFilter in allFilters">
+					<a href="#" ng-click="applyFilter($event, thisFilter)">
+						<span class="customRadio" ng-class="{selected: thisFilter == activeFilter}"></span>
+						{{thisFilter}}
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<ul class="discussionConfirmation">
+			<li>
+				<div class="dc_check"><div class="checkWrapper"></div></div>
+				<div class="dc_close"><a href="#" ng-click="closeNotification($event)"></a></div>
+				<div class="dc_body">Your message has been successfully posted.</div>
+			</li>
+		</ul>
+
+		<ul class="categoryAccordion">
+			<li class="loadingIndicator" ng-show="!dataLoaded"></li>
+			<li ng-repeat="thisTab in tabs" ng-class="{active: thisTab.active, commentsExpanded: commentsExpanded}">
+				<h1 ng-click="openTab($event, thisTab)">{{thisTab.heading}}<span></span></h1>
+				<div class="fix clearfix" ng-hide="thisTab.discussions.length">No Discussions available in this section</div>
+				<ul class="discussionTabs">
+					<li ng-repeat="td in thisTab.discussions" ng-class="{active: td.active}" ng-click="openThread(thisTab.discussions, td)">
+						<div class="imgWrapper" css-bg-image="{{td.forumimage}}"></div>
+					</li>
+				</ul>
+				<ul class="discussionBody" ng-repeat="td in thisTab.discussions" ng-show="td.active">
+					<li>
+						<div class="discussionHeader">
+							<div class="dH_thumb" css-bg-image="{{td.userimage | filterDefaultDiscussionImage}}"></div>
+							<div class="dH_details">
+								<h2 class="discussion-header" live-tooltip="{{td.forumtitle}}">{{td.forumtitle}}</h2>
+								<span live-tooltip="{{td.username}}" class="author" ng-show="td.username">by {{td.username}}</span>
+								<span class="details">{{td.createddate | momentDiference}}</span>
+								<div class="user-actions" ng-controller="UserController">
+									<a href="" class="btn btn-comment" ng-click="scrollToComment($event)">Comment</a>
+									<a href="#" ng-click="toggleLikeDiscussion(true, td, $event)" ng-class="{active: td.userlike=='1'}" class="like btn btn-small btn-purple-blue">
+										<i class="icon-like"></i>
+									</a>
+									<a href="#" ng-click="toggleLikeDiscussion(false, td, $event)" ng-class="{active: td.userdislike=='1'}" class="btn btn-small btn-purple-blue dislike">
+										<i class="icon-dislike"></i>
+									</a>
+									<a href="#" ng-click="flagDiscussion(td, $event)" ng-class="{active: td.userreportabuse=='1'}" class="btn btn-small btn-purple-blue flag">
+										<i class="icon-flag"></i>
+									</a>
+								</div>
+							</div>
+							<div class="dH_count">{{td.threadcount}}</div>
+							<div class="dH_likeCount">
+								<span class="number-likes">{{td.likecount}} people like this.</span>
+							</div>
+						</div>
+						<div class="discussionContents">
+							<a class="viewMoreComments icon bubble number-comments" ng-show="td.threadcount > 1 && td.visibleComments.length < td.allComments.length" ng-click="viewAllComments(td)"><i class="icon-buble"></i>View all {{td.threadcount}} comments</a>
+							<ul class="comments-list">
+								<li class="loadingIndicator" ng-show="td.loading"></li>
+								<li class="noCommentsToShow" ng-show="!td.visibleComments.length && !td.loading">No comments to display</li>
+								<li class="clearfix" ng-repeat="thisComment in td.visibleComments">
+									<div class="thumb" css-bg-image="{{thisComment.userimage | filterDefaultDiscussionImage}}"></div>
+									<div class="info">
+										<h2 live-tooltip="{{thisComment.username}}">{{thisComment.username}}
+											<span class="status ico star" ng-show="thisComment.moderator">moderator</span>
+										</h2>
+										<div class="description">{{thisComment.commenttext}}</div>
+										<div class="user-actions" ng-controller="UserController">
+											<a href="" class="btn-comment btn" ng-click="openReplyForm($event)" >Reply</a>
+											<a href="#"  ng-class="{active: thisComment.userlike=='1'}" ng-click="toggleLikeComment(true, thisComment, $event)" class="btn flag btn-small btn-purple-blue like">
+												<i class="icon-like"></i>
+											</a>
+											<a href="#"  ng-class="{active: thisComment.userdislike=='1'}" ng-click="toggleLikeComment(false, thisComment, $event)"  class="btn flag btn-small btn-purple-blue dislike">
+												<i class="icon-dislike"></i>
+											</a>
+											<a href="#"  ng-class="{active: thisComment.userreportabuse=='1'}" ng-click="toggleFlagComment(thisComment, $event)" class="btn flag btn-small btn-purple-blue">
+												<i class="icon-flag"></i>
+											</a>
+										</div>
+										<form class="post-reply" ng-controller="UserController" action="">
+											<textarea ng-model="discussion.reply.message" placeholder="Reply to this comment..."></textarea>
+											<button type="submit" ng-click="replyDiscussion(td.forumid, $event, loadDiscussionThread, td)" class="btn-reply btn btn-light-blue">Post</button>
+										</form>
+									</div>
+								</li>
+							</ul>
+							<div class="newCommentBox">
+								<ul class="comments-list comment-actions">
+									<li class="post-comment" ng-controller="UserController">
+										<form action="">
+											<textarea ng-model="discussion.reply.message" placeholder="Write a comment..."></textarea>
+											<button type="submit" ng-click="replyDiscussion(td.forumid, $event, loadDiscussionThread, td)" class="btn-post btn btn-light-blue">Post</button>
+										</form>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<!-- / content -->
+
+	<aside class='sidebar'>
+		<!-- Recommended Partial -->
+		<%= render :partial => "addons/recommendations", :locals => {:controller => "YourRecsController", :header => "Recommended"} %>
+
+		<div class="feed fb" ng-show="showFacebook">
+		<!-- <div class="feed fb"> -->
+			<ul>
+				<li class="colorfull">
+					<h6 class="subtitle">FB news feed</h6>
+					<a ng-click="loadMoreFb()">{{fbText}}</a>
+					<!-- <a ng-click="loadMoreFb()">view more</a> -->
+				</li>
+
+				<li class="item clearfix" ng-repeat="post in paginateFb">
+				<!-- <li class="item clearfix" ng-repeat="post in [1, 2, 3, 4]"> -->
+					<div class="thumb">
+						<div class="wrapper">
+							<img ng-src="{{facebookProfilePic}}">
+						</div>
+					</div>
+
+					<div class="info">
+						<span class="account-name">{{post.from.name}}</span>
+	       <!--  <div class="post">
+	         {{post.message}}
+	         <br/>
+	         <img ng-src="{{post.picture}}">
+	       </div> -->
+	       <div class="post" ng-bind-html>
+	       	<span ng-bind-html-unsafe="post.message | replaceLinks"></span><br/>
+	       	<!-- <span ng-bind-html-unsafe="post.message"></span><br/> -->
+	       	<img ng-src="{{post.picture}}">
+	       </div>      
+	       <br/>
+	       <span class="time">{{post.updated_time|facebookTime}}</span>
+	     </div> 
+	   </li>
+	 </ul>
+	</div>
+</aside>
+<!-- / SIDEBAR -->
+</section>

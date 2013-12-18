@@ -1,0 +1,46 @@
+
+// ------------------------------------
+// IMPORTING STYLSHEETS
+// ------------------------------------
+
+@import 'grid.less';
+@import 'elements.less';
+@import 'fonts.less';
+
+
+
+// ------------------------------------
+// RESPONSIVE STYLES INCLUDE
+// ------------------------------------
+
+/* default desktop version */
+@import 'movies-desktop.less';
+
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-width: 640px){
+  @import 'movies-phone.less';
+}
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-width: 480px) and (orientation: portrait){
+}
+
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-width: 640px) and (orientation: landscape){
+}
+/* #### iPhone 4+ Portrait or Landscape #### */
+@media screen and (max-width: 480px) and (-webkit-min-pixel-ratio: 2){
+  /* some CSS here */
+}
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  @import 'movies-tablet-android.less';
+}
+/* #### Tablets Portrait #### */
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation:portrait) {
+  @import 'movies-tablet.less';
+}
+/* #### Tablets Landscape #### */
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation:landscape) {
+}
+

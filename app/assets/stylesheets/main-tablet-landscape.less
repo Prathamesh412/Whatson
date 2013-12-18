@@ -1,0 +1,104 @@
+/* Overwriting hover styles for the language popover */
+/*.custom-checkbox {
+  label:hover::after {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+}
+
+.tvoperator-popover, .language-popover, .reminder-popover {
+  .language-list li {
+    span {
+      &:hover {
+        background: none !important;
+      }
+    }
+  }
+}*/
+
+
+// ------------------------------------
+// Trending / Facebook activity
+// ------------------------------------
+.trending {
+  .container .slider .item {
+    position: relative;
+    width: 400px;
+    padding: 15px 0px 20px 40px;
+    float: left;
+  }        
+  .arrows.right {
+    width: 16px;
+  /*  left: 550px; */
+    left: auto !important;
+    right: 8px;
+  }          
+}
+
+.main-nav {
+  .visible-on-tablet {
+    display: none;
+  }
+
+  .hide-on-tablet {
+    display: block;
+  }
+
+ 
+  ul.dropdown-menu {
+    left: 0;
+    display: none;
+    z-index:999999999;
+
+    li {
+      float: none;
+      display: block;
+      margin: 0 !important;
+      padding: 0 !important;
+
+      &:first-child a {
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+      }
+
+      &:last-child a {
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      a {
+        display: block;
+        color: inherit;
+        border: none;
+        text-shadow: none;
+        padding: 5px 10px;
+
+        &.active {
+          color: inherit;
+          border: none;
+          text-shadow: none;
+          text-decoration: none;
+        }
+
+        /*&:hover {
+          border: none;
+        }*/
+      }
+    }
+  }
+}
+
+.logo {
+   width: auto;
+ }
+.social-actions-col {
+   float:right;
+   width: auto;
+   margin-left: 1.04166666666%
+}
+
+.fb-activity .container .slider .item {
+  width:400px; 
+  padding-left:46px;
+}

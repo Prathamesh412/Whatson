@@ -1,0 +1,96 @@
+<section class='clearfix main-section lpApps' ng-controller="AppsLandingPageController">
+  <h6 class="subtitle hidden-phone visible-desktop visible-tablet">What's on India Apps</h6>
+
+  <div class = 'phone-filters visible-phone hidden-desktop hidden-tablet clearfix'>
+    <h6 class="subtitle">What's on India Apps</h6>
+    <div class = 'right-wrapper'>
+        <span class = 'title'>Browse </span>
+        <button class = 'btn btn-filter'>=</button>
+    </div>
+  </div>
+
+  <div class="appSliderWrap">
+    <ul class="as_control">
+      <li class="{{thisDevice.classname}}" ng-class="{active: thisDevice.active}" ng-click="loadApp(thisDevice.appid - 1, $event)" ng-repeat="thisDevice in appDetails">
+        <span class="thumbnail"></span>
+        {{thisDevice.appname}}
+      </li>
+    </ul>
+    <!--  <button class = 'btn back-btn-filter visible-phone hidden-desktop hidden-tablet' ng-click = 'hideFilter()'> Back </button> -->
+    <div class="as_container">
+      <!--  Slider here  -->
+      <div class = "swiper-container" id ="swiper-container1">
+        <a class="apps-arrow-left"  ng-show="showLeft" ng-click="moveLeft($event)">&lsaquo;</a>
+        <a class="apps-arrow-right" ng-show="showRight" ng-click="moveRight($event)">&rsaquo;</a>
+        <div class = "swiper-wrapper">
+          <div ng-repeat="thisImage in selectedApp.appgallery" class = "swiper-slide">
+            <div css-bg-image="{{thisImage.imagename}}"></div>
+          </div>
+       </div>
+     </div>
+     <div class="pagination pagination1" id="devicePagination"></div>
+     <div class="sliderActions" id="videoTrigger" ng-show="selectedApp.appvideourl">
+      <a href="{{selectedApp.appvideourl}}" target="_blank">
+        <div class="thumbWrap"></div>
+        See it in action
+      </a>
+    </div>
+    <div class="sliderActions" id="storeTrigger" ng-show="selectedApp.appstoreurl">
+      <a href="{{selectedApp.appstoreurl}}" target="_blank">
+        <div class="thumbWrap"></div>
+
+        Available on <span ng-hide="selectedApp.appname == 'Blackberry'">the</span> <span class="bigText {{selectedApp.classname}}">{{selectedApp.storeName}}</span>
+        <div class="clearfix"></div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<div class='content'>
+  <div class="bodyText">
+    <h4>India's TV Guide Application</h4>
+    <p>{{selectedApp.appdescription}}</p>
+
+    <h5 ng-show="selectedApp.features">This app features</h5>
+    <ul class="bulleted" ng-show="selectedApp.features">
+      <li ng-repeat="thisFeature in selectedApp.features"><span>{{thisFeature.featuredescription}}</span></li>
+    </ul>
+  </div><!--  End of bodyText  -->
+
+  <div class="testimonials" ng-show="selectedApp.testimonials">
+    <h6 class="subtitle">Testimonials</h6>
+    <a class="more" href="" ng-click="showAllTestimonials()" ng-show="selectedApp.testimonials.length > 3">View More</a>
+    <div ng-show="selectedApp.testimonials.length">
+      <div class="content-wrapper">
+        <aside class="td-shows-sidebar">
+          <ul>
+            <li class="row" ng-repeat="td in selectedApp.testimonials">
+              <div class="thumb">
+                <!-- <div class="wrapper" css-bg-image="{{td.forumimage | filterDefaultImage}}"></div> -->
+                <div class="wrapper" css-bg-image="assets/img/profile-default.png"></div>
+              </div>
+            </li>
+          </ul>
+        </aside>
+
+        <div class="td-shows-content clearfix">
+          <div class="td-selected-show" ng-class-odd="'odd'" ng-class="{active: td.active}" ng-repeat="td in selectedApp.testimonials" multiline-overflow>
+            <h5>{{td.reviewtitle}}</h5>
+            <p>{{td.reviewdescription}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / comments -->
+  </div><!--  End of testimonials  -->
+</div>
+<!-- / content -->
+
+<aside class='sidebar'>
+  <!-- Recommended Partial -->
+  <%= render :partial => "addons/recommendations", :locals => {:controller => "YourRecsController", :header => "Recommended"} %>
+</aside>
+<!-- / SIDEBAR -->
+</section>

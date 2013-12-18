@@ -1,0 +1,94 @@
+		<div class = 'watchlist-user clearfix' ng-hide="hideMainContent()">
+			<div class = 'overlay hide-elem' watchlist-dropbox ></div>
+			<div class = 'watchlist-section today-watchlist clearfix'>
+				<div class  = 'watchlist-header clearfix'>
+					<div class = 'title'> Today</div>
+					<% if page == "watchlist" %>
+		            <div class  = 'btn-group'>
+		              <a class = 'btn' ng-click="filterType = 'reminders'" ng-class="{active: filterType=='reminders'}">Reminders </a>
+		              <a class = 'btn' ng-click="filterType = 'favourites'" ng-class="{active: filterType=='favourites'}">Favorites</a>
+		              <a class = 'btn' ng-click="filterType = 'all'" ng-class="{active: filterType=='all'}">All</a>
+		            </div>
+		            <% end %>
+				</div>
+				<div class ="watchlist-body clearfix">
+					<ul class = 'profile_item_content_list clearfix'>
+						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in today" ng-show="canItBeShown(item)">
+							<%= render :partial => "watchlist/item", :locals => {:type => "today"} %>
+						</li>
+					</ul>
+					<div class = 'noResultsBlockWatchlist' ng-show="showNoResult('today')"> No results for Today </div>
+				</div>
+			</div>
+			<div class = 'watchlist-section tomorrow-watchlist clearfix'>
+				<div class  = 'watchlist-header clearfix'>
+					<div class = 'title'> Tomorrow </div>
+				</div>
+				<div class ="watchlist-body clearfix">
+					<ul class = 'profile_item_content_list clearfix'>
+						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in tomo" ng-show="canItBeShown(item)">
+							<%= render :partial => "watchlist/item", :locals => {:type => "tomo"} %>
+						</li>
+					</ul>
+					<div class = 'noResultsBlockWatchlist' ng-show="showNoResult('tomo')"> No results for Tomorrow </div>
+				</div>
+			</div>
+			<div class = 'watchlist-section clearfix'>
+				<div class  = 'watchlist-header clearfix'>
+					<div class = 'watchlist-info-tabs clearfix'>
+					    <ul>
+					      <li ng-hide="isItFriday()" ><a class='tab-btn' ng-click="changeWeek('thisWeek')" ng-class="{active: weekSelection=='thisWeek'}" >THIS WEEK</a></li>
+					      <li><a class='tab-btn' ng-click="changeWeek('nextWeek')" ng-class="{active: weekSelection=='nextWeek'}">NEXT WEEK</a></li>
+					    </ul>
+					</div>      
+					<div class="duedate">
+				        <a watchlist-calendar-popover>
+				          	<span class="day-label"> {{calendarDate}}</span> 
+				          	<i class="calendar-icon" >{{calendarIcon}}</i>
+				        </a>
+				    </div>
+				</div>
+        		<div class ="watchlist-body this-week-watchlist clearfix" ng-show="weekSelection=='thisWeek'">
+					<ul class = 'profile_item_content_list clearfix'>
+						<li class = 'list-item' save-start-time="item" scroll-callback ng-repeat="item in thisWeek" ng-show="canItBeShown(item)">
+							<%= render :partial => "watchlist/item", :locals => {:type => "thisWeek"} %>
+						</li>
+					</ul>
+					<div class = 'noResultsBlockWatchlist' ng-show="showNoResult('thisWeek')"> No results for This Week </div>
+				</div>      
+        		<div class ="watchlist-body next-week-watchlist clearfix" ng-show="weekSelection=='nextWeek'">
+					<ul class = 'profile_item_content_list clearfix'>
+						<li class = 'list-item' save-start-time="item" scroll-callback ng-repeat="item in nextWeek" ng-show="canItBeShown(item)">
+							<%= render :partial => "watchlist/item", :locals => {:type => "nextWeek"} %>
+						</li>
+					</ul>
+					<div class = 'noResultsBlockWatchlist' ng-show="showNoResult('nextWeek')"> No results for Next Week </div>
+				</div>
+        		<div class ="watchlist-body random-date-watchlist clearfix" ng-show="weekSelection==''">
+					<ul class = 'profile_item_content_list clearfix'>
+						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in selectedDate" ng-show="canItBeShown(item)">
+							<%= render :partial => "watchlist/item", :locals => {:type => "selectedDate"} %>
+						</li>
+					</ul>
+					<div class = 'noResultsBlockWatchlist' ng-show="weekSelection=='' && showNoResult('selectedDate')"> No results for {{calendarDate}} </div>
+				</div>
+			</div>
+
+			<% if page == "watchlist" %>
+	      	<div class="loadmore" ng-hide="displayNextMonth" ng-click="showNextMonth()">Next Month...</div>
+
+			<div class = 'watchlist-section next-month-watchlist clearfix' ng-show="displayNextMonth">
+				<div class  = 'watchlist-header clearfix'>
+					<div class = 'title'> Next Month </div>
+				</div>
+				<div class ="watchlist-body clearfix">
+					<ul class = 'profile_item_content_list clearfix'>
+						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in nextMonth" ng-show="canItBeShown(item)">
+							<%= render :partial => "watchlist/item", :locals => {:type => "nextMonth"} %>
+						</li>
+					</ul>
+					<div class = 'noResultsBlockWatchlist' ng-show="showNoResult('nextMonth')"> No results for Next Month </div>
+				</div>
+			</div>
+			<% end %>
+		</div>

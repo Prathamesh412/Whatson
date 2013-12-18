@@ -1,0 +1,59 @@
+
+// ------------------------------------
+// IMPORTING STYLSHEETS
+// ------------------------------------
+
+@import 'grid.less';
+@import 'elements.less';
+@import 'fonts.less';
+
+
+
+// ------------------------------------
+// RESPONSIVE STYLES INCLUDE
+// ------------------------------------
+
+/* default desktop version */
+@import 'tv_guide-desktop.less';
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-width: 640px){
+  @import 'tv_guide-phone.less';
+}
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-width: 480px) and (orientation: portrait){
+	  @import 'tv_guide-phone.less';
+}
+
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-width: 640px) and (orientation: landscape){
+	.tv_guide.tv{
+	  .tv_guide{
+			.channels{
+				ul{
+					margin-left:-2px;
+				}
+			}
+		}
+	}
+
+}
+/* #### iPhone 4+ Portrait or Landscape #### */
+@media screen and (max-width: 480px) and (-webkit-min-pixel-ratio: 2){
+  /* some CSS here */
+}
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  @import 'tv_guide-tablet.less';
+}
+/* #### Tablets Portrait #### */
+@media screen and (width: 768px) and (height: 1024px) and (orientation:portrait) {
+}
+/* #### Tablets Landscape #### */
+@media screen and (width: 768px) and (height: 1024px) and (orientation:landscape) {
+	/* Hiding the sliding favorite icon on tablet landscape */
+	.channels a.favorite { 
+		display: none; 
+	}
+}
+

@@ -1,0 +1,187 @@
+.search-list{
+
+
+  .results_header {
+    h6{
+      .column(8);
+
+    } 
+  }
+  .results{
+    clear:both;
+
+    .item{
+      .thumb{
+        width:150px;
+        height:117px; 
+        .user-actions{ 
+          .btn{
+            margin-left:20px;
+          }
+        }
+
+        .wrapper{
+          width:155px;
+          height:120px; 
+        }
+      }
+      .info{
+        .column(7);
+        margin-left:10px;
+        h2{
+          width:100%;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+    }
+
+    .more{
+      background-image: url(../assets/img/icons-sprite.png);
+      background-position: 0 -542px;
+      background-repeat: no-repeat;
+      display: block;
+      margin-top: 10px;
+      text-indent: -9999px;
+      width: 46px;
+      height: 46px;
+      margin: 20px auto 0 auto;
+    }
+  }
+
+}
+
+.search_results{
+  .results{
+    .item{
+      .info{
+        .tags{
+          li{
+            padding-left: 0px;
+            // padding: 0 1px;
+          }
+        }
+        .details {
+          .channel-name{
+            font-size: 13px;
+          }
+          .time{
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.search.sidebar{
+  li{
+    display:inline; 
+    border-left:1px solid #502b50; 
+    padding: 0 9px;
+    height:20px; 
+    line-height:20px; 
+    font-family: 'HelveticaNeueCn';
+
+    &:first-child{
+      border-left:0; 
+    }
+
+    a{
+      color:#a85b9c; 
+      font-size: 14px; 
+      text-transform:capitalize;
+
+      &.active, &:hover, &:active{
+        color: #feef02;
+        text-shadow: 0 2px 17px #ff616b;
+      }
+    }
+  }
+}
+
+.search-results-outer-wrapper{
+  .content{
+    width: 290px  !important;
+    margin: 0 auto !important;
+  }
+  .sidebar{
+    width: 280px !important;
+    margin: 0 auto !important;
+  }
+}
+
+.search_results{
+
+  .phone-filters{
+    width: 290px;
+    margin: 0px auto 10px auto;   
+    .filter-wrapper{
+      float: right;
+      width: 105px;
+    }
+      .title{
+          float:left;
+          color:#a85b9c; 
+          font-size: 14px; 
+          margin:5px 10px 0 0; 
+          font-family: 'HelveticaNeueCn', sans-serif;
+      }
+      .btn-filter{
+          float:right;
+          text-indent:-9999px;
+          padding:0px; 
+          width:25px; 
+          height:25px; 
+          padding-top:4px; 
+          .rounded(2px);
+          
+          &:before{
+              content:''; 
+              width:15px; 
+              height:15px; 
+              position:relative;
+              display:block; 
+              margin: 15px auto;
+              background:url('../assets/img/icon-list.png') no-repeat 50% 50% transparent;
+          }
+      }
+    }
+    .back-btn-filter{
+      margin-top: 20px;
+    }
+}
+
+    h6.results_header.phone-view{
+      font-family: 'DosisLight';
+      font-size: 25px; 
+      color:#a85b9c; 
+      float:left;
+      .column(8);
+
+      overflow:hidden;
+      white-space: nowrap;
+
+      span{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        display:block; 
+        float:left; 
+        max-width:125px; 
+        height:33px; 
+        line-height:25px; 
+      }
+
+      .count-search-query{
+        padding-left:10px; 
+        font-size: 17px; 
+        color:#b49bb0; 
+        width:75px; 
+        line-height:33px; 
+
+
+      }
+    }

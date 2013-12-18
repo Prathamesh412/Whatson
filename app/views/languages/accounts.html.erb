@@ -1,0 +1,44 @@
+<div class='choose-language' header-location>
+  <div class = 'popover-loader signin-loader' ng-hide='paginate.length>0'> </div>
+  <div ng-show = 'paginate.length>0'>
+    <div class='header' ng-show="edit">
+      <h4>Choose Your TV Language</h4>
+      <!-- <p>
+        <span class="location-label">
+          <input type="text" class="location-input" style="display: none;" value="{{locationString}}"/>
+          <span class="location-string"><span class="autolocation-label">Auto Location: </span>{{locationString}}</span>
+        </span>
+        <span class='close location-change'>&times;</span>
+      </p> -->
+    </div>
+    <div class='header' ng-hide="edit">
+      <h4> Your Favorite TV Languages </h4>
+    </div>
+    <ul id="accountlanguageList" class='account-language-list language-list' ng-init="getLanguages();">
+        <li ng-repeat="l in paginate">
+        <span ng-show="edit">
+          <label for="account-checkbox{{l.languagename.replace(' ','')}}"  ng-class="{selectedLanguage:l.favlanguage == '1'}">
+            {{ l.languagename }}
+          </label>
+            <div class="custom-checkbox">
+              <input ng-click="toggleLanguageGenre($event,l.languagename,'language',l)" id="account-checkbox{{l.languagename.replace(' ','')}}" name="language" value="{{l.languagename}}" type="checkbox" ng-checked="l.favlanguage == 1"/>
+              <label for="account-checkbox{{l.languagename.replace(' ','')}}"></label>
+            </div>
+        </span>
+        <span ng-hide="edit">
+          <label ng-class="{selectedLanguage:l.favlanguage == '1'}">
+            {{ l.languagename }}
+          </label>
+          <div class="custom-checkbox">
+            <input type="checkbox" ng-checked="l.favlanguage == 1"/>
+            <!-- Empty Label tag for UI -->
+            <label></label>
+          </div>
+        </span>
+        </li>
+    </ul>
+    <div ng-show="paginate.length < languages.length" class='footer'>
+      <a ng-click="loadMoreLanguages()">More languages</a>
+    </div>  
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class='popover-content signin-container' ng-controller='App_UserActionController'>
+  <div ng-switch on="state">
+    <div ng-switch-default>
+      <form ng-submit='submitSignIn()' name='signInForm' class='signInForm' novalidate>
+        <h4 class='icon key gray'>Login to your TV Guide</h4>
+        <a class='btn fb' ng-click='submitFacebookLogin()'>Facebook Connect</a>
+        <input type='email' ng-model='data.signin.email' name='email'  sign-in-input class="email">
+        <div class="errorMessage signin_email_error"></div>
+        <input type='password' ng-model='data.signin.password' name='password'  sign-in-input class="password android-desktop-password">
+        <input type='text' ng-model='data.signin.password' name='password'  sign-in-input class="ios-password password ios-signin-pwd">
+        <div class="errorMessage signin_pw_error"></div>
+        <button class='btn btn-light-blue'>Sign In</button>
+      </form>
+      <div class='footer'>
+        <a ng-click='displayForgotPassword()'>Forgot Password?</a>
+      </div>
+    </div>
+    <div class="forgotPassword" ng-switch-when="forgot">
+      <h4>Forgot Password</h4>
+      <p>Submit your email id to recover your password.</p>
+      <form name='forgotPasswordForm' ng-submit='submitForgotPassword()' novalidate>
+        <input id="recoverEmail" type="email" name="email" ng-model="data.forgot.emailid"  sign-in-input class="email" />
+        <div class="errorMessage recover_email_error"></div>
+        <div class="successMessage recover_email_success">Login credentials sent successfully to your Email ID</div>
+        <button id="recoverSubmit" type="submit" class="btn btn-light-blue">Submit</button> 
+        <%#<input type='submit' value='Submit' class="btn btn-light-blue" />%>
+      </form>
+      <div class='footer'>
+        <a ng-click='displaySignIn()'>Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>

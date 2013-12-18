@@ -1,0 +1,142 @@
+<section class='clearfix main-section lpVideos' ng-controller="VideosLandingPageController">
+
+<!-- <h1 class="test">videos sss</h1> -->
+
+    <div class = 'video-info-tabs clearfix'  ng-controller="VideosNavController">
+        <ul class='video-tabs'>
+          <li class='tab'>
+          	<a class='tab-btn' ng-class="{active: currentTab == 'popular'}" ng-click="toggleTab('popular')">POPULAR</a>
+          </li>
+          <li class='tab'>
+          	<a class='tab-btn' ng-class="{active: currentTab == 'recommended'}" ng-click="toggleTab('recommended')">RECOMMENDED</a>
+          </li>
+          <li class='tab'>
+          	<a class='tab-btn' ng-class="{active: currentTab == 'new'}" ng-click="toggleTab('new')">NEW</a>
+          </li>
+          <li class='tab' ng-show="userLogged=='on'">
+          	<a class='tab-btn' ng-class="{active: currentTab == 'favorites'}" ng-click="toggleTab('favorites')" >FAVORITES</a>
+          </li>
+          <!-- <li><a class='tab-btn' ng-click="showMore()">{{aboutTabText}}</a></li> -->
+        </ul>
+        <div class = 'clearfix visible-phone hidden-tablet hidden-desktop clearfix'></div>
+        <div class = 'phone-filters visible-phone hidden-tablet hidden-desktop clearfix'>
+          <div class = 'filter-wrapper'>
+            <span class = 'title'>Filters & Search </span>
+            <button class = 'btn btn-filter' video-toggle-filter>=</button>
+          </div>
+        </div>
+        <div class = 'select-boxes hidden-phone'>
+          <div class = 'search-icon' ng-controller="ChannelAutoCompleteControllerVideos">
+            <div class = 'iconoverlay' ng-click="clickSearch($event)"></div>
+         	  <input type="text" channel-autocomplete placeholder="Channel Name..."/>
+          </div>
+    	    <div class="select-operator clearfix" ng-controller = "VideosGenreController">
+        		<a class="btn" dropdown-popover-genre>
+          			<span id="selectedGenre" class="operator-name">Genre</span><span class="arrow"></span>
+        		</a>
+        	</div>
+          <button class = 'btn back-btn-filter visible-phone hidden-desktop hidden-tablet' video-toggle-filter> Back </button>
+      	</div>
+    </div>
+
+<div class='outer-wrapper' ng-controller="VideosListController">
+  
+  <div class ='inner-wrapper' ng-hide="finishedLoading == true && paginateVideos.length == 0 && phoneSidebar == 'off'">
+    
+    <div class = 'select-boxes hidden-desktop hidden-tablet'>
+      <div class = 'search-icon' ng-controller="ChannelAutoCompleteControllerVideos">
+        <div class = 'iconoverlay' ng-click="clickSearch($event)"></div>
+        <input type="text" channel-autocomplete placeholder="Channel Name..."/>
+      </div>
+      <div class="select-operator clearfix" ng-controller = "VideosGenreController">
+        <a class="btn" dropdown-popover-genre>
+            <span id="selectedGenrePhone" class="operator-name">Genre</span><span class="arrow"></span>
+        </a>
+      </div>
+      <button class = 'btn back-btn-filter visible-phone hidden-desktop hidden-tablet' video-toggle-filter> Back </button>
+    </div>
+
+    <div class = 'videosWrapper clearfix' >
+    	<!-- <div class="spin" ng-show = "paginateVideos.length == 0"/> -->
+      <div class="spin" style="bottom:0; left:50%; top:100%;" ng-show = "allowRequests == false || paginateVideos.length==0 && finishedLoading == false"/>
+      <script type="text/ng-template" id="video-item.html">
+          <div class = 'thumb' style='background-image: url("{{p.videothumbnail}}")'>
+            <div class='player'></div>
+            <div class ='major-details'>
+              <!-- add ng-show = "p.isrecommended='1'" -->
+              <div class="favorite-ribbon" style=""></div>
+              <div class="featured-text">FEATURED by <a href="">{{p.channelname}}</a></div>
+              <span class='play'  ng-click="playVideo()"><img src="assets/img/icon-play-big.png" alt=""></span>
+              <div class = 'video-details'>
+                <div class = 'info'>
+                   <h2 live-tooltip-single-line="{{p.programmename}}">
+                      <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)">{{p.programmename}}
+                      </a>
+                    </h2>
+                    <p>
+                      {{p.starttime | featuredVideoTime}}, 
+                      <a ng-href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'channel',p.channelid,p.programmeid)"> {{p.channelname}}</a>
+                    </p>
+                </div>
+        
+                  <div class="actions">
+          
+                    <a live-tooltip='Add to Favorite'  ng-click='toggleFavoriteVideo(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isfavorite == '1'}">
+                      <i class="icon-favorite"></i>
+                    </a>
+                    
+                    <a ng-controller="UserController" live-tooltip="Reminder Alerts"        ng-click='toggleReminder(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isreminder == '1'}"  >
+                      <i class="icon-reminder"></i>
+                    </a>
+
+                    <a ng-controller="UserController" live-tooltip='Add to Watchlist' ng-click='addToWatchlist(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.iswatchlist == '1'}">
+                      <i class="icon-watchlist"></i>
+                    </a>
+                  </div>
+              </div>
+            </div>
+            
+            <div class ='minor-details'>
+              <a class='play' ng-click="playVideo()"></a>
+              <a class='noPlay'></a>
+                
+        
+              <div class="user-actions hidden-phone hidden-tablet visible-desktop" ng-controller="UserController">
+              
+                <a live-tooltip='Add to Favorite'  ng-click='toggleFavoriteVideo(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isfavorite == '1'}">
+                  <i class="icon-favorite"></i>
+                </a>
+                
+                <a ng-controller="UserController" live-tooltip="Reminder Alerts"        ng-click='toggleReminder(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isreminder == '1'}"  >
+                  <i class="icon-reminder"></i>
+                </a>
+
+                <a ng-controller="UserController" live-tooltip='Add to Watchlist' ng-click='addToWatchlist(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.iswatchlist == '1'}">
+                  <i class="icon-watchlist"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class = 'text-wrapper minor-details'>
+            <div class = 'row-one clearfix'> 
+              <div class = 'name' live-tooltip-single-line ="{{p.programmename}}">
+                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)">{{p.programmename}}</a>
+              </div>
+              <div class = 'channel' live-tooltip-single-line="{{p.channelname}}"> 
+                <a ng-href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'channel',p.channelid,p.programmeid)">{{p.channelname}}</a>
+              </div>
+            </div>
+            <div class = 'time'> {{p.starttime | featuredVideoTime}} </div>
+          </div>
+      </script> 
+
+    	<ul class = 'video-pics clearfix'>
+    		<li class = 'video-item' video-item save-start-time="p" scroll-callback ng-repeat="p in paginateVideos" watchable="p">          
+    		</li>	
+      </ul>
+    </div>
+  </div>
+  <div ng-show="finishedLoading == true && paginateVideos.length == 0 && phoneSidebar == 'off'" class="noResultsBlock">No matches found for your selection</div>
+</div>
+</section>

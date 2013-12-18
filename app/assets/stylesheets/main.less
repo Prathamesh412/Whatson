@@ -1,0 +1,152 @@
+// ------------------------------------
+// IMPORTING STYLSHEETS
+// ------------------------------------
+
+@import 'reset.less';
+@import 'grid.less';
+@import 'elements.less';
+@import 'fonts.less';
+
+@import 'buttons.less';
+@import 'icons.less';
+
+@import 'sidebar.less';
+
+
+@total-width: 100%;
+
+
+// ------------------------------------
+// RESPONSIVE STYLES INCLUDE
+// ------------------------------------
+
+/* default desktop version */
+@import 'main-desktop.less';
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-width: 640px){
+  @import 'main-phone.less';
+}
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-width: 480px){
+  footer{
+    .newsletter{
+      text-align: left;
+      width:100%;
+      input{
+        float: left;
+        width:100%;
+      }
+    }
+  }
+}
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-width: 640px) and (orientation: landscape){
+  @import 'main-phone-landscape.less';
+}
+/* #### iPhone 4+ Portrait or Landscape #### */
+@media screen and (max-width: 480px) and (-webkit-min-pixel-ratio: 2){
+  @import 'main-phone.less';
+}
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  /*@import 'main-tablet.less';*/
+    @import 'main-tablet-portrait.less';
+}
+/* #### Tablets Portrait #### */
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation:portrait) {
+  @import 'main-tablet-portrait.less';
+}
+/* #### Tablets Landscape #### */
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation:landscape) {
+  @import 'main-tablet-landscape.less';
+}
+
+.iphone-media-ctrl{
+      display: none;
+}
+
+html.iphone{
+    .iphone-media-ctrl{
+      display:block;
+      background: none;
+      width:60px;
+      z-index:99999999999999;
+    }
+
+    .iphone-media-ctrl-next{
+      right:-20px !important;
+    }
+
+    .iphone-media-ctrl-prev{
+      left:-20px !important;
+    }
+}
+
+// ------------------------------------
+// BOOTSTRAP OVERWRITE
+// ------------------------------------
+
+// tooltip ----------------------------
+.tooltip{
+  
+  margin-top:5px; 
+
+  &.in{opacity:.9;}
+
+  .tooltip-inner{
+    color:#000; 
+    text-shadow:0px 1px  #fff; 
+    font-size: 16px; 
+    .rounded(2);
+    padding: 12px 15px 8px 15px;
+    text-align:center; 
+    box-shadow: 0 0 8px rgba(0,0,0,.7); 
+    white-space:nowrap
+  }
+
+  &.top .tooltip-inner{  
+    border-top:1px solid #e2dee3;
+    background-color: #b4adc3; background-repeat: repeat-x;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b4adc3), to(#fff));
+    background: -webkit-linear-gradient(top, #b4adc3, #fff);
+    background: -moz-linear-gradient(top, #b4adc3, #fff);
+    background: -ms-linear-gradient(top, #b4adc3, #fff);
+    background: -o-linear-gradient(top, #b4adc3, #fff);
+  }
+  
+  &.bottom .tooltip-inner{  
+    border-top:1px solid #e2dee3;
+    background-color: #b4adc3; background-repeat: repeat-x;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b4adc3), to(#fff));
+    background: -webkit-linear-gradient(top, #b4adc3, #fff);
+    background: -moz-linear-gradient(top, #b4adc3, #fff);
+    background: -ms-linear-gradient(top, #b4adc3, #fff);
+    background: -o-linear-gradient(top, #b4adc3, #fff);
+  }
+  
+  &.left .tooltip-inner{  
+    border-top:1px solid #e2dee3;
+    background-color: #b4adc3; background-repeat: repeat-x;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b4adc3), to(#fff));
+    background: -webkit-linear-gradient(left, #b4adc3, #fff);
+    background: -moz-linear-gradient(left, #b4adc3, #fff);
+    background: -ms-linear-gradient(left, #b4adc3, #fff);
+    background: -o-linear-gradient(left, #b4adc3, #fff);
+  }
+  
+  &.right .tooltip-inner{  
+    border-top:1px solid #e2dee3;
+    background-color: #b4adc3; background-repeat: repeat-x;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b4adc3), to(#fff));
+    background: -webkit-linear-gradient(right, #b4adc3, #fff);
+    background: -moz-linear-gradient(right, #b4adc3, #fff);
+    background: -ms-linear-gradient(right, #b4adc3, #fff);
+    background: -o-linear-gradient(right, #b4adc3, #fff);
+  }
+  
+  &.top .tooltip-arrow{border-top-color:#fff;          border-width:8px 8px 0 8px; margin-left: -8px; bottom:-3px;}
+  &.bottom .tooltip-arrow{border-bottom-color:#b4adc3; border-width:0 8px 8px 8px; margin-left: -8px; top:-2px;}
+  &.left .tooltip-arrow{border-left-color:#fff;        border-width:8px 0 8px 8px; margin-top: -8px;  right:-3px;}   
+  &.right .tooltip-arrow{border-right-color:#fff;      border-width:8px 8px 8px 0; margin-top: -8px;  left:-3px;}
+}

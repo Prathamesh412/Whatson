@@ -1,0 +1,9 @@
+<div class="calendar-popover">
+  <div class="title">Change date</div>
+    <ul class="days">
+      <li ng-click="selectDate(c, $event)" ng-repeat="c in calendar" ng-class="{active : isDateSelected(c)}">
+      <span class="day-name">{{c.day_name}}</span>
+      <span class="day-value">{{c.day_value}}</span>
+      </li>
+    </ul>
+</div>

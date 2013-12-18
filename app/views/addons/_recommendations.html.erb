@@ -1,0 +1,41 @@
+
+  <div class="yourrecs" ng-controller=<%= controller %> ng-hide="paginate.length==0">              <!--changesin id Prathamesh-->
+    <h6 class="subtitle"><%= header %></h6>
+    <ul class="recommended">
+      <li class="item animate bounceInDown" save-start-time="r" ng-repeat="r in paginate" watchable="r">
+      <div class="thumb">
+        <div ng-show="r.isrecommended=='1'" class="favorite-ribbon"></div>
+        <div class="wrapper">
+          <a href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid)"><img ng-src="{{r.imagefilepath}}" alt="{{r.programmename}}" /></a>
+        </div>
+        <span class="duration" ng-show="r.duration">{{r.duration | videoLength}}</span>
+      
+        <div class="user-actions" ng-controller="UserController">
+          
+          <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(r, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:r.isfavorite == '1'}">
+            <i class="icon-favorite"></i>
+          </a>
+          
+          <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(r, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:r.isreminder == '1'}"  >
+            <i class="icon-reminder"></i>
+          </a>
+
+          <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(r, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:r.iswatchlist == '1'}">
+            <i class="icon-watchlist"></i>
+          </a>
+        </div>
+      </div>
+      <div class="thumbDetails">
+	      <h2>
+	       <a href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid)">{{r.programmename}}</a>
+	      </h2>
+	      <p class="info">
+	      {{r.starttime | featuredVideoTime}}
+	      <br />
+	      <a href="#!/channel/{{r.channelname}}" ng-click="EncodeUrlWithDash(r.channelname,$event,'channel',r.channelid,r.programmeid)">{{r.channelname}}</a>
+	      </p>
+      </div>
+      </li>
+      <li class="loadmore" ng-show="showMore==true"><a href="javascript:void(0);" title="Load more Recommended" ng-click="loadMore()">More..</a></li>
+    </ul>
+  </div>

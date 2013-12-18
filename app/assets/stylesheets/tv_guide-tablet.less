@@ -1,0 +1,84 @@
+
+
+.tv_guide.tv .shows .container .time-elapsed{display:block;}
+.sidebar.expand .tv_guide .container .time-elapsed{display:block;}
+
+.tv_guide.tv{
+    width:100% !important;
+    margin:0;
+  .top-nav{
+    width:100% !important;
+    margin:0;
+      .location{
+        width:100% !important;
+        clear:both; 
+        overflow:hidden; 
+        margin-top:20px; 
+      }
+    .filters{
+      .main-nav{
+        ul{
+          width:70% !important;
+          li{
+            padding: 0 5px !important;
+            border: none;
+
+            &:first-child {
+              padding-left: 0 !important;
+            }
+          }
+          a{
+            font-size: 15px; 
+          }
+        }
+      }
+    }
+  }
+
+  .channelProgrammeRow {
+    .item {
+      &:active {
+        border: none;
+        border-top: 1px solid #241832;
+        background-color: none;
+        box-shadow: none;
+        color: #FFF;
+        z-index: auto;
+
+        & > h3 {
+          color: #BEB0BF;
+          text-shadow: none;
+        }
+
+        & > h4 {
+          color: #AF5AA1;
+          text-shadow: none;
+        }
+
+        &.odd {
+          background-color: #231630;
+        }
+      }
+    }
+  }
+}
+
+.tv_guide {
+  .channels{
+    .favorite {
+      display: none;
+    }
+  }
+}
+
+.tvoperator-popover .qtip-tip{
+  left:113px !important;
+}
+html.android{
+  .tv_guide .shows .channelProgrammeRow .item h3{
+    line-height: 22px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,47 @@
+<div class="questionnaireContainer {{displayedQuestion.displayClass}}" ng-controller="QuestionnaireController">
+	<div class="promptText">Tell us about yourself to better your TV Recommendations! <span class="showTip" questionnaire-tip></span></div>
+	<div class="closeQuestion" ng-click="nextQuestion()">&times;</div>
+	<div class="text">{{displayedQuestion.questiontext}}</div>
+
+	<div class="customSelect showFor2 showFor4">
+		<a class='btn' custom-dropdown content-src="{{displayedQuestion.getapiurl}}" ng-click="toggleDropdown($event)">{{displayedQuestion.placeholder[0]}}<span class='arrow' ng-hide="dd_loading"></span></a>
+		<ul class="customAutocomplete" ng-show="dd_open" ng-class="{multiSelect: displayedQuestion.multipleselection == 'true'}" ng-click="stopProp($event)">
+			<li ng-repeat="thisEntry in displayedQuestion.dropdownValues" ng-class="{selected: thisEntry.selected, active: thisEntry.active}" ng-click="dd_selectValue(thisEntry)">{{thisEntry.displayvalue}}</li>
+		</ul>
+		<div ng-show="dd_loading" class="loadingIndicator"></div>
+	</div>
+	
+	<div class="customTextbox showFor4" ng-class="{spacedTop: displayedQuestion.questiontype == 4}">
+		<input type="text" placeholder="{{displayedQuestion.placeholder[1]}}" custom-autocomplete auto-src="{{displayedQuestion.autocompleteurl}}" />
+		<ul class="customAutocomplete" ng-show="ac_open" ng-class="{multiSelect: displayedQuestion.multipleselection == 'true'}">
+			<li ng-repeat="thisEntry in autocompleteText" ng-class="{selected: thisEntry.selected, active: thisEntry.active}" ng-click="selectValue(thisEntry)">{{thisEntry.displayvalue}}</li>
+		</ul>
+		<div ng-show="ac_loading" class="loadingIndicator"></div>
+	</div>
+
+	<div class="customTextbox showFor3 showFor5">
+		<input type="text" placeholder="{{displayedQuestion.placeholder[0]}}" custom-autocomplete auto-src="{{displayedQuestion.autocompleteurl}}" />
+		<ul class="customAutocomplete" ng-show="ac_open" ng-class="{multiSelect: displayedQuestion.multipleselection == 'true'}">
+			<li ng-repeat="thisEntry in autocompleteText" ng-class="{selected: thisEntry.selected, active: thisEntry.active}" ng-click="selectValue(thisEntry)">{{thisEntry.displayvalue}}</li>
+		</ul>
+		<div ng-show="ac_loading" class="loadingIndicator"></div>
+	</div>
+
+	<div class="customSelect showFor5" ng-class="{spacedTop: displayedQuestion.questiontype == 5}">
+		<a class='btn' custom-dropdown content-src="{{displayedQuestion.getapiurl}}" ng-click="toggleDropdown($event)">{{displayedQuestion.placeholder[1]}}<span class='arrow' ng-hide="dd_loading"></span></a>
+		<ul class="customAutocomplete" ng-show="dd_open" ng-class="{multiSelect: displayedQuestion.multipleselection == 'true'}">
+			<li ng-repeat="thisEntry in dropdownValues" ng-class="{selected: thisEntry.selected, active: thisEntry.active}" ng-click="dd_selectValue(thisEntry)">{{thisEntry.displayvalue}}</li>
+		</ul>
+		<div ng-show="dd_loading" class="loadingIndicator"></div>
+	</div>
+
+	<div class="yes_no_container clearfix showFor2 showFor3 showFor4 showFor5">
+		<span ng-click="submitAns()" class="yes_button yn_button">Submit</span>
+		<span ng-click="clearForm()" class="no_button yn_button">Cancel</span>
+	</div>
+
+	<div class="yes_no_container clearfix showFor1">
+		<span ng-click="submitYes()" class="yes_button yn_button">Yes</span>
+		<span ng-click="submitNo()" class="no_button yn_button">No</span>
+	</div>
+</div>
