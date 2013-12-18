@@ -1,3 +1,6 @@
 .idea/*
 log/*
 tmp/*
+vendor/bundle/*
+vendor/cache/*
+vendor/plugins/*
