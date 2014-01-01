@@ -2,21 +2,21 @@
     <div class='fb-activity' ng-controller='Home_FBActivityController'>
       <h6 class='subtitle'>FACEBOOK ACTIVITY</h6>
 
-      <a class='more' ng-click="toggleSlider()" ng-show="activities.length > 2">{{viewStatus}}</a>
+      <a class='more' ng-click="toggleSlider()" ng-show="activities.length > 2" style="cursor: pointer">{{viewStatus}}</a>
       <div class='FBwrapper' id='FBwrapperLinkWidth'>
-        <a class='arrows prev' ng-click='slide(false)' ng-class="{disabled:currentSlide == 0}">&lt;</a>
-        <a class='arrows next' ng-click='slide(true)' ng-class="{disabled:currentSlide == (activities.length-1)}">&gt;</a>
+        <a class='arrows prev' ng-click='slide(false)' ng-class="{disabled:currentSlide == 0}" style="cursor: pointer">&lt;</a>
+        <a class='arrows next' ng-click='slide(true)' ng-class="{disabled:currentSlide == (activities.length-1)}" style="cursor: pointer">&gt;</a>
 
         <div class='container FBcontainerWrapper'>
           <div class='slider'>
             <div class='item' save-start-time="a" ng-repeat='a in activities' fb-activity-width-setter>
-              <a ng-href="#!/program/{{a.contentname}}" ng-click="EncodeUrlWithDash(a.contentname,$event,'programme',a.channelid,a.contentid)">
+              <a ng-href="#!/program/{{a.contentname}}" ng-click="EncodeUrlWithDash(a.contentname,$event,'programme',a.channelid,a.contentid,a.starttime)">
 
 
                 <div class='thumb' css-bg-image='{{a.imageurl}}'></div>
               </a>
               <h2 live-tooltip-single-line = "{{a.contentname}}">
-                <a ng-href="#!/program/{{a.contentname}}" ng-click="EncodeUrlWithDash(a.contentname,$event,'programme',a.channelid,a.contentid)">                       <!-- changes made for facebook..a.contentname | makeURL:a.contentname-->
+                <a ng-href="#!/program/{{a.contentname}}" ng-click="EncodeUrlWithDash(a.contentname,$event,'programme',a.channelid,a.contentid,a.starttime)">                       <!-- changes made for facebook..a.contentname | makeURL:a.contentname-->
                   {{a.contentname}}
                 </a>
               </h2>

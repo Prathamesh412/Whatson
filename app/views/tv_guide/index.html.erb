@@ -22,24 +22,24 @@
         <%#</div>%>
       <span class="location-label">
         <input type="text" class="location-input" value="{{locationString}}"/>
-        <span class="location-string">{{locationString}}</span>
+        <span class="location-string" style="cursor: pointer">{{locationString}}</span>
       </span>
       
-      <a class="location-change">Change</a>
+      <a class="location-change" style="cursor: pointer">Change</a>
     </div>
 
     <div class="filters" ng-controller="GenreController">
       <div class="main-nav">
         <ul>
-          <li><a ng-class="{active:_currentGenre == 'all'}"  ng-click="setGenre('all')">All</a></li>
-          <li ng-show="userLogged == 'on'"><a ng-class="{active:_currentGenre == 'favorite'}" class="btn-purple-blue" ng-click="setGenre('favorite')"><i class="icon-favorite"></i></a></li>
-          <li><a ng-class="{active:_currentGenre == 'entertainment'}" ng-click="setGenre('entertainment')">Entertainment</a></li>
-          <li><a ng-class="{active:_currentGenre == 'sports'}" ng-click="setGenre('sports')">Sports</a></li>
-          <li><a ng-class="{active:_currentGenre == 'kids'}" ng-click="setGenre('kids')">Kids</a></li>
-          <li><a ng-class="{active:_currentGenre == 'lifestyle'}" ng-click="setGenre('lifestyle')">Lifestyle</a></li>
-          <li><a ng-class="{active:_currentGenre == 'news'}" ng-click="setGenre('news')">News</a></li>
-          <li><a ng-class="{active:_currentGenre == 'movies'}" ng-click="setGenre('movies')">Movies</a></li>
-          <li><a ng-class="{active:_currentGenre == 'religious'}" ng-click="setGenre('religious')">Religious</a></li>
+          <li><a ng-class="{active:_currentGenre == 'all'}"  ng-click="setGenre('all')" style="cursor: pointer">All</a></li>
+          <li ng-show="userLogged == 'on'"><a ng-class="{active:_currentGenre == 'favorite'}" class="btn-purple-blue" ng-click="setGenre('favorite')" style="cursor: pointer"><i class="icon-favorite"></i></a></li>
+          <li><a ng-class="{active:_currentGenre == 'entertainment'}" ng-click="setGenre('entertainment')" style="cursor: pointer">Entertainment</a></li>
+          <li><a ng-class="{active:_currentGenre == 'sports'}" ng-click="setGenre('sports')" style="cursor: pointer">Sports</a></li>
+          <li><a ng-class="{active:_currentGenre == 'kids'}" ng-click="setGenre('kids')" style="cursor: pointer">Kids</a></li>
+          <li><a ng-class="{active:_currentGenre == 'lifestyle'}" ng-click="setGenre('lifestyle')" style="cursor: pointer">Lifestyle</a></li>
+          <li><a ng-class="{active:_currentGenre == 'news'}" ng-click="setGenre('news')" style="cursor: pointer">News</a></li>
+          <li><a ng-class="{active:_currentGenre == 'movies'}" ng-click="setGenre('movies')" style="cursor: pointer">Movies</a></li>
+          <li><a ng-class="{active:_currentGenre == 'religious'}" ng-click="setGenre('religious')" style="cursor: pointer">Religious</a></li>
         </ul>
       </div>
 
@@ -47,7 +47,7 @@
         <a  ng-click="setCalendar()" tv-guide-calendar-popover>
           <span>{{selected_date.date_string}}</span> 
           <span class="day-label">{{selected_date.day_name}}</span> 
-          <i class="calendar-icon" >{{selected_date.day_value}}</i>
+          <i class="calendar-icon" style="cursor: pointer" >{{selected_date.day_value}}</i>
         </a>
       </div>
       <div class = 'clearfix visible-phone hidden-tablet hidden-desktop'></div>

@@ -1,7 +1,8 @@
 <div class="bg" id="popup_login_form" name='signInForm' style="display: none" ng-controller="App_UserActionController">
-  <div class="admin_panel_forgot signin-container">
-    <input  type="button" class="close" ng-click="redirctToHomePage()"/>
 
+  <div class="admin_panel_forgot signin-container">
+    <!--<input  type="button" class="close" ng-click="redirctToHomePage()"/>-->
+    <img class="auth-close-button" src="/assets/img/close.png"  ng-click="redirctToHomePage()" />
     <img class="key" src="/assets/img/overlay_key.png" />
     <div class="admin_text">Login to your TV Guide</div>
     <div class="login_bg">
@@ -31,8 +32,8 @@
 
 <div class="bg" id="forgot_form" style="display: none" ng-controller="App_UserActionController">
   <div class="admin_panel_forgot_inside signin-container">
-    <input  type="button" class="close" ng-click="redirctToHomePage()"/>
-
+    <!--<input  type="button" class="close" ng-click="redirctToHomePage()"/>-->
+    <img class="auth-close-button" src="/assets/img/close.png" ng-click="redirctToHomePage()" />
     <div class="forgot_tital">Forgot Password</div>
     <div class="sub_text">Submit your email id to recover your password.</div>
 
@@ -56,9 +57,10 @@
 
 <div class="bg" id="submit_form" style="display: none" ng-controller="App_UserActionController">
   <div class="admin_panel signin-container">
-    <input type="button" class="close" ng-click="redirctToHomePage()"/>
+    <!--<input type="button" class="close" ng-click="redirctToHomePage()"/>-->
 
     <img class="key" src="/assets/img/overlay_key.png" />
+    <img class="auth-close-button" src="/assets/img/close.png" ng-click="redirctToHomePage()" />
     <div class="admin_text">Sign up. It's quick and easy.</div>
     <div class="login_bg">
       <input  type="button" class="facebook" ng-click="submitFacebookLogin()"/>

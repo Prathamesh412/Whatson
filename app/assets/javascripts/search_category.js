@@ -1,4 +1,4 @@
-woi.controller('SearchCategoryController', ['$scope', '$rootScope', 'recoAPI', 'userAPI','$routeParams', '$compile', '$timeout' , function($scope, $rootScope, recoAPI, userAPI, $routeParams, $compile, $timeout){
+woi.controller('SearchCategoryController', ['$scope', '$rootScope', 'userAPI','$routeParams', '$compile', '$timeout' , function($scope, $rootScope, userAPI, $routeParams, $compile, $timeout){
 
   $rootScope.searchCategories = [
     {label:'All Categories' , param: 'allcategories' , value: 0}  ,

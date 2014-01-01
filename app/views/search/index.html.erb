@@ -51,7 +51,7 @@
         <div class="wrapper">
           <a ng-click='playVideo(s.videourls.videourl[0],s)' id="trigger-{{s.videourls.videourl[0].videoid}}" ng-show='s.videourls.videourl[0]' class='play'></a>
           <img ng-show="s.videourls.videourl[0]" ng-src="{{s.imagefilepath}}" alt="" />
-          <a ng-hide="s.videourls.videourl[0]" href="#!/program/{{s.ProgrammeName}}"ng-click="EncodeUrlWithDash(s.programmename,$event,'programme',s.ChannelID,s.ProgrammeID)"><img ng-src="{{s.imagefilepath}}" alt="" /></a>
+          <a ng-hide="s.videourls.videourl[0]" href="#!/program/{{s.ProgrammeName}}"ng-click="EncodeUrlWithDash(s.programmename,$event,'programme',s.ChannelID,s.ProgrammeID,s.StartTime)"><img ng-src="{{s.imagefilepath}}" alt="" /></a>
       </div>
         <span class="duration" ng-show="s.videourls.videourl[0]">{{s.duration}}</span>
        
@@ -72,7 +72,7 @@
 
       </div>
       <div class="info">
-        <h2><a href="#!/program/{{s.ProgrammeName}}" ng-click="EncodeUrlWithDash(s.ProgrammeName,$event,'programme',s.ChannelID,s.ProgrammeID)" >{{s.ProgrammeName}}</a></h2>
+        <h2><a href="#!/program/{{s.ProgrammeName}}" ng-click="EncodeUrlWithDash(s.ProgrammeName,$event,'programme',s.ChannelID,s.ProgrammeID,s.StartTime)" >{{s.ProgrammeName}}</a></h2>
         <span class="details">
           <span class="time">{{s.StartTime|featuredVideoTime}}</span>
           <span class="channel-name"><a href="#!/channel/{{s.ChannelName}}" ng-click="EncodeUrlWithDash(s.ChannelName,$event,'channel',s.ChannelID,s.ProgrammeID)">{{s.ChannelName}}</a></span>
@@ -109,7 +109,7 @@
         <img ng-src="{{s.castimage | filterDefaultImage}}" alt="{{s.castname}}" /> 
       </div>
       <div class="info">
-        <h2><a ng-href="#!/search/{{s.castname}}">{{s.castname}}</a></h2>
+        <h2><a ng-href="#!/actor/{{s|encodeActorNameWIthDash}}">{{s.castname}}</a></h2>
         <p class="description">{{s.castdescription}}</p>
         <ul class="tags">
           <li><a ng-href="#!/search/{{s.rolenames}}">{{s.rolenames}}</a></li>

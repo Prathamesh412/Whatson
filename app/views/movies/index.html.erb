@@ -4,15 +4,15 @@
     <!-- The main nav bar This Week / Today / Tomorrow -->
     <ul >
       <li>
-      	<a  ng-click="toggleTab('this_week')" ng-class="{active: currentTab == 'this_week'}" class='tab-btn' >THIS WEEK
+      	<a  ng-click="toggleTab('this_week')" ng-class="{active: currentTab == 'this_week'}" class='tab-btn' style="cursor: pointer">THIS WEEK
   		</a>
       </li>
       <li>
-      	<a  ng-click="toggleTab('today')"     ng-class="{active: currentTab == 'today'}"     class='tab-btn'>TODAY
+      	<a  ng-click="toggleTab('today')"     ng-class="{active: currentTab == 'today'}" style="cursor: pointer" class='tab-btn'>TODAY
       	</a>
       </li>
       <li>
-      	<a  ng-click="toggleTab('tomorrow')"  ng-class="{active: currentTab == 'tomorrow'}"  class='tab-btn'>TOMORROW
+      	<a  ng-click="toggleTab('tomorrow')"  ng-class="{active: currentTab == 'tomorrow'}" style="cursor: pointer" class='tab-btn'>TOMORROW
       	</a>
       </li>
       <!-- <li><a class='tab-btn' ng-click="showMore()">{{aboutTabText}}</a></li> -->
@@ -107,7 +107,7 @@
 
           <!-- Add background image -->
     			<div class = 'thumb' style='background-image: url("{{item.imagefilepath}}")'>
-              <a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)" style="display:block; width:100%; height:100%; "></a>
+              <a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)" style="display:block; width:100%; height:100%; "></a>
     				  <div class="favorite-ribbon" ng-show="item.isrecommended == '1'"></div>
     			    
              <div class="user-actions hidden-phone hidden-tablet visible-desktop" >
@@ -128,7 +128,7 @@
           </div>
     			<div class = 'text-wrapper'>
     				<div class = 'row-one clearfix'> 
-    					<a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)"><div class = 'name'  live-tooltip-single-line="{{item.programmename}}">{{item.programmename}}</div></a>
+    					<a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)"><div class = 'name'  live-tooltip-single-line="{{item.programmename}}">{{item.programmename}}</div></a>
     					<a href="#!/channel/{{item.channelname}}" ng-click="EncodeUrlWithDash(item.channelname,$event,'channel',item.channelid,item.programmeid)"><div class = 'channel' live-tooltip-single-line="{{item.channelname}}"> {{item.channelname}} </div></a>
     				</div>
     				<div class = 'time'> {{item.starttime | featuredVideoTime}} </div>

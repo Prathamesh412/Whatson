@@ -191,9 +191,10 @@
             <span class='text-info'>{{watchlistCount}} Movies, videos and more</span>
             <span class='dropstatus-msg'>Item saved in your watchlist.</span>
             <ul class='ctrl-list'>
-              <li class='edit-watchlist-slider' ng-click="openEditMode()" ng-class="{active:editMode}" ng-hide="hideEditButton()"></li>
-              <li class='share-watchlist-slider' ng-click="shareWatchlist()" ng-hide="watchlistCount == 0"></li>
-              <li class='close-watchlist-slider' ng-show="showHideButton"></li>
+
+              <li class='edit-watchlist-slider' ng-click="openEditMode()" ng-class="{active:editMode}" ng-hide="hideEditButton()" title="Edit"></li>
+              <li class='share-watchlist-slider' ng-click="shareWatchlist()" ng-hide="watchlistCount == 0" title="Share"></li>
+              <li class='close-watchlist-slider' ng-show="showHideButton" title="Close"></li>
             </ul>
         </div>
 
@@ -214,7 +215,7 @@
 
                 <div class="text-wrapper clearfix">
                   <div class="row-one">
-                    <a class="name" href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)" watchlist-tooltip="{{item.programmename}}"> {{item.programmename}} </a>
+                    <a class="name" href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)" watchlist-tooltip="{{item.programmename}}"> {{item.programmename}} </a>
                   </div>
                   <div class="time"> {{item.starttime | watchlisttimeformat}}</div>
                 </div>
@@ -306,7 +307,7 @@
       window.fbAsyncInit = function() {
         // init the FB JS SDK
         FB.init({
-          appId      : '286624648037398',
+          appId      : '331810416962723',
           channelUrl : '//WhatsOnIndia.com/channel.html', // Channel File for x-domain communication
           status     : true, // check the login status upon init?
           cookie     : true, // set sessions cookies to allow your server to access the session?
@@ -334,7 +335,7 @@
           appId      : '536822596369929', //QA
           appId      : '352501411518498', //Dev
           appId      : '121998297991674', // localhost:8080
-	  appId      : '331810416962723', //192.168.1.238:8080 - woitest
+	      appId      : '331810416962723', //192.168.1.238:8080 - woitest
       */
       var pki = "<%= @pki %>";
     </script>

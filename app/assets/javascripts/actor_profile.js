@@ -57,6 +57,7 @@ woi.controller("ActorController", ['$scope', '$rootScope', '$routeParams', '$tim
             castid : $rootScope.actorid
         };
         $scope.fullActorDetail = [];
+
         userAPI.actor_profile(params, function(rs) {
 
             // console.log('------->>>>>> fullProgrammeDetail = ', rs);
@@ -1189,15 +1190,15 @@ woi.controller('ActorGallary', ['$scope', '$rootScope', '$routeParams', '$timeou
 
     $scope.addToFavorite = function(p){
 
-        userAPI.toggleFavoriteProgramme({like:(p.isfavorite == "0"), programmeid:p.programmeid}, function(rs){
-            // if it fails, display error message
-            if(!rs.response.responsestatus){
-                alert(rs.response.message);
-            } else {
-                // change the flag
-                p.isfavorite = (p.isfavorite == "0") ? "1" : "0";
-            }
-        });
+//        userAPI.toggleFavoriteProgramme({like:(p.isfavorite == "0"), programmeid:p.programmeid}, function(rs){
+//            // if it fails, display error message
+//            if(!rs.response.responsestatus){
+//                alert(rs.response.message);
+//            } else {
+//                // change the flag
+//                p.isfavorite = (p.isfavorite == "0") ? "1" : "0";
+//            }
+//        });
     };
 
 //    $scope.addToReminder = function(p){

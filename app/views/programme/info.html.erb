@@ -41,7 +41,7 @@
       <div class="item clearfix" data-isvideo="{{(v.videourl) && 1 || 0}}" data-youtubeurl="{{v.videoid}}" data-isyoutube="{{v.isyoutube}}" data-slideid="{{v.slideid}}" ng-repeat='v in featuredVideos' featured-video-player css-bg-image-fallback video-id="{{v.videoid}}" is-youtube="{{v.isyoutube}}" video-thumbnail="{{v.videothumbnail}}" image-filepath="{{v.imagefilepath}}">
         <div class='player' data-isyoutube="{{v.isyoutube}}" id="playerthing{{v.slideid}}"></div>
         <!-- <img class="featured-image" ng-src="{{v.videothumbnail}}" alt=""> -->
-        <div class="featured-text">FEATURED by <a href="#!/channel/{{fullProgrammeDetail.channelname}}" ng-click="EncodeUrlWithDash(fullProgrammeDetail.channelname,$event,'channel',fullProgrammeDetail.channelid,fullProgrammeDetail.programmeid)">{{fullProgrammeDetail.channelname}}</a></div>
+        <!--<div class="featured-text">FEATURED by <a href="#!/channel/{{fullProgrammeDetail.channelname}}" ng-click="EncodeUrlWithDash(fullProgrammeDetail.channelname,$event,'channel',fullProgrammeDetail.channelid,fullProgrammeDetail.programmeid)">{{fullProgrammeDetail.channelname}}</a></div>-->
         <span class='play'><img src="assets/img/icon-play-big.png" alt=""></span>
       </div>
 
@@ -56,7 +56,7 @@
     <div class="carousel-actions" style="overflow:visible; ">
       <div class="item-content" data-actionsid="{{v.slideid}}" ng-repeat='v in featuredVideos'>
         <div class='info'>
-          <h2 live-tooltip-single-line = "{{fullProgrammeDetail.programmename}}" ><a href="#!/program/ {{fullProgrammeDetail.programmename}}" ng-click="EncodeUrlWithDash(fullProgrammeDetail.programmename,$event,'programme',fullProgrammeDetail.channelid,fullProgrammeDetail.programmeid)">{{fullProgrammeDetail.programmename}}</a></h2>
+          <h2 live-tooltip-single-line = "{{fullProgrammeDetail.programmename}}" ><a href="#!/program/ {{fullProgrammeDetail.programmename}}" ng-click="EncodeUrlWithDash(fullProgrammeDetail.programmename,$event,'programme',fullProgrammeDetail.channelid,fullProgrammeDetail.programmeid,fullProgrammeDetail.starttime)">{{fullProgrammeDetail.programmename}}</a></h2>
           <p>{{fullProgrammeDetail.starttime|featuredVideoTime}}<span ng-show="fullProgrammeDetail.channelname.length">, </span><a href="#!/channel/{{fullProgrammeDetail.channelname}}" ng-click="EncodeUrlWithDash(fullProgrammeDetail.channelname,$event,'channel',fullProgrammeDetail.channelid,fullProgrammeDetail.programmeid)">{{fullProgrammeDetail.channelname}}</a></p>
         </div>
 
@@ -66,7 +66,7 @@
             <i class="icon-favorite"></i>
           </a>
 
-          <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(fullProgrammeDetail, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:fullProgrammeDetail.isreminder == '1'}"  >
+          <a live-tooltip="Reminder Alerts"   ng-click='toggleReminder(fullProgrammeDetail, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:fullProgrammeDetail.isreminder == '1'}"  >
             <i class="icon-reminder"></i>
           </a>
 
@@ -89,11 +89,11 @@
 <div class='programme-info-tabs hidden-phone'>
 
   <ul class="clearfix" >
-    <li><a class='tab-btn' ng-class="{active: infotab==0}" ng-click="infotab = 0">About</a></li>
-    <li><a class='tab-btn' ng-class="{active: infotab==1}" ng-click="infotab = 1">CAST & CREW</a></li>
+    <li><a class='tab-btn' ng-class="{active: infotab==0}" ng-click="infotab = 0" style="cursor: pointer">About</a></li>
+    <li><a class='tab-btn' ng-class="{active: infotab==1}" ng-hide="checked" ng-click="infotab = 1" style="cursor: pointer">CAST & CREW</a></li>
     <!-- <li><a class='tab-btn' ng-click="showMore()">{{aboutTabText}}</a></li> -->
   </ul>
-  <p><a class='tab-btn' ng-click="showMore()" ng-show="infotab == 0 && showMoreButton" >{{aboutTabText}}</a></p>
+  <p><a class='tab-btn' ng-click="showMore()" ng-show="infotab == 0 && showMoreButton" style="cursor: pointer">{{aboutTabText}}</a></p>
 
   <div class='tab-contents'>
     <div class='tab clearfix' ng-show="infotab == 0">
@@ -184,8 +184,8 @@
       <div ng-show="p.isrecommended=='1'" class="favorite-ribbon"></div>
       <div class='player'></div>
       <div class='image' background-image-fallback video-id="{{p.videoid}}" is-youtube="{{p.isyoutube}}" video-thumbnail="{{p.videothumbnail}}" image-filepath="{{p.imagefilepath}}">
-        <a ng-click='playVideo(p.programmename,$event)' ng-show='hasVideo()' class='play'></a>
-        <a href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)"  ng-show='!hasVideo()' class='noPlay' ></a>
+        <a ng-click='playVideo(p.programmename,$event)' ng-show='hasVideo()' class='play' style="cursor: pointer"></a>
+        <a href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)"  ng-show='!hasVideo()' class='noPlay' ></a>
       </div>
       <span class="time" ng-show="p.duration">{{p.duration | videoLength}}</span>
 
@@ -195,7 +195,7 @@
           <i class="icon-favorite"></i>
         </a>
 
-        <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isreminder == '1'}"  >
+        <a live-tooltip="Reminder Alerts"  ng-click='toggleReminder(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isreminder == '1'}"  >
           <i class="icon-reminder"></i>
         </a>
 
@@ -205,7 +205,7 @@
       </div>
     </div>
     <div class="text-wrapper">
-      <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'Program',p.channelid,p.programmeid)">{{p.programmename}}</a></h2>
+      <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'Program',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h2>
       <p class='infoChannel' live-tooltip-single-line = "{{p.channelname}}" ><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'channel',p.channelid,p.programmeid)">{{p.channelname}}</a></p>
       <p class='info'>{{p.starttime|featuredVideoTime}}</p>
     </div>
@@ -418,7 +418,7 @@
 </div>
 <!-- / next-schedule -->
 
-<div class="quotation" ng-controller="QuotationController" ng-show="quote">
+<div class="quotation" ng-controller="QuotationController" ng-hide="quote">
   <div class="list-friends">
     <p class="text_woi"> {{quote.forumtitle}}</p>
     <div class="bottom">
@@ -469,7 +469,7 @@
         </div>
         <div class="thumb" ng-switch-default>
           <div class="wrapper">
-            <a href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid)" class= "clearfix"><img ng-src="{{r.imagefilepath}}" alt="{{r.programmename}}" /></a>
+            <a href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid,r.starttime)" class= "clearfix"><img ng-src="{{r.imagefilepath}}" alt="{{r.programmename}}" /></a>
           </div>
 
           <div class="user-actions" ng-controller="UserController">
@@ -488,7 +488,7 @@
           </div>
         </div>
       </div>
-      <h2><a href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid)">{{r.programmename}} </a></h2>
+      <h2><a href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid,r.starttime)">{{r.programmename}} </a></h2>
       <ul class="info">
         <li class="channel-label">{{r.starttime|featuredVideoTime}}</li>
         <li><a href="#!/channel/{{r.channelname}}" ng-click="EncodeUrlWithDash(r.channelname,$event,'channel',r.channelid,r.programmeid)">{{r.channelname}}</a></li>

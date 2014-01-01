@@ -15,7 +15,7 @@
 
             <div class='player' data-isyoutube="{{v.isyoutube}}" id="playerthing{{v.slideid}}" ></div>
 
-            <div class="featured-text">FEATURED by <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></div>
+            <!--<div class="featured-text">FEATURED by <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></div>-->
 
             <span class='play'><img src="assets/img/icon-play-big.png" alt=""></span>
 
@@ -31,7 +31,7 @@
         <div class="carousel-actions" style="overflow:visible; " id="baseFeatured">
           <div class="item-content" data-actionsid="{{v.slideid}}" ng-repeat='v in featuredVideos' >
             <div class='info'>
-              <h2><a href="#!/program/{{v.programmename}}" ng-click="EncodeUrlWithDash(v.programmename,$event,'programme',v.channelid,v.programmeid)">{{v.programmename}}</a></h2>
+              <h2><a href="#!/program/{{v.programmename}}" ng-click="EncodeUrlWithDash(v.programmename,$event,'programme',v.channelid,v.programmeid,v.starttime)">{{v.programmename}}</a></h2>
               <p>{{v.starttime|featuredVideoTime}}, {{v.timestring}} <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></p>
             </div>
 
@@ -65,9 +65,9 @@
       <div ng-show="p.isrecommended=='1'" class="favorite-ribbon"></div>
       <div class='player'></div>
       <div class='image' style="background-image:url({{p.imagefilepath}});">
-      <a ng-click='playVideo(p.programmename,$event)'  ng-show='hasVideo()' class='play'></a>
+      <a ng-click='playVideo(p.programmename,$event)'  ng-show='hasVideo()' class='play' style="cursor:pointer"></a>
 
-        <a ng-href="#!/program/{{p.programmename}}"  ng-show='!hasVideo()' class='noPlay' ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)"></a>
+        <a ng-href="#!/program/{{p.programmename}}"  ng-show='!hasVideo()' class='noPlay' ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)"></a>
       </div>
 
       <span class="time" ng-show="p.duration">{{p.duration | videoLength}}</span>
@@ -89,7 +89,7 @@
 
       </div>
       <div class="text-wrapper">
-      <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)" >{{p.programmename}}
+      <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)" >{{p.programmename}}
        </a></h2>
 
       <p class='infoChannel' live-tooltip-single-line= "{{p.channelname}}"><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'channel',p.channelid,p.programmeid)">{{p.channelname}}

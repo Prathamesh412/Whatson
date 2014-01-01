@@ -29,7 +29,9 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
                     checkActorId : ['$route','$location','$rootScope', function($route,$location,$rootScope) {
                         var url = $route.current.params.id;
                         var actorName = url.replace(/\-/g, " ").replace(/\~/g, "-").replace(/\$/g, "/");
+                        console.log(actorName);
                         var  actorList = $rootScope.storeActorNameAndId;
+                        console.log(actorList);
                         if($rootScope.storeActorNameAndId){
                             angular.forEach(actorList, function(actor, key){
                                 if(actor.name == actorName){
@@ -319,7 +321,6 @@ woi.run(['$rootScope', '$route','$location','$timeout', '$http', function($rootS
         $("#forgot_form").css('display','none');
     }
     $rootScope.$on("$routeChangeSuccess", function(event, current, previous, rejection) {
-
         $rootScope.$broadcast("watchlist::fetch",1);
 
         if ($location.path() == "/reminders")
@@ -346,7 +347,11 @@ woi.run(['$rootScope', '$route','$location','$timeout', '$http', function($rootS
         element.stopPropagation();
         element.preventDefault();
     };
-    $rootScope.EncodeUrlWithDash= function(url,element,action,channelid,programmeid){
+    $rootScope.EncodeUrlWithDash= function(url,element,action,channelid,programmeid,starttime){
+       if(starttime)
+       {
+           $rootScope.programmeStartTime = starttime.replace(/\..*/,'');
+       }
         var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
         $rootScope.Programmeid = programmeid;
         $rootScope.channelid =  channelid;
@@ -357,16 +362,15 @@ woi.run(['$rootScope', '$route','$location','$timeout', '$http', function($rootS
             action = 'program';
         }
         $location.path(action + "/" + str);
-        if(element)
-        {
-            element.stopPropagation();
-            element.preventDefault();
-        }
-        else
-        {
-            return false;
-        }
-
+            try
+            {
+                element.stopPropagation();
+                element.preventDefault();
+            }
+            catch(err)
+            {
+                //Handle errors here
+            }
     };
 
     $rootScope.storeActorid = function(name,id,element){
@@ -434,9 +438,7 @@ woi.run(['$rootScope', '$route','$location','$timeout', '$http', function($rootS
 
                             var encrypted = {};
                             encrypted.ciphertext = CryptoJS.enc.Base64.parse(data.data);
-
-                            var decrypted = CryptoJS.AES.decrypt(encrypted, CryptoJS.enc.Base64.parse(pki),
-                                { iv: CryptoJS.enc.Base64.parse(data.pki) });
+                             var decrypted = CryptoJS.AES.decrypt(encrypted, CryptoJS.enc.Base64.parse(pki),{ iv: CryptoJS.enc.Base64.parse(data.pki) });
                             var mainData = decrypted.toString(CryptoJS.enc.Utf8);
                             return angular.fromJson(mainData);
                         }].concat($http.defaults.transformResponse),
@@ -444,6 +446,8 @@ woi.run(['$rootScope', '$route','$location','$timeout', '$http', function($rootS
                         headers: headers
 
                     }).success(function (data) {
+                            var endApi = new Date();
+
                             callback(data);
                         });
                 };

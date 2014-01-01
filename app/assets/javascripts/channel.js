@@ -39,7 +39,7 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
     // console.log("Twitter Handle == "+$scope.twitterHandle);
     
 
-    if($scope.facebookHandle == null || $scope.facebookHandle == 'null'){ 
+    if($scope.facebookHandle == null || $scope.facebookHandle == 'null'){                  //changes to be made for facebook feed
       $scope.showFacebook = false; 
     }else{ 
       if($scope.facebookHandle.length>1){ 
@@ -138,7 +138,8 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
 
  var getFbFeed = function(){ 
   userAPI.getFBAccessToken({}, 
-    function(rs) {      
+    function(rs) {
+
       var access_token = 'access_token=' + rs.access_token;
 
       $http({
@@ -152,7 +153,6 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
       )
       .success(function(data, status) { 
         $scope.facebookResponse = data.data;
-
         if(!$scope.facebookResponse){
           $scope.showFacebook = false;
           $scope.minTweets    = 4;
@@ -160,9 +160,10 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
         }
 
         $scope.paginateFb = $scope.facebookResponse.slice(0, 2);
+
       })
       .error(function(data, status) {
-          //console.log("ERROR in fetching facebook feed");
+          console.log("ERROR in fetching facebook feed");
         }); 
     });
 
@@ -277,7 +278,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
 
 
   $scope.loadYourRecs = function(){
-    if($rootScope.isUserLogged())
+
       var params = {hybridgenre:$scope.currentFilter};
 
       var defaultParams = {userid:$rootScope.getUser().userid, channelid:$scope.channelid};
@@ -647,7 +648,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
 
       // $rootScope.$apply();
 //      $location.path("/programme/"+test);
-      $rootScope.EncodeUrlWithDash(p.programmename,$scope.element,'programme',p.channelid,p.programmeid);
+      $rootScope.EncodeUrlWithDash(p.programmename,$scope.element,'programme',p.channelid,p.programmeid, p.starttime);
       // return false;
   };
   $scope.hasVideo = function(item){
@@ -658,7 +659,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
 woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routeParams', '$timeout','$compile', '$filter',  'userAPI', function($scope, $rootScope, $routeParams, $timeout, $compile, $filter, userAPI){
   // get the id param specified in the route
   $scope.channelid = $rootScope.Channelid;
-  $scope.programmeid = $routeParams.programmeid;
+  $scope.programmeid = $rootScope.Programmeid;
   
   var loading = $filter('loading');
 
@@ -702,6 +703,8 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
     toggleError(emError, false);
 
     if($.trim( $scope.post.title ) == "" || $.trim( $scope.post.message ) == "") {
+        alert("true");
+
       emError.html(errorMessages.emptyFields);
       toggleError(emError, true);
       return false;
@@ -796,15 +799,18 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
     if(type =='program'){//programme case
       params = $.extend(params, {
         forumtype: 'program', 
-        forumtypeid: $scope.programmeid, 
+        forumtypeid: $scope.programmeid,
         forumimage: ( $scope.fullProgrammeDetail ? $scope.fullProgrammeDetail.imagefilepath : '' )
       });
     }
 
     userAPI.createDiscussion(params, function(rs) {
-
+      console.log("Here is the response") ;
+        console.log(rs) ;
+        console.log(params);
       if(!rs || !rs.response || rs.response.responsestatus === 'false') {
         emError.html(errorMessages.creationFailed);
+          alert("I am inside.") ;
         toggleError(emError, true);
         element.removeClass("loading");
         loading('hide', {element: element});
@@ -940,7 +946,7 @@ woi.controller("ChannelFooterVideosController", ['$scope', '$rootScope' , '$rout
     if (element.outerWidth() < 550) {
       $rootScope.playThisVideo = p.videourl;
       $rootScope.playThisVideoObj = p;
-      $rootScope.EncodeUrlWithDash(p.programmename,$scope.element,'programme',p.channelid,p.programmeid);
+      $rootScope.EncodeUrlWithDash(p.programmename,$scope.element,'programme',p.channelid,p.programmeid, p.starttime);
       return false;
     }
     if(p.isyoutube == "1"){
@@ -1154,6 +1160,7 @@ woi.controller("SimilarChannels", ['$scope', '$rootScope', '$filter', '$routePar
   };
 
   userAPI.similarChannels({channelid: $rootScope.Channelid},function(rs){
+
     if(!rs.getsimilarchannels)
       return false;
 

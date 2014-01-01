@@ -24,7 +24,7 @@ woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$
 	    $('#mainSearch').val('');
 	    $('#searchBoxBottom').val('');
 	  }
-	
+
 	/*
 	 * Controller execution begins with function loadWatchlist.
 	 *
@@ -131,7 +131,7 @@ woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$
 
 		// Hide in case it's already initialized
 		loading('hide', {element: loadingIndicator});
-		
+
 		loading('show', {element: loadingIndicator});
 	}();
 
@@ -281,14 +281,14 @@ woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$
 																})(),
 							userImages 		: 	(function() {
 																	var imagesArray = [];
-									
+
 																	for(var i = 0; i < data.length; i++) {
 																		imagesArray.push({
 																			userimage : data[i].userimage,
 																			username 	: data[i].username
 																		});
 																	}
-									
+
 																	return imagesArray;
 																})()
 						};
@@ -338,14 +338,14 @@ woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$
 																})(),
 							userImages 		: 	(function() {
 																	var imagesArray = [];
-									
+
 																	for(var i = 0; i < data.length; i++) {
 																		imagesArray.push({
 																			userimage : data[i].userimage,
 																			username 	: data[i].username
 																		});
 																	}
-									
+
 																	return imagesArray;
 																})()
 						};
@@ -487,7 +487,7 @@ woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$
         $(this).slideUp().removeClass('opened');
       }
     });
-    
+
     // Toggle the element we're focusing on. We ignored it earlier to make sure
     // it isn't toggled twice
     current_comment_Form.stop().queue('fx', []).slideToggle().toggleClass('opened');
@@ -503,7 +503,7 @@ woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$
 	 //        $(this).slideUp().removeClass('opened');
 	 //      }
 	 //    });
-	    
+
 	 //    // Toggle the element we're focusing on. We ignored it earlier to make sure
 	 //    // it isn't toggled twice
 	 //    thisReplyForm.slideToggle().toggleClass('opened');
@@ -524,7 +524,7 @@ woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$
 			default 			: break;
 		}
 	}
-	
+
 	$scope.goToFeed = function(tab){
     $rootScope.feedTab = tab;
     $location.path( "/socialfeed" );
@@ -534,13 +534,13 @@ woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$
 		var shareURL;
 
 		if(flag){
-			shareURL = item;	
+			shareURL = item;
 			// event.target.innerHTML = "Liked!";
 		}else{
 			var makeURL = $filter('makeURL');
 			var url = makeURL(item.contenttype, item.contentid);
 
-			shareURL = $location.host() +'/'+url;	
+			shareURL = $location.host() +'/'+url;
 		}
 
 		if(event.target.innerHTML=='Like'){
@@ -555,16 +555,16 @@ woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$
 	          alert("Error sending request");
 	        }
 	        else{
-	        
+
 	          event.target.innerHTML = "Liked!";
 
 	         FB.ui({
 	              method: 'stream.publish',
 	              link: shareURL,
-	              user_message_prompt: 'Post this to your wall?'            
+	              user_message_prompt: 'Post this to your wall?'
 	          });
         	}
-        
+
   		  });
     	} else {
 	        userAPI.addRemoveLike({
@@ -591,7 +591,7 @@ woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$
 	$scope.playVideo = function(p){
 	    $rootScope.playThisVideo = p.videourl;
 	    $rootScope.playThisVideoObj = p;
-	    if (_.isUndefined($rootScope.playThisVideo) && !_.isUndefined(p.videoUrl)) 
+	    if (_.isUndefined($rootScope.playThisVideo) && !_.isUndefined(p.videoUrl))
 	      $rootScope.playThisVideo = p.videoUrl;
 
 	    $rootScope.playThisVideoObj.videourl = $rootScope.playThisVideo;
@@ -668,11 +668,11 @@ woi.controller('ProfileSidebarController', ['$rootScope','$location', '$scope', 
 
     	setting.amount= setting.amount + setting.step;
 
-	    if(setting.amount >= brData.length){ 
+	    if(setting.amount >= brData.length){
 	      setting.showMore = false;
 	      setting.amount = brData.length;
 	    }
-	     
+
 	    setting.visibleData = brData.slice(0, setting.amount);
 	    // console.log(setting.visibleData.length);
 	};
@@ -684,7 +684,7 @@ woi.controller('ProfileSidebarController', ['$rootScope','$location', '$scope', 
 
     	setting.amount= setting.amount + setting.step;
 
-	    if(setting.amount >= srData.length){ 
+	    if(setting.amount >= srData.length){
 	      setting.showMore = false;
 	      setting.amount = srData.length;
 	    }

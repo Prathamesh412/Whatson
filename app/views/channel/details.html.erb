@@ -46,7 +46,7 @@
       <div ng-click="" class="item clearfix" data-isvideo="{{(v.videourl) && 1 || 0}}" data-slideid="{{v.slideid}}" ng-repeat='v in featuredVideo' featured-video-player>
         <div class='player'></div>
         <img class="featured-image" ng-src="{{v.videobigthumbnail}}" alt="">
-        <div class="featured-text">FEATURED by <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></div>
+        <!--<div class="featured-text">FEATURED by <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></div>-->
         <span class='play'><img src="assets/img/icon-play-big.png" alt=""></span>
 
       </div>
@@ -61,7 +61,8 @@
     <div class="carousel-actions" style="overflow:visible; ">
       <div class="item-content" data-actionsid="{{v.slideid}}" ng-repeat='v in featuredVideo' >
         <div class='info'>
-          <h2 live-tooltip-single-line = "{{v.videotitle}}" ><a href="#!/program/{{v.programmename}}" ng-click="EncodeUrlWithDash(v.programmename,$event,'programme',v.channelid,v.programmeid)" >{{v.videotitle}}</a></h2>
+          <h1>{{}}</h1>
+          <h2 live-tooltip-single-line = "{{v.videotitle}}" ><a href="#!/program/{{v.programmename}}" ng-click="EncodeUrlWithDash(v.programmename,$event,'programme',v.channelid,v.programmeid,v.starttime)" >{{v.videotitle}}</a></h2>
            <p>{{v.starttime|featuredVideoTime}}, {{v.timestring}} <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)" >{{v.channelname}}</a></p>
         </div>
 
@@ -109,12 +110,12 @@
       <div class='tab clearfix' ng-show="userLogged=='on' && currentActiveTab == 'recs'">
         <div ng-show="programs.yourrecs.length == 0 && !spinnerOn" class="fix">Favorite your programs &amp; channels and help us recommend!</div>
         <div class="spin_channels"/>
-      	<div class='item' ng-repeat='p in programs.yourrecs' watchable="p">
+      	<div class='item' ng-repeat='p in programs.yourrecs' watchable="p" style="cursor: pointer">
       		<div class='thumb'>
 	        	<div class='player'></div>
 	        	<div class='image' css-bg-image='{{p.imagefilepath}}'>
-		          	<a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play'></a>
-                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)" ng-show='!hasVideo(p)' class='noPlay'></a>
+		          	<a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play' style="cursor: pointer"></a>
+                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)" ng-show='!hasVideo(p)' class='noPlay'></a>
 		        </div>
 
             <div class="user-actions" ng-controller="UserController">
@@ -136,7 +137,7 @@
 	        </div>
 
           <div class="text-wrapper">
-            <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)">{{p.programmename}}</a></h2>
+            <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h2>
             <p class='infoChannel' live-tooltip-single-line = "{{p.channelname}}"><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'Channel',p.channelid,p.programmeid)">{{p.channelname}}</a></p>
             <p class='info'>{{p.starttime|featuredVideoTime}}</p>
           </div>
@@ -157,8 +158,8 @@
 	      	<div class='thumb'>
 	        	<div class='player'></div>
 	        	<div class='image' css-bg-image='{{p.imagefilepath}}'>
-		          	<a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play'></a>
-                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)" ng-show='!hasVideo(p)' class='noPlay'></a>
+		          	<a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play' style="cursor: pointer"></a>
+                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)" ng-show='!hasVideo(p)' class='noPlay'></a>
 		        </div>
 		        <span class="time" ng-show="p.duration">{{p.duration | videoLength}}</span>
 
@@ -180,7 +181,7 @@
 	        </div>
 
           <div class="text-wrapper">
-            <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)">{{p.programmename}}</a></h2>
+            <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h2>
             <p class='infoChannel'><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'Channel',p.channelid,p.programmeid)">{{p.channelname}}</a></p>
             <p class='info'>{{p.starttime|featuredVideoTime}}</p>
           </div>
@@ -204,8 +205,8 @@
           <div class='thumb'>
             <div class='player'></div>
             <div class='image' css-bg-image='{{p.imagefilepath}}'>
-                <a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play'></a>
-                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)" ng-show='!hasVideo(p)' class='noPlay'></a>
+                <a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play'style="cursor: pointer"></a>
+                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)" ng-show='!hasVideo(p)' class='noPlay'></a>
             </div>
 
             <div class="user-actions" ng-controller="UserController">
@@ -226,7 +227,7 @@
           </div>
 
           <div class="text-wrapper">
-            <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)">{{p.programmename}}</a></h2>
+            <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h2>
             <p class='infoChannel'><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'Channel',p.channelid,p.programmeid)">{{p.channelname}}</a></p>
             <p class='info'>{{p.starttime|featuredVideoTime}}</p>
           </div>
@@ -377,7 +378,7 @@
         <div class="video-actions" >
           <div class="item-content" >
             <div class='info'>
-              <h2><a live-tooltip = "{{fv.videotitle}}" ng-href="#!/program/{{fv.programmename}}" ng-click="EncodeUrlWithDash(fv.programmename,$event,'programme',fv.channelid,fv.programmeid)">{{fv.videotitle}}</a></h2>
+              <h2><a live-tooltip = "{{fv.videotitle}}" ng-href="#!/program/{{fv.programmename}}" ng-click="EncodeUrlWithDash(fv.programmename,$event,'programme',fv.channelid,fv.programmeid,fv.starttime)">{{fv.videotitle}}</a></h2>
               <p>{{fv.starttime|featuredVideoTime}} {{fv.timestring}} <a ng-href="#!/channel/{{fv.channelname}}" ng-click="EncodeUrlWithDash(fv.channelname,$event,'channel',fv.channelid,fv.programmeid)">{{fv.channelname}}</a></p>
             </div>
             <div class='user-actions' ng-show="(fv.programmeid)" ng-controller="UserController">
@@ -415,7 +416,7 @@
 
     <div class="duedate">
           <a  ng-click="setCalendar()" tv-guide-calendar-popover>
-        <i class="calendar-icon" >{{selected_date.day_value}}</i>
+        <i class="calendar-icon" style="cursor: pointer">{{selected_date.day_value}}</i>
       </a>
     </div>
 
@@ -424,7 +425,7 @@
 
 
     <li class="schedule-item" save-start-time="program" ng-repeat="program in todayPrograms" ng-show="dayparam=='1'">
-    <a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',todayPrograms.channelid,program.programmeid)" class="clearfix">
+    <a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',todayPrograms.channelid,program.programmeid,program.starttime)" class="clearfix">
       <div class="time">
         <div class="ico clock"></div>
         <span class="hour">{{program.starttime|sideBarTime}}</span>
@@ -437,7 +438,7 @@
     </li>
 
     <li class="schedule-item" save-start-time="program" ng-repeat="program in tomorrowPrograms" ng-show="dayparam=='2'">
-    <a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',tomorrowProgram.channelid,program.programmeid)" class="clearfix">
+    <a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',tomorrowProgram.channelid,program.programmeid,program.starttime)" class="clearfix">
       <div class="time">
         <div class="ico clock"></div>
         <span class="hour">{{program.starttime|sideBarTime}}</span>
@@ -450,7 +451,7 @@
     </li>
 
     <li class="schedule-item" save-start-time="program" ng-repeat="program in futurePrograms" ng-show="dayparam>'2'">
-    <a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',program.channelid,program.programmeid)">
+    <a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',program.channelid,program.programmeid,program.starttime)">
       <div class="time">
         <div class="ico clock"></div>
         <span class="hour">{{program.starttime|sideBarTime}}</span>

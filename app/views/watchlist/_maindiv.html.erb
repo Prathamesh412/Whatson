@@ -37,14 +37,14 @@
 				<div class  = 'watchlist-header clearfix'>
 					<div class = 'watchlist-info-tabs clearfix'>
 					    <ul>
-					      <li ng-hide="isItFriday()" ><a class='tab-btn' ng-click="changeWeek('thisWeek')" ng-class="{active: weekSelection=='thisWeek'}" >THIS WEEK</a></li>
-					      <li><a class='tab-btn' ng-click="changeWeek('nextWeek')" ng-class="{active: weekSelection=='nextWeek'}">NEXT WEEK</a></li>
+					      <li ng-hide="isItFriday()" ><a class='tab-btn' ng-click="changeWeek('thisWeek')" ng-class="{active: weekSelection=='thisWeek'}" style="cursor: pointer">THIS WEEK</a></li>
+					      <li><a class='tab-btn' ng-click="changeWeek('nextWeek')" ng-class="{active: weekSelection=='nextWeek'}" style="cursor: pointer">NEXT WEEK</a></li>
 					    </ul>
 					</div>      
 					<div class="duedate">
 				        <a watchlist-calendar-popover>
 				          	<span class="day-label"> {{calendarDate}}</span> 
-				          	<i class="calendar-icon" >{{calendarIcon}}</i>
+				          	<i class="calendar-icon" style="cursor: pointer">{{calendarIcon}}</i>
 				        </a>
 				    </div>
 				</div>

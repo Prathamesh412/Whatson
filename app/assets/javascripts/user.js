@@ -1069,8 +1069,8 @@ woi.controller('UserController', [ '$rootScope','$location','$scope', '$compile'
     // API fix for parameter programmeid changed to programid
     if(_.isUndefined( temp.programmeid ))
       temp.programmeid = temp.programid;
-
     userAPI.toggleFavoriteProgramme({like:(temp.isfavorite == "0"), programmeid:temp.programmeid, userid:$rootScope.getUser().userid}, function(rs){
+       alert($rootScope.getUser().userid);
       if(forceRefresh) {
         location.reload();
         return false;
@@ -1084,6 +1084,7 @@ woi.controller('UserController', [ '$rootScope','$location','$scope', '$compile'
       loading('hide', {element:element});
 
       console.log("toggleFavoriteProgramme");
+        console.log(rs.response.responsestatus);
       // if it fails, display error message
       if(!rs.response.responsestatus){
         alert(rs.response.message);

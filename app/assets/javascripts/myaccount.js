@@ -1,6 +1,6 @@
 woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$route', '$filter', 'userAPI' ,'tsmAPI','$timeout', 'autoAPI', function($scope, $rootScope, $location, $route, $filter, userAPI, tsmAPI,$timeout, autoAPI){
 
-	$scope.genreEdit;  
+	$scope.genreEdit;
 	$scope.allLanguages  = [];
 	$scope.languages     = [];
   	$scope.paginate      = [];
@@ -48,7 +48,7 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 		}
 	}
 
-	
+
 	$scope.activeTab = 'myaccount';
 
 	 $scope.genresFilter = [];
@@ -63,9 +63,9 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
   		$scope.populateGenres();
 	    return false;
     }
-    
+
     userAPI.getUserGenreList({userid:$rootScope.getUser().userid}, function(rs){
-      
+
       if(!rs.favhybridgenre){
         return false;
       }
@@ -109,7 +109,7 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 		if(tabname=="editaccount"){
 			$scope.userAccountDetails = $.extend(true, {}, $scope.showUserDetails);
 			$scope.newpassword='';
-			$scope.passConfirm='';	
+			$scope.passConfirm='';
 			$firstpwd = $('input.pwd-img-placeholder');
 			$secondpwd = $('input.cpwd-img-placeholder');
 			if($('html').hasClass('ie9')){
@@ -147,7 +147,7 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 		var orig = data;
 		data = data.toLowerCase();
 		if (e.currentTarget.checked) {
-			if (_.isNull($scope.userAccountDetails[$scope.popoverAttributes[type]]) || $scope.userAccountDetails[$scope.popoverAttributes[type]] == 'null') 
+			if (_.isNull($scope.userAccountDetails[$scope.popoverAttributes[type]]) || $scope.userAccountDetails[$scope.popoverAttributes[type]] == 'null')
 				$scope.userAccountDetails[$scope.popoverAttributes[type]] = orig;
 			 else
 			 	$scope.userAccountDetails[$scope.popoverAttributes[type]] = $scope.userAccountDetails[$scope.popoverAttributes[type]] + "," + orig;
@@ -178,15 +178,15 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 		$scope.newpassword;
 		$scope.showUserDetails = $.extend(true, {}, $scope.userAccountDetails);
 		if(!rs.userprofile.user.headendlist){
-			$scope.userOperatorsList = [];	
+			$scope.userOperatorsList = [];
 		}else{
 
 			if(!angular.isArray(rs.userprofile.user.headendlist.headendinfo)){
-				if(angular.isObject(rs.userprofile.user.headendlist.headendinfo)){					
+				if(angular.isObject(rs.userprofile.user.headendlist.headendinfo)){
 				  rs.userprofile.user.headendlist.headendinfo = [rs.userprofile.user.headendlist.headendinfo];
 				}
 			}
-			
+
 			$scope.userOperatorsList  =	rs.userprofile.user.headendlist.headendinfo;
 			_.map($scope.userOperatorsList,function(item){
 				if(item.pincode == '0'){
@@ -194,15 +194,15 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 				}
 			});
 		}
-	
-		
-		
+
+
+
 
 	});
 
 	// sends API request with the upload file name
 	$(function(){
-		jQuery('#imageUploadForm').ajaxForm(function(data) { 
+		jQuery('#imageUploadForm').ajaxForm(function(data) {
 			imageLoadingIndicator(false);
 			data = JSON.parse(data);
             $scope.userImage = "/images/upload/"+data.imageName;
@@ -219,7 +219,7 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 			}
             userAPI.updateUserDetails(params, function(rs){
 			});
-         }); 
+         });
 	});
 
 	// Cancels profile pic upload
@@ -235,17 +235,17 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 				if (_.isUndefined($scope.userAccountDetails) || _.isUndefined($scope.userAccountDetails.userimage) || _.isNull($scope.userAccountDetails.userimage)) {
 					return "assets/img/profile-avatar.png";
 				}else{
-					return "/images/upload/"+$scope.userAccountDetails.userimage ;					
+					return "/images/upload/"+$scope.userAccountDetails.userimage ;
 				}
 				// return (_.isNull($scope.userAccountDetails.userimage) ? "assets/img/profile-avatar.png" : "/images/upload/"+$scope.userAccountDetails.userimage)
 			}else{
 				if (_.isUndefined($scope.showUserDetails) || _.isUndefined($scope.showUserDetails.userimage) || _.isNull($scope.showUserDetails.userimage)) {
 					return "assets/img/profile-avatar.png";
 				}else{
-					return "/images/upload/"+$scope.showUserDetails.userimage ;					
+					return "/images/upload/"+$scope.showUserDetails.userimage ;
 				}
 				// return (_.isNull($scope.showUserDetails.userimage) ? "assets/img/profile-avatar.png" : "/images/upload/"+$scope.userAccountDetails.userimage)
-			}			
+			}
 	}
 
 	// Submits form to upload the picture
@@ -334,7 +334,7 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 	// Validates the Mobile No field
 	var validateMobileNo = function(){
 		var $errorMsg = $('#changePasswordMsg');
-		$errorMsg.hide();		
+		$errorMsg.hide();
 		var mobileno = $scope.userAccountDetails.mobile;
 		if(!mobileno){
 			return true;
@@ -349,7 +349,7 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 	// Validates the username field
 	var validateUsername = function(){
 		var $errorMsg = $('#usernameMessage');
-		$errorMsg.hide();	
+		$errorMsg.hide();
 		var username = $scope.userAccountDetails.name;
 		var namePattern = /^[A-Za-z0-9 ]*$/;
 		if(!username || !namePattern.test(username)){
@@ -362,7 +362,7 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 	// Validates the Email ID Field
 	var validateEmail = function(){
 		var $errorMsg = $('#changePasswordMsg');
-		$errorMsg.hide();	
+		$errorMsg.hide();
 		var $email = $('input[type=email].email');
 		if($email.hasClass('ng-invalid-email')){
 			$errorMsg.addClass('error-msg').text("Please enter valid Email ID").show();
@@ -480,7 +480,7 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 				// cityname	: $contents.find('input.cityname:visible').val(),
 				// pincode		: $contents.find('input.pincode:visible').val(),
 				// roomname	: $contents.find('input.roomname').val(),
-				context     : contextParam 
+				context     : contextParam
 			}
 			params = $.extend(additional_params,params);
 			$errorMsg.text('');
@@ -497,11 +497,11 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 						params.headendname = $scope.selectedOperator.operator_name;
 						$scope.selectedOperator = null;
 						$scope.locationString = null;
-						$scope.userOperatorsList.push(params);	
+						$scope.userOperatorsList.push(params);
 						$scope.$apply();
 						$contents.find('input').val('');
-						$contents.find('.input-content.operator').text('TV Operator');	
-						$('input[name=tvoperator]').attr('checked',false);				
+						$contents.find('.input-content.operator').text('TV Operator');
+						$('input[name=tvoperator]').attr('checked',false);
 					},2000);
 				}
 				else{
@@ -591,7 +591,7 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 			$rootScope.$broadcast('filter:account-language-list', $scope.userAccountDetails.languagename);
 			$scope.changeTab('myaccount');
 			$('body').scrollTop(0);
-			if (returnEmptyStringForNull($scope.userAccountDetails.email) !== "") 
+			if (returnEmptyStringForNull($scope.userAccountDetails.email) !== "")
 				$rootScope.userInfo.emailaddress = $scope.userAccountDetails.email;
 			else
 				$scope.userAccountDetails.email  = $rootScope.userInfo.emailaddress;
@@ -608,7 +608,7 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 	$scope.populateOperators = function(){
 
 		if($scope.allOperators.length>0){
-			// if(tvOperatorParams.areaid == $rootScope.userInfo.areaid && 
+			// if(tvOperatorParams.areaid == $rootScope.userInfo.areaid &&
 				// tvOperatorParams.cityid == $rootScope.userInfo.cityid &&
 				// tvOperatorParams.stateid == $rootScope.userInfo.stateid)
 			return false;
@@ -668,10 +668,10 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 		  }else{
 
 		    param = {
-		      stateid : 0, 
-		      cityid  : 0, 
+		      stateid : 0,
+		      cityid  : 0,
 		      userid  : userDetails.userid
-		    };  
+		    };
 		  }
 	    if($scope.allLanguages.length > 0){
 
@@ -710,9 +710,9 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 		  }else{
 
 		    param = {
-		      stateid : 0, 
+		      stateid : 0,
 		      cityid  : 0
-		    };  
+		    };
 		  }
 		  userAPI.userFavoriteLanguage(param, function(rs) {
 		      $scope.allLanguages = rs.favlanguage.languagelist;
@@ -724,10 +724,10 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 
 	    $scope.paginate = $scope.languages.slice(0, $scope.amountDefault);
 
-	    
-	    
+
+
 	    $('.account-language-list').scrollTop($('.account-language-list')[0].scrollHeight);
-	    
+
 	    $scope.amount = ($scope.amount> $scope.languages.length) ? $scope.languages.length : $scope.amount;
 
 	    $scope.paginate = $scope.languages.slice(0, $scope.amount);
@@ -737,14 +737,14 @@ woi.controller("MyAccountNavController", ['$scope', '$rootScope','$location', '$
 
 	// Syncs the language popover list at the header with the one in the language popover list in edit account language popover
 	 $scope.$on('favorite:language-added',function(event){
-           userAPI.getUserAccountDetails({userid : $rootScope.getUser().userid}, function(rs){ 
+           userAPI.getUserAccountDetails({userid : $rootScope.getUser().userid}, function(rs){
                    if(!rs.userprofile)
                            return false;
                    $scope.showUserDetails.languagename = rs.userprofile.user.languagename;
                    if($scope.activeTab != 'editaccount')
                            $scope.userAccountDetails.languagename = rs.userprofile.user.languagename;
                     $scope.getRefreshedLanguageList();
-                    if(!$scope.$$phase)	
+                    if(!$scope.$$phase)
 	                   $scope.$apply();
            });
 
@@ -764,7 +764,7 @@ woi.controller("ProgressBarController", ['$scope', '$rootScope' , function($scop
 
 
 woi.controller("SettingsController", ['$scope', '$rootScope','userAPI', function($scope, $rootScope,  userAPI){
-    
+
 	// Will be called any time any of the settings is changed
 	$scope.$on('user-settings:update', function(event, key, value){
 
@@ -772,12 +772,12 @@ woi.controller("SettingsController", ['$scope', '$rootScope','userAPI', function
 		var updateValue = (value == 'on') ? true : false;
 
 		if(key == 'social_sharing'){
-			
+
 			params = {
 
 				userid               : $rootScope.getUser().userid,
 				updatetype           : "social sharing",
-				updatevalue          : updateValue		
+				updatevalue          : updateValue
 			};
 		}
 		else if(key == 'language_filter'){
@@ -786,7 +786,7 @@ woi.controller("SettingsController", ['$scope', '$rootScope','userAPI', function
 
 				userid               : $rootScope.getUser().userid,
 				updatetype           : "language filter",
-				updatevalue          : updateValue				
+				updatevalue          : updateValue
 			};
 
 		}
@@ -796,7 +796,7 @@ woi.controller("SettingsController", ['$scope', '$rootScope','userAPI', function
 
 				userid               : $rootScope.getUser().userid,
 				updatetype           : "sms reminder",
-				updatevalue          : updateValue			
+				updatevalue          : updateValue
 			};
 
 		}
@@ -816,7 +816,7 @@ woi.controller("SettingsController", ['$scope', '$rootScope','userAPI', function
 
 				userid               : $rootScope.getUser().userid,
 				updatetype           : "repeate reminder",
-				updatevalue          : updateValue		
+				updatevalue          : updateValue
 			};
 
 		}else if(key == 'profile'){
@@ -837,8 +837,8 @@ woi.controller("SettingsController", ['$scope', '$rootScope','userAPI', function
 				priortimeforreminder : value // time in mins
 			};
 		}
-		
-	
+
+
 
 		(function(params){
 				userAPI.updateUserSettings(params, function(rs){
@@ -869,7 +869,7 @@ woi.controller("SettingsController", ['$scope', '$rootScope','userAPI', function
 					else if(params.updatetype == "repeate reminder"){
 
 						$scope.$broadcast('revert-switch:reminder');
-						
+
 					}
 
 					return false;
@@ -885,7 +885,7 @@ woi.controller("SettingsController", ['$scope', '$rootScope','userAPI', function
 
 				}else if(params.updatetype == "language filter"){
 
-					$rootScope.userInfo.LanguageFilter = updateStatus;					
+					$rootScope.userInfo.LanguageFilter = updateStatus;
 
 				}else if(params.updatetype == "sms reminder"){
 
@@ -899,33 +899,33 @@ woi.controller("SettingsController", ['$scope', '$rootScope','userAPI', function
 				// else if(params.updatetype == "repeate reminder"){
 
 				// 	$rootScope.userInfo.isrecurring = updateStatus;
-					
+
 				// }
 
 				$.cookie('userInfo', JSON.stringify($rootScope.userInfo), {expires:365});
 
 				console.log('rootScope user details AFTER UPDATION = ',$rootScope.getUser());
-				
+
 			});
 		})(params);
-			
+
 	});
 
 }]);
 
-woi.controller("AccountSocialSharingController", ['$scope', '$rootScope', 'userAPI', function($scope, $rootScope, userAPI){    
+woi.controller("AccountSocialSharingController", ['$scope', '$rootScope', 'userAPI', function($scope, $rootScope, userAPI){
 
     $scope.$on('got-user-details', function(event, userDetails){
 
 		if(userDetails.socialsharing.toLowerCase() == "true"){
-			$scope.onOffSocialSharingValue = 'on';	
+			$scope.onOffSocialSharingValue = 'on';
 		}else{
-			$scope.onOffSocialSharingValue = 'off';	
+			$scope.onOffSocialSharingValue = 'off';
 		}
 
-		$scope.initSwitch($scope.onOffSocialSharingValue.toLowerCase());		
+		$scope.initSwitch($scope.onOffSocialSharingValue.toLowerCase());
 	});
-	
+
 	$scope.toggleSwitch = function(newValue){
 		$rootScope.$broadcast('user-settings:update', 'social_sharing', newValue);
 	};
@@ -937,11 +937,11 @@ woi.controller("AccountSocialSharingController", ['$scope', '$rootScope', 'userA
 
 
 woi.controller("ProfileSettingsController", ['$scope', '$rootScope','userAPI', function($scope, $rootScope, userAPI){
-    
+
 	$scope.$on('got-user-details', function(event, userDetails){
 		$scope.activeChoice = userDetails.profilesettings;
 	});
-	
+
 	$scope.changeChoice = function(tabname){
 
 		$scope.activeChoice = tabname;
@@ -952,19 +952,19 @@ woi.controller("ProfileSettingsController", ['$scope', '$rootScope','userAPI', f
 
 
 woi.controller("LanguageFilterController", ['$scope', '$rootScope', 'userAPI', function($scope, $rootScope, userAPI){
-    
+
 	$scope.$on('got-user-details', function(event, userDetails){
 
 		if(userDetails.languagefilter.toLowerCase() == "true"){
 			$scope.onOffLanguageValue  = 'on';
 		}else{
-			$scope.onOffLanguageValue  = 'off';	
+			$scope.onOffLanguageValue  = 'off';
 		}
 
 		$scope.initSwitch($scope.onOffLanguageValue.toLowerCase());
 	});
 
-	
+
 
 	$scope.toggleSwitch = function(newValue){
 		$rootScope.$broadcast('user-settings:update', 'language_filter', newValue);
@@ -973,26 +973,26 @@ woi.controller("LanguageFilterController", ['$scope', '$rootScope', 'userAPI', f
 	$scope.$on('revert-switch:languagefilter', function(event){
 		$scope.toggleState();
 	});
-	
-}]);	
+
+}]);
 
 
 woi.controller("SmsController", ['$scope', '$rootScope', 'userAPI', function($scope, $rootScope, userAPI){
-    
+
 	$scope.$on('got-user-details', function(event, userDetails){
 
 		if(userDetails.issmsreminder.toLowerCase() == "true"){
 			$scope.onOffSmsValue = 'on';
 		}else{
-			$scope.onOffSmsValue = 'off';	
+			$scope.onOffSmsValue = 'off';
 		}
 
 		$scope.initSwitch($scope.onOffSmsValue.toLowerCase());
 	});
 
-	$scope.toggleSwitch = function(newValue){		
+	$scope.toggleSwitch = function(newValue){
 		$rootScope.$broadcast('user-settings:update', 'sms', newValue);
-	};	
+	};
 
 	$scope.$on('revert-switch:sms', function(event){
 		$scope.toggleState();
@@ -1001,7 +1001,7 @@ woi.controller("SmsController", ['$scope', '$rootScope', 'userAPI', function($sc
 
 
 woi.controller("EmailController", ['$scope', '$rootScope', 'userAPI', function($scope, $rootScope, userAPI){
-    
+
     $scope.$on('got-user-details', function(event, userDetails){
 
     	if(userDetails.isemailreminder.toLowerCase() == "true"){
@@ -1013,9 +1013,9 @@ woi.controller("EmailController", ['$scope', '$rootScope', 'userAPI', function($
 		$scope.initSwitch($scope.onOffEmailValue.toLowerCase());
 	});
 
-    $scope.toggleSwitch = function(newValue){    	
+    $scope.toggleSwitch = function(newValue){
 		$rootScope.$broadcast('user-settings:update', 'email', newValue);
-	};	
+	};
 
 	$scope.$on('revert-switch:email', function(event){
 		$scope.toggleState();
@@ -1024,8 +1024,8 @@ woi.controller("EmailController", ['$scope', '$rootScope', 'userAPI', function($
 
 
 woi.controller("ReminderPopoverController", ['$scope', '$rootScope', 'userAPI', function($scope, $rootScope, userAPI){
-  
-	// called from directive  
+
+	// called from directive
   	$scope.constructObject = function(){
 
 	  	$scope.timeDuraions = [
@@ -1038,24 +1038,24 @@ woi.controller("ReminderPopoverController", ['$scope', '$rootScope', 'userAPI', 
 	  	];
     };
 
-  $scope.selectedReminderTime = function(obj,event){               
+  $scope.selectedReminderTime = function(obj,event){
 
     $('div.qtip:visible').qtip('hide');
-    
+
     $('#selectReminder').html(obj.label);
     $scope.userAccountDetails.priortimeforreminder = obj.value;
     // $('#checkbox'+label.replace(' ','')).parent().siblings('label').toggleClass('selectedLanguage');
 
     $rootScope.$broadcast('user-settings:update', 'reminder_time', obj.value);
-  };	
+  };
 }]);
 
 
 
 woi.controller("RemindersController", ['$scope', '$rootScope', '$filter', '$routeParams','userAPI', function($scope, $rootScope, $filter, $routeParams, userAPI){
-    
+
     $scope.$on('got-user-details', function(event, userDetails){
-		
+
 		if(userDetails.reminderrepeatoption.toLowerCase() == "true"){
 			$scope.onOffReminderValue  = 'on';
 		}else{
@@ -1067,7 +1067,7 @@ woi.controller("RemindersController", ['$scope', '$rootScope', '$filter', '$rout
 
 	$scope.toggleSwitch = function(newValue){
 		$rootScope.$broadcast('user-settings:update', 'reminder', newValue);
-	};	
+	};
 
 	$scope.$on('revert-switch:reminder', function(event){
 		$scope.toggleState();
@@ -1102,9 +1102,9 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
 	}
 
 
-	// Frineds List 
+	// Frineds List
 	$scope.paginateFriendList = [];
-	$scope.paginateFriendList = []; 
+	$scope.paginateFriendList = [];
     $scope.amountFriendList   = 0;
     $scope.stepFriendList     = 5;
 
@@ -1117,7 +1117,7 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
 
       $scope.amountFriendList= $scope.amountFriendList + $scope.stepFriendList;
 
-      if($scope.amountFriendList >= $scope.friendsList.length){ 
+      if($scope.amountFriendList >= $scope.friendsList.length){
         $scope.showMoreFriendList = false;
         $scope.amountFriendList = $scope.friendsList.length;
       }
@@ -1131,7 +1131,7 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
     };
 
 
-	userAPI.facebookActivity({userid: $rootScope.getUser().userid},function(rs){ 
+	userAPI.facebookActivity({userid: $rootScope.getUser().userid},function(rs){
 
     	$scope.friendsList = rs.getfacebookactivity.facebookactivitylist;
 
@@ -1143,10 +1143,10 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
     	$scope.loadMoreFriends();
   	});
 
-	
+
 	//////////////////////////////////////////////////////////////////////////////////
-	
-	// Popular List 
+
+	// Popular List
 	$scope.paginatePopularList = [];
 	$scope.popularList         = [];
     $scope.amountPopularList   = 0;
@@ -1161,7 +1161,7 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
 
       $scope.amountPopularList= $scope.amountPopularList + $scope.stepPopularList;
 
-      if($scope.amountPopularList >= $scope.popularList.length){ 
+      if($scope.amountPopularList >= $scope.popularList.length){
         $scope.showMorePopularList = false;
         $scope.amountPopularList = $scope.popularList.length;
       }
@@ -1169,13 +1169,13 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
       $scope.paginatePopularList = $scope.popularList.slice(0, $scope.amountPopularList);
     };
 
-   
+
 	var userDetails = $rootScope.getUser();
 	var params;
 
 	if(userDetails.userid == -1){
         $scope.popularList = [];
-     
+
      	params = {
 
 			userid    : 0,
@@ -1183,7 +1183,7 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
 			stateid   : 0,
 			cityid    : 0,
 			areaid    : 0
-		};   
+		};
 
     }else{
 
@@ -1191,7 +1191,7 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
     	var stateid_   = (angular.isDefined(userDetails.stateid))   ? userDetails.stateid   : 0;
     	var cityid_    = (angular.isDefined(userDetails.cityid))    ? userDetails.cityid    : 0;
     	var areaid_    = (angular.isDefined(userDetails.areaid))    ? userDetails.areaid    : 0;
-    
+
 		params = {
 
 			userid    : userDetails.userid,
@@ -1219,28 +1219,28 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
 		var shareURL;
 		console.log('ITEM----.....',item);
 		if(flag){
-			// shareURL = item;	
+			// shareURL = item;
 			// event.target.innerHTML = "Liked!";
-			
+
 			var url = "#!/programme/"+item.programmeid+"/channel/";
 			if(angular.isDefined(item.channelid)){
 				url = url + item.channelid;
 			}else{
 				url = url + '0';
 			}
-			
-			shareURL = $location.host() +'/'+url;	
+
+			shareURL = $location.host() +'/'+url;
 			console.log('-------shareURL NEW === ',shareURL);
 		}else{
 			var makeURL = $filter('makeURL');
 			var url = makeURL(item.contenttype, item.contentid);
 
-			shareURL = $location.host() +'/'+url;	
+			shareURL = $location.host() +'/'+url;
 			console.log('-------shareURL === ',shareURL);
 		}
 
 		if(item.isliked=='0'){
-	      
+
 			var params = {
 				contenttype  : 'program',
 				// Adding case for item.programmeid, Popular section doesn't have a contentid as of now
@@ -1250,17 +1250,17 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
 			};
 
 		    userAPI.addRemoveLike(params, function(rs){
-		        
+
 		        if(!rs.response.responsestatus){
 		          alert("Error sending request");
 		          return false;
 		        }
-		     
+
 
 				item.totalLikes++;
 				item.isliked = '1';
 
-				
+
 				var params = {
 					method              : 'stream.publish',
 		            link                : shareURL,
@@ -1287,7 +1287,7 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
 					params.description = shareText;
 				}
 				console.log('params....',params);
-		        FB.ui(params);        
+		        FB.ui(params);
 	  		});
     	}
     	// Remove the like
@@ -1301,15 +1301,15 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
 	        };
 
 	        userAPI.addRemoveLike(params, function(rs){
-	          
+
 	            if(!rs.response.responsestatus){
 	              alert("Error sending request");
-	              return false;	            
+	              return false;
 	            }
-	          
+
 				item.totalLikes--;
 
-				item.isliked = '0';	            
+				item.isliked = '0';
 	      	});
 	    }
 	};
@@ -1379,12 +1379,12 @@ woi.controller('AccountSliderController', ['$rootScope', '$location' ,'$scope','
 		$scope.trendings = rs.getrecommendationpreferences.recommendationlist;
 
 		setTimeout(function(){
-			
+
 		  var $containerWidth = $element.find('.recommended-wrapper').outerWidth();
 		  var $itemWidth      = $slide.find('.item').outerWidth();
 
 		  $scope.noOfItems    = Math.floor($containerWidth/$itemWidth);
-		   
+
 		  setActive(0);
 		},5);
 	});

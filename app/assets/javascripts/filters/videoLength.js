@@ -1,8 +1,7 @@
 woi.filter("videoLength",function(){
   return function (time){
-
   	if(angular.isUndefined(time)){
-  		return false;
+  		return '';
   	}
   	
 	var hours = Math.floor(time / 3600);

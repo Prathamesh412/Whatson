@@ -42,7 +42,7 @@ woi.controller('Home_FeaturedController', ['$rootScope', '$scope', '$location', 
     $('.channels').css('z-index',1);
   });
 
-  $('#baseFeatured').live('mouseleave',function(){    
+  $('#baseFeatured').live('mouseleave',function(){
     // setTimeout(function(){
       // $(this).css('z-index',1);
       $('.channels').css('z-index',1000);
@@ -56,7 +56,7 @@ woi.controller('Home_FeaturedController', ['$rootScope', '$scope', '$location', 
   // remove rando page after API adjusts
   // userAPI.featuredProgramme({pageno:(Math.floor(Math.random() * 4) + 1)},function(r){
   userAPI.featuredProgramme({pageno:1}, function(r){
-    
+
     if(!r.getfeaturedprogramme){
       return false;
     }
@@ -100,16 +100,16 @@ woi.controller('Home_FeaturedController', ['$rootScope', '$scope', '$location', 
                   callPlayer(iframeId, "stopVideo");
                   thisPlayer.html('');
                   injectYT($featured.find('.carousel-inner .active'), $featured.find('.carousel-inner .active').attr('video-id'));
-              });                    
+              });
             }
             else
             {
               callPlayer(iframeId, function() {
                   callPlayer(iframeId, "stopVideo");
-              });  
+              });
             }
         }
-        else 
+        else
         {
           $featured.find('.carousel-inner .active .player').empty();
         }
@@ -122,7 +122,7 @@ woi.controller('Home_FeaturedController', ['$rootScope', '$scope', '$location', 
           $featured.find('.carousel-inner .active span.play').hide();
         }
       })
-    
+
       $featured.find('.carousel').carousel({
         interval:false
       }).on("slid", function(e){
@@ -147,9 +147,9 @@ woi.controller('Home_FeaturedController', ['$rootScope', '$scope', '$location', 
         //on slide gets the current slide and matches with the userActions menu
         var currentSlideId =  $featured.find('.carousel-inner .active').attr('data-slideid');
         $('.item-content').removeClass('active');
-        // 
+        //
         $('.item-content[data-actionsid='+currentSlideId+']').addClass('active');
-        
+
       });
     },5);
   });
@@ -220,10 +220,10 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
   $scope.elements();
 
   $scope.programs = {
-    yourrecs:[], 
+    yourrecs:[],
     premiers:[],
     exclusives:[],
-    rated:[] 
+    rated:[]
   };
 
   $scope.loadYourRecs = function(){
@@ -236,11 +236,11 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
         loading('hide',{element: $recSpinner});
 
         if(!r.getrecommendationpreferences){
-          
+
           $timeout(function(){
             showTab(0);
           });
-          
+
           return false;
         }
 
@@ -258,14 +258,15 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
           $scope.programs.yourrecs[i].timestring = abbrMonth($scope.programs.yourrecs[i].timestring) ;
         }
         // called with timeout for dom creation
-        setTimeout(function(){ 
+        setTimeout(function(){
           if(openTabIndex === 0) {
             showTab(openTabIndex);
           }
-          showMoreOnTab(0); 
+          showMoreOnTab(0);
         }, 5);
       });
   };
+
   $scope.loadPremiers = function(){
 
     // call api
@@ -273,6 +274,7 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
     loading('show',{element: $premiersSpinner});
     userAPI.premiers(function(r)
     {
+
       $scope.premiersLoaded = true;
 
       loading('hide',{element: $premiersSpinner});
@@ -285,11 +287,11 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
       }
 
       // called with timeout for dom creation
-      setTimeout(function(){ 
+      setTimeout(function(){
         if(openTabIndex === 1) {
           showTab(openTabIndex);
         }
-        showMoreOnTab(1); 
+        showMoreOnTab(1);
       }, 5);
     });
   };
@@ -298,7 +300,7 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
     // call api
     var $exclusivesSpinner = $('.exclusives-spin');
     loading('show',{element: $exclusivesSpinner});
-    userAPI.exclusiveList(function(r){ 
+    userAPI.exclusiveList(function(r){
 
       $scope.exclusivesLoaded = true;
 
@@ -319,11 +321,11 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
       }
 
       // called with timeout for dom creation
-      setTimeout(function(){ 
+      setTimeout(function(){
         if(openTabIndex === 2) {
           showTab(openTabIndex);
         }
-        showMoreOnTab(2); 
+        showMoreOnTab(2);
       }, 5);
     });
   };
@@ -332,8 +334,8 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
     // call api
     var $ratedSpinner = $('.rated-spin');
     loading('show',{element: $ratedSpinner});
-    userAPI.topRated({userid: $rootScope.getUser().userid}, function(r){ 
-      
+    userAPI.topRated({userid: $rootScope.getUser().userid}, function(r){
+
       $scope.ratedLoaded = true;
 
       loading('hide',{element: $ratedSpinner});
@@ -344,11 +346,11 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
         $scope.programs.rated[i].timestring = abbrMonth($scope.programs.rated[i].timestring) ;
       }
       // called with timeout for dom creation
-      setTimeout(function(){ 
+      setTimeout(function(){
         if(openTabIndex === 3) {
           showTab(openTabIndex);
         }
-        showMoreOnTab(3); 
+        showMoreOnTab(3);
       }, 5);
     });
   };
@@ -367,7 +369,7 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
     $scope.loadRated();
 
     // hide all but first tab
-    if($rootScope.isUserLogged()){      
+    if($rootScope.isUserLogged()){
       $scope.loadYourRecs();
       showTab(0);
     } else {
@@ -447,7 +449,7 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
     if($items.filter(":visible").length == $items.length){
       // $moreButtons.css('background-position','0 -542px');
       $moreButtons.removeClass('less');
-      $items.hide().filter(':lt(' + numberOfItems + ')').show();  
+      $items.hide().filter(':lt(' + numberOfItems + ')').show();
       // Hide loading indicator
       loading('hide', {element: $moreButtons});
       $moreButtons.removeClass('loading');
@@ -457,7 +459,7 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
       }else{
         $('body, window').animate({scrollTop: $moreButtons.position().top - 500 + 'px'});
       }
-      
+
       return false;
     }
     // display next page
@@ -467,14 +469,14 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
     loading('hide', {element: $moreButtons});
     $moreButtons.removeClass('loading');
     // All items are shown
-    if(nextPageLength >= $items.length){  
+    if(nextPageLength >= $items.length){
       // change the pic
       if($items.filter(":visible").length == $items.length){
         // $moreButtons.css('background-position','-154px -542px');
         $moreButtons.addClass('less');
       }
     }
-  };
+  }
 
 
 
@@ -482,13 +484,13 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
   $tabButtons.live('click', function(e){
     e.preventDefault();
     $scope.elements();
-    
+
     var openTabIndex = $tabButtons.index(this);
     $scope.currentActiveTab = '';
 
     // Recommended
     if(openTabIndex == 0){
-      $scope.loadYourRecs();      
+      $scope.loadYourRecs();
       $scope.currentActiveTab = 'recs';
     }
 
@@ -527,9 +529,9 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
   };
 
   $scope.addToReminder = function(p){
-    // alert("Not yet"); 
+    // alert("Not yet");
     // return false;
-    
+
     // can't apply code due to API error
     if(p.isreminder == "0"){
       var d = isoToDate(p.starttime);
@@ -541,18 +543,18 @@ woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout'
         // if it fails, display error message
         if(!rs.response.responsestatus){
           alert(rs.response.message);
-        } 
+        }
       });
     } else {
       removeReminder.addReminder({reminderid:p.reminderid},function(rs){
-        
+
       });
     }
-    
+
   };
 
   $scope.addToWatchlist = function(p){
-    if ($rootScope.isUserLogged()) 
+    if ($rootScope.isUserLogged())
       var data = {watchliststatus: (p.iswatchlist == "0")};
 
       if (_.isUndefined(p.videoid)) {
@@ -595,7 +597,7 @@ woi.controller('Home_WhatsOnController', ['$scope', 'userAPI', 'recoAPI', functi
     e.preventDefault();
     slide('next', 129,v);
 
-  };  
+  };
 
   //expand now&next
   var $sidebar = $('.main-section > .sidebar');
@@ -612,7 +614,7 @@ woi.controller('Home_WhatsOnController', ['$scope', 'userAPI', 'recoAPI', functi
       .delay(600)
       .show(function(){
         $(this).addClass('shrink');
-        $sidebar.addClass('expand'); 
+        $sidebar.addClass('expand');
         $expandBtn.html('<b class="expand-close">x</b>Close&nbsp;&nbsp;&nbsp;');
         $nowAndNext.removeClass('sidebar');
       });
@@ -713,14 +715,14 @@ woi.controller('Home_WhatsOnController', ['$scope', 'userAPI', 'recoAPI', functi
     //// sort shows by time
     //$scope.channels[p.channelid].programs = $scope.channels[p.channelid].programs.reverse();
     //}
-    //});                          
+    //});
 
     //// format the early date
     //if(firstDate){
     //$scope.setTimeline(firstDate, 30, 9); //30 minutes interval & 10 markers
     //}
     //});
-    ////end case default: 
+    ////end case default:
     //}
 
   };
@@ -739,7 +741,7 @@ woi.controller('Home_WhatsOnController', ['$scope', 'userAPI', 'recoAPI', functi
     }
   };
 
-  $scope.isFavorite = function(channel){ 
+  $scope.isFavorite = function(channel){
     return $.inArray(channel, $scope.favoriteChannels)!=-1;
   };
 
@@ -762,7 +764,7 @@ woi.controller('Home_WhatsOnController', ['$scope', 'userAPI', 'recoAPI', functi
       $lis.css('left', 0);
     }
 
-    //Unables preview earlier tv-show's than "now" if minified version 
+    //Unables preview earlier tv-show's than "now" if minified version
     if(version == "minified" && (direction == "prev") && parseInt($top.css('left')) == 0){
       return false;
     }
@@ -860,7 +862,7 @@ woi.controller('Home_TrendingController', ['$scope','$rootScope', '$timeout','$c
     // setActive($scope.currentSlide);
     $slide.animate({left:-(newSlide * slideWidth) + "px"}, 500);
   };
-  
+
   userAPI.homeTrendingDiscussion({userid: $rootScope.getUser().userid},function(rs){
 
     _.each(rs.getlatestdiscussion.latestdiscussion, function(rs){
@@ -878,7 +880,7 @@ woi.controller('Home_TrendingController', ['$scope','$rootScope', '$timeout','$c
   $scope.showSlider = true;
   $scope.viewStatus = 'View All';
 
-  $scope.toggleSlider = function(){ 
+  $scope.toggleSlider = function(){
     $scope.showSlider = !$scope.showSlider;
     $scope.viewStatus = $scope.showSlider == true ? 'View All' : 'Hide';
 
@@ -913,7 +915,7 @@ woi.controller('Home_TrendingController', ['$scope','$rootScope', '$timeout','$c
     }else if(activity.forumtype == "channel" || activity.forumtype == "channels"){
       shareURL = shareURL+'/#!/channel/'+activity.contentid;
     }
-    
+
     var element = $(event.target);
     var my = 'top center'
 
@@ -929,24 +931,24 @@ woi.controller('Home_TrendingController', ['$scope','$rootScope', '$timeout','$c
           hide: {
             fixed: true,
             delay: 750,
-            event: 'unfocus',
+            event: 'unfocus'
           },
           position:{
             my: (Modernizr.mq("screen and (max-width:640px)")) ? 'bottom left' : 'bottom center',
-            at: (Modernizr.mq("screen and (max-width:640px)")) ? 'top left' : 'top center',
-            adjust:{
-              y: (Modernizr.mq("screen and (max-width:640px)")) ? -15 : -5
-            }
+           at: (Modernizr.mq("screen and (max-width:640px)")) ? 'top left' : 'top center',
+           adjust:{
+             y: (Modernizr.mq("screen and (max-width:640px)")) ? -15 : -5
+           }
           },
           style:{
             classes:'popover reminder-popover cside-popover like-popover'
-          } , 
+          } ,
           events:{
             show:function(){
             } ,
             hide:function(){
-            } 
-          }, 
+            }
+          },
           content: {
             text: '<div class="top left popover-loader signin-loader"></div>',
             ajax: {
@@ -963,8 +965,8 @@ woi.controller('Home_TrendingController', ['$scope','$rootScope', '$timeout','$c
                   });
                 });
                 $scope.actionObj = {
-                  element: element, 
-                  popconfig: qtipConfig, 
+                  element: element,
+                  popconfig: qtipConfig,
                   // after log in display the reminde popover
                   success: function(){
                     $scope.like(event, activity, true);
@@ -976,7 +978,7 @@ woi.controller('Home_TrendingController', ['$scope','$rootScope', '$timeout','$c
                 };
               }
             }
-          }, 
+          }
         };
       };
       var qtipConfig = resetQtip();
@@ -995,7 +997,7 @@ woi.controller('Home_TrendingController', ['$scope','$rootScope', '$timeout','$c
           picture             : activity.profileimage,
           name                : activity.forumtitle,
           caption             : activity.forumtype,
-          description         : activity.feeddescription            
+          description         : activity.feeddescription
       });
 
       var videoid = (activity.forumtype == 'video')?activity.forumtypeid : 0;
@@ -1019,16 +1021,16 @@ woi.controller('Home_TrendingController', ['$scope','$rootScope', '$timeout','$c
         }
         else{
 
-          event.target.innerHTML = "Liked!";          
+          event.target.innerHTML = "Liked!";
           activity.likecount++;
 
          // FB.ui({
          //      method: 'stream.publish',
          //      link: shareURL,
-         //      user_message_prompt: 'Post this to your wall?'            
+         //      user_message_prompt: 'Post this to your wall?'
          //  });
         }
-        
+
       });
     }
     else{
@@ -1047,13 +1049,13 @@ woi.controller('Home_TrendingController', ['$scope','$rootScope', '$timeout','$c
             location.reload();
             return false;
           }
-          
+
           if(!rs.response.responsestatus){
             alert("Error sending request");
           }
           else{
 
-            event.target.innerHTML = "Like";          
+            event.target.innerHTML = "Like";
             activity.likecount--;
             //var redirectURL = '\''+$location.host()+'\'';
           }
@@ -1131,7 +1133,7 @@ woi.controller("Home_FBActivityController", ['$rootScope','$location','$scope','
 
       shareURL = shareURL + '/#!/channel/'+activity.contentname;
     }
-    
+
     var element = $(event.target);
     var my = 'top center'
 
@@ -1147,7 +1149,7 @@ woi.controller("Home_FBActivityController", ['$rootScope','$location','$scope','
           hide: {
             fixed: true,
             delay: 750,
-            event: 'unfocus',
+            event: 'unfocus'
           },
           position:{
             my: 'bottom center',
@@ -1158,13 +1160,13 @@ woi.controller("Home_FBActivityController", ['$rootScope','$location','$scope','
           },
           style:{
             classes:'popover reminder-popover cside-popover like-popover'
-          } , 
+          } ,
           events:{
             show:function(){
             } ,
             hide:function(){
-            } 
-          }, 
+            }
+          },
           content: {
             text: '<div class="top left popover-loader signin-loader"></div>',
             ajax: {
@@ -1181,8 +1183,8 @@ woi.controller("Home_FBActivityController", ['$rootScope','$location','$scope','
                   });
                 });
                 $scope.actionObj = {
-                  element: element, 
-                  popconfig: qtipConfig, 
+                  element: element,
+                  popconfig: qtipConfig,
                   // after log in display the reminde popover
                   success: function(){
                     $scope.like(event, activity, true);
@@ -1235,11 +1237,11 @@ woi.controller("Home_FBActivityController", ['$rootScope','$location','$scope','
         }
         else{
 
-          event.target.innerHTML = "Liked!";          
+          event.target.innerHTML = "Liked!";
           activity.totallikes++;
         }
-        
-      }); 
+
+      });
     }
     else{
       var videoid = (activity.contenttype == 'video')?activity.contentid : 0;
@@ -1256,20 +1258,20 @@ woi.controller("Home_FBActivityController", ['$rootScope','$location','$scope','
             location.reload();
             return false;
           }
-          
+
           if(!rs.response.responsestatus){
             alert("Error sending request");
           }
           else{
 
             event.target.innerHTML = "Like";
-            activity.totallikes--;           
+            activity.totallikes--;
           }
       });
     }
   };
 
-  userAPI.facebookActivity({userid: $rootScope.getUser().userid},function(rs){ 
+  userAPI.facebookActivity({userid: $rootScope.getUser().userid},function(rs){
 
     $scope.activities = rs.getfacebookactivity.facebookactivitylist;
     $timeout(function(){ setActive($scope.currentSlide); });
@@ -1284,7 +1286,7 @@ woi.controller("Home_FBActivityController", ['$rootScope','$location','$scope','
   $scope.showSlider = true;
   $scope.viewStatus = 'View All';
 
-  $scope.toggleSlider = function(){ 
+  $scope.toggleSlider = function(){
     $scope.showSlider = !$scope.showSlider;
     $scope.viewStatus = $scope.showSlider == true ? 'View All' : 'Hide';
 
@@ -1317,25 +1319,25 @@ woi.controller("SocialSharingController", ['$scope','$http' ,'userAPI',  functio
     $scope.tweetsCount = 0;
 
     $http({
-      method: 'JSONP', 
-      url: "https://graph.facebook.com/fql?q=SELECT like_count,total_count FROM link_stat WHERE url='http://www.facebook.com/whatsonindiachannelguide'", 
+      method: 'JSONP',
+      url: "https://graph.facebook.com/fql?q=SELECT like_count,total_count FROM link_stat WHERE url='http://www.facebook.com/whatsonindiachannelguide'",
       params:{
         callback:'JSON_CALLBACK'
       }
     })
-    .success(function(data, status) {  
+    .success(function(data, status) {
 
       $scope.fbLikeCount = data.data[0].like_count;
 
      })
-    .error(function(data, status) { 
+    .error(function(data, status) {
       //console.log("FB COUNT error");
-    });   
+    });
 
 
     $http({
-        method: 'JSONP', 
-        url: 'https://api.twitter.com/1/users/show/WhatsOnIndia.json', 
+        method: 'JSONP',
+        url: 'https://api.twitter.com/1/users/show/WhatsOnIndia.json',
         params:{
           callback:'JSON_CALLBACK'
         }
@@ -1343,12 +1345,12 @@ woi.controller("SocialSharingController", ['$scope','$http' ,'userAPI',  functio
     )
     .success(function(data, status) {
 
-      $scope.twitterResponse = data; 
+      $scope.twitterResponse = data;
 
       $scope.tweetsCount = data.followers_count;
     })
-    .error(function(data, status) { 
-      
+    .error(function(data, status) {
+
     });
 
 
@@ -1360,7 +1362,7 @@ woi.controller("SocialSharingController", ['$scope','$http' ,'userAPI',  functio
           link: 'http://www.WhatsOnIndia.com/',
           user_message_prompt: 'post this to your wall?',
           redirect_uri: 'http://www.WhatsOnIndia.com/'
-      }); 
+      });
     });
 
     $('#twitterButton').live('click',function(){
@@ -1375,14 +1377,14 @@ woi.controller("SocialSharingController", ['$scope','$http' ,'userAPI',  functio
 
       var twtLink = 'http://twitter.com/home?status='+encodeURIComponent(twtTitle + ' ' + twtUrl);
       window.open(twtLink);
-      
+
     });
 
     $('#gplusButton').live('click',function(){
-     
+
       var woiLink = "WhatsOnIndia.com";
       var link = "https://plus.google.com/share?url="+woiLink;
-      window.open(link);  
+      window.open(link);
     });
 
 }]);

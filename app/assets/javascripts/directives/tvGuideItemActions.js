@@ -10,7 +10,7 @@ woi.directive('tvGuideItemActions', ['$filter', '$location', '$rootScope', 'user
       if( $rootScope.device.isTouch ) {
         element.click(function(e){          
           scope.$apply(function(){
-              $rootScope.EncodeUrlWithDash(attrs.programName,e,'programme',attrs.channelId,attrs.programId);
+              $rootScope.EncodeUrlWithDash(attrs.programName,e,'programme',attrs.channelId,attrs.programId,attrs.startTime);
           });
         });
 //        return false;
@@ -21,7 +21,7 @@ woi.directive('tvGuideItemActions', ['$filter', '$location', '$rootScope', 'user
         element.click(function(e){          
           scope.$apply(function(){
             if($('.sidebar').length !== 0 && !$('.sidebar').hasClass('expand')){
-                $rootScope.EncodeUrlWithDash(attrs.programName,e,'programme',attrs.channelId,attrs.programId);
+                $rootScope.EncodeUrlWithDash(attrs.programName,e,'programme',attrs.channelId,attrs.programId,attrs.startTime);
             }
           });
         });
@@ -31,7 +31,7 @@ woi.directive('tvGuideItemActions', ['$filter', '$location', '$rootScope', 'user
             scope.$apply(function() {
               //if the tvguide is collapsed does not show popover, instead goes to the programme details page
               if($('.sidebar').length !== 0 && !$('.sidebar').hasClass('expand')){
-                  $rootScope.EncodeUrlWithDash(attrs.programName,e,'programme',attrs.channelId,attrs.programId);
+                  $rootScope.EncodeUrlWithDash(attrs.programName,e,'programme',attrs.channelId,attrs.programId,attrs.startTime);
               }  
           
               // Divide the element into four quadrants, and position the description-popover element based on that

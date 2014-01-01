@@ -22,13 +22,21 @@ woi.filter('addLinks', ['$routeParams', '$rootScope', function($routeParams, $ro
 
         var array = value.split(',');
         var allLinks = '';
-        
+        var comma = array.length - 1;
         for(var i=0; i<array.length; i++){            
 
             var temp = escape(array[i]);
-            allLinks += '<a href=#!/actor/'+decodeURI(temp).replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$")+'>'+decodeURI(array[i])+' </a>';
+            if (comma == i)
+            {
+                allLinks += '<a href=#!/actor/'+decodeURI(temp).replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$")+ " title="  + decodeURI(temp).replace(/\s/g, "-") + '>'+decodeURI(array[i])  +' </a>';
+            }
+            else
+            {
+                allLinks += '<a href=#!/actor/'+decodeURI(temp).replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$")+ " title="  + decodeURI(temp).replace(/\s/g, "-") + '>'+decodeURI(array[i]) + ',' +' </a>';
+            }
+
         }
-        return allLinks;
+        return allLinks.replace(/\,$/g,'');
     }
     else{
         return value;

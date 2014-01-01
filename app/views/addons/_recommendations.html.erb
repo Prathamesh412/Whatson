@@ -6,7 +6,7 @@
       <div class="thumb">
         <div ng-show="r.isrecommended=='1'" class="favorite-ribbon"></div>
         <div class="wrapper">
-          <a href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid)"><img ng-src="{{r.imagefilepath}}" alt="{{r.programmename}}" /></a>
+          <a href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid,r.starttime)"><img ng-src="{{r.imagefilepath}}" alt="{{r.programmename}}" /></a>
         </div>
         <span class="duration" ng-show="r.duration">{{r.duration | videoLength}}</span>
       
@@ -27,7 +27,7 @@
       </div>
       <div class="thumbDetails">
 	      <h2>
-	       <a href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid)">{{r.programmename}}</a>
+	       <a href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid,r.starttime)">{{r.programmename}}</a>
 	      </h2>
 	      <p class="info">
 	      {{r.starttime | featuredVideoTime}}

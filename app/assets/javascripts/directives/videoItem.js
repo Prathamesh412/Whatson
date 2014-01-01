@@ -74,7 +74,7 @@ woi.directive('videoItem', ['$rootScope','$location',function($rootScope,$locati
 	          else{
 	          	$rootScope.playThisVideo = p.videourl;
 			    $rootScope.playThisVideoObj = p;
-                $rootScope.EncodeUrlWithDash(p.programmename,$scope.element,'programme',p.channelid,p.programmeid);
+                $rootScope.EncodeUrlWithDash(p.programmename,$scope.element,'programme',p.channelid,p.programmeid, p.starttime);
 //	          	return false;
 	          }
 

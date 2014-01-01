@@ -84,7 +84,7 @@ woi.directive('homeTabItem', ['$location','$rootScope','$route',function($locati
 		      	// $location.path("/programme/"+ p.programmeid +"/channel/"+(p.channelid + Math.floor((Math.random()*10)+1)));
 		      }else{
 
-                  $rootScope.EncodeUrlWithDash(url,$scope.element,'Program', p.channelid, p.programmeid);
+                  $rootScope.EncodeUrlWithDash(url,$scope.element,'Program', p.channelid, p.programmeid, p.starttime);
 //                  $location.path("/programme/"+ p.programmeid +"/channel/"+p.channelid);
 
 		      }

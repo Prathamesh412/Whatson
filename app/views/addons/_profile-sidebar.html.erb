@@ -35,10 +35,10 @@
 		<ul class="recommended">
 			<li class="item animate bounceInDown" save-start-time="thisItem" ng-repeat="thisItem in sidebar.recentBrowsed.visibleData">
 				<div class="thumb">
-					<a class='play' ng-click="playVideo(thisItem)" ng-show="showVideoButton(thisItem)"></a>
+					<a class='play' ng-click="playVideo(thisItem)" ng-show="showVideoButton(thisItem)" style="cursor: pointer"></a>
 					<div ng-show="thisItem.isrecommended =='1'" class="favorite-ribbon"></div>
 					<div class="wrapper">
-						<a href="#!/program/{{thisItem.programmename}}" ng-click="EncodeUrlWithDash(thisItem.programmename,$event,'programme',thisItem.channelid,thisItem.programmeid)"><img ng-src="{{thisItem.imagefilepath}}" alt="{{thisItem.ProgrammeName}}" ng-click="changeurl(thisItem.programmename,$event)"/></a>
+						<a href="#!/program/{{thisItem.programmename}}" ng-click="EncodeUrlWithDash(thisItem.programmename,$event,'programme',thisItem.channelid,thisItem.programmeid,thisItem.starttime)"><img ng-src="{{thisItem.imagefilepath}}" alt="{{thisItem.ProgrammeName}}" ng-click="changeurl(thisItem.programmename,$event)"/></a>
 					</div>
 					<span class="duration" ng-show="thisItem.duration">{{thisItem.duration | videoLength}}</span>
 					<div class="user-actions" ng-controller="UserController">
@@ -49,7 +49,7 @@
 				</div>
 				<div class="thumbDetails">
 					<h2>
-						<a href="#!/program/{{thisItem.programmename}}" ng-click="EncodeUrlWithDash(thisItem.programmename,$event,'programme',thisItem.channelid,thisItem.programmeid)">{{thisItem.programmename}}</a>
+						<a href="#!/program/{{thisItem.programmename}}" ng-click="EncodeUrlWithDash(thisItem.programmename,$event,'programme',thisItem.channelid,thisItem.programmeid,thisItem.starttime)">{{thisItem.programmename}}</a>
 					</h2>
 					<p class="info">
 						{{thisItem.starttime | featuredVideoTime}}

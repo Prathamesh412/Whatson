@@ -5,16 +5,16 @@
     <div class = 'video-info-tabs clearfix'  ng-controller="VideosNavController">
         <ul class='video-tabs'>
           <li class='tab'>
-          	<a class='tab-btn' ng-class="{active: currentTab == 'popular'}" ng-click="toggleTab('popular')">POPULAR</a>
+          	<a class='tab-btn' ng-class="{active: currentTab == 'popular'}" ng-click="toggleTab('popular')" style="cursor: pointer">POPULAR</a>
           </li>
           <li class='tab'>
-          	<a class='tab-btn' ng-class="{active: currentTab == 'recommended'}" ng-click="toggleTab('recommended')">RECOMMENDED</a>
+          	<a class='tab-btn' ng-class="{active: currentTab == 'recommended'}" ng-click="toggleTab('recommended')" style="cursor: pointer">RECOMMENDED</a>
           </li>
           <li class='tab'>
-          	<a class='tab-btn' ng-class="{active: currentTab == 'new'}" ng-click="toggleTab('new')">NEW</a>
+          	<a class='tab-btn' ng-class="{active: currentTab == 'new'}" ng-click="toggleTab('new')" style="cursor: pointer">NEW</a>
           </li>
           <li class='tab' ng-show="userLogged=='on'">
-          	<a class='tab-btn' ng-class="{active: currentTab == 'favorites'}" ng-click="toggleTab('favorites')" >FAVORITES</a>
+          	<a class='tab-btn' ng-class="{active: currentTab == 'favorites'}" ng-click="toggleTab('favorites')" style="cursor: pointer">FAVORITES</a>
           </li>
           <!-- <li><a class='tab-btn' ng-click="showMore()">{{aboutTabText}}</a></li> -->
         </ul>
@@ -65,12 +65,12 @@
             <div class ='major-details'>
               <!-- add ng-show = "p.isrecommended='1'" -->
               <div class="favorite-ribbon" style=""></div>
-              <div class="featured-text">FEATURED by <a href="">{{p.channelname}}</a></div>
+              <!--<div class="featured-text">FEATURED by <a href="">{{p.channelname}}</a></div>-->
               <span class='play'  ng-click="playVideo()"><img src="assets/img/icon-play-big.png" alt=""></span>
               <div class = 'video-details'>
                 <div class = 'info'>
                    <h2 live-tooltip-single-line="{{p.programmename}}">
-                      <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)">{{p.programmename}}
+                      <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}
                       </a>
                     </h2>
                     <p>
@@ -121,7 +121,7 @@
           <div class = 'text-wrapper minor-details'>
             <div class = 'row-one clearfix'> 
               <div class = 'name' live-tooltip-single-line ="{{p.programmename}}">
-                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)">{{p.programmename}}</a>
+                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a>
               </div>
               <div class = 'channel' live-tooltip-single-line="{{p.channelname}}"> 
                 <a ng-href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'channel',p.channelid,p.programmeid)">{{p.channelname}}</a>

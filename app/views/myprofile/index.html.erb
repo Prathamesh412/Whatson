@@ -8,13 +8,13 @@
 			<div class="profile_item_content clearfix">
 				<ul class='profile_item_content_list clearfix'>
 					<li class='list-item'  scroll-callback ng-repeat="item in profile.watchlist.data">
-						<div class='thumb' css-bg-image="{{item.imagefilepath}}">
-							<a class='play' ng-click="playVideo(item)" ng-show="showVideoButton(item)"></a>
+						<div class='thumb' style="cursor: pointer" css-bg-image="{{item.imagefilepath}}">
+							<a class='play' ng-click="playVideo(item)" ng-show="showVideoButton(item)" style="cursor: pointer"></a>
 							<div class="favorite-ribbon" style="" ng-show="item.isrecommended"></div>
 						</div>
 						<div class='text-wrapper clearfix'>
 							<div class='row-one'> 
-								<div multiline-overflow class='name'><a href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)">{{item.programmename}}</a></div>
+								<div multiline-overflow class='name'><a href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)">{{item.programmename}}</a></div>
 							</div>
 							<div class='time'>{{item.starttime | watchlisttimeformat}}</div>
 						</div>
@@ -42,13 +42,13 @@
 			<div class="profile_item_content clearfix">
 				<ul class='profile_item_content_list clearfix'>
 					<li class='list-item'  scroll-callback ng-repeat="item in profile.reminders.data">
-						<div class='thumb' css-bg-image="{{item.imagefilepath}}">
+						<div class='thumb'  css-bg-image="{{item.imagefilepath}}" >
 							<a class='play' ng-click="playVideo(item)" ng-show="showVideoButton(item)"></a>
 							<div class="favorite-ribbon" style="" ng-show="item.isrecommended"></div>
 						</div>
 						<div class='text-wrapper clearfix'>
 							<div class='row-one'> 
-								<div multiline-overflow class='name'><a href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)">{{item.programmename}}</a></div>
+								<div multiline-overflow class='name'><a href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)">{{item.programmename}}</a></div>
 							</div>
 							<div class='time'>{{item.starttime | watchlisttimeformat}}</div>
 						</div>
@@ -82,7 +82,7 @@
 						</div>
 						<div class='text-wrapper clearfix'>
 							<div class='row-one'> 
-								<div multiline-overflow class='name'><a href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)">{{item.programmename}}</a></div>
+								<div multiline-overflow class='name'><a href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)">{{item.programmename}}</a></div>
 							</div>
 							<div class='time'>{{item.starttime | watchlisttimeformat}}</div>
 						</div>

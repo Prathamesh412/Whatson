@@ -86,9 +86,9 @@
             </div>
 
             <ul>
-              <li live-tooltip-single-line="{{item.programmename1}}"> <a href="#!/program/{{item.programmename1}}" ng-click="EncodeUrlWithDash(item.programmename1,$event,'programme',item.channelid,item.programmeid1)">{{item.programmename1}} </a></li>
-              <li live-tooltip-single-line="{{item.programmename2}}"> <a href="#!/program/{{item.programmename2}}" ng-click="EncodeUrlWithDash(item.programmename2,$event,'programme',item.channelid,item.programmeid2)">{{item.programmename2}} </a></li>
-              <li live-tooltip-single-line="{{item.programmename3}}"> <a href="#!/program/{{item.programmename3}}" ng-click="EncodeUrlWithDash(item.programmename3,$event,'programme',item.channelid,item.programmeid3)">{{item.programmename3}} </a></li>
+              <li live-tooltip-single-line="{{item.programmename1}}"> <a href="#!/program/{{item.programmename1}}" ng-click="EncodeUrlWithDash(item.programmename1,$event,'programme',item.channelid,item.programmeid1,item.starttime)">{{item.programmename1}} </a></li>
+              <li live-tooltip-single-line="{{item.programmename2}}"> <a href="#!/program/{{item.programmename2}}" ng-click="EncodeUrlWithDash(item.programmename2,$event,'programme',item.channelid,item.programmeid2,item.starttime)">{{item.programmename2}} </a></li>
+              <li live-tooltip-single-line="{{item.programmename3}}"> <a href="#!/program/{{item.programmename3}}" ng-click="EncodeUrlWithDash(item.programmename3,$event,'programme',item.channelid,item.programmeid3,item.starttime)">{{item.programmename3}} </a></li>
             </ul>
 
           </div>
@@ -146,7 +146,7 @@
 			<div class="cv-actions" style="overflow:visible; ">
 				<div class='info'>
           <h2 live-tooltip-single-line="{{v.programmename}}">
-              <a href="#!/program/{{v.programmename}}" ng-click="EncodeUrlWithDash(v.programmename,$event,'programme',v.channelid,v.programmeid)">{{v.programmename}}</a>
+              <a href="#!/program/{{v.programmename}}" ng-click="EncodeUrlWithDash(v.programmename,$event,'programme',v.channelid,v.programmeid,v.starttime)">{{v.programmename}}</a>
           </h2>
 					<p>{{v.starttime|featuredVideoTime}}, <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></p>
 				</div>

@@ -13,13 +13,16 @@ body{
 }
 
 .key{
-	position: absolute;
-	padding: 0;
-	margin: 0 auto;
-	width: 32px;
-	height: 40px;
-	left: 207px;
-	top: 33px;
+	/*position: absolute;*/
+	/*padding: 0;*/
+	/*margin: 0 auto;*/
+	/*width: 32px;*/
+	/*height: 40px;*/
+	/*left: 207px;*/
+	/*top: 33px;*/
+    top: 16px;
+    position: relative;
+    margin-bottom: 31px
 }
 
 .bg{
@@ -36,12 +39,11 @@ body{
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	width:350px;
-	height:300px;
+	width:431px;
+	height:406px;
 	margin-left: -225px;
 	margin-top: -175px;
 	background:#f7f7f7;
-	padding:50px;
 	z-index:999;
 	
 	-moz-border-radius:5px;
@@ -61,12 +63,11 @@ body{
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	width:350px;
-	height:380px;
+	width:440px;
+	height:435px;
 	margin-left: -225px;
 	margin-top: -200px;
 	background:#f7f7f7;
-	padding:50px;
 	z-index:999;
 	
 	-moz-border-radius:5px;
@@ -86,12 +87,11 @@ body{
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	width:350px;
-	height:218px;
+	width:423px;
+	height:296px;
 	margin-left: -225px;
 	margin-top: -160px;
 	background:#f7f7f7;
-	padding:50px;
 	z-index:999;
 	
 	-moz-border-radius:5px;
@@ -115,7 +115,7 @@ body{
 	width:350px;
 	border:none;
 	text-align:center;
-	margin:30px 0 20px 0;
+	margin:0 auto
 }
 
 .login_border{
@@ -237,23 +237,20 @@ body{
 }
 
 
-.close {
-	position:absolute;
-	border:none;
-	top:10px;
-	right:10px;
-    width:20px;
-	height:20px;
-    background:url(../assets/img/overlay_close.png) no-repeat;
-    padding:7px 10px 8px 10px;
-    margin:0 auto;
-	text-align:center;
-    cursor:pointer;
-    *padding:7px 2px 8px 2px; /* IE7 Fix */
+.auth-close-button {
+float:right;
+cursor: pointer;
+position: relative;
+right: 11px;
+top: 9px;
 }
 
-.close:hover {
-	background-position:bottom;
+.auth-close-button:hover {
+    opacity: 0.6;
+}
+
+.auth-close-button:active {
+    opacity: 1;
 }
 
 .forgot{
@@ -280,6 +277,8 @@ body{
 	font-size:14px;
 	text-align:center;
 	margin-bottom:20px;
+    position: relative;
+    top: 10px;
 }
 
 .forgot_tital{
@@ -290,7 +289,8 @@ body{
 	width:350px;
 	border:none;
 	text-align:center;
-	margin:0 0 20px 0;
+	margin: 0 auto;
+    clear:both
 }
 
 .errorMessage

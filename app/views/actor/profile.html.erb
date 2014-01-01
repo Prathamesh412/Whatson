@@ -50,7 +50,7 @@
         <div class="item clearfix" data-isvideo="{{(v.videourl) && 1 || 0}}" data-youtubeurl="{{v.videoid}}" data-isyoutube="{{v.isyoutube}}" data-slideid="{{v.slideid}}" ng-repeat='v in featuredVideos' featured-video-player css-bg-image-fallback video-id="{{v.videoid}}" is-youtube="{{v.isyoutube}}" video-thumbnail="{{v.videothumbnail}}" image-filepath="{{v.imagefilepath}}">
           <div class='player' data-isyoutube="{{v.isyoutube}}" id="playerthing{{v.slideid}}"></div>
           <!-- <img class="featured-image" ng-src="{{v.videothumbnail}}" alt=""> -->
-          <div class="featured-text">FEATURED by <a href="#!/channel/{{fullProgrammeDetail.channelid}}">{{fullProgrammeDetail.channelname}}</a></div>
+         <!-- <div class="featured-text">FEATURED by <a href="#!/channel/{{fullProgrammeDetail.channelid}}">{{fullProgrammeDetail.channelname}}</a></div>  -->
           <span class='play'><img src="assets/img/icon-play-big.png" alt=""></span>
         </div>
 
@@ -194,8 +194,8 @@
           <img src="{{p.imagefilepath}}" />
         </div>
         <div class="item">
-          <h3><a href="#!/Programme/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)">{{p.programmename}}</a></h3>
-          <h4><a href="#!/Programme/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid)">{{p.starttime|featuredVideoTime}}</a></h4>
+          <h3><a href="#!/Programme/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h3>
+          <h4><a href="#!/Programme/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.starttime|featuredVideoTime}}</a></h4>
         </div>
         <!--<div class="reminder" ng-controller="UserController" >-->
 

@@ -1,14 +1,14 @@
 <div class = 'thumb'>
-  <img src = "{{item.imagefilepath}}" alt="{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)"/>
+  <img src = "{{item.imagefilepath}}" alt="{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)" style="cursor: pointer"/>
   <div class="favorite-ribbon" style="" ng-show="item.isrecommended == 1"></div>
-        <a class='play' ng-click="playVideo(item)" ng-show="showVideoButton(item)"></a>
+        <a class='play' ng-click="playVideo(item)" ng-show="showVideoButton(item)" style="cursor: pointer"></a>
         <span class='duration' ng-hide="item.duration == '0'">{{item.duration | videoLength}}</span>
         <!-- <span class='close' ng-show="editMode" ng-click="removeElement({{item.programmeid}},'<%= type %>')"></span> -->
         <div class='close remove-icon' ng-show="editMode" delete-program="{programmeid:'{{item.programmeid}}', container: '<%= type %>',video:'{{item.videoid}}'}"></div>
 </div>
 <div class = 'text-wrapper clearfix'>
   <div class = 'row-one'> 
-    <a multiline-overflow class = 'name' href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)"> {{item.programmename }}</a>
+    <a multiline-overflow class = 'name' href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)"> {{item.programmename }}</a>
     <!-- <div multiline-overflow class = 'name'> {{item.programmeid }}</div> -->
   </div>
   <div class = 'time'> {{item.starttime | watchlisttimeformat}}</div>

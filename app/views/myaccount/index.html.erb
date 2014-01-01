@@ -358,7 +358,7 @@
       <ul class = 'fp-content clearfix' ng-show = 'activeTab == "friends" && paginateFriendList.length > 0' >
         <li class = 'fp-item clearfix' save-start-time="item" ng-repeat = "item in paginateFriendList">
           <div class = 'thumb'>
-            <a ng-href="#!/program/{{item.contentname}}" ng-click="EncodeUrlWithDash(item.contentname,$event,'programme',item.channelid,item.contentid)">
+            <a ng-href="#!/program/{{item.contentname}}" ng-click="EncodeUrlWithDash(item.contentname,$event,'programme',item.channelid,item.contentid,item.starttime)">
               <img ng-src = '{{item.imageurl}}'/>
             </a>
             <!-- <div class="user-actions" ng-controller="UserController">
@@ -377,7 +377,7 @@
           </div>
           <div class = 'details'>
             <div class = 'title'> 
-              <a ng-href="#!/program/{{item.contentname}}" ng-click="EncodeUrlWithDash(item.contentname,$event,'programme',item.channelid,item.contentid)" live-tooltip="{{item.contentname}}">
+              <a ng-href="#!/program/{{item.contentname}}" ng-click="EncodeUrlWithDash(item.contentname,$event,'programme',item.channelid,item.contentid,item.starttime)" live-tooltip="{{item.contentname}}">
                 {{item.contentname}}
               </a> 
             </div>
@@ -398,13 +398,13 @@
       <ul class = 'fp-content clearfix' ng-show = 'activeTab == "popular" && paginatePopularList.length > 0' >
         <li class = 'fp-item clearfix' save-start-time="item" ng-repeat = "item in paginatePopularList">
           <div class = 'thumb'>
-            <a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)">
+            <a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)">
               <img ng-src = '{{item.imagefilepath}}'/>
             </a>
           </div>
           <div class = 'details'>
             <div class = 'title'> 
-              <a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid)">
+              <a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)">
                 {{item.programmename}}
               </a> 
             </div>
@@ -435,11 +435,11 @@
       <div class='recommended-slider'>
         <div class='item' save-start-time="r" ng-repeat='r in trendings'>
           <div class = 'thumb'>
-            <a  href="#!/program/{{r.programmename}} " ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid)"><img ng-src = '{{r.imagefilepath}}'/></a>
+            <a  href="#!/program/{{r.programmename}} " ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid,r.starttime)"><img ng-src = '{{r.imagefilepath}}'/></a>
           </div>
           <div class = 'info'>
             <div live-tooltip-single-line = "{{r.programmename}}" class = 'title'> 
-              <a  href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid)">{{r.programmename}} </a>
+              <a  href="#!/program/{{r.programmename}}" ng-click="EncodeUrlWithDash(r.programmename,$event,'programme',r.channelid,r.programmeid,r.starttime)">{{r.programmename}} </a>
             </div>
             <div class = 'time'> {{r.starttime | featuredVideoTime}} </div>
             <div class = 'channel'> 

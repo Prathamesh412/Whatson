@@ -1,7 +1,7 @@
 <div class='trending' ng-controller="Home_TrendingController">
     <h6 class='subtitle'>TRENDING DISCUSSIONS</h6>
 
-    <a class='more' ng-click="toggleSlider()" ng-hide="lessThanOne()">{{viewStatus}}</a>
+    <a class='more' ng-click="toggleSlider()" ng-hide="lessThanOne()" style="cursor: pointer">{{viewStatus}}</a>
 
     <div id="trendingCarousel" class='container containerWrapper'>
       <div class='slider'>
@@ -14,7 +14,7 @@
         <div class='clearfix'></div>
       </div>
       <!-- /slider -->
-      <a class='arrows left' ng-click='slide(false)' ng-class="{disabled:currentSlide == 0}">&lt;</a>
-      <a class='arrows right' ng-click='slide(true)' ng-class="{disabled:currentSlide == (trendings.length-1)}">&gt;</a>
+      <a class='arrows left' ng-click='slide(false)' ng-class="{disabled:currentSlide == 0}" style="cursor: pointer">&lt;</a>
+      <a class='arrows right' ng-click='slide(true)' ng-class="{disabled:currentSlide == (trendings.length-1)}" style="cursor: pointer">&gt;</a>
     </div>
   </div>

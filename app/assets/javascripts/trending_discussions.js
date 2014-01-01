@@ -1,9 +1,9 @@
-woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$routeParams', '$filter', 'userAPI', function($scope, $rootScope, $routeParams, $filter, userAPI){
+woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$routeParams', '$filter', 'userAPI','$location', function($scope, $rootScope, $routeParams, $filter, userAPI,$location){
 
   var params = {
     channelid   : $scope.$parent.channelid,
     programmeid : (_.isUndefined($scope.$parent.programmeid))? 0 : $scope.$parent.programmeid,
-    userid      : $rootScope.getUser().userid,
+    userid      : $rootScope.getUser().userid
   };
 
   $scope.channels = [];
@@ -15,7 +15,7 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
 
   $rootScope.thread = {
     current: [], 
-    all: [], 
+    all: []
   };
 
   var loading = $filter('loading');
@@ -62,7 +62,9 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
     forumid: item.forumid, 
     userid: $rootScope.getUser().userid,
     pageno: requestPage
+
   };
+
   $rootScope.currentforumid = item.forumid;
 
   APIkey = (new Date()).getTime();
@@ -149,18 +151,22 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
     //   all: []
     // };
     console.log('Reloading discussions....', forceFetch);
+
     // Show the loading indicator
     $scope.loadingDiscussions = true;
     var discussionBodies = $('.discussionBody');
 
     loading('show', {element: discussionBodies});
 
-    if(_.isUndefined($scope.$parent.programmeid)) {
+    if($location.path().match('channel') != null) {
       console.log('Loading channel discussions....');
-      userAPI.getChannelDiscussions(params, function(rs) {
+      userAPI.getChannelDiscussions({programmeid: "0", channelid: $rootScope.Channelid, starttime: "", userid: $rootScope.getUser().userid}, function(rs) {
+
         loading('hide', {element: discussionBodies});
         if(! rs.getchanneldiscussion) {
+
           console.log('Returning false for channel discussions!')
+            console.log(rs);
           $scope.loadingDiscussions = false;
           $scope.discussionsAvailable = false;
           return false; 
@@ -206,7 +212,7 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
       });
     } else { //PROGRAMME trending discussion
       console.log('Loading program discussions....');
-      userAPI.getProgrammeDiscussions(params, function(rs) {
+      userAPI.getProgrammeDiscussions({programmeid: $rootScope.Programmeid, channelid: "0", starttime: "", userid: $rootScope.getUser().userid}, function(rs) {
         loading('hide', {element: discussionBodies});
         $scope.loadingDiscussions = false;
         if(! rs.getprogramdiscussion) {

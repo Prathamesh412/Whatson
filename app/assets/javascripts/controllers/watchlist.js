@@ -172,7 +172,7 @@ woi.controller("WatchlistController",["$rootScope","$scope","userAPI","$location
         item.isreminder = programme.isreminder;
       }
     });
-  }
+  };
 
   // Function to remove a programme from watchlist slider.
   $scope.removeProgrammeFromWatchlist = function(programmeid){
@@ -186,9 +186,9 @@ woi.controller("WatchlistController",["$rootScope","$scope","userAPI","$location
         if ($(".watchlist-excoll").is(":visible") && $location.path() != ("/Watchlist")) {
             $(".watchlist-excoll").slideUp();
             $("#watchList").removeClass("watchlistactive")
-        };
+        }
     }    
-  }
+  };
 
 
     // Function to add a programme to watchlist
@@ -198,7 +198,7 @@ woi.controller("WatchlistController",["$rootScope","$scope","userAPI","$location
         $scope.watchlistCount = parseInt($scope.watchlistCount) + 1;
         $scope.watchlist = sortByDate($scope.watchlist);
       }
-    }
+    };
 
     // Watching the url to watchlist specific changes for watchlist pages
     $scope.$watch(function(){
@@ -349,8 +349,8 @@ woi.controller("WatchlistController",["$rootScope","$scope","userAPI","$location
                 var content = "Watchout for my customized watchlist at Whats On : \n ";
                 _.each(shareObj,function(item,index){
                   content += (index + 1) + ". ";
-                  content += "<a href= '" + url + "/programme/"+item.programmeid+"/channel/"+item.channelid +"'>"+ item.programmename +"</a>  on ";
-                  content += "<a href= '" + url + "/channel/"+item.channelid +"'> "+ item.channelname +"</a> \n";
+                    content += "<a href= '" + url + "/program/"+item.programmename.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$")+"'>"+ item.programmename +"</a>  on ";
+                    content += "<a href= '" + url + "/channel/"+item.channelname.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$") +"'> "+ item.channelname +"</a> \n";
                 });
 
                  var sharingData = {
@@ -533,7 +533,7 @@ $scope.toggleFavorite = function(p, e, forceRefresh){
       $rootScope.playThisVideo = p.videoUrl;
 
     $rootScope.playThisVideoObj.videourl = $rootScope.playThisVideo;
-    $rootScope.EncodeUrlWithDash(p.programmename,$scope.element,'programme', p.channelid, p.programmeid);
+    $rootScope.EncodeUrlWithDash(p.programmename,$scope.element,'programme', p.channelid, p.programmeid, p.starttime);
 //    $location.path("/programme/"+ p.programmeid +"/channel/"+p.channelid);
   }
 
@@ -621,7 +621,7 @@ woi.controller("WatchlistPageController",["$rootScope","$scope","$location","use
 
     $rootScope.playThisVideoObj.videourl = $rootScope.playThisVideo;
     $location.path("/programme/"+ p.programmename);
-      $rootScope.EncodeUrlWithDash(p.programmename,$scope.element,'programme', p.channelid, p.programmeid);
+      $rootScope.EncodeUrlWithDash(p.programmename,$scope.element,'programme', p.channelid, p.programmeid, p.starttime);
 //    return false;
   } ;
 
@@ -934,25 +934,23 @@ woi.controller("WatchlistPageController",["$rootScope","$scope","$location","use
     $scope.getWatchlistByDate(fromtodate,fromtodate,callbackForWatchlist("selectedDate"));
     $scope.calendarDate = moment(fromtodate,"YYYY-MM-DD").format("Do MMM");
     $('div.qtip:visible').qtip('hide');
-  }
+  };
 
   var appendToWatchlist = function(type,item){
     if (!_.some($scope[type],function(elem){return elem.programmeid == item.programmeid})) 
       $scope[type].push(item);
-  }
+  };
 
   // Add an item to watchlist page.
   $scope.$on("watchlistpage::add",function(event,item){
     var programmetime = moment(item.starttime);
-    var diff = programmetime.format("D") - moment().format("D")
+    var diff = programmetime.format("D") - moment().format("D");
     if (moment().format('M') == programmetime.format('M')) {
       if (diff == 0) 
         appendToWatchlist("today",item);
       else if(diff == 1)
         appendToWatchlist("tomo",item);
       else if(programmetime.format("X") <= moment().day(6).endOf("day").format('X')){
-        console.log(programmetime.format("X"));
-        console.log(moment().day(6).endOf("day").format('X'));
         appendToWatchlist("thisWeek",item);}
       else if(programmetime.format('X') >= moment().day(7).startOf("day").format('X') && programmetime.format('X') <= moment().day(13).endOf("day").format('X'))
         appendToWatchlist("nextWeek",item);
