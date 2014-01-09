@@ -5,7 +5,7 @@
 
     <div class='featured' ng-controller='Home_FeaturedController'>
 
-      <h6 class='subtitle'>FEATURED VIDEO</h6>
+      <h6 class='subtitle'>FEATURED</h6>
 
       <div id="featured-carousel" class="carousel slide">
 
@@ -31,7 +31,7 @@
         <div class="carousel-actions" style="overflow:visible; " id="baseFeatured">
           <div class="item-content" data-actionsid="{{v.slideid}}" ng-repeat='v in featuredVideos' >
             <div class='info'>
-              <h2><a href="#!/program/{{v.programmename}}" ng-click="EncodeUrlWithDash(v.programmename,$event,'programme',v.channelid,v.programmeid,v.starttime)">{{v.programmename}}</a></h2>
+              <h2><a href="#!/program/{{v.actualname}}" ng-click="EncodeUrlWithDash(v.actualname,$event,'programme',v.channelid,v.programmeid,v.starttime)">{{v.programmename}}</a></h2>
               <p>{{v.starttime|featuredVideoTime}}, {{v.timestring}} <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></p>
             </div>
 
@@ -171,7 +171,7 @@
       <div class="btn-group">
         <a ng-click="slideToNow($)" class='btn' ng-class='{active:currentNavButton == "now"}'>
           Now
-          <a ng-click="expandNowNext()" class='expand-btn visible-desktop'>Expand</a>
+          <a ng-click="expandNowNext()" class='expand-btn visible-desktop' style="cursor:pointer">Expand</a>
         </a>
         <a ng-click="moveNext()" class='btn' ng-class='{active:currentNavButton == "next"}'>Next</a>
       </div>

@@ -24,6 +24,8 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
   };
   
   userAPI.channelDetails(params, function(rs) {
+      console.log("**********************response*************************");
+      console.log(rs);
     // Wrong channel id passed
     if(_.isUndefined(rs.getsinglechanneldetail)){
       $scope.channelDetail = null;
@@ -703,7 +705,7 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
     toggleError(emError, false);
 
     if($.trim( $scope.post.title ) == "" || $.trim( $scope.post.message ) == "") {
-        alert("true");
+
 
       emError.html(errorMessages.emptyFields);
       toggleError(emError, true);
@@ -810,7 +812,7 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
         console.log(params);
       if(!rs || !rs.response || rs.response.responsestatus === 'false') {
         emError.html(errorMessages.creationFailed);
-          alert("I am inside.") ;
+
         toggleError(emError, true);
         element.removeClass("loading");
         loading('hide', {element: element});
@@ -940,6 +942,7 @@ woi.controller("ChannelFooterVideosController", ['$scope', '$rootScope' , '$rout
   };
 
   $scope.playVideo = function(e, p){
+
     var element = $(e.currentTarget).parent();
     var playerID = 'footer-' + p.videoid;
 

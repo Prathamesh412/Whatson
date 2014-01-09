@@ -150,7 +150,6 @@ class AppiController < ApplicationController
             "userid"  => "1"
         },
         "actor_profile" => {
-
             "call" => "CastDetails",
             "apikey" => "375f9609c9962cce0ad6ccaaabd80362ecd2b07f",
             "context" => "custid=1;msisdn=222;headendid=0;applicationname=website",
@@ -167,6 +166,13 @@ class AppiController < ApplicationController
         "signIn" => {
             "call" => "AuthenticateUsers",
             "apikey" => "e46de7e1bcaaced9a54f1e9d0d2f800d"
+        },
+        "getActorId" => {
+            "call" => "CastIDByName",
+            "apikey" => "bdf3f54642b2d80f8e87b6474eaaad11ece8058a",
+            "responseformat" => "json",
+            "responselanguage" => "english",
+            "context" => "custid=1;opid=;msisdn=150;headendid=0;applicationname=website"
         },
         "forgotPassword" => {
             "call" => "ForgotPassword",

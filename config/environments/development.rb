@@ -31,9 +31,13 @@ WoiWeb::Application.configure do
 
   # Do not compress assets
   config.assets.compress = false
+  #config.serve_static_assets = false
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.assets.cache_store = :null_store  # Disables the Asset cache
+  config.less.cache = false  # Disable the SASS compiler cache
 
   config.facebookAppId = 137148489775936
 end

@@ -170,7 +170,7 @@ woi.controller("VideosListController", ['$scope','$location', '$rootScope', '$fi
     (function(params){
         // call the api   
         userAPI.getAllVideos(params,function(rs){
-          
+
           $scope.allowRequests = true;
 
           console.log('requested filtertype  === ', params.filtertype);

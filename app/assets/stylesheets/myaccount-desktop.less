@@ -7,7 +7,7 @@
 			border:1px solid #271d38;
 			border-top: none;
 			cursor: pointer;
-			&:nth-child(2n){		
+			&:nth-child(2n){
 				background:#170f23;
 			}
 			&:first-child{
@@ -38,21 +38,21 @@
 					width: 100%;
 					display: block;
 					opacity: 0;
-					border-bottom-right-radius: 5px; 
-					border-bottom-left-radius: 5px; 
-					-webkit-transition: .1s all ease; 
+					border-bottom-right-radius: 5px;
+					border-bottom-left-radius: 5px;
+					-webkit-transition: .1s all ease;
 					-moz-transition: .1s all ease;
 					-o-transition: .1s all ease;
-					transition: .1s all ease; 
+					transition: .1s all ease;
 
 
 					.btn-purple-blue {
-						width:27px; 
-						height:27px; 
+						width:27px;
+						height:27px;
 						margin: 4px 0 4px 5px;
 						padding:0;
-						line-height:23px; 
-						text-align:center; 
+						line-height:23px;
+						text-align:center;
 
 						&:first-child{margin-left:8px;}
 
@@ -101,25 +101,25 @@
 			}
 		}
 		.loadmore{
-			text-align:center; 
-			height:46px; 
-			line-height:46px; 
-			background:#1e152b; 
+			text-align:center;
+			height:46px;
+			line-height:46px;
+			background:#1e152b;
 			border:1px solid #271d38;
 			.rounded(0 0 3px 3px);
 			border-top: none;
 			a{
-				display:block; 
+				display:block;
 				font-family: 'HelveticaNeueRoman', sans-serif;
-				font-size: 14px; 
+				font-size: 14px;
 				color:#744289;
 			}
 		}
 	}
 	.tabs{
-		margin-bottom:20px; 
+		margin-bottom:20px;
 		li{
-			float:left; 
+			float:left;
 			margin-left:20px;
 			&:first-child{
 				margin-left:10px;
@@ -127,8 +127,8 @@
 			a{
 				text-transform:uppercase;
 				font-family: 'DosisLight';
-				font-size: 25px; 
-				color:#b6a0b8; 
+				font-size: 25px;
+				color:#b6a0b8;
 				&.active{
 					color:#a35798;
 				}
@@ -197,11 +197,11 @@
 		&.active::after {
 			width: 0px;
 		}
-		&:after{ 
-			width:1px; 
-			height: 130px; 
-			content:''; 
-			position:absolute; 
+		&:after{
+			width:1px;
+			height: 130px;
+			content:'';
+			position:absolute;
 			left: -21px;
 			top:10px;
 			background: #54104d;
@@ -212,7 +212,7 @@
 			background: -ms-linear-gradient(top, rgba(84,16,77,0.25) 0%,rgba(105,43,98,0.8) 50%,rgba(85,14,78,0.25) 100%);
 			background: linear-gradient(to bottom, rgba(84,16,77,0.25) 0%,rgba(105,43,98,0.8) 50%,rgba(85,14,78,0.25) 100%);
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(84,16,77,0.25)', endColorstr='rgba(85,14,78,0.25)',GradientType=0 );
-		}  
+		}
 	}
 	.arrows {
 		font-family: 'DosisLight';
@@ -491,7 +491,7 @@
 		}
 	}
 	.account-edit{
-		.image-uploader{		
+		.image-uploader{
 			.thumb{
 				float: left;
 				margin-right: 20px;
@@ -514,7 +514,7 @@
 						overflow: hidden;
 						text-overflow: ellipsis;
 						white-space: nowrap;
-					}					
+					}
 					.profile-image,.touchUploadOverlay, label{
 						position: absolute;
 						opacity: 0;
@@ -700,7 +700,7 @@
 					cursor: pointer;
 					z-index: 2;
 					opacity: 1;
-					
+
 				}
 			}
 			&.pwd-wrapper{
@@ -758,11 +758,11 @@
 				font: 16px 'HelveticaNeueRoman';
 				color: #BEB0BF;
 			}
-			.sub-heading{		
+			.sub-heading{
 				color: #9587af;
 				font: 14px 'HelveticaNeueCn';
 			}
-		}	
+		}
 		.options-list{
 			margin-top: 10px;
 			.option{
@@ -837,7 +837,7 @@
 				}
 			}
 		}
-		&:nth-child(2n){		
+		&:nth-child(2n){
 			// background:#170f23;
 			background: rgba(23,15,35,0.3);
 		}
@@ -929,7 +929,7 @@
 }
 
 .account-language-list{
-	max-height: 500px;
+	max-height: 300px;
 	overflow-y: scroll;
 	-ms-overflow-y: scroll;
 }
@@ -974,9 +974,9 @@ html.no-touch {
 			.loadmore {
 				a {
 					&:hover {
-						background:#21132f; 
-						border-bottom-right-radius: 3px; 
-						border-bottom-left-radius: 3px; 
+						background:#21132f;
+						border-bottom-right-radius: 3px;
+						border-bottom-left-radius: 3px;
 						color: #feef02;
 						text-shadow: 0 2px 17px #ff616b;
 					}
@@ -1017,7 +1017,7 @@ html.no-touch {
 			}
 		}
 		.account-edit{
-			.image-uploader{		
+			.image-uploader{
 				.right-content{
 					.btn-wrapper{
 						.grey-btn{
@@ -1062,6 +1062,9 @@ html.no-touch {
 .tvoperator-popover{
 	.choose-language{
 		.language-list{
+          max-height: 308px ;
+          overflow-y: scroll;
+          -ms-overflow-y: scroll;
 			&.tv-operator-list{
 				.allcheckbox{
 					label{

@@ -43,6 +43,12 @@ woi.factory("userAPI", ['$resource', '$rootScope',"IPfetcher" , function($resour
                 "mode": "actor_profile"
             }
         },
+        "getActorId":{
+            "method": "GET",
+            "params": {
+                "mode": "getActorId"
+            }
+        },
         "SimilarActor":{
             "method": "GET",
             "params": {

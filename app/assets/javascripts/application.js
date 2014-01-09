@@ -26,12 +26,10 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         .when("/actor/:id",{
             templateUrl: "actor/profile.html",
                 resolve:{
-                    checkActorId : ['$route','$location','$rootScope', function($route,$location,$rootScope) {
+                    checkActorId : ['$route','$location','$rootScope','userAPI','$q', function($route,$location,$rootScope,userAPI,$q) {
                         var url = $route.current.params.id;
                         var actorName = url.replace(/\-/g, " ").replace(/\~/g, "-").replace(/\$/g, "/");
-                        console.log(actorName);
                         var  actorList = $rootScope.storeActorNameAndId;
-                        console.log(actorList);
                         if($rootScope.storeActorNameAndId){
                             angular.forEach(actorList, function(actor, key){
                                 if(actor.name == actorName){
@@ -41,7 +39,20 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
                         }
                         else
                         {
-                            $location.path("home")
+                            var deferred = $q.defer();
+                            userAPI.getActorId({castname: actorName }, function (r) {
+                                if(r.getcastid != null)
+                                {
+                                    deferred.resolve($rootScope.actorid = r.getcastid.castidbyname.castid);
+                                }
+                                else
+                                {
+                                   $location.path("/");
+                                }
+
+                            });
+
+                            return deferred.promise;
                         }
                 }]
             }
@@ -97,7 +108,7 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         .when('/program/:programmename', {                           //Url rewriting Prathamesh addition
             templateUrl:"programme/info.html" ,
             resolve: {
-                programmeid: ['$rootScope','$route','$q','userAPI',function($rootScope,$route,$q,userAPI) {
+                programmeid: ['$rootScope','$route','$q','userAPI','$location',function($rootScope,$route,$q,userAPI,$location) {
                     if($rootScope.isclick)
                     {
                         $rootScope.isclick = false;
@@ -107,10 +118,17 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
                     var url = $route.current.params.programmename;
                     url = url.replace(/\-/g, " ").replace(/\~/g, "-").replace(/\$/g, "/") ;
                     var deferred = $q.defer();
-                    $rootScope.Channelid = null;
+                    $rootScope.Channelid = 0;
+                    $rootScope.channelid = 0;
                     userAPI.getProgrammeid({ programmename: url }, function (r) {
-                        deferred.resolve($rootScope.Programmeid= r.getprogrammeidbyname.programmeidbyname.programmeid);
-
+                        if(r.getprogrammeidbyname != null)
+                        {
+                            deferred.resolve($rootScope.Programmeid= r.getprogrammeidbyname.programmeidbyname.programmeid);
+                        }
+                        else
+                        {
+                           $location.path("/");
+                        }
                         // now that our promise is resolved, our controller should execute
                     });
                     return deferred.promise;
@@ -123,7 +141,7 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
             templateUrl:"channels/details.html" ,
 
             resolve: {
-                storeId: ['$rootScope','$route','$q','userAPI',function($rootScope,$route,$q,userAPI){
+                storeId: ['$rootScope','$route','$q','userAPI','$location',function($rootScope,$route,$q,userAPI,$location){
 //                    if($rootScope.Channelid || $rootScope.channelid)
 //                    {
 //                        $rootScope.Channelid = null;
@@ -145,7 +163,14 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
                     url = url.replace(/\-/g, " ").replace(/\~/g, "-").replace(/\$/g, "/") ;
                     var deferred = $q.defer();
                     userAPI.getChannelid({ channelname: url }, function (r) {
-                        deferred.resolve($rootScope.Channelid= r.getsinglechannelidbyname.singlechannelidbyname.channelid);
+                        if(r.getsinglechannelidbyname != null)
+                        {
+                            deferred.resolve($rootScope.Channelid= r.getsinglechannelidbyname.singlechannelidbyname.channelid);
+                        }
+                        else
+                        {
+                            $location.path("/");
+                        }
                         // now that our promise is resolved, our controller should execute
                     });
 
@@ -400,7 +425,6 @@ woi.run(['$rootScope', '$route','$location','$timeout', '$http', function($rootS
 
     $rootScope.woiresource = function (url, defaults, actions) {
         var $res = {};
-
         for (var i in actions) {
 
             var default_params = {};

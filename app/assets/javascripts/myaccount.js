@@ -1123,8 +1123,7 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
       }
 
       $scope.paginateFriendList = $scope.friendsList.slice(0, $scope.amountFriendList);
-        console.log("*******************************ssss") ;
-        console.log($scope.paginateFriendList);
+
       if($scope.paginateFriendList.length == 0){
       	$scope.changeTab('popular');
       }

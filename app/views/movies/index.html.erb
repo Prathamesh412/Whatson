@@ -1,145 +1,146 @@
 <section class='clearfix main-section lpMovies' ng-controller="MoviesLandingPageController">
 
-<div class = 'movie-info-tabs clearfix' ng-controller="MoviesNavController">
+  <div class = 'movie-info-tabs clearfix' ng-controller="MoviesNavController">
     <!-- The main nav bar This Week / Today / Tomorrow -->
     <ul >
       <li>
-      	<a  ng-click="toggleTab('this_week')" ng-class="{active: currentTab == 'this_week'}" class='tab-btn' style="cursor: pointer">THIS WEEK
-  		</a>
+        <a  ng-click="toggleTab('this_week')" ng-class="{active: currentTab == 'this_week'}" class='tab-btn' style="cursor: pointer">THIS WEEK
+        </a>
       </li>
       <li>
-      	<a  ng-click="toggleTab('today')"     ng-class="{active: currentTab == 'today'}" style="cursor: pointer" class='tab-btn'>TODAY
-      	</a>
+        <a  ng-click="toggleTab('today')"     ng-class="{active: currentTab == 'today'}" style="cursor: pointer" class='tab-btn'>TODAY
+        </a>
       </li>
       <li>
-      	<a  ng-click="toggleTab('tomorrow')"  ng-class="{active: currentTab == 'tomorrow'}" style="cursor: pointer" class='tab-btn'>TOMORROW
-      	</a>
+        <a  ng-click="toggleTab('tomorrow')"  ng-class="{active: currentTab == 'tomorrow'}" style="cursor: pointer" class='tab-btn'>TOMORROW
+        </a>
       </li>
       <!-- <li><a class='tab-btn' ng-click="showMore()">{{aboutTabText}}</a></li> -->
     </ul>
     <div class = 'select-boxes hidden-phone visible-tablet visible-desktop'>
-    	<div class="select-operator" ng-controller = "AllDayMoviesController">
-    		<a class="btn" all-day-popover>
-      			<span class="operator-name" id="allDayName">All Day</span><span class="arrow"></span>
-    		</a>
-    	</div>
-	    <div class="select-operator" ng-controller = "MoviesTvOperatorController">
-    		<a class="btn" id="selectOperator" tv-operator-popover>
-      			<span class="operator-name" id="operator-name">TV Operator</span><span class="arrow"></span>
-    		</a>
-    	</div>
-  	</div>
-</div>
+      <div class="select-operator" ng-controller = "AllDayMoviesController">
+        <a class="btn" all-day-popover>
+          <span class="operator-name" id="allDayName">All Day</span><span class="arrow"></span>
+        </a>
+      </div>
+      <div class="select-operator" ng-controller = "MoviesTvOperatorController">
+        <a class="btn" id="selectOperator" tv-operator-popover>
+          <span class="operator-name" id="operator-name">TV Operator</span><span class="arrow"></span>
+        </a>
+      </div>
+    </div>
+  </div>
   <div class = 'phone-filters visible-phone hidden-tablet hidden-desktop clearfix'>
     <div class = 'filter-wrapper'>
       <span class = 'title'>Filters & Search </span>
       <button class = 'btn btn-filter' movie-toggle-filter>=</button>
     </div>
   </div>
-<div class = 'outer-wrapper'>
-  <div class = 'inner-wrapper'>
-    <div class="filters clearfix" ng-controller="MoviesFilterController">
+  <div class = 'outer-wrapper'>
+    <div class = 'inner-wrapper'>
+      <div class="filters clearfix" ng-controller="MoviesFilterController">
 
-      <div class='phone-filter-options visible-phone clearfix'>
-        <div class = 'main-nav clearfix'>
+        <div class='phone-filter-options visible-phone clearfix'>
+          <div class = 'main-nav clearfix'>
+            <ul>
+              <li>
+                <a ng-class="{active: currentFilter == 'All'}" ng-click="setFilter('All')">All</a>
+              </li>
+              <li ng-show="userLogged == 'on'">
+                <a ng-class="{active: currentFilter == 'Favorite'}" class="btn-purple-blue" ng-click="setFilter('Favorite')"><i class="icon-favorite"></i></a>
+              </li>
+              <li ng-repeat = "x in filterMenuList">
+                <a ng-class="{active: currentFilter == x.subgenre}" ng-click="setFilter(x.subgenre)">{{x.subgenre}}
+                  <span ng-class="{active: currentFilter == x.subgenre}" class = 'number'> ({{x.moviecount}}) </span></a>
+              </li>
+            </ul>
+          </div>
+          <div class = 'select-boxes'>
+            <div class="select-operator" ng-controller = "AllDayMoviesController">
+              <a class="btn" all-day-popover>
+                <span class="operator-name" id="mobAllDayName">All Day</span><span class="arrow"></span>
+              </a>
+            </div>
+            <div class="select-operator" ng-controller = "MoviesTvOperatorController">
+              <a class="btn" id="selectOperator " tv-operator-popover>
+                <span class="operator-name android-line-height-movies" id="mob-operator-name">TV Operator</span><span class="arrow"></span>
+              </a>
+            </div>
+            <div class = 'search-icon' ng-controller="ActorAutoCompleteController">
+              <div class = 'iconoverlay' ng-click="clickSearch($event)"></div>
+              <input type='search' actor-autocomplete placeholder='Search Actors...' class = 'actor-search'/>
+            </div>
+          </div>
+          <button class = 'btn back-btn-filter visible-phone hidden-desktop hidden-tablet' movie-toggle-filter> Back </button>
+        </div>
+        <div class="main-nav hidden-phone clearfix">
           <ul>
             <li>
               <a ng-class="{active: currentFilter == 'All'}" ng-click="setFilter('All')">All</a>
             </li>
             <li ng-show="userLogged == 'on'">
-              <a ng-class="{active: currentFilter == 'Favorite'}" class="btn-purple-blue" ng-click="setFilter('Favorite')"><i class="icon-favorite"></i></a>
+              <a live-tooltip='Favorites' ng-class="{active: currentFilter == 'Favorite'}" class="btn-purple-blue" ng-click="setFilter('Favorite')"><i class="icon-favorite"></i></a>
             </li>
             <li ng-repeat = "x in filterMenuList">
-              <a ng-class="{active: currentFilter == x.subgenre}" ng-click="setFilter(x.subgenre)">{{x.subgenre}} 
-              <span ng-class="{active: currentFilter == x.subgenre}" class = 'number'> ({{x.moviecount}}) </span></a>
+              <a ng-class="{active: currentFilter == x.subgenre}" ng-click="setFilter(x.subgenre)">{{x.subgenre}}
+                <span ng-class="{active: currentFilter == x.subgenre}" class = 'number'> ({{x.moviecount}}) </span> </a>
             </li>
+
           </ul>
-        </div>
-        <div class = 'select-boxes'>
-          <div class="select-operator" ng-controller = "AllDayMoviesController">
-            <a class="btn" all-day-popover>
-                <span class="operator-name" id="mobAllDayName">All Day</span><span class="arrow"></span>
-            </a>
+          <div class = 'range-slider hidden-phone' range-slider ng-controller="RangeSliderController">
+            Production Year
           </div>
-          <div class="select-operator" ng-controller = "MoviesTvOperatorController">
-            <a class="btn" id="selectOperator " tv-operator-popover>
-                <span class="operator-name android-line-height-movies" id="mob-operator-name">TV Operator</span><span class="arrow"></span>
-            </a>
-          </div>
-          <div class = 'search-icon' ng-controller="ActorAutoCompleteController">
-            <div class = 'iconoverlay' ng-click="clickSearch($event)"></div>
-            <input type='search' actor-autocomplete placeholder='Search Actors...' class = 'actor-search'/>
-          </div>
-        </div>
-        <button class = 'btn back-btn-filter visible-phone hidden-desktop hidden-tablet' movie-toggle-filter> Back </button>
-      </div>
-      <div class="main-nav hidden-phone clearfix">
-        <ul>
-          <li>
-              <a ng-class="{active: currentFilter == 'All'}" ng-click="setFilter('All')">All</a>
-          </li>
-          <li ng-show="userLogged == 'on'">
-          	<a live-tooltip='Favorites' ng-class="{active: currentFilter == 'Favorite'}" class="btn-purple-blue" ng-click="setFilter('Favorite')"><i class="icon-favorite"></i></a>
-          </li>
-          <li ng-repeat = "x in filterMenuList">
-          	<a ng-class="{active: currentFilter == x.subgenre}" ng-click="setFilter(x.subgenre)">{{x.subgenre}}
-            <span ng-class="{active: currentFilter == x.subgenre}" class = 'number'> ({{x.moviecount}}) </span> </a>
-          </li>
-          
-        </ul>
-        <div class = 'range-slider hidden-phone' range-slider ng-controller="RangeSliderController">
-        	Production Year
         </div>
       </div>
-    </div>
 
 
-    <div class = 'moviesWrapper clearfix' ng-controller="MoviesListController">
-    	<!-- <div class="spin" ng-show = "paginateMovies.length == 0"/> -->
-      <div class="spin" style="bottom:0; left:50%; top:100%;" ng-show = "allowRequests == false || paginateMovies.length == 0 && finishedLoading == false"/>
+      <div class = 'moviesWrapper clearfix' ng-controller="MoviesListController">
+        <!-- <div class="spin" ng-show = "paginateMovies.length == 0"/> -->
+        <div class="spin" style="bottom:0; left:50%; top:100%;" ng-show = "allowRequests == false || paginateMovies.length == 0 && finishedLoading == false"/>
         <div class = 'search-icon' ng-controller="ActorAutoCompleteController">
           <div class = 'iconoverlay hidden-phone ' ng-click="clickSearch($event)"></div>
-    	    <input type='search' actor-autocomplete placeholder='Search Actors...' class = 'actor-search hidden-phone visible-desktop visible-tablet' />
+          <input type='search' actor-autocomplete placeholder='Search Actors...' class = 'actor-search hidden-phone visible-desktop visible-tablet' />
         </div>
-    	
-    	<ul class = 'movie-pics'>
-    		<li class = 'movie-item' save-start-time="item" scroll-callback ng-repeat="item in paginateMovies" watchable="item">
 
-          <!-- Add background image -->
-    			<div class = 'thumb' style='background-image: url("{{item.imagefilepath}}")'>
-              <a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)" style="display:block; width:100%; height:100%; "></a>
-    				  <div class="favorite-ribbon" ng-show="item.isrecommended == '1'"></div>
-    			    
-             <div class="user-actions hidden-phone hidden-tablet visible-desktop" >
-          
-              <a live-tooltip='Add to Favorite'  ng-click='toggleFavoriteMovie(item, $event)'  class='btn btn-small btn-purple-blue favorite' ng-class="{active:item.isfavorite == '1'}">
-                <i class="icon-favorite"></i>
-              </a>
-              
-              <a ng-controller="UserController" live-tooltip="Reminder Alerts"        ng-click='toggleReminder(item, $event)'  class='btn btn-small btn-purple-blue reminder' ng-class="{active:item.isreminder == '1'}"  >
-                <i class="icon-reminder"></i>
-              </a>
+        <ul class = 'movie-pics'>
+          <li class = 'movie-item' save-start-time="item" scroll-callback ng-repeat="item in paginateMovies" watchable="item">
 
-              <a ng-controller="UserController" live-tooltip='Add to Watchlist' ng-click='addToWatchlist(item, $event)'  class='btn btn-small btn-purple-blue watchlist' ng-class="{active:item.iswatchlist == '1'}">
-                <i class="icon-watchlist"></i>
-              </a>
+            <!-- Add background image -->
+            <div class = 'thumb' style='background-image: url("{{item.imagefilepath}}")'>
+              <div  ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)" style="width:100%; height:100%;" ng-show="!item.videourl"></div>
+              <a class="bgimage" ng-href="#!/program/{{item.programmename}}"  style="position:absolute;background-image: url('assets/img/hometabs-play.png');background-repeat: no-repeat; width:41px; height:44px;left:37%;top:36%" ng-show="item.videourl" ng-click="showvideo(item,$event)"></a>
+
+              <div class="favorite-ribbon" ng-show="item.isrecommended == '1'"></div>
+              <div class="user-actions hidden-phone hidden-tablet visible-desktop" >
+
+                <a live-tooltip='Add to Favorite'  ng-click='toggleFavoriteMovie(item, $event)'  class='btn btn-small btn-purple-blue favorite' ng-class="{active:item.isfavorite == '1'}">
+                  <i class="icon-favorite"></i>
+                </a>
+
+                <a ng-controller="UserController" live-tooltip="Reminder Alerts"        ng-click='toggleReminder(item, $event)'  class='btn btn-small btn-purple-blue reminder' ng-class="{active:item.isreminder == '1'}"  >
+                  <i class="icon-reminder"></i>
+                </a>
+
+                <a ng-controller="UserController" live-tooltip='Add to Watchlist' ng-click='addToWatchlist(item, $event)'  class='btn btn-small btn-purple-blue watchlist' ng-class="{active:item.iswatchlist == '1'}">
+                  <i class="icon-watchlist"></i>
+                </a>
+              </div>
+
             </div>
+            <div class = 'text-wrapper'>
+              <div class = 'row-one clearfix'>
+                <a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)"><div class = 'name'  live-tooltip-single-line="{{item.programmename}}">{{item.programmename}}</div></a>
+                <a href="#!/channel/{{item.channelname}}" ng-click="EncodeUrlWithDash(item.channelname,$event,'channel',item.channelid,item.programmeid)"><div class = 'channel' live-tooltip-single-line="{{item.channelname}}"> {{item.channelname}} </div></a>
+              </div>
+              <div class = 'time'> {{item.starttime | featuredVideoTime}} </div>
+            </div>
+          </li>
 
-          </div>
-    			<div class = 'text-wrapper'>
-    				<div class = 'row-one clearfix'> 
-    					<a ng-href="#!/program/{{item.programmename}}" ng-click="EncodeUrlWithDash(item.programmename,$event,'programme',item.channelid,item.programmeid,item.starttime)"><div class = 'name'  live-tooltip-single-line="{{item.programmename}}">{{item.programmename}}</div></a>
-    					<a href="#!/channel/{{item.channelname}}" ng-click="EncodeUrlWithDash(item.channelname,$event,'channel',item.channelid,item.programmeid)"><div class = 'channel' live-tooltip-single-line="{{item.channelname}}"> {{item.channelname}} </div></a>
-    				</div>
-    				<div class = 'time'> {{item.starttime | featuredVideoTime}} </div>
-    			</div>
-    		</li>
-    	
-    	</ul>
-      <!-- <div ng-show="finishedLoading == true && paginateMovies.length == 0" class="noResultsBlock">No Results Found {{currentGenre | allFilter}}</div> -->
-      <div ng-show="finishedLoading == true && paginateMovies.length == 0" class="noResultsBlock">No matches found for your selection</div>
+        </ul>
+        <!-- <div ng-show="finishedLoading == true && paginateMovies.length == 0" class="noResultsBlock">No Results Found {{currentGenre | allFilter}}</div> -->
+        <div ng-show="finishedLoading == true && paginateMovies.length == 0" class="noResultsBlock">No matches found for your selection</div>
+      </div>
     </div>
   </div>
-</div>
 </section>
 <script type='text/javascript' src='/assets/slider.js'/>

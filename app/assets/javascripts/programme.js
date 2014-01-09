@@ -35,7 +35,7 @@ woi.controller("ProgrammeController", ['$scope', '$rootScope', '$routeParams', '
         $rootScope.thisStartTime  = '';
     }
 
-    $rootScope.programmeStartTime = null;
+//    $rootScope.programmeStartTime = null;
 
     if( angular.isUndefined($routeParams.channelid) || !$routeParams.channelid.length ) {
         $routeParams.channelid = 0;
@@ -91,7 +91,6 @@ woi.controller("ProgrammeController", ['$scope', '$rootScope', '$routeParams', '
 
                 endtime = endtime.substring(0, endtime.length - 6).replace(/\-/g,'\/').replace(/[T|Z]/g,' ');
                 starttime = starttime.substring(0, starttime.length - 6).replace(/\-/g,'\/').replace(/[T|Z]/g,' ');
-
                 minutes = Math.abs(new Date(endtime).getTime() - new Date(starttime).getTime());
 
                 minutes = (  Math.floor((minutes/1000)/60) );

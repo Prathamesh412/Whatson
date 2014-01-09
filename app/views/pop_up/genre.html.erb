@@ -4,7 +4,7 @@
     <div class='header'>
      <h4>Select a Category</h4>
     </div>
-      <ul class='language-list'>
+      <ul class='language-list' style="max-height:308px;overflow-y : scroll;-ms-overflow-y : scroll">
           <li ng-repeat="g in paginateGenres">
           <span>
             <label for="checkbox{{g.genre}}">
@@ -18,7 +18,7 @@
           </li>
       </ul>
      <div class='footer'>
-    <a ng-click="viewAllGenre()" ng-show="paginateGenres.length != allGenres.length" > 
+    <a ng-click="viewAllGenre()" ng-show="paginateGenres.length != allGenres.length" style="cursor:pointer">
       View all Categories
     </a>
     </div>

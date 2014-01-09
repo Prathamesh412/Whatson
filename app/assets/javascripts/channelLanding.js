@@ -111,13 +111,13 @@ woi.controller("FeaturedChannelPageController", ['$scope', '$location', '$rootSc
           hide: {
             fixed: true,
             delay: 750,
-            event: 'unfocus',
+            event: 'unfocus'
           },
           position:{
             my: popover_position.my, 
             at: popover_position.at,
             adjust:{
-              y: yoffset, 
+              y: yoffset
             }
           },
           style:{
@@ -196,7 +196,7 @@ woi.controller("FeaturedChannelPageController", ['$scope', '$location', '$rootSc
       loading('hide', {element:element});
 
       if(rs.response.responsestatus == 'false') {
-        alert(rs.response.message);
+
         //return false;
       }
   
@@ -480,7 +480,7 @@ woi.controller("BrowseController", ['$scope', '$rootScope', '$filter', '$timeout
                 };
               }
             }
-          }, 
+          }
         };
       };
 
@@ -513,7 +513,7 @@ woi.controller("BrowseController", ['$scope', '$rootScope', '$filter', '$timeout
       loading('hide', {element:element});
 
       if(rs.response.responsestatus == 'false') {
-        alert(rs.response.message);
+
         //return false;
       }
   

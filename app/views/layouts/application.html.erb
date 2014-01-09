@@ -82,10 +82,10 @@
 
           <!-- Twitter -->
           <!-- <a href="https://twitter.com/WhatsOnIndia" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @WhatsOnIndia</a> -->
-          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whatsonindia.com" data-text="Whats On India -" data-via="whatsonindia" data-hashtags="tvguide">Tweet</a>
+       <!--   <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whatsonindia.com" data-text="Whats On India -" data-via="whatsonindia" data-hashtags="tvguide">Tweet</a>
           <script>
             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-          </script>
+          </script>   -- >
 
           <!-- Google Plus -->
           <div class="g-plusone" data-size="medium"  data-href="http://www.WhatsOnIndia.com/" data-callback="gPlusCallback"></div>
@@ -123,8 +123,8 @@
                   <li><a href='#!/watchlistsocial'>Watchlist</a></li>
                   <li><a href='#!/reminders'>Reminders</a></li>
                   <li><a href='#!/favourites'>Favorites</a></li>
-                  <li><a ng-click="goToFeed('feed')">Social Feed</a></li>
-                  <li class="spaced"><a ng-click="signOutUser()">Log out</a></li>
+                  <li style="cursor: pointer;"><a ng-click="goToFeed('feed')">Social Feed</a></li>
+                  <li style="cursor: pointer;"class="spaced"><a ng-click="signOutUser()">Log out</a></li>
                 </ul>
               </div>
             </div>
@@ -281,10 +281,10 @@
       <!-- /newsletter -->
 
       <div class='nav' ng-controller="MainMenuController">
-       <p>® 2012</p>
+       <p>©2014 Whats On India Media Pvt. Ltd. All Rights reserved</p>
         <ul>
           <li><a href='#!/about' ng-click="clearMainNav()">About</a></li>
-          <li><a href='http://www.whatsonindia.net/contact.html' target="_blank">Contact</a></li>
+          <li><a href='http://www.whatsonindia.net/contact-form-2' target="_blank">Contact</a></li>
           <li class="visible-phone more"><a href='#' ng-click="toggleMoreFooter($event)">More</a></li>
           <li class="hidden-phone special"><a href='http://www.whatsonindia.net' target="_blank">Corporate</a></li>
           <li class="hidden-phone special"><a href='#!/tnc' ng-class='{active: currentMenuActive =="tnc"}'  ng-click="goTo('tnc')">T&amp;C</a></li>

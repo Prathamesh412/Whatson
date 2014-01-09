@@ -818,7 +818,7 @@ woi.controller('App_UserLanguageController', ['$scope', '$rootScope', '$http', '
     var $languages = $('#languageList');
 
     $languages.css({
-      'max-height' : '500px',
+      'max-height' : '300px',
       'overflow-y' : 'scroll',
       '-ms-overflow-y' : 'scroll'
     });

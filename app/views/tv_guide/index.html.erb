@@ -22,7 +22,7 @@
         <%#</div>%>
       <span class="location-label">
         <input type="text" class="location-input" value="{{locationString}}"/>
-        <span class="location-string" style="cursor: pointer">{{locationString}}</span>
+        <span class="location-string" >{{locationString}}</span>
       </span>
       
       <a class="location-change" style="cursor: pointer">Change</a>
@@ -44,7 +44,7 @@
       </div>
 
       <div class="duedate" ng-controller="CalendarController">
-        <a  ng-click="setCalendar()" tv-guide-calendar-popover>
+        <a  ng-click="setCalendar()" tv-guide-calendar-popover style="cursor:pointer">
           <span>{{selected_date.date_string}}</span> 
           <span class="day-label">{{selected_date.day_name}}</span> 
           <i class="calendar-icon" style="cursor: pointer" >{{selected_date.day_value}}</i>

@@ -28,6 +28,22 @@ woi.controller("MoviesLandingPageController", ['$scope', '$rootScope', '$filter'
 
 woi.controller("MoviesListController", ['$scope','$location','$rootScope', '$filter', '$routeParams','$timeout', '$compile', 'userAPI', function($scope, $location, $rootScope, $filter, $routeParams, $timeout,  $compile, userAPI){
 
+    $scope.showvideo = function(p,element){
+        $rootScope.playThisVideo = p.videourl;
+        $rootScope.playThisVideoObj = p;
+        if (_.isUndefined($rootScope.playThisVideo) && !_.isUndefined(p.videoUrl))
+            $rootScope.playThisVideo = p.videoUrl;
+
+        $rootScope.playThisVideoObj.videourl = $rootScope.playThisVideo;
+
+        // $rootScope.$apply();
+//      $location.path("/programme/"+test);
+        console.log("*************************************************************");
+        console.log(p.programmename);
+        $rootScope.EncodeUrlWithDash(p.programmename,element,'programme',p.channelid,p.programmeid, p.starttime);
+        return false;
+    };
+
     $scope.changeurl= function(url,element){
         var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
         $location.path("programme/" + str);
@@ -201,7 +217,6 @@ woi.controller("MoviesListController", ['$scope','$location','$rootScope', '$fil
     (function(params){
       // call the api   
       userAPI.getAllMovies(params,function(rs){
-        
         $scope.allowRequests = true;
 
         if(params.todatetime  !=  $scope.endTime){         

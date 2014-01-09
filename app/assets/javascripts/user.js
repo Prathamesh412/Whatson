@@ -1070,7 +1070,7 @@ woi.controller('UserController', [ '$rootScope','$location','$scope', '$compile'
     if(_.isUndefined( temp.programmeid ))
       temp.programmeid = temp.programid;
     userAPI.toggleFavoriteProgramme({like:(temp.isfavorite == "0"), programmeid:temp.programmeid, userid:$rootScope.getUser().userid}, function(rs){
-       alert($rootScope.getUser().userid);
+
       if(forceRefresh) {
         location.reload();
         return false;

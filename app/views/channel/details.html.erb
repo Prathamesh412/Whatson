@@ -9,7 +9,7 @@
         <div class="thumb">
           <img ng-src="{{channelDetails.logofileurl}}" alt="{{channelDetails.channelname}}" />
         </div>
-        <h1 class="name" live-tooltip-single-line="{{channelDetails.channelname}}">{{channelDetails.channelname}}</h1>
+        <h1 class="name" live-tooltip-single-line="{{channelDetails.channelname}}">{{channelDetails.displayname}}</h1>
       <div class="favs" ng-controller="UserController">
         <a href="#" ng-click="toggleFavoriteChannel($event, channelDetails)" ng-class="{active: channelDetails.channelfavorite=='1'}" class="btn btn-small btn-purple-blue"><i class="icon-favorite" ></i></a>
         <span class="number">{{channelDetails.nooffans}} Fans</span>

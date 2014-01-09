@@ -64,7 +64,7 @@ woi.directive('featuredVideoPlayer', ['$compile', '$location','$rootScope', func
 //          alert("hey");
 //          var str = video.programmename.replace(/\s/g, "-");            //Prathamesh Changes for
 //          $location.path('/programme/'+ str);
-          $rootScope.EncodeUrlWithDash(video.programmename,element,'programme',video.channelid,video.programmeid, video.starttime);
+          $rootScope.EncodeUrlWithDash(video.actualname,element,'programme',video.channelid,video.programmeid, video.starttime);
 
       };
       element.find('.player').click(function(){
