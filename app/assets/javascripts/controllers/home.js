@@ -1,20 +1,4 @@
 woi.controller('Home_FeaturedController', ['$rootScope', '$scope', '$location', 'recoAPI', 'userAPI', 'videoActions', function($rootScope, $scope, $location, recoAPI, userAPI, videoActions){
-
-    $scope.changeurl= function(url,element){
-       var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");           //Prathamesh Changes for
-        $location.path("programme/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
-    $scope.changechannelurl= function(url,element){
-        var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");            //Prathamesh Changes for
-        $location.path("channel/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
   // Highlight home in the menu
   if ($location.path().replace(/\//g, '') === 'home' || $location.path().replace(/\//g, '') === 'Home') {
     $rootScope.$broadcast('highlightHome', []);
@@ -182,24 +166,6 @@ woi.controller('Home_FeaturedController', ['$rootScope', '$scope', '$location', 
 }]);
 
 woi.controller('Home_ProgramsTabController', ['$scope', '$rootScope', '$timeout', '$filter', 'recoAPI', 'userAPI','$location', function($scope, $rootScope, $timeout, $filter, recoAPI, userAPI, $location){
-  $scope.changeurl= function(url,element){
-
-      var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");            //Prathamesh Changes for
-      $location.path("programme/" + str);
-      element.stopPropagation();
-      element.preventDefault();
-
-  };
-    $scope.changechannelurl= function(url,element){
-
-       var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");            //Prathamesh Changes for
-        $location.path("channel/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
-
   var loading = $filter('loading');
   var $channelTabs = $(".channel-tabs").hide();
   var $tabButtons;
@@ -1066,29 +1032,6 @@ woi.controller('Home_TrendingController', ['$scope','$rootScope', '$timeout','$c
 
 }]);
 woi.controller("Home_FBActivityController", ['$rootScope','$location','$scope','$timeout', '$compile','$location', 'userAPI',  function($rootScope,$location, $scope,  $timeout, $compile, $location, userAPI){
-
-    $scope.changeurl= function(url,element){
-
-       var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
-
-        $location.path("programme/" + str);
-
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
-    $scope.changechannelurl= function(url,element){
-
-
-        var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
-
-        $location.path("channel/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
   $scope.activities = [];
   $scope.currentSlide = 0;
   var $element =   $(".fb-activity"),

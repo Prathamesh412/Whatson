@@ -95,7 +95,7 @@ woi.controller("DiscussionsController", ['$scope', '$rootScope', '$filter', '$ti
 					}
 					$scope.openThread( tempArray.discussions, tempArray.discussions[0] );
 					$scope.tabs.push( tempArray );
-				});	
+				});
 			})(i, $scope.requestKey);
 		}
 	}
@@ -109,13 +109,13 @@ woi.controller("DiscussionsController", ['$scope', '$rootScope', '$filter', '$ti
 
 	$scope.loadFilters = function() {
 		userAPI.getDiscussionFilters({}, function(r) {
-			if(!r.filters) { 
-				$scope.allFilters = []; 
-				return false; 
+			if(!r.filters) {
+				$scope.allFilters = [];
+				return false;
 			}
 
 			$scope.allFilters = r.filters.filtertype;
-		});	
+		});
 	};
 
 	$scope.viewAllComments = function(thread) {
@@ -143,7 +143,7 @@ woi.controller("DiscussionsController", ['$scope', '$rootScope', '$filter', '$ti
 			var $thisElement = $( $loadingIndicator[i] ),
 			childrenCount = $thisElement.children().length;
 			if(!childrenCount) {
-				loading('show', {element: $thisElement});	
+				loading('show', {element: $thisElement});
 			}
 		}
 
@@ -169,12 +169,12 @@ woi.controller("DiscussionsController", ['$scope', '$rootScope', '$filter', '$ti
 		}
 
 		userAPI.getTrendingDiscussion({forumid: thread.forumid, pageno: pageno}, function(r){
-			if(!r.gettrendingdiscussion) { 
+			if(!r.gettrendingdiscussion) {
 				thread.loading = false;
 				thread.threadcount = thread.allComments.length;
-				return false; 
+				return false;
 			}
-			
+
 			r = r.gettrendingdiscussion.trendinglist;
 
 			// Show the first comment on the first page
@@ -250,7 +250,7 @@ woi.controller("DiscussionsController", ['$scope', '$rootScope', '$filter', '$ti
   	}
 
   	parentElement.slideUp().fadeOut();
-  } 
+  }
 
 	// Use this function to set a common value to a parameter of all objects in an object array
 	// Takes three arguments: objectArray, propertyName, Value.
@@ -263,7 +263,7 @@ woi.controller("DiscussionsController", ['$scope', '$rootScope', '$filter', '$ti
 		}
 	}
 
- /*
+/*
   *  Function to scroll the page down to the comment textarea when 'Comment' button
   *  is clicked under trending discussions
   */
@@ -282,17 +282,17 @@ woi.controller("DiscussionsController", ['$scope', '$rootScope', '$filter', '$ti
 
   $scope.facebookHandle = 'HBOIndia';
   var getFbFeed = function(){
-  	$.get('https://graph.facebook.com/oauth/access_token?type=client_cred&client_id=135772246470432&client_secret=7fcfe7ded1aa03cb58318f9e93e874d2&callback=text', 
-  		function(access_token) {      
+  	$.get('https://graph.facebook.com/oauth/access_token?type=client_cred&client_id=135772246470432&client_secret=7fcfe7ded1aa03cb58318f9e93e874d2&callback=text',
+  		function(access_token) {
   			$http({
-  				method: 'JSONP', 
-  				url: 'https://graph.facebook.com/'+$scope.facebookHandle+'/posts?'+access_token, 
+  				method: 'JSONP',
+  				url: 'https://graph.facebook.com/'+$scope.facebookHandle+'/posts?'+access_token,
   				params:{
   					limit:10,
   					callback:'JSON_CALLBACK'
   				}
   			})
-  			.success(function(data, status) { 
+  			.success(function(data, status) {
   				$scope.facebookResponse = data.data;
   				if(typeof($scope.facebookResponse)=="undefined"){
   					return;
@@ -304,34 +304,34 @@ woi.controller("DiscussionsController", ['$scope', '$rootScope', '$filter', '$ti
   			})
   			.error(function(data, status) {
           //console.log("ERROR in fetching facebook feed");
-        }); 
+        });
   		});
     // fetch the profile pic
     $http({
-    	method: 'JSONP', 
-    	url: 'http://graph.facebook.com/'+$scope.facebookHandle+'/?fields=picture&type=small', 
+    	method: 'JSONP',
+    	url: 'http://graph.facebook.com/'+$scope.facebookHandle+'/?fields=picture&type=small',
     	params:{
     		callback:'JSON_CALLBACK'
     	}
     })
     .success(function(data, status) {
     	if(typeof(data.picture)=="undefined"){
-    		$scope.facebookProfilePic = "";   
+    		$scope.facebookProfilePic = "";
     		return;
     	}
-    	$scope.facebookProfilePic = data.picture.data.url;  
+    	$scope.facebookProfilePic = data.picture.data.url;
     })
     .error(function(data, status) {
       $scope.facebookProfilePic = "";
     });
   }();
 
-  
+
   // Facebook
   $scope.paginateFb = [];
   $scope.fbText     = 'View More';
 
-  $scope.loadMoreFb = function(){ 
+  $scope.loadMoreFb = function(){
 
     if($scope.fbText == 'View More'){
       $scope.fbText = 'View Less';
@@ -339,7 +339,7 @@ woi.controller("DiscussionsController", ['$scope', '$rootScope', '$filter', '$ti
     }else{
       $scope.fbText = 'View More';
       $scope.paginateFb = $scope.facebookResponse.slice(0, 2);
-    }    
+    }
   };
 
 	// jQuery bindings for the filter dropdown

@@ -65,6 +65,7 @@ woi.controller('App_UserActionController', ['$scope', '$rootScope', '$compile', 
   }
 
   $scope.submitForgotPassword = function(){
+      alert(" I AM INSIDE");
     var errorReferences = $('.errorMessage'),
     emError = $('.recover_email_error'),
     successMessage = $('.recover_email_success');
@@ -97,6 +98,7 @@ woi.controller('App_UserActionController', ['$scope', '$rootScope', '$compile', 
      }
      var $container = $(".signin-container");
      $container.block();
+      console.log($scope.data.forgot);
      userAPI.forgotPassword($scope.data.forgot, function(r){
        if (r.response && r.response.responsestatus) {
         successMessage.html(r.response.message);
@@ -206,8 +208,7 @@ woi.controller('App_UserActionController', ['$scope', '$rootScope', '$compile', 
 
               return false;
             }
-            console.log('the logged in user ==');
-            console.log(r.userprofile.user);
+
             
             $rootScope.signInUser(r.userprofile.user);
             $scope.data = {};
@@ -461,7 +462,7 @@ woi.controller('App_UserActionController', ['$scope', '$rootScope', '$compile', 
     FB.login(function(response) {
      if (response.authResponse) {
         // if logged, call extra info
-        FB.api('/me?fields=id,email,name,first_name,last_name,link,gender,timezone,locale,picture', function(response) {
+        FB.api('/me?fields=id,email,name,username,first_name,last_name,link,gender,timezone,locale,picture', function(response) {
           // perform facebook check and login
           $scope.checkFacebookRegister(response);
         });
@@ -769,7 +770,7 @@ woi.controller('App_UserLanguageController', ['$scope', '$rootScope', '$http', '
 
     param = {
       stateid : userDetails.stateid, 
-      cityid  : userDetails.cityid, 
+      cityid  : userDetails.cityid
     };  
   }
   

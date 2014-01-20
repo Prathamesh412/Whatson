@@ -7,8 +7,8 @@ gem 'rake' , '10.1.0'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
-gem 'json'
-gem 'thin'
+gem 'json','1.8.0'
+gem 'thin' ,'1.5.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -31,8 +31,8 @@ gem 'jquery-rails', :git => 'https://github.com/rails/jquery-rails.git'
 # gem 'unicorn'
 
 # Deploy with Capistrano
- gem 'capistrano'
-gem 'rvm-capistrano'
+ gem 'capistrano','2.15.5'
+gem 'rvm-capistrano' ,'1.4.3'
 
 
 # To use debugger

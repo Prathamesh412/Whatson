@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/jquery-rails.git
-  revision: f79e8f178f8358c57f6faf65f72c7b0bbfb42f65
+  revision: 16aa3f633d8f8f48df73942b057132356bfd3d9a
   specs:
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
@@ -128,13 +128,13 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  capistrano
+  capistrano (= 2.15.5)
   jquery-rails!
-  json
+  json (= 1.8.0)
   less-rails (= 2.2.6)
   rails (= 3.2.8)
   rake (= 10.1.0)
-  rvm-capistrano
+  rvm-capistrano (= 1.4.3)
   therubyracer (= 0.10.2)
-  thin
+  thin (= 1.5.1)
   uglifier (>= 1.0.3)

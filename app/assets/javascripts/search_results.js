@@ -359,6 +359,7 @@ woi.controller('SearchResultsController', ['$scope', '$rootScope', '$filter',  '
 
         // Suggest API
         userAPI.getSuggestKeyword({Keyword:$rootScope.searchQuery.text},function(rs){
+
             if(!rs.response){
                 $scope.showSuggestionBox = false;
                 return false;
@@ -637,6 +638,7 @@ woi.controller('SearchResultsController', ['$scope', '$rootScope', '$filter',  '
 
         //Channel Search
         userAPI.searchChannel( search_params, function(rs) {
+
             if(!rs.searchdetails)
                 return false;
 
@@ -657,6 +659,7 @@ woi.controller('SearchResultsController', ['$scope', '$rootScope', '$filter',  '
 
         //CHANNEL Search
         userAPI.searchCast( search_params, function(rs) {
+
             if(!rs.searchdetails)
                 return false;
 

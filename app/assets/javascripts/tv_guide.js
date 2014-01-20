@@ -263,7 +263,7 @@ woi.controller("TVGuide_GridController", ['$scope','$location', '$rootScope', '$
         calculatedPage = 0;
       }
     }
-  
+
     // Basically this is (Total width of slider content - width of parent + width covered by the channel icons on the left)
     var maxLeft = ( 24 * $scope.hourWidth ) - sliderWidth + 86,
         newLeft = -(calculatedPage * $scope.hourWidth);
@@ -329,7 +329,7 @@ woi.controller("TVGuide_GridController", ['$scope','$location', '$rootScope', '$
       .delay(600)
       .show(function(){
         $(this).addClass('shrink');
-        $sidebar.addClass('expand'); 
+        $sidebar.addClass('expand');
         $expandBtn.addClass('expanded').text('Collapse');
         $nowAndNext.removeClass('sidebar');
         if($tvGuideSlider.position().left < -5000) {

@@ -1,22 +1,6 @@
 woi.controller('ProfileMainController', ['$rootScope', '$scope', '$location', '$routeParams', '$filter', 'userAPI',  function($rootScope, $scope, $location, $routeParams, $filter, userAPI){
 
-    $scope.changeurl= function(url,element){
 
-       var  str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
-        $location.path("programme/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
-    $scope.changechannelurl= function(url,element){
-
-        str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
-        $location.path("channel/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
 
 	// Reset the searh boxes
 	$('#mainSearch').css('background-color','transparent');

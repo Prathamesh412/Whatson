@@ -1,6 +1,6 @@
 woi.controller("ActorController", ['$scope', '$rootScope', '$routeParams', '$timeout','$location', 'userAPI', '$http', '$filter', function($scope, $rootScope, $routeParams, $timeout, $location, userAPI,$http,$filter){
 
-    $rootScope.$broadcast('handleResetEmit');
+//    $rootScope.$broadcast('handleResetEmit');
     $scope.checklength = function(){
         if($("#actor-biography").height() > 88){
             return true;

@@ -39,6 +39,7 @@ WoiWeb::Application.routes.draw do
   get "watchlistsocial/index"
   get "favourites/index"
   get "reminders/index"
+
   # get "watchlistsocial"      => "watchlistsocial#index"
   # get "favourties"           => "favourties#index"
   # get "reminders"            => "reminders#index"
@@ -125,8 +126,16 @@ WoiWeb::Application.routes.draw do
   get "watchlist/calendar"   => "watchlist#calendar"
   get "ip"                   => "ip#index"
   get "actor/profile"        => "actor#profile"
-
-  
+  get "productions"          => "productions#index"
+  get "crawler/crawlhome"    => 'crawler#crawlhome'
+  get "crawler/crawlprogram" => 'crawler#crawlprogram'
+  get "crawler/crawlchannel" => 'crawler#crawlchannel'
+  get "crawler/crawlchannels" => 'crawler#crawlchannels'
+  get "crawler/crawlactor"   => 'crawler#crawlactor'
+  get "crawler/crawltvlistings"   => 'crawler#crawltvlistings'
+  get "crawler/crawlmovies" => 'crawler#crawlmovies'
+  get "crawler/crawlvideos" => 'crawler#crawlvideos'
+  get "crawler/crawlmobileapps" => 'crawler#crawlmobileapps'
   #static api for test
   get "api-demo/index" => "api_demo#index"
   # You can have the root of your site routed with "root"

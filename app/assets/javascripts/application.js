@@ -30,12 +30,16 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
                         var url = $route.current.params.id;
                         var actorName = url.replace(/\-/g, " ").replace(/\~/g, "-").replace(/\$/g, "/");
                         var  actorList = $rootScope.storeActorNameAndId;
-                        if($rootScope.storeActorNameAndId){
-                            angular.forEach(actorList, function(actor, key){
-                                if(actor.name == actorName){
-                                    $rootScope.actorid = actor.id;
-                                }
-                            });
+                        if($rootScope.isclick)
+                        {
+                            $rootScope.isclick = false;
+                            if($rootScope.storeActorNameAndId){
+                                angular.forEach(actorList, function(actor, key){
+                                    if(actor.name == actorName){
+                                        $rootScope.actorid = actor.id;
+                                    }
+                                });
+                            }
                         }
                         else
                         {
@@ -83,6 +87,9 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         })
         .when("/tv-guide/channel/:channelid", {
             redirectTo:'/Tv-Listings/Channel/:channelid'
+        })
+        .when("/productions",{
+            templateUrl: 'productions/'
         })
         // .when("/search", {
         //   templateUrl:"search"
@@ -160,6 +167,7 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
                         $rootScope.Channelid = $route.current.params.channelname;
                         return false;
                     }
+
                     url = url.replace(/\-/g, " ").replace(/\~/g, "-").replace(/\$/g, "/") ;
                     var deferred = $q.defer();
                     userAPI.getChannelid({ channelname: url }, function (r) {
@@ -401,6 +409,7 @@ woi.run(['$rootScope', '$route','$location','$timeout', '$http', function($rootS
     $rootScope.storeActorid = function(name,id,element){
         var str = name.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
         $rootScope.actorid = id;
+        $rootScope.isclick = true;
         $location.path("actor/" + str);
         element.stopPropagation();
         element.preventDefault();
@@ -462,7 +471,7 @@ woi.run(['$rootScope', '$route','$location','$timeout', '$http', function($rootS
 
                             var encrypted = {};
                             encrypted.ciphertext = CryptoJS.enc.Base64.parse(data.data);
-                             var decrypted = CryptoJS.AES.decrypt(encrypted, CryptoJS.enc.Base64.parse(pki),{ iv: CryptoJS.enc.Base64.parse(data.pki) });
+                             var decrypted = CryptoJS.AES.decrypt(encrypted, CryptoJS.enc.Base64.parse(window.pki),{ iv: CryptoJS.enc.Base64.parse(data.pki) });
                             var mainData = decrypted.toString(CryptoJS.enc.Utf8);
                             return angular.fromJson(mainData);
                         }].concat($http.defaults.transformResponse),
@@ -579,7 +588,8 @@ woi.run(['$rootScope', '$route','$location','$timeout', '$http', function($rootS
             }
 
         hide_all();
-        $location.path($rootScope.last_requested_url)
+        $location.path($rootScope.last_requested_url);
+
         $route.reload();
 //    window.location.reload();
 

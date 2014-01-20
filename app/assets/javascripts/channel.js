@@ -1,5 +1,5 @@
 woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'userAPI','$http','$filter', function($scope, $rootScope, $routeParams,  userAPI, $http,$filter){
-  
+
 
   // Reset the searh boxes
   $('#mainSearch').css('background-color','transparent');
@@ -22,10 +22,9 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
     userid    : $rootScope.getUser().userid,
     channelid : $rootScope.Channelid
   };
-  
+
   userAPI.channelDetails(params, function(rs) {
-      console.log("**********************response*************************");
-      console.log(rs);
+
     // Wrong channel id passed
     if(_.isUndefined(rs.getsinglechanneldetail)){
       $scope.channelDetail = null;
@@ -39,12 +38,12 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
 
     // console.log("Facebook Handle == "+$scope.facebookHandle);
     // console.log("Twitter Handle == "+$scope.twitterHandle);
-    
 
-    if($scope.facebookHandle == null || $scope.facebookHandle == 'null'){                  //changes to be made for facebook feed
-      $scope.showFacebook = false; 
-    }else{ 
-      if($scope.facebookHandle.length>1){ 
+
+    if($scope.facebookHandle == null || $scope.facebookHandle == 'null'){
+      $scope.showFacebook = false;
+    }else{
+      if($scope.facebookHandle.length>1){
         $scope.showFacebook = true;
         getFbFeed();
       }else{
@@ -52,10 +51,10 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
       }
     }
 
-    if($scope.twitterHandle == null || $scope.twitterHandle == 'null'){ 
+    if($scope.twitterHandle == null || $scope.twitterHandle == 'null'){
       getTwitterSearchFeed();
-    }else{ 
-      if($scope.twitterHandle.length>1){ 
+    }else{
+      if($scope.twitterHandle.length>1){
         $scope.showTwitter = true;
         getTwitterFeed();
       }else{
@@ -75,85 +74,85 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
       $scope.channelDetails.affinityicon = 'ex' ;
     }
 
-    
+
   });
 
-  
+
   $scope.minTweets = 2;
-  
+
   var getTwitterFeed = function(){
     //console.log("Twitter Handle ---->"+$scope.twitterHandle);
     $http({
-      method: 'JSONP', 
-      url: 'http://api.twitter.com/1/statuses/user_timeline.json', 
+      method: 'JSONP',
+      url: 'http://api.twitter.com/1/statuses/user_timeline.json',
       params:{
-        screen_name:$scope.twitterHandle, 
-        count: '10', 
+        screen_name:$scope.twitterHandle,
+        count: '10',
         callback:'JSON_CALLBACK'
       }
     }
     )
     .success(function(data, status) {
 
-      if(data==null || data.length == 0){        
+      if(data==null || data.length == 0){
         getTwitterSearchFeed();
         return;
-      } 
-      $scope.twitterResponse = data; 
+      }
+      $scope.twitterResponse = data;
       $scope.paginateTwitter = $scope.twitterResponse.slice(0, $scope.minTweets);
     })
-    .error(function(data, status) { 
+    .error(function(data, status) {
       $scope.data = data || "Request failed";
       $scope.status = status;
-    }); 
+    });
 
   }
 
-  var getTwitterSearchFeed = function(){ 
+  var getTwitterSearchFeed = function(){
 
    $http({
-    method: 'JSONP', 
-    url: 'http://search.twitter.com/search.json', 
+    method: 'JSONP',
+    url: 'http://search.twitter.com/search.json',
     params:{
-      rpp: '10', 
+      rpp: '10',
       lang:'en',
       q:$scope.channelDetails.channelname,
       callback:'JSON_CALLBACK'
     }
     })
-     .success(function(data, status) {  
+     .success(function(data, status) {
       $scope.isSearchFeed=true;
       $scope.twitterResponse = data.results;
       $scope.paginateTwitter = $scope.twitterResponse.slice(0, $scope.minTweets);
-      if(data.results.length <= 0) 
-        $scope.showTwitter = false; 
+      if(data.results.length <= 0)
+        $scope.showTwitter = false;
       else
-        $scope.showTwitter = true; 
+        $scope.showTwitter = true;
     })
-     .error(function(data, status) { 
-      $scope.showTwitter = false; 
+     .error(function(data, status) {
+      $scope.showTwitter = false;
       $scope.data = data || "Request failed";
       $scope.status = status;
-  });            
+  });
 
- }
+}
 
- var getFbFeed = function(){ 
-  userAPI.getFBAccessToken({}, 
+var getFbFeed = function(){
+  userAPI.getFBAccessToken({},
     function(rs) {
 
       var access_token = 'access_token=' + rs.access_token;
 
       $http({
-        method: 'JSONP', 
-        url: 'https://graph.facebook.com/'+$scope.facebookHandle+'/posts?'+access_token, 
+        method: 'JSONP',
+        url: 'https://graph.facebook.com/'+$scope.facebookHandle+'/posts?'+access_token,
         params:{
           limit:10,
           callback:'JSON_CALLBACK'
         }
       }
       )
-      .success(function(data, status) { 
+      .success(function(data, status) {
         $scope.facebookResponse = data.data;
         if(!$scope.facebookResponse){
           $scope.showFacebook = false;
@@ -166,14 +165,14 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
       })
       .error(function(data, status) {
           console.log("ERROR in fetching facebook feed");
-        }); 
+        });
     });
 
 
     // fetch the profile pic
     $http({
-      method: 'JSONP', 
-      url: 'http://graph.facebook.com/'+$scope.facebookHandle+'/?fields=picture&type=small', 
+      method: 'JSONP',
+      url: 'http://graph.facebook.com/'+$scope.facebookHandle+'/?fields=picture&type=small',
       params:{
         callback:'JSON_CALLBACK'
       }
@@ -181,11 +180,11 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
     .success(function(data, status) {
 
       if(typeof(data.picture)=="undefined"){
-        $scope.facebookProfilePic = "";   
+        $scope.facebookProfilePic = "";
         return;
       }
 
-      $scope.facebookProfilePic = data.picture.data.url;  
+      $scope.facebookProfilePic = data.picture.data.url;
     })
     .error(function(data, status) {
       //console.log("ERROR in fetching Profile Pic");
@@ -196,7 +195,7 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
   // TWITTER
   $scope.paginateTwitter = [];
   $scope.twitterText     = 'View More';
-  
+
 
   $scope.loadMoreTweets = function(){
 
@@ -213,7 +212,7 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
   $scope.paginateFb = [];
   $scope.fbText     = 'View More';
 
-  $scope.loadMoreFb = function(){ 
+  $scope.loadMoreFb = function(){
 
     if($scope.fbText == 'View More'){
       $scope.fbText = 'View Less';
@@ -221,9 +220,9 @@ woi.controller("ChannelController", ['$scope', '$rootScope' , '$routeParams', 'u
     }else{
       $scope.fbText = 'View More';
       $scope.paginateFb = $scope.facebookResponse.slice(0, 2);
-    }    
+    }
   };
-  
+
 }]);
 
 woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$routeParams', '$filter', 'userAPI','$location', function($scope, $rootScope, $routeParams, $filter,   userAPI,$location){
@@ -246,7 +245,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
   var isoToDate = $filter('isoToDate');
 
   $scope.genreSelected = false;
-  
+
   var elements = function() {
     $tabButtons     = $channelTabs.find(".tab-btn");
     $tabs           = $channelTabs.find(".tab");
@@ -260,7 +259,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
   // $scope.noResults = false;
   $scope.programs = {
   	yourrecs: [],
-    popular:[], 
+    popular:[],
     premiers:[],
     exclusives:[],
     rated:[],
@@ -292,9 +291,9 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
 
         if(!r.getsimilarchannelprogramme){
           $scope.programs.yourrecs = [];
-          
+
           showTab(0);
-          return false;  
+          return false;
         }
 
         $scope.programs.yourrecs = addData(r.getsimilarchannelprogramme.similarchannelprogrammelist);
@@ -304,11 +303,11 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
           $scope.programs.yourrecs[i].timestring = abbrMonth($scope.programs.yourrecs[i].timestring) ;
         }
         // called with timeout for dom creation
-        setTimeout(function(){ 
+        setTimeout(function(){
           if(openTabIndex === 0) {
             showTab(openTabIndex);
           }
-          showMoreOnTab(0); 
+          showMoreOnTab(0);
         }, 5);
       });
   };
@@ -316,7 +315,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
   $scope.loadPopular = function(){
     // $scope.programs = {
     //   yourrecs: [],
-    //   popular:[], 
+    //   popular:[],
     //   premiers:[],
     //   exclusives:[],
     //   rated:[],
@@ -350,17 +349,17 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
         $scope.programs.popular[i].timestring = abbrMonth($scope.programs.popular[i].timestring) ;
       }
       // called with timeout for dom creation.
-      setTimeout(function(){ 
+      setTimeout(function(){
         if(openTabIndex === 1) {
           showTab(openTabIndex);
         }
-        showMoreOnTab(1); 
+        showMoreOnTab(1);
       }, 5);
     });
   };
 
   $scope.loadBrowse = function() {
-    
+
     var params = {hybridgenre:$scope.currentFilter};
     var defaultParams = {channelid: $rootScope.Channelid};
 
@@ -377,11 +376,11 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
 
       $scope.programs.browse = addData(r.channelbrowsedprogramme.channelbrowsedprogrammelist);
 
-      setTimeout(function(){ 
+      setTimeout(function(){
         if(openTabIndex === 2) {
           showTab(openTabIndex);
         }
-        showMoreOnTab(2); 
+        showMoreOnTab(2);
       }, 5);
     });
   }
@@ -390,7 +389,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
   	  // Load the content
       $scope.loadPopular();
       $scope.loadBrowse();
-      
+
       /*
        * Check if user is logged in, if so load Recommended and show first tab
        * Otherwise, show second tab
@@ -463,7 +462,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
     if($items.filter(":visible").length == $items.length){
       // $moreButtons.css('background-position','0 -542px');
       $moreButtons.removeClass('less');
-      $items.hide().filter(':lt(' + numberOfItems + ')').show();  
+      $items.hide().filter(':lt(' + numberOfItems + ')').show();
       // Hide loading indicator
       loading('hide', {element: $moreButtons});
       $moreButtons.removeClass('loading');
@@ -475,9 +474,9 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
     // Hide loading indicator
     loading('hide', {element: $moreButtons});
     $moreButtons.removeClass('loading');
-    
+
     // All items are shown
-    if(nextPageLength >= $items.length){  
+    if(nextPageLength >= $items.length){
       // change the pic
       if($items.filter(":visible").length == $items.length){
         // $moreButtons.css('background-position','-154px -542px');
@@ -507,11 +506,11 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
         loading('show', {element: $spinChannels});
       });
 
-      $scope.loadYourRecs(); 
+      $scope.loadYourRecs();
     }
     // Popular
     else if(openTabIndex == 1){
-      
+
       $scope.currentActiveTab = 'popular';
 
       $scope.safeApply(function(){
@@ -519,12 +518,12 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
         $scope.spinnerOn = true;
         loading('show', {element: $spinChannels});
       });
-      
-      $scope.loadPopular(); 
+
+      $scope.loadPopular();
     }
     // Browse
     else{
-      
+
       $scope.currentActiveTab = 'browse';
 
       $scope.safeApply(function(){
@@ -533,7 +532,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
         loading('show', {element: $spinChannels});
       });
 
-      $scope.loadBrowse(); 
+      $scope.loadBrowse();
     }
 
     showTab(openTabIndex);
@@ -564,7 +563,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
   // { label: 'Sports'                  , value:'Sports' },
   // { label: 'Talk Shows & Interviews' , value:'Talk Shows & Interviews' }
   // ];
-  
+
   // $scope.currentFilter = $scope.genresFilter[0].label;
   $scope.currentFilter = "All";
   $scope.allGenres     = [];
@@ -574,7 +573,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
     if ($scope.allGenres.length > 0){
       return false;
     }
-    
+
     userAPI.getGenreList({channelid:$scope.channelid}, function(rs){
       console.log('got response....',rs);
 
@@ -606,12 +605,12 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
 
     // Recommended
     if(openTabIndex == 0){
-      
+
       $scope.safeApply(function(){
         $scope.programs.yourrecs = [];
         $scope.spinnerOn = true;
         loading('show', {element: $spinChannels});
-      }); 
+      });
 
       $scope.loadYourRecs();
     }
@@ -624,7 +623,7 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
         loading('show', {element: $spinChannels});
       });
 
-      $scope.loadPopular(); 
+      $scope.loadPopular();
     }
     // Browse
     else{
@@ -636,14 +635,14 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
       });
 
 
-      $scope.loadBrowse(); 
+      $scope.loadBrowse();
     }
-    
+
   };
   $scope.playVideo = function(p){
       $rootScope.playThisVideo = p.videourl;
       $rootScope.playThisVideoObj = p;
-      if (_.isUndefined($rootScope.playThisVideo) && !_.isUndefined(p.videoUrl)) 
+      if (_.isUndefined($rootScope.playThisVideo) && !_.isUndefined(p.videoUrl))
         $rootScope.playThisVideo = p.videoUrl;
 
       $rootScope.playThisVideoObj.videourl = $rootScope.playThisVideo;
@@ -656,17 +655,17 @@ woi.controller("Channel_ProgramsTabController", ['$scope', '$rootScope', '$route
   $scope.hasVideo = function(item){
       return !_.isUndefined(item.videoid);
   }
-}]);             
+}]);
 
 woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routeParams', '$timeout','$compile', '$filter',  'userAPI', function($scope, $rootScope, $routeParams, $timeout, $compile, $filter, userAPI){
   // get the id param specified in the route
   $scope.channelid = $rootScope.Channelid;
   $scope.programmeid = $rootScope.Programmeid;
-  
+
   var loading = $filter('loading');
 
   $scope.post = {
-    title: '', 
+    title: '',
     message:''
   };
 
@@ -728,7 +727,7 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
             event: 'unfocus'
           },
           position:{
-            my: popover_position.my, 
+            my: popover_position.my,
             at: popover_position.at,
             adjust:{
               y: yoffset
@@ -736,7 +735,7 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
           },
           style:{
             classes:'popover reminder-popover cside-popover'
-          } , 
+          } ,
           events:{
             show:function(){
               element.parent().parent('.thumb').addClass('active');
@@ -745,8 +744,8 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
             hide:function(){
               element.parent().parent('.thumb').removeClass('active');
               element.removeClass('active');
-            } 
-          }, 
+            }
+          },
           content: {
             text: '<div class="popover-loader signin-loader"></div>',
             ajax: {
@@ -763,8 +762,8 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
                   });
                 });
                 $scope.actionObj = {
-                  element: element, 
-                  popconfig: qtipConfig, 
+                  element: element,
+                  popconfig: qtipConfig,
                   // after log in display the reminde popover
                   success: function(){
                     $scope.postDiscussion(e, type, true);
@@ -790,7 +789,7 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
     loading('show', {element: element});
 
     var params = {
-      forumtype: 'channel' , 
+      forumtype: 'channel' ,
       forumtypeid:$scope.channelid,
       forumtitle: $scope.post.title ,
       forumimage: ( $scope.channelDetails ? $scope.channelDetails.logofileurl : '' ),
@@ -800,7 +799,7 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
 
     if(type =='program'){//programme case
       params = $.extend(params, {
-        forumtype: 'program', 
+        forumtype: 'program',
         forumtypeid: $scope.programmeid,
         forumimage: ( $scope.fullProgrammeDetail ? $scope.fullProgrammeDetail.imagefilepath : '' )
       });
@@ -839,7 +838,7 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
       $rootScope.$broadcast('discussionPosted', feedback);
     });
 
-  };  
+  };
 
   $scope.openNotification = function(selector_id) {
     var parentElement = ( selector_id ? $('#' + selector_id) : $('.discussionConfirmation') ),
@@ -863,8 +862,8 @@ woi.controller("ChannelDiscussionController", ['$scope', '$rootScope', '$routePa
     }
 
     parentElement.slideUp().fadeOut();
-  } 
-}]);     
+  }
+}]);
 
 woi.controller("ChannelFeaturedVideoController", ['$scope', '$rootScope', '$routeParams', 'userAPI', function($scope, $rootScope, $routeParams,  userAPI){
 
@@ -881,7 +880,7 @@ woi.controller("ChannelFeaturedVideoController", ['$scope', '$rootScope', '$rout
     var videos = [],
     count = 0;
 
-    if(!r.getfeaturedvideosforchannel) 
+    if(!r.getfeaturedvideosforchannel)
       return false;
 
     videos = addData(r.getfeaturedvideosforchannel.featuredvideosforchannellist);
@@ -891,7 +890,7 @@ woi.controller("ChannelFeaturedVideoController", ['$scope', '$rootScope', '$rout
   $scope.featuredVideo = (videos.length > maxItems) ? videos.slice(0,maxItems) : videos;
 
     // prepares the footer videos and send them through $emit
-    $scope.footerVideos = _.shuffle(videos);  
+    $scope.footerVideos = _.shuffle(videos);
     $rootScope.$emit('channel:videoloaded', $scope.footerVideos);
 
     // sets Id's for the slides in order to control their user Action menu
@@ -920,11 +919,11 @@ woi.controller("ChannelFeaturedVideoController", ['$scope', '$rootScope', '$rout
         var currentSlideId =  $featured.find('.carousel-inner .active').attr('data-slideid');
         $('.item-content').removeClass('active');
         $('.item-content[data-actionsid='+currentSlideId+']').addClass('active');
-        
+
       });
     },5);
   });
-}]);             
+}]);
 
 woi.controller("ChannelFooterVideosController", ['$scope', '$rootScope' , '$routeParams', 'userAPI','$filter','$location', function($scope, $rootScope, $routeParams, userAPI,$filter,$location){
 
@@ -997,7 +996,7 @@ woi.controller("ChannelFooterVideosController", ['$scope', '$rootScope' , '$rout
       });
     }
   };
-}]);             
+}]);
 
 woi.controller("TodayTomorrowController", ['$scope','$location', '$rootScope' , '$routeParams', 'userAPI','$filter', function($scope,$location, $rootScope, $routeParams,  userAPI,$filter){
 
@@ -1031,12 +1030,12 @@ woi.controller("TodayTomorrowController", ['$scope','$location', '$rootScope' , 
     $scope.selected_date.value =0;
   }
 
-  $scope.tomorrowFunction = function(){   
+  $scope.tomorrowFunction = function(){
     $scope.dayparam = 2;
     var current = new Date();
-    current.setDate(current.getDate()+1); 
+    current.setDate(current.getDate()+1);
     $scope.selected_date.day_value= addZero(current.getDate());
-    $scope.selected_date.day_name= dayName((new Date().getDay()+1), true); 
+    $scope.selected_date.day_name= dayName((new Date().getDay()+1), true);
     $scope.selected_date.date_string= toOrdinal(current.getDate()) + " " + monthName(current.getMonth()).substr(0,3);
     $scope.selected_date.value =1;
   }
@@ -1060,7 +1059,7 @@ woi.controller("TodayTomorrowController", ['$scope','$location', '$rootScope' , 
 
   $scope.calendar = [];
   $scope.ndays = 7;
-  $scope.selected_date = {  
+  $scope.selected_date = {
     date_string : toOrdinal(new Date().getDate()) + " " + monthName(new Date().getMonth()).substr(0,3) ,
     day_name    : dayName(new Date().getDay(),true),
     day_value   : addZero(new Date().getDate()),
@@ -1081,7 +1080,7 @@ woi.controller("TodayTomorrowController", ['$scope','$location', '$rootScope' , 
         day_ordinal : toOrdinal(current.getDate()),
         value       : i
       });
-      current.setDate(current.getDate()+1); 
+      current.setDate(current.getDate()+1);
 
     };
     $scope.calendar = days;
@@ -1091,14 +1090,14 @@ woi.controller("TodayTomorrowController", ['$scope','$location', '$rootScope' , 
     return date.value === $scope.selected_date.value;
   };
 
-  $scope.selectDate = function(obj, e) { 
+  $scope.selectDate = function(obj, e) {
     var clicked = e.target;
 
     $scope.selected_date = obj;
     //closes the popover
     $('div.qtip:visible').qtip('hide');
     $rootScope.dateParamInChannel = obj.value;
-    loadNewContents(obj.value);    
+    loadNewContents(obj.value);
   };
 
   // -- END Calendar
@@ -1106,16 +1105,16 @@ woi.controller("TodayTomorrowController", ['$scope','$location', '$rootScope' , 
   loadNewContents = function(index){
 
     if(index == 0){
-      $scope.dayparam = 1;   
+      $scope.dayparam = 1;
       return;
     }
 
     if(index == 1){
-      $scope.dayparam = 2;   
+      $scope.dayparam = 2;
       return;
     }
 
-    $scope.dayparam = index+1;   
+    $scope.dayparam = index+1;
 
     userAPI.ChannelScheduleTodayTomorrow({dayparam: $scope.dayparam, channelid: $rootScope.Channelid}, function(rs) {
       $scope.futurePrograms = addData(rs.getchannelscheduletodaytomorrow.channelscheduletodaytomorrow);
@@ -1154,7 +1153,7 @@ woi.controller("SimilarChannels", ['$scope', '$rootScope', '$filter', '$routePar
       return false;
     $scope.amount= $scope.amount + $scope.step;
 
-    if($scope.amount >= $scope.similarChannels.length){ 
+    if($scope.amount >= $scope.similarChannels.length){
       $scope.showMore = false;
       $scope.amount = $scope.similarChannels.length;
     }

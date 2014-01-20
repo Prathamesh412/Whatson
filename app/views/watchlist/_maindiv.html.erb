@@ -13,7 +13,7 @@
 				</div>
 				<div class ="watchlist-body clearfix">
 					<ul class = 'profile_item_content_list clearfix'>
-						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in today" ng-show="canItBeShown(item)">
+						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in today" ng-show="canItBeShown(item)" style="cursor: pointer">
 							<%= render :partial => "watchlist/item", :locals => {:type => "today"} %>
 						</li>
 					</ul>
@@ -26,7 +26,7 @@
 				</div>
 				<div class ="watchlist-body clearfix">
 					<ul class = 'profile_item_content_list clearfix'>
-						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in tomo" ng-show="canItBeShown(item)">
+						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in tomo" ng-show="canItBeShown(item)" style="cursor: pointer">
 							<%= render :partial => "watchlist/item", :locals => {:type => "tomo"} %>
 						</li>
 					</ul>
@@ -44,13 +44,13 @@
 					<div class="duedate">
 				        <a watchlist-calendar-popover>
 				          	<span class="day-label"> {{calendarDate}}</span> 
-				          	<i class="calendar-icon" style="cursor: pointer">{{calendarIcon}}</i>
+				          	<i class="calendar-icon" style="cursor: pointer" >{{calendarIcon}}</i>
 				        </a>
 				    </div>
 				</div>
         		<div class ="watchlist-body this-week-watchlist clearfix" ng-show="weekSelection=='thisWeek'">
 					<ul class = 'profile_item_content_list clearfix'>
-						<li class = 'list-item' save-start-time="item" scroll-callback ng-repeat="item in thisWeek" ng-show="canItBeShown(item)">
+						<li class = 'list-item' save-start-time="item" scroll-callback ng-repeat="item in thisWeek" ng-show="canItBeShown(item)" style="cursor: pointer">
 							<%= render :partial => "watchlist/item", :locals => {:type => "thisWeek"} %>
 						</li>
 					</ul>
@@ -58,7 +58,7 @@
 				</div>      
         		<div class ="watchlist-body next-week-watchlist clearfix" ng-show="weekSelection=='nextWeek'">
 					<ul class = 'profile_item_content_list clearfix'>
-						<li class = 'list-item' save-start-time="item" scroll-callback ng-repeat="item in nextWeek" ng-show="canItBeShown(item)">
+						<li class = 'list-item' save-start-time="item" scroll-callback ng-repeat="item in nextWeek" ng-show="canItBeShown(item)" style="cursor: pointer">
 							<%= render :partial => "watchlist/item", :locals => {:type => "nextWeek"} %>
 						</li>
 					</ul>
@@ -66,7 +66,7 @@
 				</div>
         		<div class ="watchlist-body random-date-watchlist clearfix" ng-show="weekSelection==''">
 					<ul class = 'profile_item_content_list clearfix'>
-						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in selectedDate" ng-show="canItBeShown(item)">
+						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in selectedDate" ng-show="canItBeShown(item)" style="cursor: pointer">
 							<%= render :partial => "watchlist/item", :locals => {:type => "selectedDate"} %>
 						</li>
 					</ul>
@@ -83,7 +83,7 @@
 				</div>
 				<div class ="watchlist-body clearfix">
 					<ul class = 'profile_item_content_list clearfix'>
-						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in nextMonth" ng-show="canItBeShown(item)">
+						<li class = 'list-item'  save-start-time="item" scroll-callback ng-repeat="item in nextMonth" ng-show="canItBeShown(item)" style="cursor: pointer">
 							<%= render :partial => "watchlist/item", :locals => {:type => "nextMonth"} %>
 						</li>
 					</ul>

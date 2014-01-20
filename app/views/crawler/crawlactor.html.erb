@@ -1,0 +1,10 @@
+<p><%= @data['getcastdetails']['castsummary']['biography'] %></p>
+
+<% @similaractors['getsimilarcasts']['similarcasts'].each do |actor| %>
+    <a href=<%= "http://#{request.host + "/#!/actor/" + actor['castname'].gsub("-","~").gsub("\s","-").gsub("/\/","$")}"%> > <%= actor['castname'] %> </a>
+<% end %>
+
+<% @acotsmovie['getcastprogrammesbygenre']['castprogrammeslist'].each do |movie| %>
+    <a href=<%= "http://" + request.host + "/#!/program/" + movie['programmename'].gsub("-","~").gsub("\s","-").gsub("/\/","$") %>> <%= movie['programmename'] %> </a>
+      <a href=<%= "http://"  + request.host + "/#!/channel/" + movie['channelname'].gsub("-","~").gsub("\s","-").gsub("/\/","$") %>> <%= movie['channelname'] %> </a>
+<% end %>

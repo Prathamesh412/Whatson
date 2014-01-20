@@ -1263,8 +1263,8 @@ woi.controller("AccountSideBarController", ['$scope', '$rootScope', '$filter', '
 				var params = {
 					method              : 'stream.publish',
 		            link                : shareURL,
-		            user_message_prompt : 'Post this to your wall?',
-				}
+		            user_message_prompt : 'Post this to your wall?'
+				};
 
 				var sharePic = item.imageurl || item.imagefilepath;
 				if(angular.isDefined(sharePic)){

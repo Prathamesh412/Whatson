@@ -1,31 +1,12 @@
 woi.controller("ProgrammeController", ['$scope', '$rootScope', '$routeParams', '$timeout','$location', 'userAPI', '$http', '$filter','userList','$route', function($scope, $rootScope, $routeParams, $timeout, $location, userAPI,$http,$filter,userList,$route){
 
     $rootScope.$broadcast('handleResetEmit');
-
-    $scope.changeurl= function(url,element){
-
-        var  str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
-        $location.path("programme/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
-
-
     // Reset the searh boxes
     $('#mainSearch').css('background-color','transparent');
     if( !$('html').hasClass('ie9') ) {
         $('#mainSearch').val('');
         $('#searchBoxBottom').val('');
     }
-
-    $scope.changeurl = function(url,element){
-        var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
-        $location.path("actor/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-    } ;
     console.log('proge page === $rootScope.programmeStartTime == ',$rootScope.programmeStartTime);
 
     if(!!$rootScope.programmeStartTime){
@@ -226,6 +207,7 @@ woi.controller("ProgrammeController", ['$scope', '$rootScope', '$routeParams', '
             $scope.twitterHandle = rs.getfullprogrammedetails.fullprogrammedetails.twitterhandle;
             $scope.facebookHandle = rs.getfullprogrammedetails.fullprogrammedetails.facebookhandle;
 
+
             console.log('$scope.twitterHandle = ',$scope.twitterHandle);
             console.log('$scope.facebookHandle = ',$scope.facebookHandle);
 
@@ -311,7 +293,9 @@ woi.controller("ProgrammeController", ['$scope', '$rootScope', '$routeParams', '
     $scope.showMore = true;
 
     $scope.loadMore = function(){
+
         if(!$scope.programmeCast.length)
+
             return false;
         $scope.amount= $scope.amount + $scope.step;
 
@@ -759,24 +743,6 @@ woi.controller("ProgrammeFeaturedVideosController", ['$scope','$location','$root
 }]);
 
 woi.controller("SimilarProgrammesController", ['$scope', '$location','$rootScope', '$routeParams', '$filter', 'userAPI','userList', function($scope, $location, $rootScope, $routeParams, $filter, userAPI,userList){
-    $scope.changeurl= function(url,element){
-
-        var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");            //Prathamesh Changes for
-        $location.path("programme/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
-    $scope.changechannelurl= function(url,element){
-
-        var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");            //Prathamesh Changes for
-        $location.path("channel/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
     $scope.recommended = [];
     $scope.paginate = [];
 
@@ -807,25 +773,6 @@ woi.controller("SimilarProgrammesController", ['$scope', '$location','$rootScope
 }]);
 
 woi.controller("NextScheduleController", ['$scope', '$location','$rootScope', '$routeParams', '$filter', 'userAPI', '$timeout', function($scope, $location,$rootScope, $routeParams, $filter, userAPI, $timeout){
-
-    $scope.changeurl= function(url,element){
-
-        var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");           //Prathamesh Changes for
-        $location.path("programme/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-    $scope.changechannelurl= function(url,element){
-
-        var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");          //Prathamesh Changes for
-        $location.path("channel/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
-
     $scope.recommended = [];
     $scope.paginate    = [];
     $scope.loading     = true;
@@ -839,16 +786,23 @@ woi.controller("NextScheduleController", ['$scope', '$location','$rootScope', '$
     loading('show', { element: $('.next-schedule #loadIndicator') });
 
     $scope.loadMore = function(){
+
         if(!$scope.nextSchedule.length)
+        {
+
             return false;
+        }
+
         $scope.amount = $scope.amount + $scope.step;
 
         if($scope.amount >= $scope.nextSchedule.length){
+
             $scope.showMore = false;
             $scope.amount   = $scope.nextSchedule.length;
         }
 
         $scope.paginate = $scope.nextSchedule.slice(0, $scope.amount);
+
     };
 
     $scope.safeApply = function(fn) {
@@ -890,7 +844,6 @@ woi.controller("NextScheduleController", ['$scope', '$location','$rootScope', '$
                 },1000);
                 $rootScope.programmeDetailForWatchlist = undefined;
                 $scope.loadMore();
-
                 // Hide loading indicator
                 loading('hide', { element: $('.next-schedule #loadIndicator') });
                 $scope.loading = false;
@@ -969,6 +922,8 @@ woi.controller("FriendsController", ['$scope', '$rootScope', '$routeParams', '$f
         $scope.paginate = $scope.friends.slice(0, $scope.amount);
     };
     userAPI.friends({programmeid:$rootScope.Programmeid}, function(rs){
+        console.log("**********************like");
+        console.log(rs);
         if(!rs.getpeoplielikeprogram)
             return false;
 
@@ -979,23 +934,6 @@ woi.controller("FriendsController", ['$scope', '$rootScope', '$routeParams', '$f
 }]);
 
 woi.controller('ProgramDetailsTabController', ['$scope','$location','$rootScope', '$routeParams', '$timeout', '$filter', 'userAPI', function($scope, $location, $rootScope, $routeParams, $timeout, $filter, userAPI){
-
-    $scope.changeurl= function(url,element){
-        var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
-        $location.path("programme/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
-    $scope.changechannelurl= function(url,element){
-        var str = url.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
-        $location.path("channel/" + str);
-        element.stopPropagation();
-        element.preventDefault();
-
-    };
-
     $scope.channelid =  $rootScope.channelid;
     var loading      = $filter('loading');
     var $channelTabs = $(".channel-tabs").hide();
@@ -1397,8 +1335,8 @@ woi.controller('ProgramDetailsTabController', ['$scope','$location','$rootScope'
 }]);
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- * THIS CONTROLLER IS NOT BEING USED, CHECK THE CONTROLLER IN CHANNEL.JS
- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+* THIS CONTROLLER IS NOT BEING USED, CHECK THE CONTROLLER IN CHANNEL.JS
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 woi.controller("ProgrammeDiscussionController", ['$scope', '$rootScope', '$routeParams', 'userAPI', function($scope, $rootScope, $routeParams,  userAPI){
     // get the id param specified in the route
     $scope.programmeid = $rootScope.Programmeid;

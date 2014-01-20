@@ -20,7 +20,7 @@
         <%#<div class="styled-select">%>
           <%#<select ng-model="operatorName" ng-change="selectOperator()" ng-options="o.operator_name for o in operators"></select>%>
         <%#</div>%>
-      <span class="location-label">
+      <span class="location-label" style="cursor: pointer">
         <input type="text" class="location-input" value="{{locationString}}"/>
         <span class="location-string" >{{locationString}}</span>
       </span>
@@ -30,7 +30,7 @@
 
     <div class="filters" ng-controller="GenreController">
       <div class="main-nav">
-        <ul>
+        <ul style="cursor: pointer">
           <li><a ng-class="{active:_currentGenre == 'all'}"  ng-click="setGenre('all')" style="cursor: pointer">All</a></li>
           <li ng-show="userLogged == 'on'"><a ng-class="{active:_currentGenre == 'favorite'}" class="btn-purple-blue" ng-click="setGenre('favorite')" style="cursor: pointer"><i class="icon-favorite"></i></a></li>
           <li><a ng-class="{active:_currentGenre == 'entertainment'}" ng-click="setGenre('entertainment')" style="cursor: pointer">Entertainment</a></li>

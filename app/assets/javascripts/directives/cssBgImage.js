@@ -1,13 +1,38 @@
 'use strict'
 woi.directive('cssBgImage', function(){
-	return function(scope, element, attrs) {
+	return function(scope, element, attrs,$location) {
 		attrs.$observe('cssBgImage', function(URL){
-			element.css({
-				'background-image'		: 'url("' + URL + '")',
-				'background-repeat'		: 'no-repeat',
-				'background-position' : 'center center',
-				'background-color' 		: 'transparent'
-			});
+            if(URL.length)
+            {
+                element.css({
+                    'background-image'		: 'url("' + URL + '")',
+                    'background-repeat'		: 'no-repeat',
+                    'background-position' : 'center center',
+                    'background-color' 		: 'transparent'
+                });
+            }
+            else
+            {
+                if(attrs.programe =='programe')
+                {
+                    element.css({
+                        'background-image'		: 'url("../assets/img/programe_no_image.png")',
+                        'background-repeat'		: 'no-repeat',
+                        'background-position' : 'center center',
+                        'background-color' 		: 'transparent'
+                    });
+                }
+                else
+                {
+                    element.css({
+                        'background-image'		: 'url("../assets/img/programe_no_imagteste.png")',
+                        'background-repeat'		: 'no-repeat',
+                        'background-position' : 'center center',
+                        'background-color' 		: 'transparent'
+                    });
+                }
+
+            }
 		});
 	};
 });

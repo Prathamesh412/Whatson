@@ -1,0 +1,9 @@
+<p>
+  What's On India Pvt. Ltd. is India's premier TV guidance company working with all major TV networks and operators. The company's vision is to enable TV content search, discovery and guidance across varied platforms and technologies. What's-On- India's technology vertical runs India's largest multi-platform, multi-lingual, multi-device electronic program guide (EPG) system that covers more than 550 TV channels on the source side and powers EPGs into more than 20 million set-top-boxes and devices on the destination end.
+
+  The media vertical of the company runs the "What's-On-India" channel that is currently available in more than 30 million households across DTH and Cable besides other media assets such as portals, widgets and apps on tablets, mobile and smart- TVs. The investment is aimed at expanding the technology vertical into new and emerging technologies as well as strengthening the company's owned media portfolio.
+</p>
+<% @data["allmovies"]["movieslist"].each do |program| %>
+    <a href=<%= "http://#{request.host + "/#!/program/" + program['programmename'].gsub("-","~").gsub("\s","-").gsub("/\/","$")}"%> ><%= program['programmename'] %></a>
+    <a href=<%= "http://#{request.host + "/#!/channel/" + program['channelname'].gsub("-","~").gsub("\s","-").gsub("/\/","$")}"%> ><%= program['channelname'] %></a>
+<% end %>

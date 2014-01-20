@@ -1,0 +1,13 @@
+<p><%= @data["getfullprogrammedetails"]["fullprogrammedetails"]["synopsis"] %></p>
+<% if @has_actor %>
+    <% @actors.each do |actor| %>
+        <a href="<%= "http://" +  request.host + "/#!/actor/" + actor.gsub("-","~").gsub("\s","-").gsub("/\/","$") %>"><%= actor %></a>
+    <% end %>
+<% end %>
+
+
+<% @similarprogrames['getsimilarprogramme']['similarprogrammelist'].each do |program| %>
+    <a href=<%= "http://"+"#{request.host + "/#!/program/" + program['programmename'].gsub("-","~").gsub("\s","-").gsub("/\/","$")}"%> ><%= program['programmename'] %></a>
+    <a href=<%=  "http://"+"#{request.host + "/#!/channel/" + program['channelname'].gsub("-","~").gsub("\s","-").gsub("/\/","$")}"%> ><%= program['channelname'] %></a>
+<% end %>
+

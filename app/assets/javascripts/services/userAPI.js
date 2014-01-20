@@ -12,55 +12,13 @@ woi.factory("userAPI", ['$resource', '$rootScope',"IPfetcher" , function($resour
 
     return $rootScope.woiresource("/appi/user", {responseformat:'json', responselanguage:'English', pageno:1, context:"custid=1;msisdn=222;headendid=0;applicationname=website"}, {
         // return $resource("/api-user/:call", {responseformat:'json', responselanguage:'English', pageno:1}, {
-        "getProgrammeid": {
-            "method": "GET",
-            "params": {
-                "mode": "getProgrammeid"
-            }
-        },
-        "getChannelid": {
-            "method": "GET",
-            "params": {
-                "mode": "getChannelid"
-            }
-        },   
-          "CastGallery" :{
-            "method": "GET",
-            "params": {
-                "mode": "CastGallery"
-            }
-        },
-        "MoviesByActor": {
-            "method": "GET",
-            "params": {
-                "mode": "MoviesByActor"
-            }
-        },
-
-        "actor_profile": {
-            "method": "GET",
-            "params": {
-                "mode": "actor_profile"
-            }
-        },
-        "getActorId":{
-            "method": "GET",
-            "params": {
-                "mode": "getActorId"
-            }
-        },
-        "SimilarActor":{
-            "method": "GET",
-            "params": {
-                "mode": "SimilarActor"
-            }
-        },
         "signIn": {
             "method": "GET",
             "params": {
                 "mode": "signIn"
             }
-        },
+        }
+        ,
         "forgotPassword": {
             "method": "GET",
             "params": {
@@ -306,6 +264,49 @@ woi.factory("userAPI", ['$resource', '$rootScope',"IPfetcher" , function($resour
                 "mode": "fullProgrammeDetail",
                 "pageno": 1,
                 "userid": $rootScope.getUser().userid
+            }
+        },
+        "getProgrammeid": {
+            "method": "GET",
+            "params": {
+                "mode": "getProgrammeid"
+            }
+        },
+        "getChannelid": {
+            "method": "GET",
+            "params": {
+                "mode": "getChannelid"
+            }
+        },
+        "CastGallery" :{
+            "method": "GET",
+            "params": {
+                "mode": "CastGallery"
+            }
+        },
+        "MoviesByActor": {
+            "method": "GET",
+            "params": {
+                "mode": "MoviesByActor"
+            }
+        },
+
+        "actor_profile": {
+            "method": "GET",
+            "params": {
+                "mode": "actor_profile"
+            }
+        },
+        "getActorId":{
+            "method": "GET",
+            "params": {
+                "mode": "getActorId"
+            }
+        },
+        "SimilarActor":{
+            "method": "GET",
+            "params": {
+                "mode": "SimilarActor"
             }
         },
         "castNcrew": {
@@ -566,6 +567,18 @@ woi.factory("userAPI", ['$resource', '$rootScope',"IPfetcher" , function($resour
             "params": {
                 "mode": "filterByHybridGenre",
                 "userid": $rootScope.getUser().userid
+            }
+        },
+        "getprodctionhouselist": {
+            "method": "GET",
+            "params": {
+                "mode": "getprodctionhouselist"
+            }
+        },
+        "getprodctionhousemovielist": {
+            "method": "GET",
+            "params": {
+                "mode": "getprodctionhousemovielist"
             }
         },
         "getAppDetails": {

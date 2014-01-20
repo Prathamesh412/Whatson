@@ -1,0 +1,8 @@
+<p><%= @data["getsinglechanneldetail"]['singlechanneldetail']['channeldescription'] %></p>
+<% @popularprogrammes['gettopprogrammeforchannel']['topprogrammeforchannel'].each do |program| %>
+    <a href=<%= "http://" + request.host + "/#!/program/" + program['programmename'].gsub("-","~").gsub("\s","-").gsub("/\/","$") %>><%= program['programmename'] %></a>
+<% end %>
+
+<% @similarchannels['getsimilarchannels']['similarchannelslist'].each do |channel| %>
+    <a href=<%= "http://" + request.host + "/#!/channel/" + channel['channelname'].gsub("-","~").gsub("\s","-").gsub("/\/","$") %>><%= channel['channelname'] %></a>
+<% end %>

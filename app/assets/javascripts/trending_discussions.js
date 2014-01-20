@@ -14,7 +14,7 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
   $dlIndicator = $('#DiscussionLoadIndicator');// Discussion loading indicator
 
   $rootScope.thread = {
-    current: [], 
+    current: [],
     all: []
   };
 
@@ -33,7 +33,7 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
       var element = $(e.currentTarget),
       thisChannel = $scope.channels.indexOf(item);
     }
-    
+
     	// Make sure this is a number!
       if(! _.isUndefined(requestPage)) {
         requestPage = parseInt(requestPage);
@@ -59,7 +59,7 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
    }
 
    var params = {
-    forumid: item.forumid, 
+    forumid: item.forumid,
     userid: $rootScope.getUser().userid,
     pageno: requestPage
 
@@ -83,7 +83,7 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
 
        if(_.isArray(rs.gettrendingdiscussion.trendinglist)) {
          if(requestPage == 1) {
-          $rootScope.thread.all = rs.gettrendingdiscussion.trendinglist;  
+          $rootScope.thread.all = rs.gettrendingdiscussion.trendinglist;
         } else {
           var recData = rs.gettrendingdiscussion.trendinglist,
           recLength = recData.length;
@@ -118,7 +118,7 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
     e.preventDefault();
     $rootScope.thread.current = $rootScope.thread.all;
   };
-  
+
   // -- END Show All comments for a thread
 
    /*
@@ -133,7 +133,7 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
 
   		  // The location we need to scroll the screen to, adjusted so the targetTextarea is in the middle of the screen
   		  targetOffset = targetTextarea.offset().top - ( $(window).height() / 2 ) + targetTextarea.height();
-  		  
+
        $('body').animate({scrollTop: targetOffset}, function(){
         targetTextarea.focus();
       });
@@ -145,9 +145,9 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
     // $scope.channels = [];
     // $scope.programmes = [];
     // $rootScope.currentforumid = 0;
-    
+
     // $rootScope.thread = {
-    //   current: [], 
+    //   current: [],
     //   all: []
     // };
     console.log('Reloading discussions....', forceFetch);
@@ -169,13 +169,14 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
             console.log(rs);
           $scope.loadingDiscussions = false;
           $scope.discussionsAvailable = false;
-          return false; 
+          return false;
         }
 
         $scope.discussionsAvailable = true;
 
         $scope.channels = addData( rs.getchanneldiscussion.channeldiscussion );
-
+        console.log("************************************here is channels******************************");
+          console.log($scope.channels);
         for (var i = 0; i < $scope.channels.length; i++) {
           $scope.channels[i].active = false;
         };
@@ -204,7 +205,7 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
                 console.log('Case 2, Loading comments for discussion', $scope.channels[0]);
               }
             }
-          }      
+          }
         } else {
           console.log('Case 3, Loading comments for discussion', $scope.channels[0]);
           $scope.loadDiscussion($scope.channels[0]);
@@ -218,23 +219,24 @@ woi.controller("TrendingDiscussionController", ['$scope', '$rootScope' , '$route
         if(! rs.getprogramdiscussion) {
           console.log('Returning false for program discussions!')
           $scope.discussionsAvailable = false;
-          return false; 
+          return false;
         }
 
         $scope.discussionsAvailable = true;
 
         $scope.channels = addData( rs.getprogramdiscussion.programdiscussion );
 
+
         for (var i = 0; i < $scope.channels.length; i++) {
           $scope.channels[i].active = false;
-        };
+        }
 
         $scope.channels = _.sortBy($scope.channels, function(c) {
           return parseInt(c.forumid);
         });
 
         $scope.channels = $scope.channels.reverse();
-        
+
         if($scope.channels.length > 4) {
           $scope.channels = $scope.channels.slice(0, 4);
         }

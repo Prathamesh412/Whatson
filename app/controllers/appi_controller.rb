@@ -132,7 +132,7 @@ class AppiController < ApplicationController
             "context" => "custid=1;msisdn=222;headendid=0;applicationname=website"     # api call for channel-Prathamesh
         },
 
-       "CastGallery" => {
+        "CastGallery" => {
             "call" => "CastGallery",
             "apikey" => "925d1b50cf96fe5447879b4b57ef57c168e4fc34",
             "context" => "custid=1;msisdn=222;headendid=0;applicationname=website",
@@ -741,6 +741,30 @@ class AppiController < ApplicationController
             "context" => "headendid=0;applicationname=website",
             "hybridgenre" => "popular"
         },
+        "getprodctionhouselist" => {
+            "call" => "ProductionHouseList",
+            "apikey" => "36d64040f731b093d71a02cec21c74cb4ff122c5",
+            "responseformat" => "json",
+            "responselanguage" => "English",
+            "pageno" => "1",
+            "context" => "custid=1;msisdn=222;headendid=0;applicationname=website"
+        },
+        "getprodctionhouselist" => {
+            "call" => "ProductionHouseList",
+            "apikey" => "36d64040f731b093d71a02cec21c74cb4ff122c5",
+            "responseformat" => "json",
+            "responselanguage" => "English",
+            "pageno" => "1",
+            "context" => "custid=1;msisdn=222;headendid=0;applicationname=website"
+        },
+        "getprodctionhousemovielist" => {
+            "call" => "ProductionHouseMovieList",
+            "apikey" => "cbf641003962d3b22ea5aeb9164c4cff46a13515",
+            "responseformat" => "json",
+            "responselanguage" => "English",
+            "pageno" => "1",
+            "context" => "custid=1;msisdn=222;headendid=0;applicationname=website"
+        },
         "getAppDetails" => {
             "call" => "AllApps",
             "apikey" => "f9a40a4780f5e1306c46f1c8daecee3b",
@@ -1059,8 +1083,7 @@ class AppiController < ApplicationController
     cipher = OpenSSL::Cipher::Cipher.new(@alg)
     cipher.decrypt
     key = cipher.random_key
-
-    session[:key] = key;
+    session[:key] = key
 
     render :json => {:mkey => Base64.encode64(key).gsub(/\n/, '')}
   end
@@ -1249,7 +1272,6 @@ class AppiController < ApplicationController
 
     encrypted = Base64.encode64(encrypted).gsub(/\n/, '')
     iv64 = Base64.encode64(iv).gsub(/\n/, '')
-
     render :json => {:data => encrypted, :pki => iv64}
   end
 
