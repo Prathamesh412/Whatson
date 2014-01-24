@@ -107,7 +107,7 @@ woi.controller('UserController', [ '$rootScope','$location','$scope', '$compile'
                 };
               }
             }
-          }, 
+          }
         };
       };
 
@@ -183,13 +183,13 @@ woi.controller('UserController', [ '$rootScope','$location','$scope', '$compile'
           hide: {
             fixed: true,
             delay: 750,
-            event: 'unfocus',
+            event: 'unfocus'
           },
           position:{
             my: popover_position.my, 
             at: popover_position.at,
             adjust:{
-              y: yoffset, 
+              y: yoffset
             }
           },
           style:{
@@ -301,7 +301,7 @@ woi.controller('UserController', [ '$rootScope','$location','$scope', '$compile'
           hide: {
             fixed: true,
             delay: 750,
-            event: 'unfocus',
+            event: 'unfocus'
           },
           position:{
             my: popover_position.my, 

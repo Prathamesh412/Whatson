@@ -386,7 +386,6 @@ woi.controller('SearchResultsController', ['$scope', '$rootScope', '$filter',  '
 
         var rs = $scope.searchResults[$scope.current];
 
-
         if($scope.current=="all") {
 
             if(casts.length) {

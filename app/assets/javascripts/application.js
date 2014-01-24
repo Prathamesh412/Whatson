@@ -41,6 +41,7 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
                                 });
                             }
                         }
+
                         else
                         {
                             var deferred = $q.defer();
@@ -88,9 +89,10 @@ woi.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         .when("/tv-guide/channel/:channelid", {
             redirectTo:'/Tv-Listings/Channel/:channelid'
         })
-        .when("/productions",{
-            templateUrl: 'productions/'
+        .when("/productions", {
+            templateUrl:'productions/'
         })
+
         // .when("/search", {
         //   templateUrl:"search"
         // })
@@ -409,7 +411,7 @@ woi.run(['$rootScope', '$route','$location','$timeout', '$http', function($rootS
     $rootScope.storeActorid = function(name,id,element){
         var str = name.replace(/\-/g, "~").replace(/\s/g, "-").replace(/\//g, "$");
         $rootScope.actorid = id;
-        $rootScope.isclick = true;
+        $rootScope.isclick=true;
         $location.path("actor/" + str);
         element.stopPropagation();
         element.preventDefault();

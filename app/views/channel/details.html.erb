@@ -1,606 +1,606 @@
 
-<section class='clearfix main-section channel-details' ng-controller="ChannelController">
-
-<div class='content'>
-
-  <div class="channel-description clearfix">
-    <div class="channel-header">
-      <div class="left-grid">
-        <div class="thumb">
-          <img ng-src="{{channelDetails.logofileurl}}" alt="{{channelDetails.channelname}}" />
-        </div>
-        <h1 class="name" live-tooltip-single-line="{{channelDetails.channelname}}">{{channelDetails.displayname}}</h1>
-      <div class="favs" ng-controller="UserController">
-        <a href="#" ng-click="toggleFavoriteChannel($event, channelDetails)" ng-class="{active: channelDetails.channelfavorite=='1'}" class="btn btn-small btn-purple-blue"><i class="icon-favorite" ></i></a>
-        <span class="number">{{channelDetails.nooffans}} Fans</span>
-      </div>
-      </div>
-
-        <ul class="right-grid channel-status">
-        <li>
-          <i class="icon popularity"></i>
-          <span class="label">Popularity</span>
-          <span class="rank">{{channelDetails.popularityindex}}/10</span>
-        </li>
-        <li>
-          <i class="icon {{channelDetails.affinityicon}}"></i>
-          <span class="label">Affinity</span>
-          <span class="rank">{{channelDetails.affinitytext}}</span>
-        </li>
-      </ul>
-
-    </div>
-    <div class="channel-info">
-      <span class="welcome">Welcome to <span class="emphasis">{{channelDetails.channelname}} </span>Page</span>
-      <p class="info">{{channelDetails.channeldescription}}</p>
-    </div>
-  </div>
-  <!-- / channels-header -->
-
-
-  <div class="featured" ng-controller='ChannelFeaturedVideoController'>
-  <h6 class='subtitle'>FEATURED VIDEO</h6>
-  <div id="featured-carousel" class="carousel slide">
-    <!-- Carousel items -->
-    <div class="carousel-inner" >
-      <div ng-click="" class="item clearfix" data-isvideo="{{(v.videourl) && 1 || 0}}" data-slideid="{{v.slideid}}" ng-repeat='v in featuredVideo' featured-video-player>
-        <div class='player'></div>
-        <img class="featured-image" ng-src="{{v.videobigthumbnail}}" alt="">
-        <!--<div class="featured-text">FEATURED by <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></div>-->
-        <span class='play'><img src="assets/img/icon-play-big.png" alt=""></span>
-
-      </div>
-
-    </div>
-    <!-- Carousel nav -->
-    <a ng-hide="featuredVideo.length == 1" class="carousel-control left" href="#featured-carousel" data-slide="prev">&lsaquo;</a>
-    <a ng-hide="featuredVideos.length == 1" class="carousel-control left iphone-media-ctrl iphone-media-ctrl-prev" href="#featured-carousel" data-slide="prev"></a>
-    <a ng-hide="featuredVideo.length == 1" class="carousel-control right" href="#featured-carousel" data-slide="next">&rsaquo;</a>
-    <a ng-hide="featuredVideos.length == 1" class="carousel-control right iphone-media-ctrl iphone-media-ctrl-next" href="#featured-carousel" data-slide="next"></a>
-
-    <div class="carousel-actions" style="overflow:visible; ">
-      <div class="item-content" data-actionsid="{{v.slideid}}" ng-repeat='v in featuredVideo' >
-        <div class='info'>
-          <h1>{{}}</h1>
-          <h2 live-tooltip-single-line = "{{v.videotitle}}" ><a href="#!/program/{{v.programmename}}" ng-click="EncodeUrlWithDash(v.programmename,$event,'programme',v.channelid,v.programmeid,v.starttime)" >{{v.videotitle}}</a></h2>
-           <p>{{v.starttime|featuredVideoTime}}, {{v.timestring}} <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)" >{{v.channelname}}</a></p>
-        </div>
-
-        <div ng-show="(v.programmeid)" class="actions" ng-controller="UserController">
-
-          <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.isfavorite == '1'}">
-            <i class="icon-favorite"></i>
-          </a>
-
-          <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.isreminder == '1'}"  >
-            <i class="icon-reminder"></i>
-          </a>
-
-          <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.iswatchlist == '1'}">
-            <i class="icon-watchlist"></i>
-          </a>
-        </div>
-        </div>
-      </div>
-      <!-- / Carousel actions -->
-    </div>
-  </div>
-    <!-- / featured-video -->
-
-
-    <div class='channel-tabs hidden-phone' ng-controller='Channel_ProgramsTabController' ng-init='init()'>
-
-    <!-- template for items -->
-
-    <ul class="clearfix tab-yourrecs" >
-	  <li><a href='#' class='tab-btn active' ng-show='userLogged=="on"'>Recommended</a></li>
-      <li><a href='#' class='tab-btn active'>Popular</a></li>
-      <li><a href="#" class='tab-btn tablet_adjust'>Browse</a></li>
-      <li class="category">
-        <div class="styled-select"  dropdown-popover-channel>
-          <p ng-show="!genreSelected">Genre</p>
-          <p ng-show="genreSelected" >{{currentFilter}}</p>
-        </div>
-      </li>
-    </ul>
-
-
-    <div class='tab-contents'>
-
-      <div class='tab clearfix' ng-show="userLogged=='on' && currentActiveTab == 'recs'">
-        <div ng-show="programs.yourrecs.length == 0 && !spinnerOn" class="fix">Favorite your programs &amp; channels and help us recommend!</div>
-        <div class="spin_channels"/>
-      	<div class='item' ng-repeat='p in programs.yourrecs' watchable="p" style="cursor: pointer">
-      		<div class='thumb'>
-	        	<div class='player'></div>
-	        	<div class='image' css-bg-image='{{p.imagefilepath}}'>
-		          	<a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play' style="cursor: pointer"></a>
-                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)" ng-show='!hasVideo(p)' class='noPlay'></a>
-		        </div>
-
-            <div class="user-actions" ng-controller="UserController">
-
-              <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isfavorite == '1'}">
-                <i class="icon-favorite"></i>
-              </a>
-
-              <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isreminder == '1'}"  >
-                <i class="icon-reminder"></i>
-              </a>
-
-              <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.iswatchlist == '1'}">
-                <i class="icon-watchlist"></i>
-              </a>
-            </div>
-
-		        <div class="favorite-ribbon" ng-show="p.isrecommended=='1'"></div>
-	        </div>
-
-          <div class="text-wrapper">
-            <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h2>
-            <p class='infoChannel' live-tooltip-single-line = "{{p.channelname}}"><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'Channel',p.channelid,p.programmeid)">{{p.channelname}}</a></p>
-            <p class='info'>{{p.starttime|featuredVideoTime}}</p>
-          </div>
-      	</div>
-
-      	<div class='clearfix'></div>
-      	<div ng-show="programs.yourrecs.length > 0">
-          <a href='#' class='more'>MORE…</a>
-        </div>
-
-      </div>
-      <!-- / Yourrecs -->
-      <div class='tab clearfix' ng-show="currentActiveTab == 'popular'">
-
-        <div ng-show="programs.popular.length == 0 && !spinnerOn" class="fix">No Results for {{currentFilter}}</div>
-        <div class="spin_channels"/>
-        <div class='item' ng-repeat='p in programs.popular' watchable="p">
-	      	<div class='thumb'>
-	        	<div class='player'></div>
-	        	<div class='image' css-bg-image='{{p.imagefilepath}}'>
-		          	<a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play' style="cursor: pointer"></a>
-                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)" ng-show='!hasVideo(p)' class='noPlay'></a>
-		        </div>
-		        <span class="time" ng-show="p.duration">{{p.duration | videoLength}}</span>
-
-            <div class="user-actions" ng-controller="UserController">
-
-              <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isfavorite == '1'}">
-                <i class="icon-favorite"></i>
-              </a>
-
-              <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isreminder == '1'}"  >
-                <i class="icon-reminder"></i>
-              </a>
-
-              <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.iswatchlist == '1'}">
-                <i class="icon-watchlist"></i>
-              </a>
-            </div>
-		        <div class="favorite-ribbon" ng-show="p.isrecommended=='1'"></div>
-	        </div>
-
-          <div class="text-wrapper">
-            <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h2>
-            <p class='infoChannel'><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'Channel',p.channelid,p.programmeid)">{{p.channelname}}</a></p>
-            <p class='info'>{{p.starttime|featuredVideoTime}}</p>
-          </div>
-        </div>
-
-        <div class='clearfix' ></div>
-
-        <div ng-show="programs.popular.length >6">
-          <a href='#' class='more'>MORE…</a>
-        </div>
-
-
-      </div>
-      <!-- /tab popular -->
-
-      <div class='tab clearfix' ng-show="currentActiveTab == 'browse'">
-
-        <div ng-show="programs.browse.length == 0 && !spinnerOn" class="fix">No Results for {{currentFilter}}</div>
-        <div class="spin_channels"/>
-        <div class='item' ng-repeat='p in programs.browse' watchable="p">
-          <div class='thumb'>
-            <div class='player'></div>
-            <div class='image' css-bg-image='{{p.imagefilepath}}'>
-                <a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play'style="cursor: pointer"></a>
-                <a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)" ng-show='!hasVideo(p)' class='noPlay'></a>
-            </div>
-
-            <div class="user-actions" ng-controller="UserController">
-
-              <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isfavorite == '1'}">
-                <i class="icon-favorite"></i>
-              </a>
-
-              <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isreminder == '1'}"  >
-                <i class="icon-reminder"></i>
-              </a>
-
-              <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.iswatchlist == '1'}">
-                <i class="icon-watchlist"></i>
-              </a>
-            </div>
-            <div class="favorite-ribbon" ng-show="p.isrecommended=='1'"></div>
-          </div>
-
-          <div class="text-wrapper">
-            <h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h2>
-            <p class='infoChannel'><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'Channel',p.channelid,p.programmeid)">{{p.channelname}}</a></p>
-            <p class='info'>{{p.starttime|featuredVideoTime}}</p>
-          </div>
-        </div>
-
-        <div class='clearfix' ></div>
-
-        <div ng-show="programs.browse.length >6">
-          <a href='#' class='more'>MORE…</a>
-        </div>
-
-
-      </div>
-      <!-- /tab browse -->
-
-    </div>
-    <!-- /tab contents -->
-
-  </div>
-  <!-- /popular/browse tabs -->
-
-   <div class="discussions" ng-controller="ChannelDiscussionController">
-      <h6 class="subtitle" style="margin-top:20px;">Discussions</h6>
-      <ul class="discussionConfirmation" id="newDiscussionConfirmation">
-        <li>
-          <div class="dc_check"><div class="checkWrapper"></div></div>
-          <div class="dc_close"><a href="#" ng-click="closeNotification($event)"></a></div>
-          <div class="dc_body">Your message has been successfully posted.</div>
-        </li>
-      </ul>
-      <div class="content-wrapper clearfix">
-        <form action="">
-          <input type="text"  ng-model="post.title" class="discussion-heading" placeholder="Write the Discussion Title..." />
-          <textarea id="" name="" ng-model="post.message" class="message" placeholder="Write the Message..."></textarea>
-          <button type="submit" ng-click="postDiscussion($event)" class="btn-light-blue btn">Start a new discussion</button>
-          <div class="errorMessage" style="margin-left: 20px" id="discussion_post_error">Discussion message and title are required.</div>
-        </form>
-      </div>
-    </div>
-  <!-- / discussions -->
-
-  <div class="trending-discussions" ng-controller="TrendingDiscussionController">
-    <h6 class="subtitle">User Discussions</h6>
-    <a class="more" href="#!/discussion" ng-show="channels.length">View All</a>
-    <div class="fix clearfix" ng-hide="discussionsAvailable || loadingDiscussions">Be the first to discuss about this channel</div>
-    <!-- <div class="loadmore" id="DiscussionLoadIndicator" ng-show="loadingDiscussions"></div> -->
-    <div class="content-wrapper clearfix" ng-show="discussionsAvailable">
-
-    <ul class="discussionTabs">
-      <li ng-repeat="td in channels" ng-class="{active: td.active}" ng-click="loadDiscussion(td, $event)">
-        <div class="imgWrapper" css-bg-image="{{td.forumimage}}"></div>
-      </li>
-    </ul>
-
-    <ul class="discussionBody" ng-repeat="td in channels" ng-show="td.active">
-      <li>
-        <div class="discussionHeader">
-          <div class="dH_thumb" css-bg-image="{{td.userimage | filterDefaultDiscussionImage}}"></div>
-          <div class="dH_details">
-            <h2 class="discussion-header" live-tooltip="{{td.forumtitle}}">{{td.forumtitle}}</h2>
-            <span live-tooltip="{{td.username}}" class="author" ng-show="td.username">by {{td.username}}</span>
-            <span class="details">{{td.createddate | momentDiference}}</span>
-            <div class="user-actions" ng-controller="UserController">
-              <a href="" class="btn btn-comment" ng-click="scrollToComment($event)">Comment</a>
-              <a href="#" ng-click="toggleLikeDiscussion(true, td, $event)" ng-class="{active: td.userlike=='1'}" class="like btn btn-small btn-purple-blue">
-                <i class="icon-like"></i>
-              </a>
-              <a href="#" ng-click="toggleLikeDiscussion(false, td, $event)" ng-class="{active: td.userdislike=='1'}" class="btn btn-small btn-purple-blue dislike">
-                <i class="icon-dislike"></i>
-              </a>
-              <a href="#" ng-click="flagDiscussion(td, $event)" ng-class="{active: td.userreportabuse=='1'}" class="btn btn-small btn-purple-blue flag">
-                <i class="icon-flag"></i>
-              </a>
-            </div>
-          </div>
-          <div class="dH_count">{{td.threadcount}}</div>
-          <div class="dH_likeCount">
-            <span class="number-likes">{{td.forumlikecount}} people like this.</span>
-          </div>
-        </div>
-        <div class="discussionContents">
-          <a class="viewMoreComments icon bubble number-comments" ng-hide="td.threadcount < 2 || thread.current.length > 1" ng-click="showAllComments($event)"><i class="icon-buble"></i>View all {{td.threadcount}} comments</a>
-          <ul class="comments-list">
-            <li class="loadingIndicator" ng-show="td.loading"></li>
-              <li class="noCommentsToShow" ng-show="!thread.current.length && !td.loading">No comments to display</li>
-            <li class="clearfix" ng-repeat="thisComment in thread.current">
-              <div class="thumb" css-bg-image="{{thisComment.userimage | filterDefaultDiscussionImage}}"></div>
-              <div class="info">
-                <h2 live-tooltip="{{thisComment.username}}">{{thisComment.username}}
-                  <span class="status ico star" ng-show="thisComment.moderator">moderator</span>
-                </h2>
-                <div class="description">{{thisComment.commenttext}}</div>
-                <div class="user-actions" ng-controller="UserController">
-                  <a href="" class="btn-comment btn" ng-click="openReplyForm($event)" >Reply</a>
-                  <a href="#"  ng-class="{active: thisComment.userlike=='1'}" ng-click="toggleLikeComment(true, thisComment, $event)" class="btn flag btn-small btn-purple-blue like">
-                    <i class="icon-like"></i>
-                  </a>
-                  <a href="#"  ng-class="{active: thisComment.userdislike=='1'}" ng-click="toggleLikeComment(false, thisComment, $event)"  class="btn flag btn-small btn-purple-blue dislike">
-                    <i class="icon-dislike"></i>
-                  </a>
-                  <a href="#"  ng-class="{active: thisComment.userreportabuse=='1'}" ng-click="toggleFlagComment(thisComment, $event)" class="btn flag btn-small btn-purple-blue">
-                    <i class="icon-flag"></i>
-                  </a>
-                </div>
-                <form class="post-reply" ng-controller="UserController" action="">
-                  <textarea ng-model="discussion.reply.message" placeholder="Reply to this comment..."></textarea>
-                  <button type="submit" ng-click="replyDiscussion(td.forumid, $event, initTrending)" class="btn-reply btn btn-light-blue">Post</button>
-                </form>
-              </div>
-            </li>
-          </ul>
-          <div class="newCommentBox">
-            <ul class="comments-list comment-actions">
-              <li class="post-comment" ng-controller="UserController">
-                <form action="">
-                  <textarea ng-model="discussion.reply.message" placeholder="Write a comment..."></textarea>
-                  <button type="submit" ng-click="replyDiscussion(td.forumid, $event, initTrending)" class="btn-post btn btn-light-blue">Post</button>
-                </form>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </li>
-    </ul>
-
-
-    </div>
-    <!-- / comments -->
-
-  </div>
-  <!-- / trending-discussions -->
-
-
-  <div class="channel-videos" ng-controller="ChannelFooterVideosController">
-    <ul>
-      <li ng-repeat="fv in footerVideos">
-
-      <div class="video-item">
-        <!-- Carousel items -->
-        <div class="video-preview">
-          <span class="caption">VIDEO by {{fv.channelname}}</span>
-          <a href="" ng-click="playVideo($event, fv)" ng-show="hasVideo(fv)" class="play-btn"></a>
-          <div class="thumb">
-            <img ng-src="{{fv.videobigthumbnail}}"  alt="{{fv.videotitle}}" />
-            <div class="player"></div>
-          </div>
-        </div>
-        <div class="video-actions" >
-          <div class="item-content" >
-            <div class='info'>
-              <h2><a live-tooltip = "{{fv.videotitle}}" ng-href="#!/program/{{fv.programmename}}" ng-click="EncodeUrlWithDash(fv.programmename,$event,'programme',fv.channelid,fv.programmeid,fv.starttime)">{{fv.videotitle}}</a></h2>
-              <p>{{fv.starttime|featuredVideoTime}} {{fv.timestring}} <a ng-href="#!/channel/{{fv.channelname}}" ng-click="EncodeUrlWithDash(fv.channelname,$event,'channel',fv.channelid,fv.programmeid)">{{fv.channelname}}</a></p>
-            </div>
-            <div class='user-actions' ng-show="(fv.programmeid)" ng-controller="UserController">
-
-              <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(fv, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:fv.isfavorite == '1'}">
-                <i class="icon-favorite"></i>
-              </a>
-
-              <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(fv, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:fv.isreminder == '1'}">
-                <i class="icon-reminder"></i>
-              </a>
-
-              <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(fv, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:fv.iswatchlist == '1'}">
-                <i class="icon-watchlist"></i>
-              </a>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      </li>
-    </ul>
-  </div>
-  <!-- / channel-videos -->
-</div>
-<!-- / content -->
-
-<aside class='sidebar'>
-<div class="whatson" ng-controller="TodayTomorrowController">   <!-- Prathamesh changes for schedule in channel page -->
-  <h6 class="subtitle">What's on</h6>
-  <ul class="tabs">
-      <li><a ng-class="{active: dayparam=='1'}"    ng-click="todayFunction()"   >Today   </a></li>
-      <li><a ng-class="{active: dayparam=='2'}"    ng-click="tomorrowFunction()">Tomorrow</a></li>
-  </ul>
-
-    <div class="duedate">
-          <a  ng-click="setCalendar()" tv-guide-calendar-popover>
-        <i class="calendar-icon" style="cursor: pointer">{{selected_date.day_value}}</i>
-      </a>
-    </div>
-
-  <ul class="list-calendar">
-    <li class="top-header"><span class="date">{{selected_date.day_name}} {{selected_date.date_string}}</span></li>
-
-
-    <li class="schedule-item" save-start-time="program" ng-repeat="program in todayPrograms" ng-show="dayparam=='1'">
-    <a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',todayPrograms.channelid,program.programmeid,program.starttime)" class="clearfix">
-      <div class="time">
-        <div class="ico clock"></div>
-        <span class="hour">{{program.starttime|sideBarTime}}</span>
-      </div>
-        <div class="item">
-          <h3>{{program.programmename}}</h3>
-          <h4>{{showCategory(program.m2ecategoryname);}} &nbsp;{{program.m2esubcategoryname}}</h4>
-        </div>
-      </a>
-    </li>
-
-    <li class="schedule-item" save-start-time="program" ng-repeat="program in tomorrowPrograms" ng-show="dayparam=='2'">
-    <a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',tomorrowProgram.channelid,program.programmeid,program.starttime)" class="clearfix">
-      <div class="time">
-        <div class="ico clock"></div>
-        <span class="hour">{{program.starttime|sideBarTime}}</span>
-      </div>
-        <div class="item">
-          <h3>{{program.programmename}}</h3>
-          <h4>{{program.m2ecategoryname}}, {{program.m2esubcategoryname}}</h4>
-        </div>
-        </a>
-    </li>
-
-    <li class="schedule-item" save-start-time="program" ng-repeat="program in futurePrograms" ng-show="dayparam>'2'">
-    <a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',program.channelid,program.programmeid,program.starttime)">
-      <div class="time">
-        <div class="ico clock"></div>
-        <span class="hour">{{program.starttime|sideBarTime}}</span>
-      </div>
-        <div class="item">
-          <h3>{{program.programmename}}</h3>
-          <h4>{{program.m2ecategoryname}}, {{program.m2esubcategoryname}}</h4>
-        </div>
-        </a>
-    </li>
-
-
-    <li class="footer clearfix"><a href="#!/Tv-Listings" ng-click="checkDate(dayparam)" class="btn arrow-right">Full TV Guide</a></li>
-  </ul>
-</div>
-<!-- / whatson -->
-
-<div class="recommendations" ng-controller="UserController" contextual-info ng-show="showTips">
-  <div class="recClose" ng-click="closePrompt()">×</div>
-  <h6>Get better recommendations</h6>
-  <div class="recPrompt">
-    <div class="favTrigger">
-      <a href="javascript:void(0)" class="btn btn-small btn-purple-blue">
-        <i class="icon-favorite"></i>
-      </a>
-
-      <a href="javascript:void(0)" class="btn btn-small btn-purple-blue">
-        <i class="icon-reminder"></i>
-      </a>
-
-      <a href="javascript:void(0)" class="btn btn-small btn-purple-blue">
-        <i class="icon-watchlist"></i>
-      </a>
-    </div>
-    <div class="favPrompt">
-      Click Heart To Favorite
-    </div>
-    <div class="favPrompt">
-
-      Click to set SMS/Email Reminders for your favorite programs
-    </div>
-    <div class="favPrompt">
-     Click to add programs to your watchlist
-    </div>
-  </div>
-</div>
-
-  <div class="similar-channels" ng-controller="SimilarChannels" ng-show="similarChannels.length > 0">
-    <h6 class="subtitle">Similar Channels</h6>
-    <ul class="recommended">
-      <li class="item animate bounceInDown clearfix" ng-repeat="r in paginate">
-      <a href="#!/channel/{{r.channelname}}" class="clearfix linkchannel" ng-click="EncodeUrlWithDash(r.channelname,$event,'channel',r.channelid,r.programmeid)">
-        <div class="thumb">
-          <div ng-show="r.isrecommended=='1'" class="favorite-ribbon"></div>
-          <div class="wrapper">
-            <img ng-src="{{r.logofileurl}}" alt="{{r.channelname}}" />
-          </div>
-        </div>
-        <h2>{{r.channelname}} </h2>
-        <ul class="info">
-          <li class="channel-label">Channel</li>
-          <li>{{r.languagename}}</li>
-          <li>{{r.genre}}</li>
-        </ul>
-      </a>
-      </li>
-      <li class="loadmore" ng-show="showMore==true"><a href="javascript:void(0);" title="Load more Recommended" ng-click="loadMore()">More..</a></li>
-    </ul>
-  </div>
-<!-- / similar-channels -->
-
-<div class="feed fb" ng-show="showFacebook==true && paginateFb.length > 0">
-  <ul>
-    <li class="colorfull">
-      <h6 class="subtitle">FB newsfeed</h6>
-      <a ng-click="loadMoreFb()">{{fbText}}</a>
-    </li>
-
-    <li class="item clearfix" ng-repeat="post in paginateFb">
-      <div class="thumb">
-        <div class="wrapper">
-          <img ng-src="{{facebookProfilePic}}">
-        </div>
-      </div>
-
-      <div class="info">
-        <span class="account-name">{{post.from.name}}</span>
-
-       <!--  <div class="post">
-         {{post.message}}
-         <br/>
-         <img ng-src="{{post.picture}}">
-       </div> -->
-        <div class="post" ng-bind-html>
-           <span ng-bind-html-unsafe="post.message | replaceLinks"></span><br/>
-           <img ng-src="{{post.picture}}">
-        </div>
-        <br/>
-       <span class="time">{{post.updated_time|facebookTime}}</span>
-      </div>
-    </li>
-  </ul>
-
-</div>
-<!-- / feed facebook -->
-
-<div class="feed twitter" ng-show="showTwitter==true && paginateTwitter.length > 0">
-  <ul>
-    <li class="colorfull">
-      <h6 class="subtitle">Twitter</h6>
-      <a ng-click="loadMoreTweets()">{{twitterText}}</a>
-    </li>
-
-    <li class="item clearfix" ng-repeat="post in paginateTwitter" ng-show="isSearchFeed==false">
-      <div class="thumb">
-        <div class="wrapper">
-          <img ng-src="{{post.user.profile_image_url}}">
-        </div>
-      </div>
-      <div class="info">
-        <span class="account-name">{{post.user.name}} </span>
-        <div class="post" ng-bind-html>
-           <span ng-bind-html-unsafe="post.text | replaceLinks"></span>
-        </div>
-        <span class="time">{{post.created_at|twitterTime}}</span>
-      </div>
-    </li>
-
-    <li class="item clearfix" ng-repeat="post in paginateTwitter" ng-show="isSearchFeed==true">
-      <div class="thumb">
-        <div class="wrapper">
-          <img ng-src="{{post.profile_image_url}}">
-        </div>
-      </div>
-      <div class="info">
-        <span class="account-name">{{post.from_user_name}} </span>
-        <div class="post" ng-bind-html>
-           <span ng-bind-html-unsafe="post.text | replaceLinks"></span>
-        </div>
-        <span class="time">{{post.created_at|twitterTime}}</span>
-      </div>
-    </li>
-
-  </ul>
-</div>
-<!-- / feed facebook -->
-
-
-</aside>
-<!-- / SIDEBAR -->
-
-</section>
+<!--<section class='clearfix main-section channel-details' ng-controller="ChannelController">-->
+
+<!--<div class='content'>-->
+
+  <!--<div class="channel-description clearfix">-->
+    <!--<div class="channel-header">-->
+      <!--<div class="left-grid">-->
+        <!--<div class="thumb">-->
+          <!--<img ng-src="{{channelDetails.logofileurl}}" alt="{{channelDetails.channelname}}" />-->
+        <!--</div>-->
+        <!--<h1 class="name" live-tooltip-single-line="{{channelDetails.channelname}}">{{channelDetails.displayname}}</h1>-->
+      <!--<div class="favs" ng-controller="UserController">-->
+        <!--<a href="#" ng-click="toggleFavoriteChannel($event, channelDetails)" ng-class="{active: channelDetails.channelfavorite=='1'}" class="btn btn-small btn-purple-blue"><i class="icon-favorite" ></i></a>-->
+        <!--<span class="number">{{channelDetails.nooffans}} Fans</span>-->
+      <!--</div>-->
+      <!--</div>-->
+
+        <!--<ul class="right-grid channel-status">-->
+        <!--<li>-->
+          <!--<i class="icon popularity"></i>-->
+          <!--<span class="label">Popularity</span>-->
+          <!--<span class="rank">{{channelDetails.popularityindex}}/10</span>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<i class="icon {{channelDetails.affinityicon}}"></i>-->
+          <!--<span class="label">Affinity</span>-->
+          <!--<span class="rank">{{channelDetails.affinitytext}}</span>-->
+        <!--</li>-->
+      <!--</ul>-->
+
+    <!--</div>-->
+    <!--<div class="channel-info">-->
+      <!--<span class="welcome">Welcome to <span class="emphasis">{{channelDetails.channelname}} </span>Page</span>-->
+      <!--<p class="info">{{channelDetails.channeldescription}}</p>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--&lt;!&ndash; / channels-header &ndash;&gt;-->
+
+
+  <!--<div class="featured" ng-controller='ChannelFeaturedVideoController'>-->
+  <!--<h6 class='subtitle'>FEATURED VIDEO</h6>-->
+  <!--<div id="featured-carousel" class="carousel slide">-->
+    <!--&lt;!&ndash; Carousel items &ndash;&gt;-->
+    <!--<div class="carousel-inner" >-->
+      <!--<div ng-click="" class="item clearfix" data-isvideo="{{(v.videourl) && 1 || 0}}" data-slideid="{{v.slideid}}" ng-repeat='v in featuredVideo' featured-video-player>-->
+        <!--<div class='player'></div>-->
+        <!--<img class="featured-image" ng-src="{{v.videobigthumbnail}}" alt="">-->
+        <!--&lt;!&ndash;<div class="featured-text">FEATURED by <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></div>&ndash;&gt;-->
+        <!--<span class='play'><img src="assets/img/icon-play-big.png" alt=""></span>-->
+
+      <!--</div>-->
+
+    <!--</div>-->
+    <!--&lt;!&ndash; Carousel nav &ndash;&gt;-->
+    <!--<a ng-hide="featuredVideo.length == 1" class="carousel-control left" href="#featured-carousel" data-slide="prev">&lsaquo;</a>-->
+    <!--<a ng-hide="featuredVideos.length == 1" class="carousel-control left iphone-media-ctrl iphone-media-ctrl-prev" href="#featured-carousel" data-slide="prev"></a>-->
+    <!--<a ng-hide="featuredVideo.length == 1" class="carousel-control right" href="#featured-carousel" data-slide="next">&rsaquo;</a>-->
+    <!--<a ng-hide="featuredVideos.length == 1" class="carousel-control right iphone-media-ctrl iphone-media-ctrl-next" href="#featured-carousel" data-slide="next"></a>-->
+
+    <!--<div class="carousel-actions" style="overflow:visible; ">-->
+      <!--<div class="item-content" data-actionsid="{{v.slideid}}" ng-repeat='v in featuredVideo' >-->
+        <!--<div class='info'>-->
+          <!--<h1>{{}}</h1>-->
+          <!--<h2 live-tooltip-single-line = "{{v.videotitle}}" ><a href="#!/program/{{v.programmename}}" ng-click="EncodeUrlWithDash(v.programmename,$event,'programme',v.channelid,v.programmeid,v.starttime)" >{{v.videotitle}}</a></h2>-->
+           <!--<p>{{v.starttime|featuredVideoTime}}, {{v.timestring}} <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)" >{{v.channelname}}</a></p>-->
+        <!--</div>-->
+
+        <!--<div ng-show="(v.programmeid)" class="actions" ng-controller="UserController">-->
+
+          <!--<a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.isfavorite == '1'}">-->
+            <!--<i class="icon-favorite"></i>-->
+          <!--</a>-->
+
+          <!--<a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.isreminder == '1'}"  >-->
+            <!--<i class="icon-reminder"></i>-->
+          <!--</a>-->
+
+          <!--<a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.iswatchlist == '1'}">-->
+            <!--<i class="icon-watchlist"></i>-->
+          <!--</a>-->
+        <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--&lt;!&ndash; / Carousel actions &ndash;&gt;-->
+    <!--</div>-->
+  <!--</div>-->
+    <!--&lt;!&ndash; / featured-video &ndash;&gt;-->
+
+
+    <!--<div class='channel-tabs hidden-phone' ng-controller='Channel_ProgramsTabController' ng-init='init()'>-->
+
+    <!--&lt;!&ndash; template for items &ndash;&gt;-->
+
+    <!--<ul class="clearfix tab-yourrecs" >-->
+	  <!--<li><a href='#' class='tab-btn active' ng-show='userLogged=="on"'>Recommended</a></li>-->
+      <!--<li><a href='#' class='tab-btn active'>Popular</a></li>-->
+      <!--<li><a href="#" class='tab-btn tablet_adjust'>Browse</a></li>-->
+      <!--<li class="category">-->
+        <!--<div class="styled-select"  dropdown-popover-channel>-->
+          <!--<p ng-show="!genreSelected">Genre</p>-->
+          <!--<p ng-show="genreSelected" >{{currentFilter}}</p>-->
+        <!--</div>-->
+      <!--</li>-->
+    <!--</ul>-->
+
+
+    <!--<div class='tab-contents'>-->
+
+      <!--<div class='tab clearfix' ng-show="userLogged=='on' && currentActiveTab == 'recs'">-->
+        <!--<div ng-show="programs.yourrecs.length == 0 && !spinnerOn" class="fix">Favorite your programs &amp; channels and help us recommend!</div>-->
+        <!--<div class="spin_channels"/>-->
+      	<!--<div class='item' ng-repeat='p in programs.yourrecs' watchable="p" style="cursor: pointer">-->
+      		<!--<div class='thumb'>-->
+	        	<!--<div class='player'></div>-->
+	        	<!--<div class='image' css-bg-image='{{p.imagefilepath}}'>-->
+		          	<!--<a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play' style="cursor: pointer"></a>-->
+                <!--<a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)" ng-show='!hasVideo(p)' class='noPlay'></a>-->
+		        <!--</div>-->
+
+            <!--<div class="user-actions" ng-controller="UserController">-->
+
+              <!--<a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isfavorite == '1'}">-->
+                <!--<i class="icon-favorite"></i>-->
+              <!--</a>-->
+
+              <!--<a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isreminder == '1'}"  >-->
+                <!--<i class="icon-reminder"></i>-->
+              <!--</a>-->
+
+              <!--<a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.iswatchlist == '1'}">-->
+                <!--<i class="icon-watchlist"></i>-->
+              <!--</a>-->
+            <!--</div>-->
+
+		        <!--<div class="favorite-ribbon" ng-show="p.isrecommended=='1'"></div>-->
+	        <!--</div>-->
+
+          <!--<div class="text-wrapper">-->
+            <!--<h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h2>-->
+            <!--<p class='infoChannel' live-tooltip-single-line = "{{p.channelname}}"><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'Channel',p.channelid,p.programmeid)">{{p.channelname}}</a></p>-->
+            <!--<p class='info'>{{p.starttime|featuredVideoTime}}</p>-->
+          <!--</div>-->
+      	<!--</div>-->
+
+      	<!--<div class='clearfix'></div>-->
+      	<!--<div ng-show="programs.yourrecs.length > 0">-->
+          <!--<a href='#' class='more'>MORE…</a>-->
+        <!--</div>-->
+
+      <!--</div>-->
+      <!--&lt;!&ndash; / Yourrecs &ndash;&gt;-->
+      <!--<div class='tab clearfix' ng-show="currentActiveTab == 'popular'">-->
+
+        <!--<div ng-show="programs.popular.length == 0 && !spinnerOn" class="fix">No Results for {{currentFilter}}</div>-->
+        <!--<div class="spin_channels"/>-->
+        <!--<div class='item' ng-repeat='p in programs.popular' watchable="p">-->
+	      	<!--<div class='thumb'>-->
+	        	<!--<div class='player'></div>-->
+	        	<!--<div class='image' css-bg-image='{{p.imagefilepath}}'>-->
+		          	<!--<a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play' style="cursor: pointer"></a>-->
+                <!--<a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)" ng-show='!hasVideo(p)' class='noPlay'></a>-->
+		        <!--</div>-->
+		        <!--<span class="time" ng-show="p.duration">{{p.duration | videoLength}}</span>-->
+
+            <!--<div class="user-actions" ng-controller="UserController">-->
+
+              <!--<a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isfavorite == '1'}">-->
+                <!--<i class="icon-favorite"></i>-->
+              <!--</a>-->
+
+              <!--<a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isreminder == '1'}"  >-->
+                <!--<i class="icon-reminder"></i>-->
+              <!--</a>-->
+
+              <!--<a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.iswatchlist == '1'}">-->
+                <!--<i class="icon-watchlist"></i>-->
+              <!--</a>-->
+            <!--</div>-->
+		        <!--<div class="favorite-ribbon" ng-show="p.isrecommended=='1'"></div>-->
+	        <!--</div>-->
+
+          <!--<div class="text-wrapper">-->
+            <!--<h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h2>-->
+            <!--<p class='infoChannel'><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'Channel',p.channelid,p.programmeid)">{{p.channelname}}</a></p>-->
+            <!--<p class='info'>{{p.starttime|featuredVideoTime}}</p>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class='clearfix' ></div>-->
+
+        <!--<div ng-show="programs.popular.length >6">-->
+          <!--<a href='#' class='more'>MORE…</a>-->
+        <!--</div>-->
+
+
+      <!--</div>-->
+      <!--&lt;!&ndash; /tab popular &ndash;&gt;-->
+
+      <!--<div class='tab clearfix' ng-show="currentActiveTab == 'browse'">-->
+
+        <!--<div ng-show="programs.browse.length == 0 && !spinnerOn" class="fix">No Results for {{currentFilter}}</div>-->
+        <!--<div class="spin_channels"/>-->
+        <!--<div class='item' ng-repeat='p in programs.browse' watchable="p">-->
+          <!--<div class='thumb'>-->
+            <!--<div class='player'></div>-->
+            <!--<div class='image' css-bg-image='{{p.imagefilepath}}'>-->
+                <!--<a ng-click='playVideo(p)' ng-show='hasVideo(p)' class='play'style="cursor: pointer"></a>-->
+                <!--<a ng-href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)" ng-show='!hasVideo(p)' class='noPlay'></a>-->
+            <!--</div>-->
+
+            <!--<div class="user-actions" ng-controller="UserController">-->
+
+              <!--<a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isfavorite == '1'}">-->
+                <!--<i class="icon-favorite"></i>-->
+              <!--</a>-->
+
+              <!--<a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.isreminder == '1'}"  >-->
+                <!--<i class="icon-reminder"></i>-->
+              <!--</a>-->
+
+              <!--<a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(p, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:p.iswatchlist == '1'}">-->
+                <!--<i class="icon-watchlist"></i>-->
+              <!--</a>-->
+            <!--</div>-->
+            <!--<div class="favorite-ribbon" ng-show="p.isrecommended=='1'"></div>-->
+          <!--</div>-->
+
+          <!--<div class="text-wrapper">-->
+            <!--<h2 multiline-overflow><a title="{{p.programmename}}" href="#!/program/{{p.programmename}}" ng-click="EncodeUrlWithDash(p.programmename,$event,'programme',p.channelid,p.programmeid,p.starttime)">{{p.programmename}}</a></h2>-->
+            <!--<p class='infoChannel'><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'Channel',p.channelid,p.programmeid)">{{p.channelname}}</a></p>-->
+            <!--<p class='info'>{{p.starttime|featuredVideoTime}}</p>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class='clearfix' ></div>-->
+
+        <!--<div ng-show="programs.browse.length >6">-->
+          <!--<a href='#' class='more'>MORE…</a>-->
+        <!--</div>-->
+
+
+      <!--</div>-->
+      <!--&lt;!&ndash; /tab browse &ndash;&gt;-->
+
+    <!--</div>-->
+    <!--&lt;!&ndash; /tab contents &ndash;&gt;-->
+
+  <!--</div>-->
+  <!--&lt;!&ndash; /popular/browse tabs &ndash;&gt;-->
+
+   <!--<div class="discussions" ng-controller="ChannelDiscussionController">-->
+      <!--<h6 class="subtitle" style="margin-top:20px;">Discussions</h6>-->
+      <!--<ul class="discussionConfirmation" id="newDiscussionConfirmation">-->
+        <!--<li>-->
+          <!--<div class="dc_check"><div class="checkWrapper"></div></div>-->
+          <!--<div class="dc_close"><a href="#" ng-click="closeNotification($event)"></a></div>-->
+          <!--<div class="dc_body">Your message has been successfully posted.</div>-->
+        <!--</li>-->
+      <!--</ul>-->
+      <!--<div class="content-wrapper clearfix">-->
+        <!--<form action="">-->
+          <!--<input type="text"  ng-model="post.title" class="discussion-heading" placeholder="Write the Discussion Title..." />-->
+          <!--<textarea id="" name="" ng-model="post.message" class="message" placeholder="Write the Message..."></textarea>-->
+          <!--<button type="submit" ng-click="postDiscussion($event)" class="btn-light-blue btn">Start a new discussion</button>-->
+          <!--<div class="errorMessage" style="margin-left: 20px" id="discussion_post_error">Discussion message and title are required.</div>-->
+        <!--</form>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--&lt;!&ndash; / discussions &ndash;&gt;-->
+
+  <!--<div class="trending-discussions" ng-controller="TrendingDiscussionController">-->
+    <!--<h6 class="subtitle">User Discussions</h6>-->
+    <!--<a class="more" href="#!/discussion" ng-show="channels.length">View All</a>-->
+    <!--<div class="fix clearfix" ng-hide="discussionsAvailable || loadingDiscussions">Be the first to discuss about this channel</div>-->
+    <!--&lt;!&ndash; <div class="loadmore" id="DiscussionLoadIndicator" ng-show="loadingDiscussions"></div> &ndash;&gt;-->
+    <!--<div class="content-wrapper clearfix" ng-show="discussionsAvailable">-->
+
+    <!--<ul class="discussionTabs">-->
+      <!--<li ng-repeat="td in channels" ng-class="{active: td.active}" ng-click="loadDiscussion(td, $event)">-->
+        <!--<div class="imgWrapper" css-bg-image="{{td.forumimage}}"></div>-->
+      <!--</li>-->
+    <!--</ul>-->
+
+    <!--<ul class="discussionBody" ng-repeat="td in channels" ng-show="td.active">-->
+      <!--<li>-->
+        <!--<div class="discussionHeader">-->
+          <!--<div class="dH_thumb" css-bg-image="{{td.userimage | filterDefaultDiscussionImage}}"></div>-->
+          <!--<div class="dH_details">-->
+            <!--<h2 class="discussion-header" live-tooltip="{{td.forumtitle}}">{{td.forumtitle}}</h2>-->
+            <!--<span live-tooltip="{{td.username}}" class="author" ng-show="td.username">by {{td.username}}</span>-->
+            <!--<span class="details">{{td.createddate | momentDiference}}</span>-->
+            <!--<div class="user-actions" ng-controller="UserController">-->
+              <!--<a href="" class="btn btn-comment" ng-click="scrollToComment($event)">Comment</a>-->
+              <!--<a href="#" ng-click="toggleLikeDiscussion(true, td, $event)" ng-class="{active: td.userlike=='1'}" class="like btn btn-small btn-purple-blue">-->
+                <!--<i class="icon-like"></i>-->
+              <!--</a>-->
+              <!--<a href="#" ng-click="toggleLikeDiscussion(false, td, $event)" ng-class="{active: td.userdislike=='1'}" class="btn btn-small btn-purple-blue dislike">-->
+                <!--<i class="icon-dislike"></i>-->
+              <!--</a>-->
+              <!--<a href="#" ng-click="flagDiscussion(td, $event)" ng-class="{active: td.userreportabuse=='1'}" class="btn btn-small btn-purple-blue flag">-->
+                <!--<i class="icon-flag"></i>-->
+              <!--</a>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="dH_count">{{td.threadcount}}</div>-->
+          <!--<div class="dH_likeCount">-->
+            <!--<span class="number-likes">{{td.forumlikecount}} people like this.</span>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="discussionContents">-->
+          <!--<a class="viewMoreComments icon bubble number-comments" ng-hide="td.threadcount < 2 || thread.current.length > 1" ng-click="showAllComments($event)"><i class="icon-buble"></i>View all {{td.threadcount}} comments</a>-->
+          <!--<ul class="comments-list">-->
+            <!--<li class="loadingIndicator" ng-show="td.loading"></li>-->
+              <!--<li class="noCommentsToShow" ng-show="!thread.current.length && !td.loading">No comments to display</li>-->
+            <!--<li class="clearfix" ng-repeat="thisComment in thread.current">-->
+              <!--<div class="thumb" css-bg-image="{{thisComment.userimage | filterDefaultDiscussionImage}}"></div>-->
+              <!--<div class="info">-->
+                <!--<h2 live-tooltip="{{thisComment.username}}">{{thisComment.username}}-->
+                  <!--<span class="status ico star" ng-show="thisComment.moderator">moderator</span>-->
+                <!--</h2>-->
+                <!--<div class="description">{{thisComment.commenttext}}</div>-->
+                <!--<div class="user-actions" ng-controller="UserController">-->
+                  <!--<a href="" class="btn-comment btn" ng-click="openReplyForm($event)" >Reply</a>-->
+                  <!--<a href="#"  ng-class="{active: thisComment.userlike=='1'}" ng-click="toggleLikeComment(true, thisComment, $event)" class="btn flag btn-small btn-purple-blue like">-->
+                    <!--<i class="icon-like"></i>-->
+                  <!--</a>-->
+                  <!--<a href="#"  ng-class="{active: thisComment.userdislike=='1'}" ng-click="toggleLikeComment(false, thisComment, $event)"  class="btn flag btn-small btn-purple-blue dislike">-->
+                    <!--<i class="icon-dislike"></i>-->
+                  <!--</a>-->
+                  <!--<a href="#"  ng-class="{active: thisComment.userreportabuse=='1'}" ng-click="toggleFlagComment(thisComment, $event)" class="btn flag btn-small btn-purple-blue">-->
+                    <!--<i class="icon-flag"></i>-->
+                  <!--</a>-->
+                <!--</div>-->
+                <!--<form class="post-reply" ng-controller="UserController" action="">-->
+                  <!--<textarea ng-model="discussion.reply.message" placeholder="Reply to this comment..."></textarea>-->
+                  <!--<button type="submit" ng-click="replyDiscussion(td.forumid, $event, initTrending)" class="btn-reply btn btn-light-blue">Post</button>-->
+                <!--</form>-->
+              <!--</div>-->
+            <!--</li>-->
+          <!--</ul>-->
+          <!--<div class="newCommentBox">-->
+            <!--<ul class="comments-list comment-actions">-->
+              <!--<li class="post-comment" ng-controller="UserController">-->
+                <!--<form action="">-->
+                  <!--<textarea ng-model="discussion.reply.message" placeholder="Write a comment..."></textarea>-->
+                  <!--<button type="submit" ng-click="replyDiscussion(td.forumid, $event, initTrending)" class="btn-post btn btn-light-blue">Post</button>-->
+                <!--</form>-->
+              <!--</li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</li>-->
+    <!--</ul>-->
+
+
+    <!--</div>-->
+    <!--&lt;!&ndash; / comments &ndash;&gt;-->
+
+  <!--</div>-->
+  <!--&lt;!&ndash; / trending-discussions &ndash;&gt;-->
+
+
+  <!--<div class="channel-videos" ng-controller="ChannelFooterVideosController">-->
+    <!--<ul>-->
+      <!--<li ng-repeat="fv in footerVideos">-->
+
+      <!--<div class="video-item">-->
+        <!--&lt;!&ndash; Carousel items &ndash;&gt;-->
+        <!--<div class="video-preview">-->
+          <!--<span class="caption">VIDEO by {{fv.channelname}}</span>-->
+          <!--<a href="" ng-click="playVideo($event, fv)" ng-show="hasVideo(fv)" class="play-btn"></a>-->
+          <!--<div class="thumb">-->
+            <!--<img ng-src="{{fv.videobigthumbnail}}"  alt="{{fv.videotitle}}" />-->
+            <!--<div class="player"></div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="video-actions" >-->
+          <!--<div class="item-content" >-->
+            <!--<div class='info'>-->
+              <!--<h2><a live-tooltip = "{{fv.videotitle}}" ng-href="#!/program/{{fv.programmename}}" ng-click="EncodeUrlWithDash(fv.programmename,$event,'programme',fv.channelid,fv.programmeid,fv.starttime)">{{fv.videotitle}}</a></h2>-->
+              <!--<p>{{fv.starttime|featuredVideoTime}} {{fv.timestring}} <a ng-href="#!/channel/{{fv.channelname}}" ng-click="EncodeUrlWithDash(fv.channelname,$event,'channel',fv.channelid,fv.programmeid)">{{fv.channelname}}</a></p>-->
+            <!--</div>-->
+            <!--<div class='user-actions' ng-show="(fv.programmeid)" ng-controller="UserController">-->
+
+              <!--<a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(fv, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:fv.isfavorite == '1'}">-->
+                <!--<i class="icon-favorite"></i>-->
+              <!--</a>-->
+
+              <!--<a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(fv, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:fv.isreminder == '1'}">-->
+                <!--<i class="icon-reminder"></i>-->
+              <!--</a>-->
+
+              <!--<a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(fv, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:fv.iswatchlist == '1'}">-->
+                <!--<i class="icon-watchlist"></i>-->
+              <!--</a>-->
+
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--</li>-->
+    <!--</ul>-->
+  <!--</div>-->
+  <!--&lt;!&ndash; / channel-videos &ndash;&gt;-->
+<!--</div>-->
+<!--&lt;!&ndash; / content &ndash;&gt;-->
+
+<!--<aside class='sidebar'>-->
+<!--<div class="whatson" ng-controller="TodayTomorrowController">   &lt;!&ndash; Prathamesh changes for schedule in channel page &ndash;&gt;-->
+  <!--<h6 class="subtitle">What's on</h6>-->
+  <!--<ul class="tabs">-->
+      <!--<li><a ng-class="{active: dayparam=='1'}"    ng-click="todayFunction()"   >Today   </a></li>-->
+      <!--<li><a ng-class="{active: dayparam=='2'}"    ng-click="tomorrowFunction()">Tomorrow</a></li>-->
+  <!--</ul>-->
+
+    <!--<div class="duedate">-->
+          <!--<a  ng-click="setCalendar()" tv-guide-calendar-popover>-->
+        <!--<i class="calendar-icon" style="cursor: pointer">{{selected_date.day_value}}</i>-->
+      <!--</a>-->
+    <!--</div>-->
+
+  <!--<ul class="list-calendar">-->
+    <!--<li class="top-header"><span class="date">{{selected_date.day_name}} {{selected_date.date_string}}</span></li>-->
+
+
+    <!--<li class="schedule-item" save-start-time="program" ng-repeat="program in todayPrograms" ng-show="dayparam=='1'">-->
+    <!--<a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',todayPrograms.channelid,program.programmeid,program.starttime)" class="clearfix">-->
+      <!--<div class="time">-->
+        <!--<div class="ico clock"></div>-->
+        <!--<span class="hour">{{program.starttime|sideBarTime}}</span>-->
+      <!--</div>-->
+        <!--<div class="item">-->
+          <!--<h3>{{program.programmename}}</h3>-->
+          <!--<h4>{{showCategory(program.m2ecategoryname);}} &nbsp;{{program.m2esubcategoryname}}</h4>-->
+        <!--</div>-->
+      <!--</a>-->
+    <!--</li>-->
+
+    <!--<li class="schedule-item" save-start-time="program" ng-repeat="program in tomorrowPrograms" ng-show="dayparam=='2'">-->
+    <!--<a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',tomorrowProgram.channelid,program.programmeid,program.starttime)" class="clearfix">-->
+      <!--<div class="time">-->
+        <!--<div class="ico clock"></div>-->
+        <!--<span class="hour">{{program.starttime|sideBarTime}}</span>-->
+      <!--</div>-->
+        <!--<div class="item">-->
+          <!--<h3>{{program.programmename}}</h3>-->
+          <!--<h4>{{program.m2ecategoryname}}, {{program.m2esubcategoryname}}</h4>-->
+        <!--</div>-->
+        <!--</a>-->
+    <!--</li>-->
+
+    <!--<li class="schedule-item" save-start-time="program" ng-repeat="program in futurePrograms" ng-show="dayparam>'2'">-->
+    <!--<a href="#!/program/{{program.programmename}}" ng-click="EncodeUrlWithDash(program.programmename,$event,'programme',program.channelid,program.programmeid,program.starttime)">-->
+      <!--<div class="time">-->
+        <!--<div class="ico clock"></div>-->
+        <!--<span class="hour">{{program.starttime|sideBarTime}}</span>-->
+      <!--</div>-->
+        <!--<div class="item">-->
+          <!--<h3>{{program.programmename}}</h3>-->
+          <!--<h4>{{program.m2ecategoryname}}, {{program.m2esubcategoryname}}</h4>-->
+        <!--</div>-->
+        <!--</a>-->
+    <!--</li>-->
+
+
+    <!--<li class="footer clearfix"><a href="#!/Tv-Listings" ng-click="checkDate(dayparam)" class="btn arrow-right">Full TV Guide</a></li>-->
+  <!--</ul>-->
+<!--</div>-->
+<!--&lt;!&ndash; / whatson &ndash;&gt;-->
+
+<!--<div class="recommendations" ng-controller="UserController" contextual-info ng-show="showTips">-->
+  <!--<div class="recClose" ng-click="closePrompt()">×</div>-->
+  <!--<h6>Get better recommendations</h6>-->
+  <!--<div class="recPrompt">-->
+    <!--<div class="favTrigger">-->
+      <!--<a href="javascript:void(0)" class="btn btn-small btn-purple-blue">-->
+        <!--<i class="icon-favorite"></i>-->
+      <!--</a>-->
+
+      <!--<a href="javascript:void(0)" class="btn btn-small btn-purple-blue">-->
+        <!--<i class="icon-reminder"></i>-->
+      <!--</a>-->
+
+      <!--<a href="javascript:void(0)" class="btn btn-small btn-purple-blue">-->
+        <!--<i class="icon-watchlist"></i>-->
+      <!--</a>-->
+    <!--</div>-->
+    <!--<div class="favPrompt">-->
+      <!--Click Heart To Favorite-->
+    <!--</div>-->
+    <!--<div class="favPrompt">-->
+
+      <!--Click to set SMS/Email Reminders for your favorite programs-->
+    <!--</div>-->
+    <!--<div class="favPrompt">-->
+     <!--Click to add programs to your watchlist-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+  <!--<div class="similar-channels" ng-controller="SimilarChannels" ng-show="similarChannels.length > 0">-->
+    <!--<h6 class="subtitle">Similar Channels</h6>-->
+    <!--<ul class="recommended">-->
+      <!--<li class="item animate bounceInDown clearfix" ng-repeat="r in paginate">-->
+      <!--<a href="#!/channel/{{r.channelname}}" class="clearfix linkchannel" ng-click="EncodeUrlWithDash(r.channelname,$event,'channel',r.channelid,r.programmeid)">-->
+        <!--<div class="thumb">-->
+          <!--<div ng-show="r.isrecommended=='1'" class="favorite-ribbon"></div>-->
+          <!--<div class="wrapper">-->
+            <!--<img ng-src="{{r.logofileurl}}" alt="{{r.channelname}}" />-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<h2>{{r.channelname}} </h2>-->
+        <!--<ul class="info">-->
+          <!--<li class="channel-label">Channel</li>-->
+          <!--<li>{{r.languagename}}</li>-->
+          <!--<li>{{r.genre}}</li>-->
+        <!--</ul>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li class="loadmore" ng-show="showMore==true"><a href="javascript:void(0);" title="Load more Recommended" ng-click="loadMore()">More..</a></li>-->
+    <!--</ul>-->
+  <!--</div>-->
+<!--&lt;!&ndash; / similar-channels &ndash;&gt;-->
+
+<!--<div class="feed fb" ng-show="showFacebook==true && paginateFb.length > 0">-->
+  <!--<ul>-->
+    <!--<li class="colorfull">-->
+      <!--<h6 class="subtitle">FB newsfeed</h6>-->
+      <!--<a ng-click="loadMoreFb()">{{fbText}}</a>-->
+    <!--</li>-->
+
+    <!--<li class="item clearfix" ng-repeat="post in paginateFb">-->
+      <!--<div class="thumb">-->
+        <!--<div class="wrapper">-->
+          <!--<img ng-src="{{facebookProfilePic}}">-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="info">-->
+        <!--<span class="account-name">{{post.from.name}}</span>-->
+
+       <!--&lt;!&ndash;  <div class="post">-->
+         <!--{{post.message}}-->
+         <!--<br/>-->
+         <!--<img ng-src="{{post.picture}}">-->
+       <!--</div> &ndash;&gt;-->
+        <!--<div class="post" ng-bind-html>-->
+           <!--<span ng-bind-html-unsafe="post.message | replaceLinks"></span><br/>-->
+           <!--<img ng-src="{{post.picture}}">-->
+        <!--</div>-->
+        <!--<br/>-->
+       <!--<span class="time">{{post.updated_time|facebookTime}}</span>-->
+      <!--</div>-->
+    <!--</li>-->
+  <!--</ul>-->
+
+<!--</div>-->
+<!--&lt;!&ndash; / feed facebook &ndash;&gt;-->
+
+<!--<div class="feed twitter" ng-show="showTwitter==true && paginateTwitter.length > 0">-->
+  <!--<ul>-->
+    <!--<li class="colorfull">-->
+      <!--<h6 class="subtitle">Twitter</h6>-->
+      <!--<a ng-click="loadMoreTweets()">{{twitterText}}</a>-->
+    <!--</li>-->
+
+    <!--<li class="item clearfix" ng-repeat="post in paginateTwitter" ng-show="isSearchFeed==false">-->
+      <!--<div class="thumb">-->
+        <!--<div class="wrapper">-->
+          <!--<img ng-src="{{post.user.profile_image_url}}">-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="info">-->
+        <!--<span class="account-name">{{post.user.name}} </span>-->
+        <!--<div class="post" ng-bind-html>-->
+           <!--<span ng-bind-html-unsafe="post.text | replaceLinks"></span>-->
+        <!--</div>-->
+        <!--<span class="time">{{post.created_at|twitterTime}}</span>-->
+      <!--</div>-->
+    <!--</li>-->
+
+    <!--<li class="item clearfix" ng-repeat="post in paginateTwitter" ng-show="isSearchFeed==true">-->
+      <!--<div class="thumb">-->
+        <!--<div class="wrapper">-->
+          <!--<img ng-src="{{post.profile_image_url}}">-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="info">-->
+        <!--<span class="account-name">{{post.from_user_name}} </span>-->
+        <!--<div class="post" ng-bind-html>-->
+           <!--<span ng-bind-html-unsafe="post.text | replaceLinks"></span>-->
+        <!--</div>-->
+        <!--<span class="time">{{post.created_at|twitterTime}}</span>-->
+      <!--</div>-->
+    <!--</li>-->
+
+  <!--</ul>-->
+<!--</div>-->
+<!--&lt;!&ndash; / feed facebook &ndash;&gt;-->
+
+
+<!--</aside>-->
+<!--&lt;!&ndash; / SIDEBAR &ndash;&gt;-->
+
+<!--</section>-->

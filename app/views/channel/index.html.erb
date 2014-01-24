@@ -1,175 +1,175 @@
-<section class='clearfix main-section channel-details lpMain' ng-controller="ChannelLandingPageController">
+<!--<section class='clearfix main-section channel-details lpMain' ng-controller="ChannelLandingPageController">-->
 
 
-<div class='channel-content'>
-  <div class='lp_header clearfix'>
-   <span class='browse hidden-phone visible-desktop visible-tablet'>BROWSE</span>
-   <div class = 'phone-filters visible-phone hidden-desktop hidden-tablet clearfix'>
-     <!-- <div class = 'operator-box' ng-controller="OperatorsControllerChannels">
-       <div class="select-operator" >
-        <a class="btn" id="selectOperator" tv-operator-popover="" href="" data-hasqtip="true">
-          <span class="operator-name">TV Operator</span><span class="arrow"></span>
-        </a>
-     </div> -->
-     <div class = 'right-wrapper'>
-      <span class = 'title'>Browse </span>
-      <button class = 'btn btn-filter' channel-toggle-filter>=</button>
-     </div>
-   </div>
-   <div class = 'search-options clearfix hidden-phone visible-desktop visible-tablet'>
-    <div class = 'search-icon'>
-      <div class = 'iconoverlay'></div>
-      <input type="text" search-by-channel-name id="channelSearch" placeholder="Channel Name..." ng-controller="ChannelAutoCompleteController"/>
-    </div>
-     <div class = 'operator-box' ng-controller="OperatorsControllerChannels">
-       <!-- <div class="select-operator" > -->
-        <a class="btn" id="selectOperator" tv-operator-popover href="" data-hasqtip="true">
-          <span class="operator-name">TV Operator</span><span class="arrow"></span>
-        </a>
-     </div>
-   </div>
-  </div>
+<!--<div class='channel-content'>-->
+  <!--<div class='lp_header clearfix'>-->
+   <!--<span class='browse hidden-phone visible-desktop visible-tablet'>BROWSE</span>-->
+   <!--<div class = 'phone-filters visible-phone hidden-desktop hidden-tablet clearfix'>-->
+     <!--&lt;!&ndash; <div class = 'operator-box' ng-controller="OperatorsControllerChannels">-->
+       <!--<div class="select-operator" >-->
+        <!--<a class="btn" id="selectOperator" tv-operator-popover="" href="" data-hasqtip="true">-->
+          <!--<span class="operator-name">TV Operator</span><span class="arrow"></span>-->
+        <!--</a>-->
+     <!--</div> &ndash;&gt;-->
+     <!--<div class = 'right-wrapper'>-->
+      <!--<span class = 'title'>Browse </span>-->
+      <!--<button class = 'btn btn-filter' channel-toggle-filter>=</button>-->
+     <!--</div>-->
+   <!--</div>-->
+   <!--<div class = 'search-options clearfix hidden-phone visible-desktop visible-tablet'>-->
+    <!--<div class = 'search-icon'>-->
+      <!--<div class = 'iconoverlay'></div>-->
+      <!--<input type="text" search-by-channel-name id="channelSearch" placeholder="Channel Name..." ng-controller="ChannelAutoCompleteController"/>-->
+    <!--</div>-->
+     <!--<div class = 'operator-box' ng-controller="OperatorsControllerChannels">-->
+       <!--&lt;!&ndash; <div class="select-operator" > &ndash;&gt;-->
+        <!--<a class="btn" id="selectOperator" tv-operator-popover href="" data-hasqtip="true">-->
+          <!--<span class="operator-name">TV Operator</span><span class="arrow"></span>-->
+        <!--</a>-->
+     <!--</div>-->
+   <!--</div>-->
+  <!--</div>-->
 
-<div ng-controller="BrowseController" class ='clearfix channel-detail-content'>
- <div class = 'channel-inner-wrapper'>
- <!-- The left side bar-->
- <div class="sideList clearfix" >
-    <div class = 'search-icon'>
-      <div class = 'iconoverlay'></div>
+<!--<div ng-controller="BrowseController" class ='clearfix channel-detail-content'>-->
+ <!--<div class = 'channel-inner-wrapper'>-->
+ <!--&lt;!&ndash; The left side bar&ndash;&gt;-->
+ <!--<div class="sideList clearfix" >-->
+    <!--<div class = 'search-icon'>-->
+      <!--<div class = 'iconoverlay'></div>-->
 
-         <input type="text" search-by-channel-name id="channelSearchMobile" placeholder="Channel Name..." ng-controller="ChannelAutoCompleteController" class ='visible-phone hidden-desktop hidden-tablet'/>
-    </div>
-   <div class = 'operator-box  visible-phone hidden-desktop hidden-tablet' ng-controller="OperatorsControllerChannels">
-       <!-- <div class="select-operator" > -->
-        <a class="btn" id="selectOperator" tv-operator-popover="" href="" data-hasqtip="true">
-          <span class="operator-name android-line-height-channel">TV Operator</span><span class="arrow"></span>
-        </a>
-    </div>
-   <ul class="clearfix">
-     <li ng-click="itemClicked($event,'favorites')" ng-class="{active: 'favorites' == curretHybridGenre}" ng-show="userLogged=='on'">Favorites</li>
-     <li ng-click="itemClicked($event,item)" ng-class="{active: item.hybridgenre == curretHybridGenre}" ng-repeat = "item in browseCategories"><span live-tooltip-single-line="{{item.hybridgenre}}">{{item.hybridgenre}}</span></li>
-   </ul>
-   <button class = 'btn back-btn-filter visible-phone hidden-desktop hidden-tablet' channel-toggle-filter> Back </button>
- </div>
+         <!--<input type="text" search-by-channel-name id="channelSearchMobile" placeholder="Channel Name..." ng-controller="ChannelAutoCompleteController" class ='visible-phone hidden-desktop hidden-tablet'/>-->
+    <!--</div>-->
+   <!--<div class = 'operator-box  visible-phone hidden-desktop hidden-tablet' ng-controller="OperatorsControllerChannels">-->
+       <!--&lt;!&ndash; <div class="select-operator" > &ndash;&gt;-->
+        <!--<a class="btn" id="selectOperator" tv-operator-popover="" href="" data-hasqtip="true">-->
+          <!--<span class="operator-name android-line-height-channel">TV Operator</span><span class="arrow"></span>-->
+        <!--</a>-->
+    <!--</div>-->
+   <!--<ul class="clearfix">-->
+     <!--<li ng-click="itemClicked($event,'favorites')" ng-class="{active: 'favorites' == curretHybridGenre}" ng-show="userLogged=='on'">Favorites</li>-->
+     <!--<li ng-click="itemClicked($event,item)" ng-class="{active: item.hybridgenre == curretHybridGenre}" ng-repeat = "item in browseCategories"><span live-tooltip-single-line="{{item.hybridgenre}}">{{item.hybridgenre}}</span></li>-->
+   <!--</ul>-->
+   <!--<button class = 'btn back-btn-filter visible-phone hidden-desktop hidden-tablet' channel-toggle-filter> Back </button>-->
+ <!--</div>-->
 
-  <!-- The details in th center -->
-  <div class="detailsWrapper">
-   <div class="spin" ng-show = "detailedList.length == 0"/>
-   <ul class = 'channelList clearfix'>
-     <li class = 'channelItem clearfix' scroll-callback ng-repeat = "item in paginateDetailedList">
-        <div class = 'leftContent'>
-          <div class = 'logoWrapper'>
-            <div class = 'channelLogo'>
-              <!-- <div class="favorite-ribbon"></div> -->
-              <a class='favourite-logged' ng-class="{active:item.ischannelfavorite=='1'}" ng-click="toggleFavoriteChannel($event, item)"></a>
-              <a ng-href="#!/channel/{{item.channelname}}" ng-click="EncodeUrlWithDash(item.channelname,$event,'channel',item.channelid,item.programmeid)"><img ng-src='{{item.logofileurl}}'/></a>
-            </div>
-          </div>
-          <div class = 'topShows'>
-            <div class = 'title'>
-              TOP SHOWS
-            </div>
-          </div>
-        </div>
-        <div class = 'rightContent'>
-          <div class = 'channelDetails'>
-            <div class = 'innerWrapper clearfix'>
-              <div class = 'channelName'>
-                <a ng-href="#!/channel/{{item.channelname}}" ng-click="EncodeUrlWithDash(item.channelname,$event,'channel',item.channelid,item.programmeid)">{{item.channelname}}</a>
-              </div>
-              <div class = 'channelText'>
-                {{item.genre}}
-              </div>
-            </div>
-            <div class = 'description' multiline-overflow>
-             <p>{{item.description}}</p>
-            </div>
+  <!--&lt;!&ndash; The details in th center &ndash;&gt;-->
+  <!--<div class="detailsWrapper">-->
+   <!--<div class="spin" ng-show = "detailedList.length == 0"/>-->
+   <!--<ul class = 'channelList clearfix'>-->
+     <!--<li class = 'channelItem clearfix' scroll-callback ng-repeat = "item in paginateDetailedList">-->
+        <!--<div class = 'leftContent'>-->
+          <!--<div class = 'logoWrapper'>-->
+            <!--<div class = 'channelLogo'>-->
+              <!--&lt;!&ndash; <div class="favorite-ribbon"></div> &ndash;&gt;-->
+              <!--<a class='favourite-logged' ng-class="{active:item.ischannelfavorite=='1'}" ng-click="toggleFavoriteChannel($event, item)"></a>-->
+              <!--<a ng-href="#!/channel/{{item.channelname}}" ng-click="EncodeUrlWithDash(item.channelname,$event,'channel',item.channelid,item.programmeid)"><img ng-src='{{item.logofileurl}}'/></a>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class = 'topShows'>-->
+            <!--<div class = 'title'>-->
+              <!--TOP SHOWS-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class = 'rightContent'>-->
+          <!--<div class = 'channelDetails'>-->
+            <!--<div class = 'innerWrapper clearfix'>-->
+              <!--<div class = 'channelName'>-->
+                <!--<a ng-href="#!/channel/{{item.channelname}}" ng-click="EncodeUrlWithDash(item.channelname,$event,'channel',item.channelid,item.programmeid)">{{item.channelname}}</a>-->
+              <!--</div>-->
+              <!--<div class = 'channelText'>-->
+                <!--{{item.genre}}-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class = 'description' multiline-overflow>-->
+             <!--<p>{{item.description}}</p>-->
+            <!--</div>-->
 
-            <ul>
-              <li live-tooltip-single-line="{{item.programmename1}}"> <a href="#!/program/{{item.programmename1}}" ng-click="EncodeUrlWithDash(item.programmename1,$event,'programme',item.channelid,item.programmeid1,item.starttime)">{{item.programmename1}} </a></li>
-              <li live-tooltip-single-line="{{item.programmename2}}"> <a href="#!/program/{{item.programmename2}}" ng-click="EncodeUrlWithDash(item.programmename2,$event,'programme',item.channelid,item.programmeid2,item.starttime)">{{item.programmename2}} </a></li>
-              <li live-tooltip-single-line="{{item.programmename3}}"> <a href="#!/program/{{item.programmename3}}" ng-click="EncodeUrlWithDash(item.programmename3,$event,'programme',item.channelid,item.programmeid3,item.starttime)">{{item.programmename3}} </a></li>
-            </ul>
+            <!--<ul>-->
+              <!--<li live-tooltip-single-line="{{item.programmename1}}"> <a href="#!/program/{{item.programmename1}}" ng-click="EncodeUrlWithDash(item.programmename1,$event,'programme',item.channelid,item.programmeid1,item.starttime)">{{item.programmename1}} </a></li>-->
+              <!--<li live-tooltip-single-line="{{item.programmename2}}"> <a href="#!/program/{{item.programmename2}}" ng-click="EncodeUrlWithDash(item.programmename2,$event,'programme',item.channelid,item.programmeid2,item.starttime)">{{item.programmename2}} </a></li>-->
+              <!--<li live-tooltip-single-line="{{item.programmename3}}"> <a href="#!/program/{{item.programmename3}}" ng-click="EncodeUrlWithDash(item.programmename3,$event,'programme',item.channelid,item.programmeid3,item.starttime)">{{item.programmename3}} </a></li>-->
+            <!--</ul>-->
 
-          </div>
-        </div>
-     </li>
-     <div class = 'noResultsBlock' ng-show="requestCompleted == true && paginateDetailedList.length==0 && curretHybridGenre !='favorites'"> No results for {{curretHybridGenre}} </div>
-     <div class = 'noResultsBlock' ng-show="requestCompleted == true && paginateDetailedList.length==0 && curretHybridGenre =='favorites'">Build your library of favorites! Add your favorite channels/prgorams to your Watchlist!</div>
-   </ul>
-  </div>
- </div>
+          <!--</div>-->
+        <!--</div>-->
+     <!--</li>-->
+     <!--<div class = 'noResultsBlock' ng-show="requestCompleted == true && paginateDetailedList.length==0 && curretHybridGenre !='favorites'"> No results for {{curretHybridGenre}} </div>-->
+     <!--<div class = 'noResultsBlock' ng-show="requestCompleted == true && paginateDetailedList.length==0 && curretHybridGenre =='favorites'">Build your library of favorites! Add your favorite channels/prgorams to your Watchlist!</div>-->
+   <!--</ul>-->
+  <!--</div>-->
+ <!--</div>-->
 
-</div>
+<!--</div>-->
 
-<!-- Featured channel at the bottom -->
-<div class='lpFeatured clearfix' ng-controller = "FeaturedChannelPageController" ng-show='phoneSidebar=="off"'>
- <h6 class='subtitle'>FEATURED</h6>
-   <ul>
-     <li class="item" ng-repeat="r in paginate">
-     <a href="#!/channel/{{r.channelname}}" ng-click="EncodeUrlWithDash(r.channelname,$event,'channel',r.channelid,r.programmeid)" class="clearfix linkchannel">
-       <div class="thumb">
-        <div class='favourite-logged' ng-class="{active:r.ischannelfavorite=='1'}" ng-click="toggleFavoriteChannel($event, r)"></div>
-         <div ng-show="r.isrecommended=='1'" class="favorite-ribbon"></div>
-         <div class="wrapper">
-           <img ng-src="{{r.logofileurl}}" alt="{{r.channelname}}" />
-         </div>
-       </div>
-      </a>
-      <div class ='right-info'>
-       <h2><a href='#!/channel/{{r.channelname}}'ng-click="EncodeUrlWithDash(r.channelname,$event,'channel',r.channelid,r.programmeid)">{{r.channelname}} </a></h2>
-       <ul class="info">
-         <li class="channel-label">Channel</li>
-         <li><a href="#!/search/{{r.genre}}">{{r.genre}}</a></li>
-       </ul>
-      </div>
-     </li>
-   </ul>
-</div>
+<!--&lt;!&ndash; Featured channel at the bottom &ndash;&gt;-->
+<!--<div class='lpFeatured clearfix' ng-controller = "FeaturedProductionPageController" ng-show='phoneSidebar=="off"'>-->
+ <!--<h6 class='subtitle'>FEATURED</h6>-->
+   <!--<ul>-->
+     <!--<li class="item" ng-repeat="r in paginate">-->
+     <!--<a href="#!/channel/{{r.channelname}}" ng-click="EncodeUrlWithDash(r.channelname,$event,'channel',r.channelid,r.programmeid)" class="clearfix linkchannel">-->
+       <!--<div class="thumb">-->
+        <!--<div class='favourite-logged' ng-class="{active:r.ischannelfavorite=='1'}" ng-click="toggleFavoriteChannel($event, r)"></div>-->
+         <!--<div ng-show="r.isrecommended=='1'" class="favorite-ribbon"></div>-->
+         <!--<div class="wrapper">-->
+           <!--<img ng-src="{{r.logofileurl}}" alt="{{r.channelname}}" />-->
+         <!--</div>-->
+       <!--</div>-->
+      <!--</a>-->
+      <!--<div class ='right-info'>-->
+       <!--<h2><a href='#!/channel/{{r.channelname}}'ng-click="EncodeUrlWithDash(r.channelname,$event,'channel',r.channelid,r.programmeid)">{{r.channelname}} </a></h2>-->
+       <!--<ul class="info">-->
+         <!--<li class="channel-label">Channel</li>-->
+         <!--<li><a href="#!/search/{{r.genre}}">{{r.genre}}</a></li>-->
+       <!--</ul>-->
+      <!--</div>-->
+     <!--</li>-->
+   <!--</ul>-->
+<!--</div>-->
 
 
 
-</div>
-<!-- / content -->
+<!--</div>-->
+<!--&lt;!&ndash; / content &ndash;&gt;-->
 
-<div class = 'clearfix visible-phone hidden-tablet hidden-desktop'></div>
+<!--<div class = 'clearfix visible-phone hidden-tablet hidden-desktop'></div>-->
 
-<!-- Featured Side Bar -->
-<aside class='channel-sidebar' ng-show='phoneSidebar=="off"'>
-	<div class='channel-videos channelLanding' ng-controller='SidebarVideosController'>
-        <div class="cv-item clearfix" scroll-callback save-start-time="v" ng-repeat='v in paginatefeaturedList' featured-video-player watchable="v">
-        	<div class="thumb-wrap" style="cursor:pointer" ng-click="EncodeUrlWithDash(v.actualname,$event,'programme',v.channelid,v.programmeid,v.starttime)">
-				<div class='player' style='background-image: url("{{v.imagefilepath}}")'></div>
-				<div class="video-text">On <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></div>
-				<a ng-click="playVideo()" ng-show="hasVideo()" class="play" href="" style=""></a>
-			</div>
-			<div class="cv-actions" style="overflow:visible; ">
-				<div class='info'>
-          <h2 live-tooltip-single-line="{{v.programmename}}">
-              <a href="#!/program/{{v.actualname}}" ng-click="EncodeUrlWithDash(v.actualname,$event,'programme',v.channelid,v.programmeid,v.starttime)">{{v.programmename}}</a>
-          </h2>
-					<p>{{v.starttime|featuredVideoTime}}, <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></p>
-				</div>
+<!--&lt;!&ndash; Featured Side Bar &ndash;&gt;-->
+<!--<aside class='channel-sidebar' ng-show='phoneSidebar=="off"'>-->
+	<!--<div class='channel-videos channelLanding' ng-controller='SidebarVideosController'>-->
+        <!--<div class="cv-item clearfix" scroll-callback save-start-time="v" ng-repeat='v in paginatefeaturedList' featured-video-player watchable="v">-->
+        	<!--<div class="thumb-wrap" style="cursor:pointer" ng-click="EncodeUrlWithDash(v.actualname,$event,'programme',v.channelid,v.programmeid,v.starttime)">-->
+				<!--<div class='player' style='background-image: url("{{v.imagefilepath}}")'></div>-->
+				<!--<div class="video-text">On <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></div>-->
+				<!--<a ng-click="playVideo()" ng-show="hasVideo()" class="play" href="" style=""></a>-->
+			<!--</div>-->
+			<!--<div class="cv-actions" style="overflow:visible; ">-->
+				<!--<div class='info'>-->
+          <!--<h2 live-tooltip-single-line="{{v.programmename}}">-->
+              <!--<a href="#!/program/{{v.actualname}}" ng-click="EncodeUrlWithDash(v.actualname,$event,'programme',v.channelid,v.programmeid,v.starttime)">{{v.programmename}}</a>-->
+          <!--</h2>-->
+					<!--<p>{{v.starttime|featuredVideoTime}}, <a href="#!/channel/{{v.channelname}}" ng-click="EncodeUrlWithDash(v.channelname,$event,'channel',v.channelid,v.programmeid)">{{v.channelname}}</a></p>-->
+				<!--</div>-->
 
-        <div class="actions" ng-controller="UserController">
+        <!--<div class="actions" ng-controller="UserController">-->
 
-          <a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.isfavorite == '1'}">
-            <i class="icon-favorite"></i>
-          </a>
+          <!--<a live-tooltip='Add to Favorite'  ng-click='toggleFavorite(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.isfavorite == '1'}">-->
+            <!--<i class="icon-favorite"></i>-->
+          <!--</a>-->
 
-          <a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.isreminder == '1'}"  >
-            <i class="icon-reminder"></i>
-          </a>
+          <!--<a live-tooltip="Reminder Alerts"        ng-click='toggleReminder(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.isreminder == '1'}"  >-->
+            <!--<i class="icon-reminder"></i>-->
+          <!--</a>-->
 
-          <a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.iswatchlist == '1'}">
-            <i class="icon-watchlist"></i>
-          </a>
-        </div>
-			</div>
-        </div>
-    </div>
-  <!-- / channel-video -->
-</aside>
-<!-- / SIDEBAR -->
+          <!--<a live-tooltip='Add to Watchlist' ng-click='addToWatchlist(v, $event)'  class='btn btn-small btn-purple-blue' ng-class="{active:v.iswatchlist == '1'}">-->
+            <!--<i class="icon-watchlist"></i>-->
+          <!--</a>-->
+        <!--</div>-->
+			<!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+  <!--&lt;!&ndash; / channel-video &ndash;&gt;-->
+<!--</aside>-->
+<!--&lt;!&ndash; / SIDEBAR &ndash;&gt;-->
 
-</section>
+<!--</section>-->

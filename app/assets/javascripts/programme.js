@@ -27,10 +27,11 @@ woi.controller("ProgrammeController", ['$scope', '$rootScope', '$routeParams', '
     // $rootScope.thisStartTime = '';
 
 
+
     var getFullDetails = function(){
         //Main Controller here
         var params = {
-            programmeid : $rootScope.Programmeid,       //Prathamesh-Changes here to be done
+            programmeid : $rootScope.Programmeid,       //Prathamesh-Changes here done
             channelid   :  $rootScope.channelid,
             starttime   : $rootScope.thisStartTime,
             userid      : $rootScope.getUser().userid
@@ -38,12 +39,15 @@ woi.controller("ProgrammeController", ['$scope', '$rootScope', '$routeParams', '
 
         $scope.fullProgrammeDetail = [];
         userAPI.fullProgrammeDetail(params, function(rs) {
+
             $routeParams.channelname=rs.getfullprogrammedetails.fullprogrammedetails.channelname;
             // Wrong programme id passed
             if(_.isUndefined(rs.getfullprogrammedetails)){
                 $scope.fullProgrammeDetail = null;
                 return false;
             }
+
+
 
             // Using this var in order to print stuff in view
             $scope.fullProgrammeDetail = rs.getfullprogrammedetails.fullprogrammedetails;
@@ -249,6 +253,9 @@ woi.controller("ProgrammeController", ['$scope', '$rootScope', '$routeParams', '
             setTimeout(function() {
                 $('.right-about').css('height',$('.left-about').css('height'));
             },0);
+            var recommends = 'load-recommendation';
+            $scope.$broadcast(recommends,rs.getfullprogrammedetails.fullprogrammedetails.channelid);
+
 
         });
     };
@@ -819,8 +826,8 @@ woi.controller("NextScheduleController", ['$scope', '$location','$rootScope', '$
         userAPI.nextSchedule({programmeid:$rootScope.Programmeid, userid: $rootScope.getUser().userid}, function(rs){
             if(!rs.getmoreprogrammeschedule || !rs.getmoreprogrammeschedule.moreprogrammeschedulelist){
 
-                loading('hide', { element: $('.next-schedule #loadIndicator') });
-                $('.next-schedule #loadIndicator').css('display','none');
+                loading('hide', { element: $('.NextScheduleController') });
+                $('.next-schedule #loadIndicator').css('display','none');            //Prathamesh
 
                 // $scope.safeApply(function(){
                 $scope.loadError = true;
@@ -1005,10 +1012,15 @@ woi.controller('ProgramDetailsTabController', ['$scope','$location','$rootScope'
 
     $scope.loadYourRecs = function() {
         if($rootScope.isUserLogged())
-            userAPI.yourChannelRecs( {userid:$rootScope.getUser().userid, channelid:$scope.channelid}, function(r) {
-                recsReady = true;
+            userAPI.yourChannelRecs( {userid:$rootScope.getUser().userid, channelid:$scope.channelid}, function(r)
+
+            {
+
+             recsReady = true;
                 tabsReady();
                 if(!r.getsimilarchannelprogramme){
+
+
                     $scope.programs.yourrecs = 0;
                     setTimeout(function(){
                         showMoreOnTab(0);
@@ -1026,6 +1038,7 @@ woi.controller('ProgramDetailsTabController', ['$scope','$location','$rootScope'
                 $scope.programs.yourrecs = _.reject($scope.programs.yourrecs, function(obj){
                     return obj.programmeid == $rootScope.Programmeid;
                 });
+
 
                 // called with timeout for dom creation
                 setTimeout(function(){
@@ -1123,13 +1136,21 @@ woi.controller('ProgramDetailsTabController', ['$scope','$location','$rootScope'
         $scope.loadEpisodes();
         $scope.loadWeb();
 
+
         /*
          * Check if user is logged in, if so load Recommended and show first tab
          * Otherwise, show second tab
          */
-        if($rootScope.isUserLogged()) {
-            $scope.loadYourRecs();
-        }
+
+            $scope.$on('load-recommendation', function(args,rs) {
+
+                if($rootScope.isUserLogged()) {
+                $scope.channelid=rs;
+                $scope.loadYourRecs();
+                }
+            });
+
+
 
         // setTimeout(function(){$tabs.find('.item').show();}, 1000); //@TODO this needs to be done properly. it's a temporary fix
     };

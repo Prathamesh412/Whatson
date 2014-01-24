@@ -19,7 +19,7 @@
     <div class='container' id='tv_guide_container'>
       <div class='slider'>
         
-        <div id="description-popover" ng-click="stopProp($event)">
+        <div id="description-popover" ng-click="stopProp($event)" style="z-index: 4;">
           <div class="loading-spinner" ng-show="!showinfo.visible"></div>
           <div class="thumb" ng-show="showinfo.visible">
             <div class="wrapper"><img ng-src="{{showinfo.imagefilepath}}" alt="" /></div>
@@ -58,8 +58,8 @@
           </ul>
         </div>
         <div class="channelProgrammeRow" ng-class-odd="'odd'" ng-class="{highlighted: thisChannel.channel_info.ChannelID == highlightedChannel}" ng-repeat="thisChannel in _MODEL" ng-hide="_currentGenre == 'favorite' && thisChannel.channel_info.ischannelfavorite=='false'">
-          <div ng-repeat='thisProgram in thisChannel.programs' save-start-time="thisProgram" tv-guide-item tv-guide-item-actions  class='item' rel="tooltip" channel-id="{{thisChannel.channel_info.ChannelID}}" program-id="{{thisProgram.programmeid}}" program-name="{{thisProgram.programmename}}" start-time="{{thisProgram.starttime}}" is-recommended="{{thisProgram.isrecommended}}" image-path="{{thisProgram.imagefilepath}}">
-            <h3>{{thisProgram.programmename}}</h3>            
+          <div ng-repeat='thisProgram in thisChannel.programs' save-start-time="thisProgram" tv-guide-item tv-guide-item-actions  class='item' rel="tooltip" channel-id="{{thisChannel.channel_info.ChannelID}}" program-id="{{thisProgram.programmeid}}" program-name="{{thisProgram.programmename}}" start-time="{{thisProgram.starttime}}" is-recommended="{{thisProgram.isrecommended}}" image-path="{{thisProgram.imagefilepath}}" style="z-index: inherit" >
+            <h3>{{thisProgram.programmename}}</h3>
             <h4><span ng-show="p.m2ecategoryname=='Film'">{{thisProgram.m2ecategoryname}},</span> {{thisProgram.m2esubcategoryname}}</h4>
           </div>
         </div>

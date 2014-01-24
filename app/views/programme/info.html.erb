@@ -222,7 +222,7 @@
     <div class='tab clearfix' ng-show="currentActiveTab == 'recs'">
 
       <div class='item' ng-repeat='p in programs.yourrecs' home-tab-item watchable="p"></div>
-      <div ng-show="programs.yourrecs == 0 " class="noResultsBlock">Favorite your programs &amp; channels and help us recommend!</div>
+      <div ng-show="programs.yourrecs == 0 && !spinnerOn" class="noResultsBlock">Favorite your programs &amp; channels and help us recommend!</div>
       <div class='clearfix'></div>
 
       <a href='#' class='more'>MORE…</a>
@@ -400,7 +400,7 @@
         <span class="hour">{{p.starttime|sideBarTime}}</span>
       </div>
       <div class="item">
-        <h3><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'channel',p.channelid,p.programmeid)">on {{p.channelname}}</a></h3>
+        <h3><a href="#!/channel/{{p.channelname}}" ng-click="EncodeUrlWithDash(p.channelname,$event,'channel',p.channelid,p.programmeid)">on {{p.channeldisplayname}}</a></h3>
         <h4>{{p.starttime|sideBarDateString}}</h4>
       </div>
       <div class="reminder" ng-controller="UserController" >
